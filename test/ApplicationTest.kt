@@ -37,33 +37,35 @@ class ApplicationTest {
     }
 
     private fun expected() = """{
-  "title" : "test title",
-  "contentBody" : "test content",
-  "heroImage" : [ {
-    "id" : "image id",
-    "title" : "test image title",
-    "url" : "image url",
-    "mimeType" : "image mime"
-  } ],
-  "videos" : [ {
-    "id" : "id1",
-    "title" : "test video title1",
-    "url" : "url1",
-    "mimeType" : "video mime1"
-  }, {
-    "id" : "id2",
-    "title" : "test video title2",
-    "url" : "url2",
-    "mimeType" : "video mime2"
-  } ]
+  "textContent" : {
+    "test" : "title"
+  },
+  "assets" : {
+    "assets" : [ {
+      "id" : "id1",
+      "title" : "test video title1",
+      "url" : "url1",
+      "mimeType" : "video mime1"
+    }, {
+      "id" : "id2",
+      "title" : "test video title2",
+      "url" : "url2",
+      "mimeType" : "video mime2"
+    }, {
+      "id" : "image id",
+      "title" : "test image title",
+      "url" : "image url",
+      "mimeType" : "image mime"
+    } ]
+  }
 }"""
 
     private fun actual(): HomePage {
-        val image = listOf(Asset ("image id", "test image title","image url", "image mime"))
         val videos = listOf(
             Asset ("id1", "test video title1","url1", "video mime1"),
-            Asset ("id2", "test video title2","url2", "video mime2")  )
-        return HomePage(mutableMapOf("test" to "title"), mutableMapOf("test" to listOf()))
+            Asset ("id2", "test video title2","url2", "video mime2"),
+            Asset ("image id", "test image title","image url", "image mime"))
+        return HomePage(mutableMapOf("test" to "title"), mutableMapOf("assets" to (videos)))
     }
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit) {

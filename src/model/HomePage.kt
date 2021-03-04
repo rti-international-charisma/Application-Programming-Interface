@@ -22,6 +22,9 @@ fun converter(entry: CDAEntry) : HomePage  {
         if (entry.getField<Any>(it) is String) {
             homePage.textContent[it] = entry.getField<String>(it)
         }
+        if (entry.getField<Any>(it) is CDAAsset) {
+            homePage.assets[it] = toAsset(entry.getField<List<CDAAsset>>(it))
+        }
 
         if (entry.getField<Any>(it) is ArrayList<*>) {
             homePage.assets[it] = toAsset(entry.getField<List<CDAAsset>>(it))
