@@ -1,16 +1,11 @@
-package com.rti.charisma.api.content
+package service
 
 import com.contentful.java.cda.CDAClient
 import com.contentful.java.cda.CDAEntry
 import com.rti.charisma.api.model.HomePage
 import com.rti.charisma.api.model.converter
 
-class ContentService {
-    var client = CDAClient.builder()
-        .setToken("c0JOePfprGTcMTvUcYT3pwvEtmKm0nY7sAV5G1Dq01Q")
-        .setSpace("5lkmroeaw7nj")
-        .build()
-
+class ContentService(private val client: CDAClient) {
     //TODO: set locale
 
     fun getHomePage(): HomePage{

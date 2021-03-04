@@ -5,19 +5,27 @@ buildscript {
     
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
     }
+}
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+apply plugin: 'jacoco'
 
 group 'com.rti.charisma.api'
-version '0.0.1'
+version = '1.0-SNAPSHOT'
+
 mainClassName = "io.ktor.server.netty.EngineMain"
 
 sourceSets {
-    main.kotlin.srcDirs = main.java.srcDirs = ['src']
-    test.kotlin.srcDirs = test.java.srcDirs = ['test']
+    main.kotlin.srcDirs = ['src']
+    test.kotlin.srcDirs = ['test']
     main.resources.srcDirs = ['resources']
     test.resources.srcDirs = ['testresources']
 }
@@ -37,11 +45,48 @@ dependencies {
     implementation "io.ktor:ktor-server-host-common:$ktor_version"
     compile "io.ktor:ktor-jackson:$ktor_version"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+    testImplementation "io.mockk:mockk:1.10.0"
+    testCompile "org.testcontainers:testcontainers:1.15.2"
+    testCompile "org.testcontainers:junit-jupiter:1.15.2"
+    testCompile "io.ktor:ktor-server-test-host:$ktor_version"
 }
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = '1.8'
 }
+
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+shadowJar {
+    archiveBaseName = 'charisma-api-fat'
+    archiveClassifier = null
+    archiveVersion = null
+}
+
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        csv.enabled = false
+        html.enabled = true
+        html.destination = file("${buildDir}/jacocoHtml")
+
+    }
+    dependsOn test
+}
+
+check.dependsOn jacocoTestReport
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions.freeCompilerArgs += ["-Xuse-experimental=io.ktor.util.KtorExperimentalAPI"]
 }

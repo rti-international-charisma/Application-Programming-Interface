@@ -1,10 +1,10 @@
 package com.rti.charisma.api
 
+import com.contentful.java.cda.CDAClient
 import com.fasterxml.jackson.core.util.DefaultIndenter
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.google.gson.Gson
-import com.rti.charisma.api.content.ContentService
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -13,19 +13,33 @@ import io.ktor.jackson.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import io.ktor.util.date.*
 import org.slf4j.event.Level
+import service.ContentService
 
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
-
-@Suppress("unused") // Referenced in application.conf
+fun main() {
+    embeddedServer(Netty, port = 8080) {
+        main()
+    }.start(wait = true)
+}
 @kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
+fun Application.main() {
 
-    val contentService = ContentService();
+    val contentClient = CDAClient.builder()
+        .setToken("c0JOePfprGTcMTvUcYT3pwvEtmKm0nY7sAV5G1Dq01Q")
+        .setSpace("5lkmroeaw7nj")
+        .build()
 
+    val contentService = ContentService(contentClient);
 
+    mainWithDependencies(contentClient, contentService)
+
+}
+
+fun Application.mainWithDependencies(contentClient: CDAClient, contentService: ContentService) {
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
@@ -40,15 +54,10 @@ fun Application.module(testing: Boolean = false) {
         }
     }
     install(ContentNegotiation) {
-        install(ContentNegotiation) {
-            jackson {
-                configure(com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT, true)
-                setDefaultPrettyPrinter(DefaultPrettyPrinter().apply {
-                    indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
-                    indentObjectsWith(DefaultIndenter("  ", "\n"))
-                })
-                registerModule(JavaTimeModule())  // support java.time.* types
-            }
+        jackson {
+            configure(com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT, true)
+            setDefaultPrettyPrinter(DefaultPrettyPrinter())
+            registerModule(JavaTimeModule())  // support java.time.* types
         }
     }
     install(StatusPages) {
@@ -63,25 +72,30 @@ fun Application.module(testing: Boolean = false) {
         }
 
     }
-
     routing {
-        route("/") {
+        defaultRoute()
+        healthCheckRoute(contentClient)
+        contentRoute(contentService)
+    }
+}
 
-            get() {
-                call.respondText("Welcome", contentType = io.ktor.http.ContentType.Text.Html)
-            }
-            get("/health_check") {
-                //check cms connection
-                //check db connection
-                call.respondText("OK", contentType = io.ktor.http.ContentType.Application.Json)
-            }
-            get ("content"){
-                call.respond(contentService.getHomePage());
-            }
-        }
+private fun Routing.contentRoute(contentService: ContentService) {
+    get (path = "/content"){
+        call.respond(contentService.getHomePage());
+    }
+}
+
+fun Routing.healthCheckRoute(contentClient: CDAClient) {
+    get("/health") {
+        //check cms connection
+        //check db connection
+        call.respondText("OK", contentType = io.ktor.http.ContentType.Application.Json)
     }
 
-
+}fun Routing.defaultRoute() {
+    get("/{...}") {
+        call.respondText("Try /content", contentType = io.ktor.http.ContentType.Application.Json)
+    }
 
 }
 
