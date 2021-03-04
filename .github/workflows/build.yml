@@ -19,7 +19,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build --info
       - name: Upload JaCoCo coverage report
-      uses: actions/upload-artifact@v2
-      with:
-        name: jacoco-report
-        path: build/reports/jacoco/
+        uses: actions/upload-artifact@v2
+        with:
+         name: jacoco-report
+         path: build/reports/jacoco/
