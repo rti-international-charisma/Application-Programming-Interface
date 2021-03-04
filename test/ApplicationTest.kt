@@ -63,7 +63,7 @@ class ApplicationTest {
         val videos = listOf(
             Asset ("id1", "test video title1","url1", "video mime1"),
             Asset ("id2", "test video title2","url2", "video mime2")  )
-        return HomePage("test title", "test content", image, videos )
+        return HomePage(mutableMapOf("test" to "title"), mutableMapOf("test" to listOf()))
     }
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit) {
