@@ -39,5 +39,5 @@ jobs:
           --platform managed \
           --allow-unauthenticated \
           --memory 512M \
-          --region europe-west2 \
+          --region us-east4 \
           --project ${{ secrets.GCP_PROJECT_ID }}
