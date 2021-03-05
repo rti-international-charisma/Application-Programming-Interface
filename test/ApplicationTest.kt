@@ -9,7 +9,6 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import service.ContentService
-import kotlin.collections.HashMap
 import kotlin.test.assertEquals
 
 class ApplicationTest {
@@ -25,6 +24,13 @@ class ApplicationTest {
     }
 
     @Test
+    fun `should return NOT_FOUND response on invlaid rquest`() = testApp {
+        handleRequest(HttpMethod.Get, "/invalid").apply {
+            assertEquals(HttpStatusCode.NotFound, response.status())
+        }
+    }
+
+    @Test
     fun `should return json content from content client on GET content `() = testApp {
         val homePage = actual()
         every { contentService.getHomePage() } returns homePage
@@ -35,6 +41,17 @@ class ApplicationTest {
             assertEquals(expected(), response.content)
         }
     }
+
+    @Test
+    fun `should return internal server error on error from CDA Client on GET content `() = testApp {
+        val homePage = actual()
+        every { contentService.getHomePage() } throws Exception("Error connecting to CMS")
+        handleRequest(HttpMethod.Get, "/content").apply {
+
+            assertEquals(HttpStatusCode.InternalServerError, response.status())
+        }
+    }
+
 
     private fun expected() = """{
   "textContent" : {

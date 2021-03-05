@@ -100,7 +100,7 @@ fun Routing.healthCheckRoute(contentClient: CDAClient) {
     }
 
 }fun Routing.defaultRoute() {
-    get("/{...}") {
+    get("/") {
         call.respondText("Try /content", contentType = io.ktor.http.ContentType.Application.Json)
     }
 
