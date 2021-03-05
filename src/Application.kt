@@ -72,6 +72,13 @@ fun Application.mainWithDependencies(contentClient: CDAClient, contentService: C
         }
 
     }
+
+    install(CORS) {
+        anyHost()
+        allowCredentials = true
+        header(HttpHeaders.AccessControlAllowOrigin)
+    }
+
     routing {
         defaultRoute()
         healthCheckRoute(contentClient)
