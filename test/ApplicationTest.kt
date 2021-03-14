@@ -44,7 +44,6 @@ class ApplicationTest {
 
     @Test
     fun `should return internal server error on error from CDA Client on GET content `() = testApp {
-        val homePage = actual()
         every { contentService.getHomePage() } throws Exception("Error connecting to CMS")
         handleRequest(HttpMethod.Get, "/content").apply {
 

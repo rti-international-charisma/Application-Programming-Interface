@@ -1,4 +1,4 @@
-name: Deploy Charisma API
+name: Deploy Charisma API To GCP
 on:
   workflow_dispatch:
 

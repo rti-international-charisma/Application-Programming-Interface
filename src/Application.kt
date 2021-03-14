@@ -27,7 +27,6 @@ fun main() {
 }
 @kotlin.jvm.JvmOverloads
 fun Application.main() {
-
     val contentClient = CDAClient.builder()
         .setToken("c0JOePfprGTcMTvUcYT3pwvEtmKm0nY7sAV5G1Dq01Q")
         .setSpace("5lkmroeaw7nj")
