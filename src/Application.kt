@@ -21,7 +21,7 @@ import service.ContentService
 
 
 fun main() {
-    embeddedServer(Netty, port = 8080) {
+    embeddedServer(Netty, port = 5000) {
         main()
     }.start(wait = true)
 }
