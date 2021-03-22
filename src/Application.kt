@@ -1,10 +1,10 @@
 package com.rti.charisma.api
 
 import com.contentful.java.cda.CDAClient
-import com.fasterxml.jackson.core.util.DefaultIndenter
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.google.gson.Gson
+import com.rti.charisma.api.db.CharismaDB
+import com.viartemev.ktor.flyway.FlywayFeature
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -39,6 +39,7 @@ fun Application.main() {
 }
 
 fun Application.mainWithDependencies(contentClient: CDAClient, contentService: ContentService) {
+    initDB()
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
@@ -78,11 +79,19 @@ fun Application.mainWithDependencies(contentClient: CDAClient, contentService: C
         header(HttpHeaders.AccessControlAllowOrigin)
     }
 
+    install(FlywayFeature) {
+        dataSource = CharismaDB.getDataSource()
+    }
+
     routing {
         defaultRoute()
         healthCheckRoute(contentClient)
         contentRoute(contentService)
     }
+}
+
+fun initDB() {
+    CharismaDB.init()
 }
 
 private fun Routing.contentRoute(contentService: ContentService) {
