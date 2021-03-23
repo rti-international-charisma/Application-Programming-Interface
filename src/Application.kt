@@ -4,12 +4,17 @@ import com.contentful.java.cda.CDAClient
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.rti.charisma.api.db.CharismaDB
+import com.rti.charisma.api.exception.UserAlreadyExistException
+import com.rti.charisma.api.repository.UserRepositoryImpl
+import com.rti.charisma.api.route.userRoute
+import com.rti.charisma.api.service.UserService
 import com.viartemev.ktor.flyway.FlywayFeature
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.jackson.*
+import io.ktor.locations.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -33,13 +38,15 @@ fun Application.main() {
         .build()
 
     val contentService = ContentService(contentClient);
-
-    mainWithDependencies(contentClient, contentService)
+    val userService = UserService(UserRepositoryImpl())
+    mainWithDependencies(contentClient, contentService, userService)
 
 }
 
-fun Application.mainWithDependencies(contentClient: CDAClient, contentService: ContentService) {
+fun Application.mainWithDependencies(contentClient: CDAClient, contentService: ContentService, userService: UserService) {
+    install(Locations)
     initDB()
+
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
@@ -71,6 +78,10 @@ fun Application.mainWithDependencies(contentClient: CDAClient, contentService: C
             call.respond(HttpStatusCode.InternalServerError)
         }
 
+        exception<UserAlreadyExistException> {
+            call.respond(HttpStatusCode.BadRequest, "Username already exists")
+        }
+
     }
 
     install(CORS) {
@@ -87,6 +98,7 @@ fun Application.mainWithDependencies(contentClient: CDAClient, contentService: C
         defaultRoute()
         healthCheckRoute(contentClient)
         contentRoute(contentService)
+        userRoute(userService)
     }
 }
 

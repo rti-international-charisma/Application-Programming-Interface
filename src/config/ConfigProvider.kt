@@ -6,6 +6,7 @@ import io.ktor.config.HoconApplicationConfig
 const val DB_URL = "ktor.db.db_url"
 const val DB_USER = "ktor.db.db_user"
 const val DB_PASSWORD = "ktor.db.db_password"
+const val SECRET_KEY = "ktor.secret"
 
 object ConfigProvider {
     private val config = HoconApplicationConfig(ConfigFactory.load())

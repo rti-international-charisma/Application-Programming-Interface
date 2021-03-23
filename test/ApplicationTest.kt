@@ -3,6 +3,7 @@ package com.rti.charisma.api
 import com.contentful.java.cda.CDAClient
 import com.rti.charisma.api.model.Asset
 import com.rti.charisma.api.model.HomePage
+import com.rti.charisma.api.service.UserService
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.every
@@ -14,6 +15,7 @@ import kotlin.test.assertEquals
 class ApplicationTest {
     private val contentClient = mockk<CDAClient>(relaxed = true)
     private val contentService = mockk<ContentService>(relaxed = true)
+    private val userService = mockk<UserService>(relaxed = true)
 
     @Test
     fun `should return text response on GET `() = testApp {
@@ -88,7 +90,8 @@ class ApplicationTest {
         withTestApplication({
             mainWithDependencies(
                 contentClient,
-                contentService
+                contentService,
+                userService
             )
         }){ callback()}
     }
