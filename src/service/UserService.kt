@@ -1,8 +1,8 @@
 package com.rti.charisma.api.service
 
-import com.rti.charisma.api.Signup
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepository
+import com.rti.charisma.api.route.Signup
 
 class UserService(private val userRepository: UserRepository) {
     fun registerUser(signupModel: Signup): Int {

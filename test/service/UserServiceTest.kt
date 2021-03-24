@@ -1,8 +1,8 @@
 package service
 
 import com.rti.charisma.api.exception.UserAlreadyExistException
-import com.rti.charisma.api.Signup
 import com.rti.charisma.api.repository.UserRepository
+import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.service.UserService
 import io.mockk.every
 import io.mockk.mockk
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 
 class UserServiceTest {
 

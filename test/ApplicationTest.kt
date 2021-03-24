@@ -88,10 +88,9 @@ class ApplicationTest {
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit) {
         withTestApplication({
-            mainWithDependencies(
+            cmsModule(
                 contentClient,
-                contentService,
-                userService
+                contentService
             )
         }){ callback()}
     }

@@ -11,3 +11,10 @@ object Users: Table() {
     override val primaryKey: PrimaryKey = PrimaryKey(id)
 
 }
+
+data class User(
+    val id: Int,
+    val username: String,
+    @Transient
+    val password: String
+)

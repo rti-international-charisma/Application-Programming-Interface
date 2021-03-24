@@ -5,8 +5,12 @@ CREATE TABLE IF NOT EXISTS securityquestions (
 );
 
 INSERT INTO securityquestions (question)
-VALUES('What is your mother''s maiden name?'),
-('What is the name of your first pet?');
+VALUES('What was your favourite sport in high school?'),
+('What was your favourite sport in high school?'),
+('What is the title and artist of your favourite song?'),
+('What is your grandmother''s first name?'),
+('What is the name of the boy or girl that you first kissed?'),
+('What was your childhood nickname?');
 
 CREATE TABLE IF NOT EXISTS users (
 	id INT GENERATED ALWAYS AS IDENTITY,
