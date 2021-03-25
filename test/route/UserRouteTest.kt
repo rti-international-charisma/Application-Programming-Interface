@@ -32,7 +32,7 @@ class UserRouteTest {
 
     @Test
     fun `it should return all Security Questions `() = testApp {
-        handleRequest(HttpMethod.Get, "/securityquestions") {
+        handleRequest(HttpMethod.Get, "/securityquestions/") {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertNotNull(response.content)
@@ -41,7 +41,7 @@ class UserRouteTest {
 
     @Test
     fun `it should return Security Questions by id`() = testApp {
-        handleRequest(HttpMethod.Get, "/securityquestions?id=1") {
+        handleRequest(HttpMethod.Get, "/securityquestions/1") {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertNotNull(response.content)

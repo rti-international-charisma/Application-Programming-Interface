@@ -24,7 +24,12 @@ fun Routing.userRoute(userService: UserService) {
         call.respond(HttpStatusCode.OK, "User registered ")
     }
 
-    get("/securityquestions") {
-        call.respond(HttpStatusCode.OK, userService.getSecurityQuestions(call.request.queryParameters["id"]?.toInt()))
+    get("/securityquestions/{id}") {
+        val id = if (call.parameters["id"].isNullOrEmpty()) {
+           null
+         } else {
+            call.parameters["id"]?.toInt()
+        }
+        call.respond(HttpStatusCode.OK, userService.getSecurityQuestions(id))
     }
 }
