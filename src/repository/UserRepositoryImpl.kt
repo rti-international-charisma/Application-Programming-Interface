@@ -7,6 +7,7 @@ import com.rti.charisma.api.db.tables.SecurityQuestions
 import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.db.tables.Users
 import com.rti.charisma.api.route.Signup
+import com.rti.charisma.api.util.hash
 import io.ktor.util.hex
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
@@ -61,14 +62,4 @@ class UserRepositoryImpl: UserRepository {
             id = this[SecurityQuestions.sec_q_id],
             question = this[SecurityQuestions.question]
     )
-
-    private fun String.hash(): String {
-        val hashKey = ConfigProvider.get(SECRET_KEY).toByteArray()
-
-        val hmacKey = SecretKeySpec(hashKey, "HmacSHA1")
-
-        val hmac = Mac.getInstance("HmacSHA1")
-        hmac.init(hmacKey)
-        return hex(hmac.doFinal(this.toByteArray(Charsets.UTF_8)))
-    }
 }

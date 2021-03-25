@@ -110,12 +110,6 @@ fun Application.loginModule(postgresDbDataSource: DataSource, userService: UserS
 fun Application.cmsModule(contentClient: CDAClient, contentService: ContentService) {
 
     install(StatusPages) {
-        exception<AuthenticationException> {
-            call.respond(HttpStatusCode.Unauthorized)
-        }
-        exception<AuthorizationException> {
-            call.respond(HttpStatusCode.Forbidden)
-        }
         exception<Throwable> {
             call.respond(HttpStatusCode.InternalServerError)
         }
@@ -155,7 +149,3 @@ fun Routing.healthCheckRoute(contentClient: CDAClient) {
     }
 
 }
-
-class AuthenticationException : RuntimeException()
-class AuthorizationException : RuntimeException()
-

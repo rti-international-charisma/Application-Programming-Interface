@@ -37,6 +37,7 @@ class UserServiceTest {
     @Test
     fun `it should add user`() {
         val signupModel = Signup("someusername", "password", 1, "security question answer")
+        every { userRepository.getSecurityQuestions(any()) } returns listOf(SecurityQuestion(1, "question"))
         every { userRepository.doesUserExist(signupModel.username) } returns false
         every { userRepository.registerUser(signupModel) } returns 1
 
