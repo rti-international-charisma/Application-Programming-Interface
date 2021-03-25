@@ -2,6 +2,7 @@ package route
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.rti.charisma.api.loginModule
+import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.service.UserService
 import com.zaxxer.hikari.HikariConfig
@@ -29,8 +30,27 @@ class UserRouteTest {
         }
     }
 
-    private fun testApp(callback: TestApplicationEngine.() -> Unit) {
-        withTestApplication({
+    @Test
+    fun `it should return all Security Questions `() = testApp {
+        handleRequest(HttpMethod.Get, "/securityquestions") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertNotNull(response.content)
+        }
+    }
+
+    @Test
+    fun `it should return Security Questions by id`() = testApp {
+        handleRequest(HttpMethod.Get, "/securityquestions?id=1") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertNotNull(response.content)
+        }
+    }
+
+    private fun testApp(callback: TestApplicationEngine.() -> Unit){
+        return withTestApplication({
+            commonModule()
             loginModule(
                     inMemoryDataSoure(),
                     userService

@@ -8,6 +8,7 @@ import com.rti.charisma.api.config.DB_PASSWORD
 import com.rti.charisma.api.config.DB_URL
 import com.rti.charisma.api.config.DB_USER
 import com.rti.charisma.api.db.CharismaDB
+import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.userRoute
@@ -20,7 +21,6 @@ import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.jackson.*
-import io.ktor.locations.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -52,7 +52,7 @@ fun Application.main() {
     loginModule(getDataSource(), userService)
 }
 
-private fun Application.commonModule() {
+fun Application.commonModule() {
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
@@ -122,6 +122,10 @@ fun Application.cmsModule(contentClient: CDAClient, contentService: ContentServi
 
         exception<UserAlreadyExistException> {
             call.respond(HttpStatusCode.BadRequest, "Username already exists")
+        }
+
+        exception<SecurityQuestionException> { e ->
+            call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
         }
     }
 

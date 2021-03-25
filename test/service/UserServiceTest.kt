@@ -1,5 +1,7 @@
 package service
 
+import com.rti.charisma.api.db.tables.SecurityQuestion
+import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepository
 import com.rti.charisma.api.route.Signup
@@ -42,5 +44,47 @@ class UserServiceTest {
 
         verify { userRepository.registerUser(signupModel) }
         assertEquals(1, registeredUserId)
+    }
+
+    @Test
+    fun `it should return all security questions`() {
+        val qId = null
+        every { userRepository.getSecurityQuestions(null) } returns listOf(SecurityQuestion(1, "question1"), SecurityQuestion(2, "question2"))
+
+        val securityQuestions = userService.getSecurityQuestions(qId)
+
+        verify { userRepository.getSecurityQuestions(null) }
+        assertNotNull(securityQuestions)
+    }
+
+    @Test
+    fun `it should throw error while registering if security question is absent`() {
+        val qId = 89
+        every { userRepository.getSecurityQuestions(qId) } returns listOf()
+        assertFailsWith(SecurityQuestionException::class) {
+            userService.getSecurityQuestions(qId)
+        }
+    }
+
+    @Test
+    fun `it should return security question by id`() {
+        val qId = 1
+        every { userRepository.getSecurityQuestions(qId) } returns listOf(SecurityQuestion(1, "question1"))
+
+        val securityQuestions = userService.getSecurityQuestions(qId)
+
+        verify { userRepository.getSecurityQuestions(qId) }
+        assertNotNull(securityQuestions)
+        assertEquals(1, securityQuestions.size)
+    }
+
+    @Test
+    fun `it should throw error if security question by id sis absent`() {
+        val qId = 30
+        every { userRepository.getSecurityQuestions(qId) } returns listOf()
+
+        assertFailsWith(SecurityQuestionException::class) {
+            userService.getSecurityQuestions(qId)
+        }
     }
 }

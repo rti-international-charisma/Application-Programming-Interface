@@ -15,7 +15,6 @@ import kotlin.test.assertEquals
 class ApplicationTest {
     private val contentClient = mockk<CDAClient>(relaxed = true)
     private val contentService = mockk<ContentService>(relaxed = true)
-    private val userService = mockk<UserService>(relaxed = true)
 
     @Test
     fun `should return text response on GET `() = testApp {
@@ -88,6 +87,7 @@ class ApplicationTest {
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit) {
         withTestApplication({
+            commonModule()
             cmsModule(
                 contentClient,
                 contentService

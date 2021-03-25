@@ -8,3 +8,7 @@ object SecurityQuestions: Table() {
     override val primaryKey: PrimaryKey = PrimaryKey(sec_q_id)
 }
 
+data class SecurityQuestion(
+        val id: Int,
+        val question: String
+)
