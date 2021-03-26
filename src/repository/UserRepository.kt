@@ -11,5 +11,6 @@ interface UserRepository {
 
     fun doesUserExist(username: String): Boolean
     fun registerUser(signup: Signup): Int
-    fun findByUserByUsername(username: String): User?
+    fun findUserByUsername(username: String): User?
+    fun findUserById(userId: Int): User?
 }

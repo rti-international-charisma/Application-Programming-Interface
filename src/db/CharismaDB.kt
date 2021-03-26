@@ -5,7 +5,6 @@ import javax.sql.DataSource
 
 object CharismaDB {
 
-    fun init (dataSource: DataSource) {
-        Database.connect(dataSource)
-    }
+    fun init (dataSource: DataSource) = Database.connect(dataSource)
+
 }
