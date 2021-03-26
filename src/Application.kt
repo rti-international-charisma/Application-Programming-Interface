@@ -12,11 +12,14 @@ import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.userRoute
+import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
 import com.viartemev.ktor.flyway.FlywayFeature
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.*
+import io.ktor.auth.Authentication
+import io.ktor.auth.jwt.jwt
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -45,7 +48,7 @@ fun Application.main() {
         .build()
 
     val contentService = ContentService(contentClient);
-    val userService = UserService(UserRepositoryImpl())
+    val userService = UserService(UserRepositoryImpl(), JWTService)
 
     commonModule()
     cmsModule(contentClient, contentService)
@@ -97,6 +100,20 @@ fun getDataSource() : HikariDataSource {
 fun Application.loginModule(postgresDbDataSource: DataSource, userService: UserService) {
 
     CharismaDB.init(postgresDbDataSource)
+
+    install(Authentication) {
+        jwt("jwt") {
+            verifier(JWTService.verifier)
+            realm = "CharismaApi"
+            validate {
+                val payload = it.payload
+                val claim = payload.getClaim("id")
+                val claimString = claim.asInt()
+                val user = userService.findUserById(claimString)
+                user
+            }
+        }
+    }
 
     install(FlywayFeature) {
         dataSource = postgresDbDataSource

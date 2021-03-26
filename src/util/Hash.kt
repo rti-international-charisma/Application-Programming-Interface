@@ -1,7 +1,7 @@
 package com.rti.charisma.api.util
 
 import com.rti.charisma.api.config.ConfigProvider
-import com.rti.charisma.api.config.SECRET_KEY
+import com.rti.charisma.api.config.HASH_SECRET_KEY
 import io.ktor.util.hex
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec
 
 object Hash {
     fun stringHash(str: String): String {
-        val hashKey = ConfigProvider.get(SECRET_KEY).toByteArray()
+        val hashKey = ConfigProvider.get(HASH_SECRET_KEY).toByteArray()
 
         val hmacKey = SecretKeySpec(hashKey, "HmacSHA1")
 

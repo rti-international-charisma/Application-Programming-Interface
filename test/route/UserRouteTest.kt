@@ -3,6 +3,9 @@ package route
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.rti.charisma.api.loginModule
 import com.rti.charisma.api.commonModule
+import com.rti.charisma.api.db.tables.User
+import com.rti.charisma.api.model.UserResponse
+import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.service.UserService
 import com.zaxxer.hikari.HikariConfig
@@ -12,6 +15,7 @@ import io.ktor.server.testing.TestApplicationEngine
 import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.setBody
 import io.ktor.server.testing.withTestApplication
+import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -47,6 +51,18 @@ class UserRouteTest {
             assertNotNull(response.content)
         }
     }
+
+    @Test
+    fun `it should login user`() = testApp {
+        val loginModel = Login("username", "password")
+        every { userService.login(loginModel) } returns UserResponse(User(1, "username", password = "hashedPassword"), "jwt-token")
+        handleRequest(HttpMethod.Post, "/login") {
+            setBody(jacksonObjectMapper().writeValueAsString(loginModel))
+        }.apply {
+            assertEquals(200, response.status()?.value)
+        }
+    }
+
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit){
         return withTestApplication({
