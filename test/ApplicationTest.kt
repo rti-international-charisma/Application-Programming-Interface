@@ -3,6 +3,7 @@ package com.rti.charisma.api
 import com.contentful.java.cda.CDAClient
 import com.rti.charisma.api.model.Asset
 import com.rti.charisma.api.model.HomePage
+import com.rti.charisma.api.service.UserService
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.every
@@ -86,7 +87,8 @@ class ApplicationTest {
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit) {
         withTestApplication({
-            mainWithDependencies(
+            commonModule()
+            cmsModule(
                 contentClient,
                 contentService
             )
