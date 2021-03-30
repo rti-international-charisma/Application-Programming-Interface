@@ -29,21 +29,22 @@ sourceSets {
     main.resources.srcDirs = ['resources']
     test.resources.srcDirs = ['testresources']
 }
-
-repositories {
-    mavenLocal()
-    jcenter()
-    maven { url 'https://kotlin.bintray.com/ktor' }
-}
-
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "io.ktor:ktor-server-netty:$ktor_version"
-    implementation "com.contentful.java:java-sdk:$contentful_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     implementation "io.ktor:ktor-server-core:$ktor_version"
     implementation "io.ktor:ktor-server-host-common:$ktor_version"
     implementation "io.ktor:ktor-locations:$ktor_version"
+
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation "io.ktor:ktor-client-apache:$ktor_version"
+    implementation("io.ktor:ktor-client-jackson:$ktor_version")
+
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("io.ktor:ktor-client-logging:$ktor_version")
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+
     compile "io.ktor:ktor-jackson:$ktor_version"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
 
@@ -57,11 +58,22 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
     testImplementation "io.mockk:mockk:1.10.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
+    testImplementation("io.ktor:ktor-client-mock:$ktor_version")
     testCompile "org.testcontainers:testcontainers:1.15.2"
     testCompile "org.testcontainers:junit-jupiter:1.15.2"
     testCompile "io.ktor:ktor-server-test-host:$ktor_version"
+
+
     testCompile "com.h2database:h2:1.4.200"
 }
+
+repositories {
+    mavenLocal()
+    jcenter()
+    maven { url 'https://kotlin.bintray.com/ktor' }
+}
+
 
 test {
     useJUnitPlatform()

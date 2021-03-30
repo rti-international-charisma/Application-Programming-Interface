@@ -1,21 +1,16 @@
 package com.rti.charisma.api.repository
 
-import com.rti.charisma.api.config.ConfigProvider
-import com.rti.charisma.api.config.SECRET_KEY
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.SecurityQuestions
 import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.db.tables.Users
 import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.util.hash
-import io.ktor.util.hex
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
 
 class UserRepositoryImpl: UserRepository {
 

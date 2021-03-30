@@ -8,7 +8,6 @@ import com.rti.charisma.api.route.Signup
 interface UserRepository {
 
     fun getSecurityQuestions(secQId: Int?): List<SecurityQuestion>
-
     fun doesUserExist(username: String): Boolean
     fun registerUser(signup: Signup): Int
     fun findByUserByUsername(username: String): User?
