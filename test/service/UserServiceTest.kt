@@ -1,11 +1,16 @@
 package service
 
 import com.rti.charisma.api.db.tables.SecurityQuestion
+import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
+import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.repository.UserRepository
+import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
+import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
+import com.rti.charisma.api.util.hash
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -19,10 +24,11 @@ class UserServiceTest {
 
     private lateinit var userService: UserService
     private val userRepository = mockk<UserRepository>(relaxed = true)
+    private val mockJWTService = mockk<JWTService>(relaxed = true)
 
     @BeforeEach
     fun setup() {
-        userService = UserService(userRepository)
+        userService = UserService(userRepository, mockJWTService)
     }
 
     @Test
@@ -87,5 +93,46 @@ class UserServiceTest {
         assertFailsWith(SecurityQuestionException::class) {
             userService.getSecurityQuestions(qId)
         }
+    }
+
+    @Test
+    fun `it should throw error while login if the user does not exist`() {
+        val loginModel = Login("username", "password")
+
+        every { userRepository.findUserByUsername("username") } returns null
+
+        assertFailsWith(LoginException::class) {
+            userService.login(loginModel)
+        }
+    }
+
+    @Test
+    fun `it should throw error while login if the credentials do not match`() {
+        val password = "password"
+        val loginModel = Login("username", password)
+
+        every { userRepository.findUserByUsername(loginModel.username) } returns User(1, "username", password = "hashedPassword")
+
+        val exception = assertFailsWith(LoginException::class) {
+            userService.login(loginModel)
+        }
+
+        assertEquals("Username and password do not match", exception.localizedMessage)
+    }
+
+    @Test
+    fun `it should generate token when credentials are correct`() {
+        val password = "password"
+        val loginModel = Login("username", password)
+        val hashedPassword = password.hash()
+        val user = User(1, "username", password = hashedPassword)
+
+        every { userRepository.findUserByUsername(loginModel.username) } returns user
+
+        val userResponse = userService.login(loginModel)
+
+        verify { mockJWTService.generateToken(user) }
+        assertNotNull(userResponse)
+        assertNotNull(userResponse.token)
     }
 }

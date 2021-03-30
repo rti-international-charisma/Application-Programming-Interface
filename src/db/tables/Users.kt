@@ -1,5 +1,7 @@
 package com.rti.charisma.api.db.tables
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import io.ktor.auth.Principal
 import org.jetbrains.exposed.sql.Table
 
 object Users: Table() {
@@ -15,6 +17,8 @@ object Users: Table() {
 data class User(
     val id: Int,
     val username: String,
-    @Transient
+    val sec_q_id: Int = 0,
+
+    @JsonIgnore
     val password: String
-)
+) : Principal

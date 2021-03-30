@@ -42,14 +42,19 @@ class UserRepositoryImpl: UserRepository {
         return user[Users.id]
     }
 
-    override fun findByUserByUsername(username: String) = transaction {
-            Users.select { Users.username eq id }.firstOrNull()?.toUser()
-        }
+    override fun findUserByUsername(username: String) = transaction {
+        Users.select { Users.username eq username }.firstOrNull()?.toUser()
+    }
+
+    override fun findUserById(userId: Int): User? = transaction {
+        Users.select { Users.id eq userId }.firstOrNull()?.toUser()
+    }
 
 
     private fun ResultRow.toUser(): User = User(
                 id =this[Users.id],
                 username = this[Users.username],
+                sec_q_id = this[Users.sec_q_id],
                 password = this[Users.password]
         )
 
