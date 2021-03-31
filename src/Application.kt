@@ -1,16 +1,18 @@
 package com.rti.charisma.api
 
-import com.contentful.java.cda.CDAClient
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.config.DB_PASSWORD
 import com.rti.charisma.api.config.DB_URL
 import com.rti.charisma.api.config.DB_USER
 import com.rti.charisma.api.db.CharismaDB
+import com.rti.charisma.api.exception.ContentNotFoundException
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepositoryImpl
+import com.rti.charisma.api.route.contentRoute
 import com.rti.charisma.api.route.userRoute
 import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
@@ -40,19 +42,15 @@ fun main() {
         main()
     }.start(wait = true)
 }
+
 @kotlin.jvm.JvmOverloads
 fun Application.main() {
-    val contentClient = CDAClient.builder()
-        .setToken("c0JOePfprGTcMTvUcYT3pwvEtmKm0nY7sAV5G1Dq01Q")
-        .setSpace("5lkmroeaw7nj")
-        .build()
-
-    val contentService = ContentService(contentClient);
+    val contentService = ContentService(ContentClient())
     val userService = UserService(UserRepositoryImpl(), JWTService)
 
     commonModule()
-    cmsModule(contentClient, contentService)
     loginModule(getDataSource(), userService)
+    contentModule(contentService)
 }
 
 fun Application.commonModule() {
@@ -69,11 +67,30 @@ fun Application.commonModule() {
             }
         }
     }
+
     install(ContentNegotiation) {
         jackson {
             configure(com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT, true)
             setDefaultPrettyPrinter(DefaultPrettyPrinter())
             registerModule(JavaTimeModule())  // support java.time.* types
+        }
+    }
+
+    install(StatusPages) {
+        exception<Throwable> {
+            call.respond(HttpStatusCode.InternalServerError)
+        }
+
+        exception<ContentNotFoundException> {
+            call.respond(HttpStatusCode.InternalServerError, "Error fetching data")
+        }
+
+        exception<UserAlreadyExistException> {
+            call.respond(HttpStatusCode.BadRequest, "Username already exists")
+        }
+
+        exception<SecurityQuestionException> { e ->
+            call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
         }
     }
 
@@ -124,45 +141,13 @@ fun Application.loginModule(postgresDbDataSource: DataSource, userService: UserS
     }
 }
 
-fun Application.cmsModule(contentClient: CDAClient, contentService: ContentService) {
-
-    install(StatusPages) {
-        exception<Throwable> {
-            call.respond(HttpStatusCode.InternalServerError)
-        }
-
-        exception<UserAlreadyExistException> {
-            call.respond(HttpStatusCode.BadRequest, "Username already exists")
-        }
-
-        exception<SecurityQuestionException> { e ->
-            call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
-        }
-    }
+fun Application.contentModule(contentService: ContentService) {
 
     routing {
-        defaultRoute()
-        healthCheckRoute(contentClient)
         contentRoute(contentService)
     }
-}
-
-private fun Routing.contentRoute(contentService: ContentService) {
-    get (path = "/content"){
-        call.respond(contentService.getHomePage());
-    }
-}
-
-fun Routing.healthCheckRoute(contentClient: CDAClient) {
-    get("/health") {
-        //check cms connection
-        //check db connection
-        call.respondText("OK", contentType = io.ktor.http.ContentType.Application.Json)
-    }
-
-}fun Routing.defaultRoute() {
-    get("/") {
-        call.respondText("Try /content", contentType = io.ktor.http.ContentType.Application.Json)
-    }
 
 }
+
+
+
