@@ -47,4 +47,8 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
 
     fun findUserById(userId: Int): User? = userRepository.findUserById(userId)
 
+    fun findUsersByUsername(username: String): Boolean {
+        userRepository.findUserByUsername(username)?.let { return true }
+        return false
+    }
 }

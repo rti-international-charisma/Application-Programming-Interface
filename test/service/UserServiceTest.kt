@@ -16,9 +16,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
+import kotlin.test.*
 
 class UserServiceTest {
 
@@ -134,5 +132,23 @@ class UserServiceTest {
         verify { mockJWTService.generateToken(user) }
         assertNotNull(userResponse)
         assertNotNull(userResponse.token)
+    }
+
+    @Test
+    fun `it should return true when user with username is present` () {
+        every { userRepository.findUserByUsername("username") } returns  User(1, "username", 1, "hashed")
+
+        val users = userService.findUsersByUsername("username")
+
+        assertTrue(users)
+    }
+
+    @Test
+    fun `it should return false when user with username is present` () {
+        every { userRepository.findUserByUsername("username") } returns null
+
+        val users = userService.findUsersByUsername("username")
+
+        assertFalse(users)
     }
 }

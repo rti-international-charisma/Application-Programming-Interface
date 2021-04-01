@@ -63,6 +63,27 @@ class UserRouteTest {
         }
     }
 
+    @Test
+    fun `it should return true when`() = testApp {
+        every { userService.findUsersByUsername("username") } returns true
+
+        handleRequest(HttpMethod.Get, "/user/availability/username") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertNotNull(response.content)
+        }
+    }
+
+    @Test
+    fun `it should return 400 if username is absent`() = testApp {
+        every { userService.findUsersByUsername("username") } returns false
+
+        handleRequest(HttpMethod.Get, "/user/availability/") {
+        }.apply {
+            assertEquals(400, response.status()?.value)
+        }
+    }
+
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit){
         return withTestApplication({
