@@ -54,7 +54,10 @@ class ContentClient {
             method = HttpMethod.Get
             header("Authorization", "Bearer $accessToken")
         }
-        client.close();
+        /* This completes the job and throws
+            kotlinx.coroutines.JobCancellationException: Parent job is Completed
+         */
+//        client.close()
         return cmsResponse
     }
 }
