@@ -41,7 +41,7 @@ fun Routing.userRoute(userService: UserService) {
         if (call.parameters["username"].isNullOrEmpty()) {
             call.respond(HttpStatusCode.BadRequest, "Provide username")
         } else {
-            val usernameAvailable = userService.findUsersByUsername(call.parameters["username"]!!)
+            val usernameAvailable = userService.isUsernameAvailable(call.parameters["username"]!!)
             call.respond(HttpStatusCode.OK, UsernameAvailability(usernameAvailable))
         }
     }

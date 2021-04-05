@@ -135,20 +135,20 @@ class UserServiceTest {
     }
 
     @Test
-    fun `it should return true when user with username is present` () {
+    fun `it should return false when user with username is present` () {
         every { userRepository.findUserByUsername("username") } returns  User(1, "username", 1, "hashed")
 
-        val users = userService.findUsersByUsername("username")
+        val users = userService.isUsernameAvailable("username")
 
-        assertTrue(users)
+        assertFalse(users)
     }
 
     @Test
-    fun `it should return false when user with username is present` () {
+    fun `it should return true when user with username is absent` () {
         every { userRepository.findUserByUsername("username") } returns null
 
-        val users = userService.findUsersByUsername("username")
+        val users = userService.isUsernameAvailable("username")
 
-        assertFalse(users)
+        assertTrue(users)
     }
 }

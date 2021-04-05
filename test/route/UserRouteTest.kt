@@ -64,8 +64,8 @@ class UserRouteTest {
     }
 
     @Test
-    fun `it should return true when`() = testApp {
-        every { userService.findUsersByUsername("username") } returns true
+    fun `it should return 200 when request is correct`() = testApp {
+        every { userService.isUsernameAvailable("username") } returns true
 
         handleRequest(HttpMethod.Get, "/user/availability/username") {
         }.apply {
@@ -76,7 +76,7 @@ class UserRouteTest {
 
     @Test
     fun `it should return 400 if username is absent`() = testApp {
-        every { userService.findUsersByUsername("username") } returns false
+        every { userService.isUsernameAvailable("username") } returns false
 
         handleRequest(HttpMethod.Get, "/user/availability/") {
         }.apply {
