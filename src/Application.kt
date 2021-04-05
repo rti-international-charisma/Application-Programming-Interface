@@ -38,7 +38,7 @@ import javax.sql.DataSource
 
 
 fun main() {
-    embeddedServer(Netty, port = 5000) {
+    embeddedServer(Netty, port = 8080) {
         main()
     }.start(wait = true)
 }
@@ -96,6 +96,7 @@ fun Application.commonModule() {
 
     install(CORS) {
         anyHost()
+        header("Content-Type")
         allowCredentials = true
         header(HttpHeaders.AccessControlAllowOrigin)
     }
