@@ -15,7 +15,15 @@ class ContentService(private val contentClient: ContentClient) {
             return jacksonObjectMapper().readValue(response)
 
         } catch (e: Exception) {
-            throw ContentNotFoundException(e.stackTraceToString());
+            throw ContentNotFoundException(e.stackTraceToString())
+        }
+    }
+
+    suspend fun getAsset(assetID: String): ByteArray {
+        try {
+            return contentClient.requestAsset("/assets/${assetID}")
+        } catch (e: Exception) {
+            throw ContentNotFoundException(e.stackTraceToString())
         }
     }
 

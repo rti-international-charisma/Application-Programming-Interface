@@ -21,7 +21,12 @@ data class HomePage(val data: MutableMap<String, Any>)
 @KtorExperimentalLocationsAPI
 fun Routing.contentRoute(contentService: ContentService) {
     get("/homepage") {
-        val homePage = contentService.getHomePage()
+        val homePage = contentService.getHomePage();
         call.respond(homePage)
+    }
+
+    get("/assets/{assetID}") {
+        val asset = contentService.getAsset("${call.parameters["assetID"]}")
+        call.respondBytes(asset)
     }
 }

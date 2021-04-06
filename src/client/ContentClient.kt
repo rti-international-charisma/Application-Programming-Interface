@@ -60,4 +60,12 @@ class ContentClient {
 //        client.close()
         return cmsResponse
     }
+
+    suspend fun requestAsset(endpoint: String): ByteArray {
+        return client.request<ByteArray> {
+            url("$baseUrl${endpoint}")
+            method = HttpMethod.Get
+            header("Authorization", "Bearer $accessToken")
+        }
+    }
 }
