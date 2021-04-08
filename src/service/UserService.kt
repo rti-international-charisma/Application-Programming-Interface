@@ -1,5 +1,7 @@
 package com.rti.charisma.api.service
 
+import com.rti.charisma.api.config.ConfigProvider
+import com.rti.charisma.api.config.LOGIN_ATTEMPTS
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
@@ -17,7 +19,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
             throw UserAlreadyExistException()
         } else {
             userRepository.getSecurityQuestions(signupModel.secQuestionId).firstOrNull()?.let {
-                return userRepository.registerUser(signupModel)
+                return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt())
             } ?: run {
                 throw SecurityQuestionException("Security question with Id: ${signupModel.secQuestionId} is not present")
             }

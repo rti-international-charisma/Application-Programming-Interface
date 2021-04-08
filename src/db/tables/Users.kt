@@ -10,6 +10,7 @@ object Users: Table() {
     val password = varchar("password", 50)
     val sec_q_id = integer("sec_q_id").references(SecurityQuestions.sec_q_id)
     val sec_answer = varchar("sec_answer", 50)
+    val loginAttempts = integer("login_attempts_left")
     override val primaryKey: PrimaryKey = PrimaryKey(id)
 
 }
@@ -18,6 +19,7 @@ data class User(
     val id: Int,
     val username: String,
     val sec_q_id: Int = 0,
+    val loginAttemptsLeft: Int,
 
     @JsonIgnore
     val password: String

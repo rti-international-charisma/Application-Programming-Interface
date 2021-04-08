@@ -9,6 +9,7 @@ import com.rti.charisma.api.config.DB_URL
 import com.rti.charisma.api.config.DB_USER
 import com.rti.charisma.api.db.CharismaDB
 import com.rti.charisma.api.exception.ContentNotFoundException
+import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepositoryImpl

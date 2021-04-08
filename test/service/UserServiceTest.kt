@@ -43,11 +43,11 @@ class UserServiceTest {
         val signupModel = Signup("someusername", "password", 1, "security question answer")
         every { userRepository.getSecurityQuestions(any()) } returns listOf(SecurityQuestion(1, "question"))
         every { userRepository.doesUserExist(signupModel.username) } returns false
-        every { userRepository.registerUser(signupModel) } returns 1
+        every { userRepository.registerUser(signupModel, 5) } returns 1
 
         val registeredUserId = userService.registerUser(signupModel)
 
-        verify { userRepository.registerUser(signupModel) }
+        verify { userRepository.registerUser(signupModel, 5) }
         assertEquals(1, registeredUserId)
     }
 
@@ -109,7 +109,7 @@ class UserServiceTest {
         val password = "password"
         val loginModel = Login("username", password)
 
-        every { userRepository.findUserByUsername(loginModel.username) } returns User(1, "username", password = "hashedPassword")
+        every { userRepository.findUserByUsername(loginModel.username) } returns User(1, "username", password = "hashedPassword", loginAttemptsLeft = 5)
 
         val exception = assertFailsWith(LoginException::class) {
             userService.login(loginModel)
@@ -123,7 +123,7 @@ class UserServiceTest {
         val password = "password"
         val loginModel = Login("username", password)
         val hashedPassword = password.hash()
-        val user = User(1, "username", password = hashedPassword)
+        val user = User(1, "username", password = hashedPassword, loginAttemptsLeft = 5)
 
         every { userRepository.findUserByUsername(loginModel.username) } returns user
 
@@ -136,7 +136,7 @@ class UserServiceTest {
 
     @Test
     fun `it should return false when user with username is present` () {
-        every { userRepository.findUserByUsername("username") } returns  User(1, "username", 1, "hashed")
+        every { userRepository.findUserByUsername("username") } returns  User(1, "username", 1, 5,  "hashed")
 
         val users = userService.isUsernameAvailable("username")
 

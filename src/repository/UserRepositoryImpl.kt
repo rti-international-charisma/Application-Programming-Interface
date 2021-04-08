@@ -30,13 +30,14 @@ class UserRepositoryImpl: UserRepository {
         Users.select { Users.username eq username }.firstOrNull()?.let { true } ?: false
     }
 
-    override fun registerUser(signup: Signup): Int {
+    override fun registerUser(signup: Signup, initialLoginAttempts: Int): Int {
         val user = transaction {
             Users.insert {
                 it[username] = signup.username
                 it[password] = signup.password.hash()
                 it[sec_q_id] = signup.secQuestionId
                 it[sec_answer] = signup.secQuestionAnswer.hash()
+                it[loginAttempts] = initialLoginAttempts
             }
         }
         return user[Users.id]
@@ -55,7 +56,8 @@ class UserRepositoryImpl: UserRepository {
                 id =this[Users.id],
                 username = this[Users.username],
                 sec_q_id = this[Users.sec_q_id],
-                password = this[Users.password]
+                password = this[Users.password],
+                loginAttemptsLeft = this[Users.loginAttempts]
         )
 
     private fun ResultRow.toSecurityQuestion(): SecurityQuestion = SecurityQuestion(
