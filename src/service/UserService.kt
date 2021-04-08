@@ -5,6 +5,7 @@ import com.rti.charisma.api.config.LOGIN_ATTEMPTS
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
+import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.model.UserResponse
@@ -39,9 +40,17 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
         val user = userRepository.findUserByUsername(loginModel.username)
         user?.let {
             if (loginModel.password.hash() == it.password) {
+                user.loginAttemptsLeft = ConfigProvider.get(LOGIN_ATTEMPTS).toInt()
+                userRepository.updateUser(user)
                 return UserResponse(user, jwtService.generateToken(it))
             } else {
-                throw LoginException("Username and password do not match")
+                if (user.loginAttemptsLeft > 0) {
+                    user.loginAttemptsLeft--
+                    userRepository.updateUser(user)
+                    throw LoginException("Username and password do not match. You have ${user.loginAttemptsLeft} Login attempts left.")
+                } else {
+                    throw LoginAttemptsExhaustedException()
+                }
             }
         }
         throw LoginException("User does not exist.")

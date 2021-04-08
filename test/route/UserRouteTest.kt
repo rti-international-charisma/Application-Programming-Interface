@@ -1,9 +1,13 @@
 package route
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.rti.charisma.api.com.rti.charisma.api.model.ErrorResponse
 import com.rti.charisma.api.loginModule
 import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.db.tables.User
+import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
+import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.model.UserResponse
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
@@ -60,6 +64,36 @@ class UserRouteTest {
             setBody(jacksonObjectMapper().writeValueAsString(loginModel))
         }.apply {
             assertEquals(200, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `it should return 401 when login user with incorrect password`() = testApp {
+        val loginModel = Login("username", "password")
+
+        every { userService.login(loginModel) } throws LoginException("Username and password do not match. You have 4 Login attempts left.")
+
+        handleRequest(HttpMethod.Post, "/login") {
+            setBody(jacksonObjectMapper().writeValueAsString(loginModel))
+        }.apply {
+            assertEquals(401, response.status()?.value)
+            val errorResponse = jacksonObjectMapper().readValue<ErrorResponse>(response.content!!)
+            assertEquals("Username and password do not match. You have 4 Login attempts left.", errorResponse.body)
+        }
+    }
+
+    @Test
+    fun `it should return 401 LoginAttemptsExhausted when login user with incorrect password more than 5 times`() = testApp {
+        val loginModel = Login("username", "password")
+
+        every { userService.login(loginModel) } throws LoginAttemptsExhaustedException()
+
+        handleRequest(HttpMethod.Post, "/login") {
+            setBody(jacksonObjectMapper().writeValueAsString(loginModel))
+        }.apply {
+            assertEquals(401, response.status()?.value)
+            val errorResponse = jacksonObjectMapper().readValue<ErrorResponse>(response.content!!)
+            assertEquals("Reset Password", errorResponse.body)
         }
     }
 
