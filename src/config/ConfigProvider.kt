@@ -10,6 +10,7 @@ const val HASH_SECRET_KEY = "ktor.hash_secret"
 const val JWT_SECRET = "ktor.jwt_secret"
 const val CMS_BASE_URL = "ktor.cms.base_url"
 const val ACCESS_TOKEN = "ktor.cms.access_token"
+const val LOGIN_ATTEMPTS = "ktor.login_attempts"
 
 object ConfigProvider {
     private val config = HoconApplicationConfig(ConfigFactory.load())

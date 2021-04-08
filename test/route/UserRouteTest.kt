@@ -55,7 +55,7 @@ class UserRouteTest {
     @Test
     fun `it should login user`() = testApp {
         val loginModel = Login("username", "password")
-        every { userService.login(loginModel) } returns UserResponse(User(1, "username", password = "hashedPassword"), "jwt-token")
+        every { userService.login(loginModel) } returns UserResponse(User(1, "username", password = "hashedPassword", loginAttemptsLeft = 5), "jwt-token")
         handleRequest(HttpMethod.Post, "/login") {
             setBody(jacksonObjectMapper().writeValueAsString(loginModel))
         }.apply {

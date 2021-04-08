@@ -9,7 +9,7 @@ interface UserRepository {
 
     fun getSecurityQuestions(secQId: Int?): List<SecurityQuestion>
     fun doesUserExist(username: String): Boolean
-    fun registerUser(signup: Signup): Int
+    fun registerUser(signup: Signup, initialLoginAttempts: Int): Int
     fun findUserByUsername(username: String): User?
     fun findUserById(userId: Int): User?
 }
