@@ -12,4 +12,5 @@ interface UserRepository {
     fun registerUser(signup: Signup, initialLoginAttempts: Int): Int
     fun findUserByUsername(username: String): User?
     fun findUserById(userId: Int): User?
+    fun updateUser(user: User)
 }

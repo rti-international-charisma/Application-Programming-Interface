@@ -19,7 +19,7 @@ data class User(
     val id: Int,
     val username: String,
     val sec_q_id: Int = 0,
-    val loginAttemptsLeft: Int,
+    var loginAttemptsLeft: Int,
 
     @JsonIgnore
     val password: String

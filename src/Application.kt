@@ -3,15 +3,13 @@ package com.rti.charisma.api
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.rti.charisma.api.client.ContentClient
+import com.rti.charisma.api.com.rti.charisma.api.model.ErrorResponse
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.config.DB_PASSWORD
 import com.rti.charisma.api.config.DB_URL
 import com.rti.charisma.api.config.DB_USER
 import com.rti.charisma.api.db.CharismaDB
-import com.rti.charisma.api.exception.ContentNotFoundException
-import com.rti.charisma.api.exception.LoginException
-import com.rti.charisma.api.exception.SecurityQuestionException
-import com.rti.charisma.api.exception.UserAlreadyExistException
+import com.rti.charisma.api.exception.*
 import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.contentRoute
 import com.rti.charisma.api.route.userRoute
@@ -92,6 +90,14 @@ fun Application.commonModule() {
 
         exception<SecurityQuestionException> { e ->
             call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
+        }
+
+        exception<LoginException> {e ->
+            call.respond(HttpStatusCode.Unauthorized, ErrorResponse(e.localizedMessage))
+        }
+
+        exception<LoginAttemptsExhaustedException> { e ->
+            call.respond(HttpStatusCode.Unauthorized, ErrorResponse("Reset Password"))
         }
     }
 

@@ -6,10 +6,7 @@ import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.db.tables.Users
 import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.util.hash
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class UserRepositoryImpl: UserRepository {
@@ -49,6 +46,14 @@ class UserRepositoryImpl: UserRepository {
 
     override fun findUserById(userId: Int): User? = transaction {
         Users.select { Users.id eq userId }.firstOrNull()?.toUser()
+    }
+
+    override fun updateUser(user: User) {
+        transaction {
+            Users.update({ Users.id eq user.id }) {
+                it[loginAttempts] = user.loginAttemptsLeft
+            }
+        }
     }
 
 
