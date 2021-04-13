@@ -30,7 +30,6 @@ data class HomePage(
             )
         }
 
-
         private fun toPageImages(data: Any?): List<PageImage> {
             if (isListType(data)) {
                 val images = data as List<Map<String, Any>>
@@ -76,7 +75,7 @@ data class Step(
             Step(
                 title = (data["title"] ?: "") as String,
                 actionText = (data["action_text"] ?: "") as String,
-                backgroundImageUrl = if (data["background_image"]!= null){
+                backgroundImageUrl = if (data["background_image"] != null) {
                     val image = data["background_image"] as Map<String, Any>
                     "${ConfigProvider.get(CMS_ASSETS_URL)}/${image["id"]}"
                 } else "",
@@ -88,29 +87,6 @@ data class Step(
     }
 }
 
-
-data class PageImage(
-    var title: String = "",
-    var introduction: String = "",
-    var summary: String = "",
-    var imageUrl: String = ""
-) {
-    companion object {
-        fun toPageImage(data: Any?): PageImage {
-            return if (data is Map<*, *>) {
-                PageImage(
-                    title = (data["title"] ?: "") as String,
-                    introduction = (data["introduction"] ?: "") as String,
-                    summary = (data["summary"] ?: "") as String,
-                    imageUrl = if (data["image_file"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["image_file"]}" else ""
-                )
-            } else {
-                PageImage()
-            }
-        }
-
-    }
-}
 
 data class VideoSection(
     var introduction: String = "",
@@ -132,24 +108,3 @@ data class VideoSection(
     }
 }
 
-data class PageVideo(
-    var title: String = "",
-    var description: String = "",
-    var videoUrl: String = "",
-    var actionText: String = ""
-) {
-    companion object {
-        fun toPageVideo(data: Any): PageVideo {
-            return if (data is Map<*, *>) {
-                PageVideo(
-                    title = (data["title"] ?: "") as String,
-                    description = (data["description"] ?: "") as String,
-                    videoUrl = if (data["video_file"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_file"]}" else "",
-                    actionText = (data["action_text"] ?: "") as String
-                )
-            } else {
-                return PageVideo()
-            }
-        }
-    }
-}

@@ -1,6 +1,5 @@
 package com.rti.charisma.api.route
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.ktor.application.*
 import io.ktor.locations.*
 import io.ktor.response.*
@@ -15,10 +14,16 @@ import service.ContentService
 
 @KtorExperimentalLocationsAPI
 fun Routing.contentRoute(contentService: ContentService) {
-    get("/homepage") {
+    get("/home") {
         val homePage = contentService.getHomePage()
         call.respond(homePage)
     }
+
+    get("/assessment/intro") {
+        val introPage = contentService.getPage("assessment-intro")
+        call.respond(introPage)
+    }
+
 }
 
 
