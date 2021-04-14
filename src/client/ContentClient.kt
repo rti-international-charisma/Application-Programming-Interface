@@ -71,6 +71,14 @@ class ContentClient {
             throw ContentException("Error processing content")
         }
     }
+
+    suspend fun requestAsset(endpoint: String): ByteArray {
+        return client.request<ByteArray> {
+            url("$baseUrl${endpoint}")
+            method = HttpMethod.Get
+            header("Authorization", "Bearer $accessToken")
+        }
+    }
 }
 
 

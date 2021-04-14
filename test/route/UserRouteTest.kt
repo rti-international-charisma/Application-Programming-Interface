@@ -1,9 +1,13 @@
 package route
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.rti.charisma.api.com.rti.charisma.api.model.ErrorResponse
 import com.rti.charisma.api.loginModule
 import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.db.tables.User
+import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
+import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.model.UserResponse
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
@@ -55,7 +59,7 @@ class UserRouteTest {
     @Test
     fun `it should login user`() = testApp {
         val loginModel = Login("username", "password")
-        every { userService.login(loginModel) } returns UserResponse(User(1, "username", password = "hashedPassword"), "jwt-token")
+        every { userService.login(loginModel) } returns UserResponse(User(1, "username", password = "hashedPassword", loginAttemptsLeft = 5), "jwt-token")
         handleRequest(HttpMethod.Post, "/login") {
             setBody(jacksonObjectMapper().writeValueAsString(loginModel))
         }.apply {
@@ -64,8 +68,38 @@ class UserRouteTest {
     }
 
     @Test
-    fun `it should return true when`() = testApp {
-        every { userService.findUsersByUsername("username") } returns true
+    fun `it should return 401 when login user with incorrect password`() = testApp {
+        val loginModel = Login("username", "password")
+
+        every { userService.login(loginModel) } throws LoginException("Username and password do not match. You have 4 Login attempts left.")
+
+        handleRequest(HttpMethod.Post, "/login") {
+            setBody(jacksonObjectMapper().writeValueAsString(loginModel))
+        }.apply {
+            assertEquals(401, response.status()?.value)
+            val errorResponse = jacksonObjectMapper().readValue<ErrorResponse>(response.content!!)
+            assertEquals("Username and password do not match. You have 4 Login attempts left.", errorResponse.body)
+        }
+    }
+
+    @Test
+    fun `it should return 401 LoginAttemptsExhausted when login user with incorrect password more than 5 times`() = testApp {
+        val loginModel = Login("username", "password")
+
+        every { userService.login(loginModel) } throws LoginAttemptsExhaustedException()
+
+        handleRequest(HttpMethod.Post, "/login") {
+            setBody(jacksonObjectMapper().writeValueAsString(loginModel))
+        }.apply {
+            assertEquals(401, response.status()?.value)
+            val errorResponse = jacksonObjectMapper().readValue<ErrorResponse>(response.content!!)
+            assertEquals("Reset Password", errorResponse.body)
+        }
+    }
+
+    @Test
+    fun `it should return 200 when request is correct`() = testApp {
+        every { userService.isUsernameAvailable("username") } returns true
 
         handleRequest(HttpMethod.Get, "/user/availability/username") {
         }.apply {
@@ -76,7 +110,7 @@ class UserRouteTest {
 
     @Test
     fun `it should return 400 if username is absent`() = testApp {
-        every { userService.findUsersByUsername("username") } returns false
+        every { userService.isUsernameAvailable("username") } returns false
 
         handleRequest(HttpMethod.Get, "/user/availability/") {
         }.apply {

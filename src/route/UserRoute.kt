@@ -3,6 +3,7 @@ package com.rti.charisma.api.route
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.rti.charisma.api.db.tables.User
+import com.rti.charisma.api.model.Response
 import com.rti.charisma.api.model.UsernameAvailability
 import com.rti.charisma.api.service.UserService
 import io.ktor.application.call
@@ -25,7 +26,7 @@ fun Routing.userRoute(userService: UserService) {
     post("/signup") {
         val signupModel = jacksonObjectMapper().readValue<Signup>(call.receiveText())
         userService.registerUser(signupModel)
-        call.respond(HttpStatusCode.OK, "User registered ")
+        call.respond(HttpStatusCode.OK, Response("User registered "))
     }
 
     get("/securityquestions/{id}") {
@@ -39,9 +40,9 @@ fun Routing.userRoute(userService: UserService) {
 
     get("/user/availability/{username}") {
         if (call.parameters["username"].isNullOrEmpty()) {
-            call.respond(HttpStatusCode.BadRequest, "Provide username")
+            call.respond(HttpStatusCode.BadRequest, Response("Provide username"))
         } else {
-            val usernameAvailable = userService.findUsersByUsername(call.parameters["username"]!!)
+            val usernameAvailable = userService.isUsernameAvailable(call.parameters["username"]!!)
             call.respond(HttpStatusCode.OK, UsernameAvailability(usernameAvailable))
         }
     }
@@ -54,7 +55,7 @@ fun Routing.userRoute(userService: UserService) {
     authenticate("jwt") {
         get("/auth/route") {
             val user = call.principal<User>()
-            call.respond(HttpStatusCode.OK, " ${user?.username} is an authenticated user")
+            call.respond(HttpStatusCode.OK, Response("${user?.username} is an authenticated user"))
         }
     }
 }

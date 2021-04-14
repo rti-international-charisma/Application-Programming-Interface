@@ -24,6 +24,11 @@ fun Routing.contentRoute(contentService: ContentService) {
         call.respond(introPage)
     }
 
+
+    get("/assets/{assetID}") {
+        val asset = contentService.getAsset("${call.parameters["assetID"]}")
+        call.respondBytes(asset)
+    }
 }
 
 

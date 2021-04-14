@@ -11,6 +11,7 @@ const val JWT_SECRET = "ktor.jwt_secret"
 const val CMS_BASE_URL = "ktor.cms.base_url"
 const val CMS_ASSETS_URL = "ktor.cms.assets_url"
 const val ACCESS_TOKEN = "ktor.cms.access_token"
+const val LOGIN_ATTEMPTS = "ktor.login_attempts"
 const val ACCESSIBILITY_STATUS = "ktor.cms.accessible_state"
 
 object ConfigProvider {

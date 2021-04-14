@@ -46,6 +46,15 @@ class ContentService(private val contentClient: ContentClient) {
     }
 
 
+    suspend fun getAsset(assetID: String): ByteArray {
+        try {
+            return contentClient.requestAsset("/assets/${assetID}")
+        } catch (e: Exception) {
+            throw ContentException(e.stackTraceToString())
+        }
+    }
+
+
     private fun canAccess(status: String): Boolean {
         val states : List<String> = ConfigProvider.getList(ACCESSIBILITY_STATUS)
         return states.contains(status)

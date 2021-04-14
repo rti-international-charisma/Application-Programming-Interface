@@ -6,10 +6,7 @@ import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.db.tables.Users
 import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.util.hash
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class UserRepositoryImpl: UserRepository {
@@ -30,13 +27,14 @@ class UserRepositoryImpl: UserRepository {
         Users.select { Users.username eq username }.firstOrNull()?.let { true } ?: false
     }
 
-    override fun registerUser(signup: Signup): Int {
+    override fun registerUser(signup: Signup, initialLoginAttempts: Int): Int {
         val user = transaction {
             Users.insert {
                 it[username] = signup.username
                 it[password] = signup.password.hash()
                 it[sec_q_id] = signup.secQuestionId
                 it[sec_answer] = signup.secQuestionAnswer.hash()
+                it[loginAttempts] = initialLoginAttempts
             }
         }
         return user[Users.id]
@@ -50,12 +48,21 @@ class UserRepositoryImpl: UserRepository {
         Users.select { Users.id eq userId }.firstOrNull()?.toUser()
     }
 
+    override fun updateUser(user: User) {
+        transaction {
+            Users.update({ Users.id eq user.id }) {
+                it[loginAttempts] = user.loginAttemptsLeft
+            }
+        }
+    }
+
 
     private fun ResultRow.toUser(): User = User(
                 id =this[Users.id],
                 username = this[Users.username],
                 sec_q_id = this[Users.sec_q_id],
-                password = this[Users.password]
+                password = this[Users.password],
+                loginAttemptsLeft = this[Users.loginAttempts]
         )
 
     private fun ResultRow.toSecurityQuestion(): SecurityQuestion = SecurityQuestion(

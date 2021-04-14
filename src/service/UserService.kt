@@ -1,8 +1,11 @@
 package com.rti.charisma.api.service
 
+import com.rti.charisma.api.config.ConfigProvider
+import com.rti.charisma.api.config.LOGIN_ATTEMPTS
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
+import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.model.UserResponse
@@ -17,7 +20,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
             throw UserAlreadyExistException()
         } else {
             userRepository.getSecurityQuestions(signupModel.secQuestionId).firstOrNull()?.let {
-                return userRepository.registerUser(signupModel)
+                return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt())
             } ?: run {
                 throw SecurityQuestionException("Security question with Id: ${signupModel.secQuestionId} is not present")
             }
@@ -37,9 +40,17 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
         val user = userRepository.findUserByUsername(loginModel.username)
         user?.let {
             if (loginModel.password.hash() == it.password) {
+                user.loginAttemptsLeft = ConfigProvider.get(LOGIN_ATTEMPTS).toInt()
+                userRepository.updateUser(user)
                 return UserResponse(user, jwtService.generateToken(it))
             } else {
-                throw LoginException("Username and password do not match")
+                if (user.loginAttemptsLeft > 0) {
+                    user.loginAttemptsLeft--
+                    userRepository.updateUser(user)
+                    throw LoginException("Username and password do not match. You have ${user.loginAttemptsLeft} Login attempts left.")
+                } else {
+                    throw LoginAttemptsExhaustedException()
+                }
             }
         }
         throw LoginException("User does not exist.")
@@ -47,8 +58,8 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
 
     fun findUserById(userId: Int): User? = userRepository.findUserById(userId)
 
-    fun findUsersByUsername(username: String): Boolean {
-        userRepository.findUserByUsername(username)?.let { return true }
-        return false
+    fun isUsernameAvailable(username: String): Boolean {
+        userRepository.findUserByUsername(username)?.let { return false }
+        return true
     }
 }

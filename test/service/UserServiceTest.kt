@@ -2,6 +2,7 @@ package service
 
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
+import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.exception.LoginException
@@ -43,11 +44,11 @@ class UserServiceTest {
         val signupModel = Signup("someusername", "password", 1, "security question answer")
         every { userRepository.getSecurityQuestions(any()) } returns listOf(SecurityQuestion(1, "question"))
         every { userRepository.doesUserExist(signupModel.username) } returns false
-        every { userRepository.registerUser(signupModel) } returns 1
+        every { userRepository.registerUser(signupModel, 5) } returns 1
 
         val registeredUserId = userService.registerUser(signupModel)
 
-        verify { userRepository.registerUser(signupModel) }
+        verify { userRepository.registerUser(signupModel, 5) }
         assertEquals(1, registeredUserId)
     }
 
@@ -109,13 +110,13 @@ class UserServiceTest {
         val password = "password"
         val loginModel = Login("username", password)
 
-        every { userRepository.findUserByUsername(loginModel.username) } returns User(1, "username", password = "hashedPassword")
+        every { userRepository.findUserByUsername(loginModel.username) } returns User(1, "username", password = "hashedPassword", loginAttemptsLeft = 5)
 
         val exception = assertFailsWith(LoginException::class) {
             userService.login(loginModel)
         }
 
-        assertEquals("Username and password do not match", exception.localizedMessage)
+        assertEquals("Username and password do not match. You have 4 Login attempts left.", exception.localizedMessage)
     }
 
     @Test
@@ -123,7 +124,7 @@ class UserServiceTest {
         val password = "password"
         val loginModel = Login("username", password)
         val hashedPassword = password.hash()
-        val user = User(1, "username", password = hashedPassword)
+        val user = User(1, "username", password = hashedPassword, loginAttemptsLeft = 5)
 
         every { userRepository.findUserByUsername(loginModel.username) } returns user
 
@@ -135,20 +136,59 @@ class UserServiceTest {
     }
 
     @Test
-    fun `it should return true when user with username is present` () {
-        every { userRepository.findUserByUsername("username") } returns  User(1, "username", 1, "hashed")
+    fun `it should return false when user with username is present` () {
+        every { userRepository.findUserByUsername("username") } returns  User(1, "username", 1, 5,  "hashed")
 
-        val users = userService.findUsersByUsername("username")
+        val users = userService.isUsernameAvailable("username")
+
+        assertFalse(users)
+    }
+
+    @Test
+    fun `it should return true when user with username is absent` () {
+        every { userRepository.findUserByUsername("username") } returns null
+
+        val users = userService.isUsernameAvailable("username")
 
         assertTrue(users)
     }
 
     @Test
-    fun `it should return false when user with username is present` () {
-        every { userRepository.findUserByUsername("username") } returns null
+    fun `it should return error if 0 login attempts are left with user while login` () {
+        every { userRepository.findUserByUsername("username") } returns User(1, "username", 1, 0,  "hashed")
 
-        val users = userService.findUsersByUsername("username")
+        val login = Login("username", "password")
+        assertFailsWith(LoginAttemptsExhaustedException::class) {
+            userService.login(login)
+        }
+    }
 
-        assertFalse(users)
+    @Test
+    fun `it should reduce login attempts and return error if attempts left are not zero` () {
+        val user = User(1, "username", 1, 5,  "hashed")
+        every { userRepository.findUserByUsername("username") } returns user
+
+        val login = Login("username", "password")
+        val loginException = assertFailsWith(LoginException::class, "asdasd") {
+            userService.login(login)
+        }
+
+        assertEquals("Username and password do not match. You have 4 Login attempts left.", loginException.localizedMessage)
+
+        verify { userRepository.updateUser(user.copy(loginAttemptsLeft = 4)) }
+    }
+
+    @Test
+    fun `it should reset login attempts if correct password is entered` () {
+        val password = "password"
+        val loginModel = Login("username", password)
+        val hashedPassword = password.hash()
+        val user = User(1, "username", 1, 3,  hashedPassword)
+
+        every { userRepository.findUserByUsername("username") } returns user
+
+        userService.login(loginModel)
+
+        verify { userRepository.updateUser(user.copy(loginAttemptsLeft = 5)) }
     }
 }

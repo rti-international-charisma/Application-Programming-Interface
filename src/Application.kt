@@ -3,11 +3,13 @@ package com.rti.charisma.api
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.rti.charisma.api.client.ContentClient
+import com.rti.charisma.api.com.rti.charisma.api.model.ErrorResponse
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.config.DB_PASSWORD
 import com.rti.charisma.api.config.DB_URL
 import com.rti.charisma.api.config.DB_USER
 import com.rti.charisma.api.db.CharismaDB
+import com.rti.charisma.api.exception.*
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.exception.SecurityQuestionException
@@ -39,7 +41,7 @@ import javax.sql.DataSource
 
 
 fun main() {
-    embeddedServer(Netty, port = 5000) {
+    embeddedServer(Netty, port = 8080) {
         main()
     }.start(wait = true)
 }
@@ -97,6 +99,14 @@ fun Application.commonModule() {
             call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
         }
 
+        exception<LoginException> {e ->
+            call.respond(HttpStatusCode.Unauthorized, ErrorResponse(e.localizedMessage))
+        }
+
+        exception<LoginAttemptsExhaustedException> { e ->
+            call.respond(HttpStatusCode.Unauthorized, ErrorResponse("Reset Password"))
+        }
+
         exception<Throwable> {
             call.respond(HttpStatusCode.InternalServerError)
         }
@@ -104,6 +114,7 @@ fun Application.commonModule() {
 
     install(CORS) {
         anyHost()
+        header("Content-Type")
         allowCredentials = true
         header(HttpHeaders.AccessControlAllowOrigin)
     }
