@@ -115,22 +115,24 @@ class ContentRouteTest {
       "title" : "video-title1",
       "description" : "description1",
       "videoUrl" : "/assets/file1",
+      "videoImage" : "/assets/video-image-1",
       "actionText" : "action1"
     }, {
       "title" : "video-title2",
       "description" : "description2",
       "videoUrl" : "/assets/file2",
+      "videoImage" : "/assets/video-image-2",
       "actionText" : "action2"
     } ]
   },
   "steps" : [ {
     "title" : "title-1",
-    "actionText" : "action1",
+    "subTitle" : "sub-title-1",
     "backgroundImageUrl" : "/assets/bg_image1",
     "imageUrl" : "/assets/image1"
   }, {
     "title" : "title-2",
-    "actionText" : "action2",
+    "subTitle" : "sub-title-2",
     "backgroundImageUrl" : "/assets/bg_image2",
     "imageUrl" : "/assets/image2"
   } ]
@@ -140,14 +142,9 @@ class ContentRouteTest {
     private fun introPageJson(): String {
         return """{
   "title" : "This is the landing page",
-  "description" : "This is description",
+  "summary" : "This is description",
   "introduction" : "This is introduction",
-  "image" : {
-    "title" : "Intro Image",
-    "introduction" : "<div><span>some styled introduction</span></div>",
-    "summary" : "summary",
-    "imageUrl" : "/assets/image-id"
-  }
+  "imageUrl" : "/assets/image-id"
 }"""
     }
 
@@ -161,10 +158,10 @@ class ContentRouteTest {
         )
         val image1 = PageImage("image1-title", "intro", "summary", "/assets/image1-id")
         val image2 = PageImage("image2-title", "intro", "summary", "/assets/image2-id")
-        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "action1")
-        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "action2")
-        val step1 = Step("title-1", "action1", "/assets/bg_image1", "/assets/image1")
-        val step2 = Step("title-2", "action2", "/assets/bg_image2", "/assets/image2")
+        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video-image-1", "action1")
+        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video-image-2", "action2")
+        val step1 = Step("title-1", "sub-title-1", "/assets/bg_image1", "/assets/image1")
+        val step2 = Step("title-2", "sub-title-2", "/assets/bg_image2", "/assets/image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
@@ -183,17 +180,11 @@ class ContentRouteTest {
 
 
     private fun introPage(): Page {
-        val image = PageImage(
-            "Intro Image",
-            "<div><span>some styled introduction</span></div>",
-            "summary",
-            "/assets/image-id"
-        )
         return Page(
             "This is the landing page",
             "This is description",
             "This is introduction",
-            image
+            "/assets/image-id"
         )
     }
 

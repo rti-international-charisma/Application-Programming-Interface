@@ -99,7 +99,7 @@ class ContentServiceTest {
 			"title": "Hero Image",
 			"summary": "summary",
 			"introduction": "<div><span>some styled introduction</span></div>",
-			"image_file": "hero-image-id"
+			"image_url": "hero-image-id"
 		}
 	}
 }"""
@@ -112,15 +112,16 @@ class ContentServiceTest {
 		"id": "intro page",
 		"title": "This is the landing page",
 		"introduction": "This is introduction",
-		"description": "This is description",
+		"summary": "This is description",
 		"status": "published",
+        "image_url": "/assets/image-id",
 		"image": {
 			"name": "Page image",
 			"status": "published",
 			"title": "Page Image",
 			"summary": "summary",
 			"introduction": "<div><span>some styled introduction</span></div>",
-			"image_file": "page-image-id"
+			"image_url": "page-image-id"
 		}
 	}
 }"""
@@ -144,27 +145,29 @@ class ContentServiceTest {
 			"videos": [{
 					"id": "homepage_video",
 					"status": "published",
-					"video_file": "file1",
+					"video_url": "file1",
 					"action_text": "action1",
 					"title": "video-title1",
 					"description": "description1",
-					"video_section": "video_section"
+					"video_section": "video_section",
+                    "video_image": "video_image1"
 				},
 				{
 					"id": "video_module2",
 					"status": "published",
-					"video_file": "file2",
+					"video_url": "file2",
 					"action_text": "action2",
 					"title": "video-title2",
 					"description": "description2",
-					"video_section": "video_section"
+					"video_section": "video_section",
+                    "video_image": "video_image2"
 				}
 			]
 		},
 		"steps": [{
 				"id": 1,
 				"title": "title-1",
-				"action_text": "action1",
+				"sub_title": "sub-title-1",
 				"background_image": {
 					"id": "bg_image1",
 					"title": "title",
@@ -180,7 +183,7 @@ class ContentServiceTest {
 			{
 				"id": 2,
 				"title": "title-2",
-				"action_text": "action2",
+				"sub_title": "sub-title-2",
 				"background_image": {
 					"id": "bg_image2",
 					"title": "Ellipse 4 (1)",
@@ -200,7 +203,7 @@ class ContentServiceTest {
                 "title": "image1-title",
                 "summary": "summary",
                 "introduction": "intro",
-                "image_file": "image1-id"
+                "image_url": "image1-id"
 		    },
             {
                 "name": " image 2",
@@ -208,7 +211,7 @@ class ContentServiceTest {
                 "title": "image2-title",
                 "summary": "summary",
                 "introduction": "intro",
-                "image_file": "image2-id"
+                "image_url": "image2-id"
 		    }
         ],
 		"hero_image": {
@@ -217,7 +220,7 @@ class ContentServiceTest {
 			"title": "Hero Image",
 			"summary": "summary",
 			"introduction": "<div><span>some styled introduction</span></div>",
-			"image_file": "hero-image-id"
+			"image_url": "hero-image-id"
 		}
 	}
 }"""
@@ -240,27 +243,29 @@ class ContentServiceTest {
 			"videos": [{
 					"id": "homepage_video",
 					"status": "published",
-					"video_file": "file1",
+					"video_url": "file1",
 					"action_text": "action1",
 					"title": "video-title1",
 					"description": "description1",
-					"video_section": "video_section"
+					"video_section": "video_section",
+                    "video_image": "video_image1"
 				},
 				{
 					"id": "video_module2",
 					"status": "published",
-					"video_file": "file2",
+					"video_url": "file2",
 					"action_text": "action2",
 					"title": "video-title2",
 					"description": "description2",
-					"video_section": "video_section"
+					"video_section": "video_section",
+                    "video_image": "video_image2"
 				}
 			]
 		},
 		"steps": [{
 				"id": 1,
 				"title": "title-1",
-				"action_text": "action1",
+                "sub_title": "sub-title-1",
 				"background_image": {
 					"id": "bg_image1",
 					"title": "title",
@@ -276,7 +281,7 @@ class ContentServiceTest {
 			{
 				"id": 2,
 				"title": "title-2",
-				"action_text": "action2",
+				"sub_title": "sub-title-2",
 				"background_image": {
 					"id": "bg_image2",
 					"title": "Ellipse 4 (1)",
@@ -296,7 +301,7 @@ class ContentServiceTest {
                 "title": "image1-title",
                 "summary": "summary",
                 "introduction": "intro",
-                "image_file": "image1-id"
+                "image_url": "image1-id"
 		    },
             {
                 "name": " image 2",
@@ -304,7 +309,7 @@ class ContentServiceTest {
                 "title": "image2-title",
                 "summary": "summary",
                 "introduction": "intro",
-                "image_file": "image2-id"
+                "image_url": "image2-id"
 		    }
         ],
 		"hero_image": {
@@ -313,7 +318,7 @@ class ContentServiceTest {
 			"title": "Hero Image",
 			"summary": "summary",
 			"introduction": "<div><span>some styled introduction</span></div>",
-			"image_file": "hero-image-id"
+			"image_url": "hero-image-id"
 		}
 	}
 }"""
@@ -324,10 +329,10 @@ class ContentServiceTest {
         val heroImage = PageImage("Hero Image", "<div><span>some styled introduction</span></div>", "summary", "/assets/hero-image-id")
         val image1 = PageImage("image1-title", "intro", "summary", "/assets/image1-id")
         val image2 = PageImage("image2-title", "intro", "summary", "/assets/image2-id")
-        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "action1")
-        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "action2")
-        val step1 = Step("title-1", "action1", "/assets/bg_image1", "/assets/image1")
-        val step2 = Step("title-2", "action2", "/assets/bg_image2", "/assets/image2")
+        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video_image1")
+        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video_image2")
+        val step1 = Step("title-1", "sub-title-1", "/assets/bg_image1", "/assets/image1")
+        val step2 = Step("title-2", "sub-title-2", "/assets/bg_image2", "/assets/image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
@@ -349,7 +354,7 @@ class ContentServiceTest {
             "This is the landing page",
             "This is description",
             "This is introduction",
-            image,
+            imageUrl = "/assets/image-id",
         )
     }
 }
