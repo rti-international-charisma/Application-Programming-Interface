@@ -5,7 +5,6 @@ import com.rti.charisma.api.client.CmsContent
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
-import com.rti.charisma.api.exception.NoContentAvailableException
 import com.rti.charisma.api.model.*
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -77,10 +76,10 @@ class ContentServiceTest {
     }
 
     @Test
-    fun `it should throw no content available exception if content not in allowed state `() = runBlockingTest {
+    fun `it should throw no content exception if content not in allowed state `() = runBlockingTest {
         coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns archivedContent()
         assertFailsWith(
-            exceptionClass = NoContentAvailableException::class,
+            exceptionClass = ContentException::class,
             block = { contentService.getHomePage() }
         )
     }

@@ -54,26 +54,26 @@ class ContentClient {
     suspend fun request(endpoint: String): CmsContent {
         /* This completes the job and throws
             kotlinx.coroutines.JobCancellationException: Parent job is Completed
+                   client.close()
          */
-//        client.close()
         try {
-            val response: CmsContent = client.request {
+            return client.request {
                 url("$baseUrl${endpoint}")
                 method = HttpMethod.Get
                 header("Authorization", "Bearer $accessToken")
             }
-            return response
         } catch (e: ClientRequestException) {
             throw ContentRequestException("Failed to fetch content, ${e.message}}")
         } catch (e: ServerResponseException) {
-            throw ContentException("Error processing content")
+            throw ContentException("Error while fetching content from server")
         } catch (e: Exception) {
-            throw ContentException("Error processing content")
+            throw ContentException("Unexpected error while fetching content from server")
         }
+
     }
 
     suspend fun requestAsset(endpoint: String): ByteArray {
-        return client.request<ByteArray> {
+        return client.request {
             url("$baseUrl${endpoint}")
             method = HttpMethod.Get
             header("Authorization", "Bearer $accessToken")
