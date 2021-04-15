@@ -107,22 +107,23 @@ class ContentServiceTest {
 
     private fun pageContent(): CmsContent {
         val content =  """{
-	"data": {
+            "data": {
 		"id": "intro page",
 		"title": "This is the landing page",
 		"introduction": "This is introduction",
 		"summary": "This is description",
 		"status": "published",
         "image_url": "/assets/image-id",
-		"image": {
-			"name": "Page image",
-			"status": "published",
-			"title": "Page Image",
-			"summary": "summary",
-			"introduction": "<div><span>some styled introduction</span></div>",
-			"image_url": "page-image-id"
-		}
-	}
+		"images": [
+            {
+                "id": 4,
+                "directus_files_id": {
+                    "id": "image1",
+                    "title": "Image 1"
+                }
+            }
+        ]
+}
 }"""
         return jacksonObjectMapper().readValue(content, CmsContent::class.java)
     }
@@ -167,32 +168,15 @@ class ContentServiceTest {
 				"id": 1,
 				"title": "title-1",
 				"sub_title": "sub-title-1",
-				"background_image": {
-					"id": "bg_image1",
-					"title": "title",
-					"type": "image/png",
-					"description": "description"
-				},
-				"image": {
-					"id": "image1",
-					"title": "Ellipse 3",
-					"description": null
-				}
+				"background_image": "bg_image1",
+				"image": "image1"
 			},
 			{
 				"id": 2,
 				"title": "title-2",
 				"sub_title": "sub-title-2",
-				"background_image": {
-					"id": "bg_image2",
-					"title": "Ellipse 4 (1)",
-					"description": null
-				},
-				"image": {
-					"id": "image2",
-					"title": "Ellipse 10",
-					"description": null
-				}
+				"background_image": "bg_image2",
+				"image": "image2"
 			}
 		],
         "images" : [
@@ -265,32 +249,15 @@ class ContentServiceTest {
 				"id": 1,
 				"title": "title-1",
                 "sub_title": "sub-title-1",
-				"background_image": {
-					"id": "bg_image1",
-					"title": "title",
-					"type": "image/png",
-					"description": "description"
-				},
-				"image": {
-					"id": "image1",
-					"title": "Ellipse 3",
-					"description": null
-				}
+				"background_image": "bg_image1",
+				"image": "image1"
 			},
 			{
 				"id": 2,
 				"title": "title-2",
 				"sub_title": "sub-title-2",
-				"background_image": {
-					"id": "bg_image2",
-					"title": "Ellipse 4 (1)",
-					"description": null
-				},
-				"image": {
-					"id": "image2",
-					"title": "Ellipse 10",
-					"description": null
-				}
+				"background_image": "bg_image2",
+				"image": "image2"
 			}
 		],
         "images" : [
@@ -328,8 +295,8 @@ class ContentServiceTest {
         val heroImage = PageImage("Hero Image", "<div><span>some styled introduction</span></div>", "summary", "/assets/hero-image-id")
         val image1 = PageImage("image1-title", "intro", "summary", "/assets/image1-id")
         val image2 = PageImage("image2-title", "intro", "summary", "/assets/image2-id")
-        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video_image1")
-        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video_image2")
+        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video_image1", "action1")
+        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video_image2", "action2")
         val step1 = Step("title-1", "sub-title-1", "/assets/bg_image1", "/assets/image1")
         val step2 = Step("title-2", "sub-title-2", "/assets/bg_image2", "/assets/image2")
         val videoSection = VideoSection(
@@ -353,7 +320,7 @@ class ContentServiceTest {
             "This is the landing page",
             "This is description",
             "This is introduction",
-            imageUrl = "/assets/image-id",
+            mutableListOf(ImagesInPage("Image 1", "/assets/image1"))
         )
     }
 }

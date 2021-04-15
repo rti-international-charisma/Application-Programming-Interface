@@ -11,6 +11,7 @@ import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import service.ContentService
+import java.awt.Image
 
 
 class ContentRouteTest {
@@ -144,7 +145,13 @@ class ContentRouteTest {
   "title" : "This is the landing page",
   "summary" : "This is description",
   "introduction" : "This is introduction",
-  "imageUrl" : "/assets/image-id"
+  "images" : [ {
+    "title" : "Image 1",
+    "imageUrl" : "/assets/image1"
+  }, {
+    "title" : "Image 2",
+    "imageUrl" : "/assets/image2"
+  } ]
 }"""
     }
 
@@ -184,7 +191,7 @@ class ContentRouteTest {
             "This is the landing page",
             "This is description",
             "This is introduction",
-            "/assets/image-id"
+            mutableListOf(ImagesInPage("Image 1", "/assets/image1"), ImagesInPage("Image 2", "/assets/image2"))
         )
     }
 
