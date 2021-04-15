@@ -76,12 +76,12 @@ data class Step(
                 title = (data["title"] ?: "") as String,
                 subTitle = (data["sub_title"] ?: "") as String,
                 backgroundImageUrl = if (data["background_image"] != null) {
-                    val image = data["background_image"] as Map<String, Any>
-                    "${ConfigProvider.get(CMS_ASSETS_URL)}/${image["id"]}"
+                    val image = data["background_image"] as String
+                    "${ConfigProvider.get(CMS_ASSETS_URL)}/${image}"
                 } else "",
                 imageUrl = if (data["image"] != null) {
-                    val image = data["image"] as Map<String, Any>
-                    "${ConfigProvider.get(CMS_ASSETS_URL)}/${image["id"]}"
+                    val image = data["image"] as String
+                    "${ConfigProvider.get(CMS_ASSETS_URL)}/${image}"
                 } else ""
             )
     }
