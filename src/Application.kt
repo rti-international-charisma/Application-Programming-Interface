@@ -84,19 +84,19 @@ fun Application.commonModule() {
 
     install(StatusPages) {
         exception<ContentRequestException> { e ->
-            call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
+            call.respond(HttpStatusCode.BadRequest, ErrorResponse(e.localizedMessage))
         }
 
         exception<ContentException> { e ->
-            call.respond(HttpStatusCode.InternalServerError, e.localizedMessage)
+            call.respond(HttpStatusCode.InternalServerError, ErrorResponse(e.localizedMessage))
         }
 
         exception<UserAlreadyExistException> {
-            call.respond(HttpStatusCode.BadRequest, "Username already exists")
+            call.respond(HttpStatusCode.BadRequest, ErrorResponse("Username already exists"))
         }
 
         exception<SecurityQuestionException> { e ->
-            call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
+            call.respond(HttpStatusCode.BadRequest, ErrorResponse(e.localizedMessage))
         }
 
         exception<LoginException> {e ->
