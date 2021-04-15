@@ -10,6 +10,10 @@ import com.rti.charisma.api.config.DB_URL
 import com.rti.charisma.api.config.DB_USER
 import com.rti.charisma.api.db.CharismaDB
 import com.rti.charisma.api.exception.*
+import com.rti.charisma.api.exception.ContentException
+import com.rti.charisma.api.exception.ContentRequestException
+import com.rti.charisma.api.exception.SecurityQuestionException
+import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.contentRoute
 import com.rti.charisma.api.route.userRoute
@@ -19,8 +23,8 @@ import com.viartemev.ktor.flyway.FlywayFeature
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.*
-import io.ktor.auth.Authentication
-import io.ktor.auth.jwt.jwt
+import io.ktor.auth.*
+import io.ktor.auth.jwt.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -61,7 +65,10 @@ fun Application.commonModule() {
     install(CachingHeaders) {
         options { outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
-                ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60), expires = null as? GMTDate?)
+                ContentType.Text.CSS -> CachingOptions(
+                    CacheControl.MaxAge(maxAgeSeconds = 60),
+                    expires = null as? GMTDate?
+                )
                 else -> null
             }
         }
@@ -76,20 +83,20 @@ fun Application.commonModule() {
     }
 
     install(StatusPages) {
-        exception<Throwable> {
-            call.respond(HttpStatusCode.InternalServerError)
+        exception<ContentRequestException> { e ->
+            call.respond(HttpStatusCode.BadRequest, ErrorResponse(e.localizedMessage))
         }
 
-        exception<ContentNotFoundException> {
-            call.respond(HttpStatusCode.InternalServerError, "Error fetching data")
+        exception<ContentException> { e ->
+            call.respond(HttpStatusCode.InternalServerError, ErrorResponse(e.localizedMessage))
         }
 
         exception<UserAlreadyExistException> {
-            call.respond(HttpStatusCode.BadRequest, "Username already exists")
+            call.respond(HttpStatusCode.BadRequest, ErrorResponse("Username already exists"))
         }
 
         exception<SecurityQuestionException> { e ->
-            call.respond(HttpStatusCode.BadRequest, e.localizedMessage)
+            call.respond(HttpStatusCode.BadRequest, ErrorResponse(e.localizedMessage))
         }
 
         exception<LoginException> {e ->
@@ -98,6 +105,10 @@ fun Application.commonModule() {
 
         exception<LoginAttemptsExhaustedException> { e ->
             call.respond(HttpStatusCode.Unauthorized, ErrorResponse("Reset Password"))
+        }
+
+        exception<Throwable> {
+            call.respond(HttpStatusCode.InternalServerError)
         }
     }
 
@@ -109,7 +120,7 @@ fun Application.commonModule() {
     }
 }
 
-fun getDataSource() : HikariDataSource {
+fun getDataSource(): HikariDataSource {
     val config = HikariConfig()
     config.driverClassName = "org.postgresql.Driver"
     config.jdbcUrl = ConfigProvider.get(DB_URL)
