@@ -5,21 +5,20 @@ import com.rti.charisma.api.config.ConfigProvider
 
 data class Page(
     val title: String,
-    val description: String,
+    val summary: String,
     val introduction: String,
-    val image: PageImage
+    val imageUrl: String
 ) {
     companion object {
         fun toPage(data: MutableMap<String, Any>): Page {
             return Page(
                 title = (data["title"] ?: "") as String,
                 introduction = (data["introduction"] ?: "") as String,
-                description = (data["description"] ?: "") as String,
-                image = PageImage.toPageImage(data["image"])
+                summary = (data["summary"] ?: "") as String,
+                imageUrl = (data["image_url"] ?: "") as String
             )
         }
     }
-
 }
 
 data class PageImage(
@@ -35,13 +34,12 @@ data class PageImage(
                     title = (data["title"] ?: "") as String,
                     introduction = (data["introduction"] ?: "") as String,
                     summary = (data["summary"] ?: "") as String,
-                    imageUrl = if (data["image_file"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["image_file"]}" else ""
+                    imageUrl = if (data["image_url"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["image_url"]}" else ""
                 )
             } else {
                 PageImage()
             }
         }
-
     }
 }
 
@@ -49,6 +47,7 @@ data class PageVideo(
     var title: String = "",
     var description: String = "",
     var videoUrl: String = "",
+    var videoImage: String = "",
     var actionText: String = ""
 ) {
     companion object {
@@ -57,8 +56,9 @@ data class PageVideo(
                 PageVideo(
                     title = (data["title"] ?: "") as String,
                     description = (data["description"] ?: "") as String,
-                    videoUrl = if (data["video_file"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_file"]}" else "",
-                    actionText = (data["action_text"] ?: "") as String
+                    videoUrl = if (data["video_url"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_url"]}" else "",
+                    videoImage = if (data["video_image"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_image"]}" else "",
+                    actionText = (data["action text"] ?: "") as String
                 )
             } else {
                 return PageVideo()
