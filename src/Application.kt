@@ -16,6 +16,7 @@ import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.contentRoute
+import com.rti.charisma.api.route.healthRoute
 import com.rti.charisma.api.route.userRoute
 import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
@@ -54,6 +55,13 @@ fun Application.main() {
     commonModule()
     loginModule(getDataSource(), userService)
     contentModule(contentService)
+    healthCheckModule()
+}
+
+fun Application.healthCheckModule() {
+    routing {
+        healthRoute()
+    }
 }
 
 fun Application.commonModule() {
