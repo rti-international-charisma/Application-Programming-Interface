@@ -11,7 +11,7 @@ data class Page(
     val images: List<ImagesInPage>
 ) {
     companion object {
-        fun toPage(data: MutableMap<String, Any>): Page {
+        fun toPage(data: Map<String, Any>): Page {
             return Page(
                 title = (data["title"] ?: "") as String,
                 introduction = (data["introduction"] ?: "") as String,

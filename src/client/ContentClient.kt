@@ -6,6 +6,8 @@ import com.rti.charisma.api.config.CMS_BASE_URL
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
+import com.rti.charisma.api.model.Assessment
+import com.rti.charisma.api.model.AssessmentSection
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.*
@@ -15,7 +17,9 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import java.text.DateFormat
 
-data class CmsContent(val data: MutableMap<String, Any>)
+data class CmsContent(val data: Map<String, Any>)
+data class CmsList(val data: List<Any>)
+
 class ContentClient {
     private val accessToken = ConfigProvider.get(ACCESS_TOKEN)
     private val baseUrl = ConfigProvider.get(CMS_BASE_URL)
@@ -72,6 +76,23 @@ class ContentClient {
 
     }
 
+    suspend fun requestList(endpoint: String): CmsList {
+        try {
+            return client.request {
+                url("$baseUrl${endpoint}")
+                method = HttpMethod.Get
+                header("Authorization", "Bearer $accessToken")
+            }
+        } catch (e: ClientRequestException) {
+            throw ContentRequestException("Failed to fetch content, ${e.message}}")
+        } catch (e: ServerResponseException) {
+            throw ContentException("Error while fetching content from server")
+        } catch (e: Exception) {
+            throw ContentException("Unexpected error while fetching content from server")
+        }
+
+    }
+
     suspend fun requestAsset(endpoint: String): ByteArray {
         return client.request {
             url("$baseUrl${endpoint}")
@@ -80,5 +101,6 @@ class ContentClient {
         }
     }
 }
+
 
 

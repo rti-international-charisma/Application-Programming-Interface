@@ -1,11 +1,13 @@
 package service
 
 import com.rti.charisma.api.client.CmsContent
+import com.rti.charisma.api.client.CmsList
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
+import com.rti.charisma.api.model.Assessment
 import com.rti.charisma.api.model.HomePage
 import com.rti.charisma.api.model.Page
 
@@ -45,11 +47,24 @@ class ContentService(private val contentClient: ContentClient) {
         }
     }
 
+    suspend fun getAssessment(): Assessment {
+        try {
+            val content: CmsList = contentClient.requestList("/items/sections?fields=*," +
+                    "questions.questions_id.text,questions.questions_id.options.options_id.*")
+                return Assessment.toAssessment(content.data)
+        } catch (e: ContentRequestException) {
+            throw e
+        } catch (e: ContentException) {
+            throw e
+        }
+
+    }
+
     suspend fun getAsset(assetID: String): ByteArray {
         try {
             return contentClient.requestAsset("/assets/${assetID}")
         } catch (e: Exception) {
-            throw ContentException(e.stackTraceToString())
+            throw ContentException(e.localizedMessage)
         }
     }
 
@@ -57,4 +72,6 @@ class ContentService(private val contentClient: ContentClient) {
         val states: List<String> = ConfigProvider.getList(ACCESSIBILITY_STATUS)
         return states.contains(status)
     }
+
+
 }

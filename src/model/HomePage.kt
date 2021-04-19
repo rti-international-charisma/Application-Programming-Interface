@@ -18,7 +18,7 @@ data class HomePage(
     val steps: List<Step>,
 ) {
     companion object {
-        fun toHomePage(data: MutableMap<String, Any>): HomePage {
+        fun toHomePage(data: Map<String, Any>): HomePage {
             return HomePage(
                 title = (data["title"] ?: "") as String,
                 introduction = (data["introduction"] ?: "") as String,
