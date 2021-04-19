@@ -6,7 +6,7 @@ import com.rti.charisma.api.model.*
 
 class HomePageContentFixture {
 
-    fun createHomePage(): HomePage {
+    fun homePageResult(): HomePage {
         val heroImage = PageImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",
@@ -273,8 +273,7 @@ class HomePageContentFixture {
 }"""
     }
 
-
-    fun homepageFromService(): HomePage {
+    fun homePageStubResponse(): HomePage {
         val heroImage = PageImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",

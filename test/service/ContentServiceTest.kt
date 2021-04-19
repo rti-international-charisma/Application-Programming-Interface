@@ -24,7 +24,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should parse homepage response `() = runBlockingTest {
-        val expectedHomePage = HomePageContentFixture().createHomePage()
+        val expectedHomePage = HomePageContentFixture().homePageResult()
 
         coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageContentFixture().publishedContent()
 
@@ -35,7 +35,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should parse homepage response if content in draft state`() = runBlockingTest {
-        val expectedHomePage = HomePageContentFixture().createHomePage()
+        val expectedHomePage = HomePageContentFixture().homePageResult()
 
         coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageContentFixture().draftContent()
 
@@ -119,7 +119,7 @@ class ContentServiceTest {
         coEvery {
             contentClient.requestList(
                 "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().assessmentContent()
+                        "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().assessmentCmsContent()
 
         val assessment = contentService.getAssessment()
 
@@ -131,17 +131,17 @@ class ContentServiceTest {
         coEvery {
             contentClient.requestList(
                 "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().getEmptyContent()
+                        "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().emptyCmsContent()
 
         val assessment = contentService.getAssessment()
 
-        assertEquals(Assessment(mutableListOf(AssessmentSection("","", mutableListOf(Question("", emptyList()))))), assessment)
+        assertEquals(Assessment(mutableListOf(AssessmentSection("","", mutableListOf(Question("","", emptyList()))))), assessment)
     }
 
     @Test
     fun `it should return empty assessment response if assessment content not in allowed state `() = runBlockingTest {
         coEvery { contentClient.requestList("/items/sections?fields=*," +
-                "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().archived()
+                "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().archivedCmsContent()
         val assessment = contentService.getAssessment()
 
         assertEquals(Assessment(mutableListOf(AssessmentSection("","", emptyList()))), assessment)

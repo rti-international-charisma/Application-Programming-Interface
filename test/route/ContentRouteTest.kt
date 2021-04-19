@@ -21,7 +21,7 @@ class ContentRouteTest {
 
     @Test
     fun `GET home should return 200 OK with json response`() = testApp {
-        coEvery { contentService.getHomePage() } returns HomePageContentFixture().homepageFromService()
+        coEvery { contentService.getHomePage() } returns HomePageContentFixture().homePageStubResponse()
         handleRequest(HttpMethod.Get, "/home") {
         }.apply {
             assertEquals(200, response.status()?.value)

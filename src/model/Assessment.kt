@@ -59,6 +59,7 @@ data class AssessmentSection(val section: String, val introduction: String, val 
 
 data class Question(
     var text: String = "",
+    var description: String = "",
     var options: List<Option> = emptyList()
 ) {
     companion object {
@@ -67,6 +68,7 @@ data class Question(
                 val questions = data["questions_id"] as Map<String, Any>
                 return Question(
                     text = (questions["text"] ?: "") as String,
+                    description = (questions["description"] ?: "") as String,
                     options = toOptions(questions["options"])
                 )
             }

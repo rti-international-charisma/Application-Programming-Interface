@@ -15,9 +15,9 @@ class AssessmentContentFixture {
         val option4 = Option("strongly disagree", 1)
         val option5 = Option("strongly agree", 5)
 
-        val question1 = Question("question 1", mutableListOf(option1, option2, option3))
-        val question2 = Question("question 2", mutableListOf(option1, option4, option3, option2, option5))
-        val question3 = Question("question 3", mutableListOf(option2, option1))
+        val question1 = Question("question 1","description 1", mutableListOf(option1, option2, option3))
+        val question2 = Question("question 2","description 2", mutableListOf(option1, option4, option3, option2, option5))
+        val question3 = Question("question 3","description 3", mutableListOf(option2, option1))
 
 
         val assessmentSection1 =
@@ -26,7 +26,7 @@ class AssessmentContentFixture {
         return Assessment(mutableListOf(assessmentSection1, assessmentSection2))
     }
 
-    fun assessmentContent(): CmsList {
+    fun assessmentCmsContent(): CmsList {
         val content = """{
     "data": [
         {
@@ -38,6 +38,7 @@ class AssessmentContentFixture {
                 {
                     "questions_id": {
                         "text": "question 1",
+                        "description": "description 1",
                         "options": [
                             {
                                 "options_id": {
@@ -72,6 +73,7 @@ class AssessmentContentFixture {
                 {
                     "questions_id": {
                         "text": "question 3",
+                        "description": "description 3",
                         "options": [
                             {
                                 "options_id": {
@@ -105,6 +107,7 @@ class AssessmentContentFixture {
                 {
                     "questions_id": {
                         "text": "question 2",
+                        "description": "description 2",
                         "options": [
                             {
                                 "options_id": {
@@ -161,7 +164,7 @@ class AssessmentContentFixture {
         return jacksonObjectMapper().readValue(content, CmsList::class.java)
     }
 
-    fun getEmptyContent(): CmsList {
+    fun emptyCmsContent(): CmsList {
         val content = """{
     "data": [
         {
@@ -179,7 +182,7 @@ class AssessmentContentFixture {
     }
 
 
-    fun archived(): CmsList {
+    fun archivedCmsContent(): CmsList {
         val content = """{
     "data": [
         {
@@ -204,6 +207,7 @@ class AssessmentContentFixture {
     "introduction" : "Introduction for section 1",
     "questions" : [ {
       "text" : "question 1",
+      "description" : "description 1",
       "options" : [ {
         "text" : "disagree",
         "weightage" : 2
@@ -216,6 +220,7 @@ class AssessmentContentFixture {
       } ]
     }, {
       "text" : "question 3",
+      "description" : "description 3",
       "options" : [ {
         "text" : "agree",
         "weightage" : 4
@@ -229,6 +234,7 @@ class AssessmentContentFixture {
     "introduction" : "introduction for section 2",
     "questions" : [ {
       "text" : "question 2",
+      "description" : "description 2",
       "options" : [ {
         "text" : "disagree",
         "weightage" : 2
