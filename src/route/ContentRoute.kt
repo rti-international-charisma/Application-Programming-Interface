@@ -24,6 +24,11 @@ fun Routing.contentRoute(contentService: ContentService) {
         call.respond(introPage)
     }
 
+    get("/assessment") {
+        val assessment = contentService.getAssessment()
+        call.respond(assessment)
+    }
+
 
     get("/assets/{assetID}") {
         val asset = contentService.getAsset("${call.parameters["assetID"]}")
