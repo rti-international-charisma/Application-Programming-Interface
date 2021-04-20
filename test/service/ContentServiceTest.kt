@@ -83,8 +83,6 @@ class ContentServiceTest {
         assertEquals(expectedPageContent, pageContent)
     }
 
-
-
     @Test
     fun `it should throw exception on error processing page response`() = runBlockingTest {
         coEvery { contentClient.request("/items/pages/test-page?fields=*.*.*") } throws (ContentException("Content error"))
@@ -166,8 +164,6 @@ class ContentServiceTest {
             block = { contentService.getAssessment() }
         )
     }
-
-
 
     private fun archivedPageContent(): CmsContent {
         val content = """{

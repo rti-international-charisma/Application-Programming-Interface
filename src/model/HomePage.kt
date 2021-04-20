@@ -66,7 +66,6 @@ data class HomePage(
 
 data class Step(
     val title: String,
-    val subTitle: String,
     val backgroundImageUrl: String,
     val imageUrl: String
 ) {
@@ -74,7 +73,6 @@ data class Step(
         fun toStep(data: Map<String, Any>): Step =
             Step(
                 title = (data["title"] ?: "") as String,
-                subTitle = (data["sub_title"] ?: "") as String,
                 backgroundImageUrl = if (data["background_image"] != null) {
                     val image = data["background_image"] as String
                     "${ConfigProvider.get(CMS_ASSETS_URL)}/${image}"

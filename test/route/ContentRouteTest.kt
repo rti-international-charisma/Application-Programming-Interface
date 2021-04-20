@@ -101,15 +101,12 @@ class ContentRouteTest {
         }
     }
 
-
     private fun testApp(callback: TestApplicationEngine.() -> Unit) {
         return withTestApplication({
             commonModule()
             contentModule(contentService)
         }) { callback() }
     }
-
-
 
     private fun introPageJson(): String {
         return """{

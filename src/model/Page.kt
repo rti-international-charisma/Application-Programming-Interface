@@ -65,7 +65,9 @@ data class PageVideo(
     var description: String = "",
     var videoUrl: String = "",
     var videoImage: String = "",
-    var actionText: String = ""
+    var actionText: String = "",
+    var actionLink: String = "",
+    var isPrivate: Boolean = false
 ) {
     companion object {
         fun toPageVideo(data: Any): PageVideo {
@@ -75,7 +77,9 @@ data class PageVideo(
                     description = (data["description"] ?: "") as String,
                     videoUrl = if (data["video_url"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_url"]}" else "",
                     videoImage = if (data["video_image"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_image"]}" else "",
-                    actionText = (data["action_text"] ?: "") as String
+                    actionText = (data["action_text"] ?: "") as String,
+                    actionLink = (data["action_link"] ?: "") as String,
+                    isPrivate = (data["is_private"]) as Boolean
                 )
             } else {
                 return PageVideo()

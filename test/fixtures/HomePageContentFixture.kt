@@ -17,8 +17,8 @@ class HomePageContentFixture {
         val image2 = PageImage("image2-title", "intro", "summary", "/assets/image2-id")
         val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video_image1", "action1")
         val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video_image2", "action2")
-        val step1 = Step("title-1", "sub-title-1", "/assets/bg_image1", "/assets/image1")
-        val step2 = Step("title-2", "sub-title-2", "/assets/bg_image2", "/assets/image2")
+        val step1 = Step("title-1", "/assets/bg_image1", "/assets/image1")
+        val step2 = Step("title-2", "/assets/bg_image2", "/assets/image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
@@ -75,6 +75,8 @@ class HomePageContentFixture {
 					"status": "published",
 					"video_url": "file1",
 					"action_text": "action1",
+                    "action_link" : "",
+                    "is_private" : false,
 					"title": "video-title1",
 					"description": "description1",
 					"video_section": "video_section",
@@ -85,6 +87,8 @@ class HomePageContentFixture {
 					"status": "published",
 					"video_url": "file2",
 					"action_text": "action2",
+                    "action_link" : "",
+                    "is_private" : false,
 					"title": "video-title2",
 					"description": "description2",
 					"video_section": "video_section",
@@ -95,14 +99,12 @@ class HomePageContentFixture {
 		"steps": [{
 				"id": 1,
 				"title": "title-1",
-				"sub_title": "sub-title-1",
 				"background_image": "bg_image1",
 				"image": "image1"
 			},
 			{
 				"id": 2,
 				"title": "title-2",
-				"sub_title": "sub-title-2",
 				"background_image": "bg_image2",
 				"image": "image2"
 			}
@@ -156,6 +158,8 @@ class HomePageContentFixture {
 					"status": "published",
 					"video_url": "file1",
 					"action_text": "action1",
+                    "action_link" : "",
+                    "is_private" : false,
 					"title": "video-title1",
 					"description": "description1",
 					"video_section": "video_section",
@@ -166,6 +170,8 @@ class HomePageContentFixture {
 					"status": "published",
 					"video_url": "file2",
 					"action_text": "action2",
+                    "action_link" : "",
+                    "is_private" : false,
 					"title": "video-title2",
 					"description": "description2",
 					"video_section": "video_section",
@@ -176,14 +182,12 @@ class HomePageContentFixture {
 		"steps": [{
 				"id": 1,
 				"title": "title-1",
-                "sub_title": "sub-title-1",
 				"background_image": "bg_image1",
 				"image": "image1"
 			},
 			{
 				"id": 2,
 				"title": "title-2",
-				"sub_title": "sub-title-2",
 				"background_image": "bg_image2",
 				"image": "image2"
 			}
@@ -250,23 +254,25 @@ class HomePageContentFixture {
       "description" : "description1",
       "videoUrl" : "/assets/file1",
       "videoImage" : "/assets/video-image-1",
-      "actionText" : "action1"
+      "actionText" : "action1",
+      "actionLink" : "",
+      "isPrivate" : false
     }, {
       "title" : "video-title2",
       "description" : "description2",
       "videoUrl" : "/assets/file2",
       "videoImage" : "/assets/video-image-2",
-      "actionText" : "action2"
+      "actionText" : "action2",
+      "actionLink" : "",
+      "isPrivate" : false
     } ]
   },
   "steps" : [ {
     "title" : "title-1",
-    "subTitle" : "sub-title-1",
     "backgroundImageUrl" : "/assets/bg_image1",
     "imageUrl" : "/assets/image1"
   }, {
     "title" : "title-2",
-    "subTitle" : "sub-title-2",
     "backgroundImageUrl" : "/assets/bg_image2",
     "imageUrl" : "/assets/image2"
   } ]
@@ -284,8 +290,8 @@ class HomePageContentFixture {
         val image2 = PageImage("image2-title", "intro", "summary", "/assets/image2-id")
         val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video-image-1", "action1")
         val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video-image-2", "action2")
-        val step1 = Step("title-1", "sub-title-1", "/assets/bg_image1", "/assets/image1")
-        val step2 = Step("title-2", "sub-title-2", "/assets/bg_image2", "/assets/image2")
+        val step1 = Step("title-1", "/assets/bg_image1", "/assets/image1")
+        val step2 = Step("title-2", "/assets/bg_image2", "/assets/image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
