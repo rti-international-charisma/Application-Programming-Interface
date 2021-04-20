@@ -5,9 +5,10 @@ import com.rti.charisma.api.client.CmsContent
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
-import com.rti.charisma.api.fixtures.AssessmentContentFixture
-import com.rti.charisma.api.fixtures.HomePageContentFixture
-import com.rti.charisma.api.model.*
+import com.rti.charisma.api.fixtures.AssessmentFixture
+import com.rti.charisma.api.fixtures.HomePageFixture
+import com.rti.charisma.api.model.ImagesInPage
+import com.rti.charisma.api.model.Page
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,6 +16,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
 class ContentServiceTest {
@@ -24,9 +26,9 @@ class ContentServiceTest {
 
     @Test
     fun `it should parse homepage response `() = runBlockingTest {
-        val expectedHomePage = HomePageContentFixture().homePageResult()
+        val expectedHomePage = HomePageFixture().homePageResult()
 
-        coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageContentFixture().publishedContent()
+        coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageFixture().publishedContent()
 
         val homePage = contentService.getHomePage()
 
@@ -35,9 +37,9 @@ class ContentServiceTest {
 
     @Test
     fun `it should parse homepage response if content in draft state`() = runBlockingTest {
-        val expectedHomePage = HomePageContentFixture().homePageResult()
+        val expectedHomePage = HomePageFixture().homePageResult()
 
-        coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageContentFixture().draftContent()
+        coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageFixture().draftContent()
 
         val homePage = contentService.getHomePage()
 
@@ -65,7 +67,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw content exception if content not in allowed state `() = runBlockingTest {
-        coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageContentFixture().archivedContent()
+        coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageFixture().archivedContent()
         assertFailsWith(
             exceptionClass = ContentException::class,
             block = { contentService.getHomePage() }
@@ -82,7 +84,6 @@ class ContentServiceTest {
 
         assertEquals(expectedPageContent, pageContent)
     }
-
 
 
     @Test
@@ -104,7 +105,7 @@ class ContentServiceTest {
     }
 
     @Test
-    fun `it should throwcontent exception if page content not in allowed state `() = runBlockingTest {
+    fun `it should throw content exception if page content not in allowed state `() = runBlockingTest {
         coEvery { contentClient.request("/items/pages/test-page?fields=*.*.*") } returns archivedPageContent()
         assertFailsWith(
             exceptionClass = ContentException::class,
@@ -114,12 +115,14 @@ class ContentServiceTest {
 
     @Test
     fun `it should parse assessment response`() = runBlockingTest {
-        val expectedAssessmentContent = AssessmentContentFixture().assessment()
+        val expectedAssessmentContent = AssessmentFixture.assessment()
 
         coEvery {
-            contentClient.requestList(
+            contentClient.getAssessment(
                 "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().assessmentCmsContent()
+                        "questions.questions_id.text,questions.questions_id.options.options_id.*"
+            )
+        } returns AssessmentFixture.assessmentCmsContent()
 
         val assessment = contentService.getAssessment()
 
@@ -127,30 +130,13 @@ class ContentServiceTest {
     }
 
     @Test
-    fun `it should return empty assessment response if no content received`() = runBlockingTest {
-        coEvery {
-            contentClient.requestList(
-                "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().emptyCmsContent()
-
-        val assessment = contentService.getAssessment()
-
-        assertEquals(Assessment(mutableListOf(AssessmentSection("","", mutableListOf(Question("","", emptyList()))))), assessment)
-    }
-
-    @Test
-    fun `it should return empty assessment response if assessment content not in allowed state `() = runBlockingTest {
-        coEvery { contentClient.requestList("/items/sections?fields=*," +
-                "questions.questions_id.text,questions.questions_id.options.options_id.*") } returns AssessmentContentFixture().archivedCmsContent()
-        val assessment = contentService.getAssessment()
-
-        assertEquals(Assessment(mutableListOf(AssessmentSection("","", emptyList()))), assessment)
-    }
-
-    @Test
     fun `it should throw exception on error processing assessment response`() = runBlockingTest {
-        coEvery { contentClient.requestList("/items/sections?fields=*," +
-                "questions.questions_id.text,questions.questions_id.options.options_id.*") } throws (ContentException("Content error"))
+        coEvery {
+            contentClient.getAssessment(
+                "/items/sections?fields=*," +
+                        "questions.questions_id.text,questions.questions_id.options.options_id.*"
+            )
+        } throws (ContentException("Content error"))
         assertFailsWith(
             exceptionClass = ContentException::class,
             block = { contentService.getAssessment() }
@@ -159,15 +145,17 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error fetching assessment response`() = runBlockingTest {
-        coEvery { contentClient.requestList( "/items/sections?fields=*," +
-                "questions.questions_id.text,questions.questions_id.options.options_id.*") } throws (ContentRequestException("Content Request Error"))
+        coEvery {
+            contentClient.getAssessment(
+                "/items/sections?fields=*," +
+                        "questions.questions_id.text,questions.questions_id.options.options_id.*"
+            )
+        } throws (ContentRequestException("Content Request Error"))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
             block = { contentService.getAssessment() }
         )
     }
-
-
 
     private fun archivedPageContent(): CmsContent {
         val content = """{

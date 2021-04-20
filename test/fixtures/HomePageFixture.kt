@@ -4,7 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.rti.charisma.api.client.CmsContent
 import com.rti.charisma.api.model.*
 
-class HomePageContentFixture {
+class HomePageFixture {
 
     fun homePageResult(): HomePage {
         val heroImage = PageImage(

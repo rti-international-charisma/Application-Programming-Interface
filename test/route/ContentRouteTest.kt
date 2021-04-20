@@ -3,8 +3,8 @@ package com.rti.charisma.api.route
 import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.contentModule
 import com.rti.charisma.api.exception.ContentRequestException
-import com.rti.charisma.api.fixtures.AssessmentContentFixture
-import com.rti.charisma.api.fixtures.HomePageContentFixture
+import com.rti.charisma.api.fixtures.AssessmentFixture
+import com.rti.charisma.api.fixtures.HomePageFixture
 import com.rti.charisma.api.model.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
@@ -21,12 +21,12 @@ class ContentRouteTest {
 
     @Test
     fun `GET home should return 200 OK with json response`() = testApp {
-        coEvery { contentService.getHomePage() } returns HomePageContentFixture().homePageStubResponse()
+        coEvery { contentService.getHomePage() } returns HomePageFixture().homePageStubResponse()
         handleRequest(HttpMethod.Get, "/home") {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(HomePageContentFixture().homePageReponseJson(), response.content)
+            assertEquals(HomePageFixture().homePageReponseJson(), response.content)
         }
     }
 
@@ -44,13 +44,25 @@ class ContentRouteTest {
 
     @Test
     fun `GET assessment should return 200 OK with json response`() = testApp {
-        coEvery { contentService.getAssessment() } returns AssessmentContentFixture().assessment()
+        coEvery { contentService.getAssessment() } returns AssessmentFixture.assessment()
 
         handleRequest(HttpMethod.Get, "/assessment") {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentContentFixture().assessmentResponseJson(), response.content)
+            assertEquals(AssessmentFixture.assessmentResponseJson(), response.content)
+        }
+    }
+
+    @Test
+    fun `GET assessment should return 200 OK with only published sections`() = testApp {
+        coEvery { contentService.getAssessment() } returns AssessmentFixture.archivedCmsContent()
+
+        handleRequest(HttpMethod.Get, "/assessment") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(AssessmentFixture.onlyPublishedSectionsJson(), response.content)
         }
     }
 

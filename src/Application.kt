@@ -3,7 +3,7 @@ package com.rti.charisma.api
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.rti.charisma.api.client.ContentClient
-import com.rti.charisma.api.com.rti.charisma.api.model.ErrorResponse
+import com.rti.charisma.api.model.ErrorResponse
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.config.DB_PASSWORD
 import com.rti.charisma.api.config.DB_URL

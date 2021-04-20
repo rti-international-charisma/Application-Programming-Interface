@@ -7,7 +7,6 @@ import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.model.Assessment
-import com.rti.charisma.api.model.AssessmentSection
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.*
@@ -18,13 +17,12 @@ import io.ktor.http.*
 import java.text.DateFormat
 
 data class CmsContent(val data: Map<String, Any>)
-data class CmsList(val data: List<Any>)
 
 class ContentClient {
-    private val accessToken = ConfigProvider.get(ACCESS_TOKEN)
-    private val baseUrl = ConfigProvider.get(CMS_BASE_URL)
+    val accessToken = ConfigProvider.get(ACCESS_TOKEN)
+    val baseUrl = ConfigProvider.get(CMS_BASE_URL)
 
-    private val client: HttpClient =
+    val client: HttpClient =
         HttpClient(Apache) {
             install(Logging) {
                 logger = Logger.DEFAULT
@@ -76,7 +74,7 @@ class ContentClient {
 
     }
 
-    suspend fun requestList(endpoint: String): CmsList {
+    suspend fun getAssessment(endpoint: String): Assessment {
         try {
             return client.request {
                 url("$baseUrl${endpoint}")
@@ -101,6 +99,7 @@ class ContentClient {
         }
     }
 }
+
 
 
 
