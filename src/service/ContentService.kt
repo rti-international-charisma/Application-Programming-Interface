@@ -1,63 +1,70 @@
 package service
 
-import com.rti.charisma.api.client.CmsContent
 import com.rti.charisma.api.client.ContentClient
-import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
-import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
-import com.rti.charisma.api.model.Assessment
-import com.rti.charisma.api.model.AssessmentSection
-import com.rti.charisma.api.model.HomePage
-import com.rti.charisma.api.model.Page
+import com.rti.charisma.api.model.*
+import io.ktor.client.features.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 
 class ContentService(private val contentClient: ContentClient) {
 
     suspend fun getHomePage(): HomePage {
+
+        val endpoint = "/items/homepage?fields=*.*.*"
         //supports 3 levels of information
         try {
-            val content: CmsContent = contentClient.request("/items/homepage?fields=*.*.*")
-            val status: String = (content.data["status"] ?: "") as String
-            if (canAccess(status)) {
-                return HomePage.toHomePage(content.data)
-            } else {
-                throw ContentException("Content not available")
+            val content: HomePageContent = contentClient.getClient().request {
+                url("${contentClient.baseUrl}${endpoint}")
+                method = HttpMethod.Get
+                header("Authorization", "Bearer ${contentClient.accessToken}")
             }
-        } catch (e: ContentRequestException) {
-            throw e
-        } catch (e: ContentException) {
-            throw e
+            return content.homepage
+        } catch (e: ClientRequestException) {
+            throw ContentRequestException("Failed to fetch content, ${e.message}}")
+        } catch (e: ServerResponseException) {
+            throw ContentException("Error while fetching content from server")
+        } catch (e: Exception) {
+            throw ContentException("Unexpected error while fetching content from server")
         }
     }
 
     suspend fun getPage(pageId: String): Page {
+        val endpoint = "/items/pages/${pageId}?fields=*.*.*"
         //supports 3 levels of information
         try {
-            val content: CmsContent = contentClient.request("/items/pages/${pageId}?fields=*.*.*")
-            val status: String = (content.data["status"] ?: "") as String
-            if (canAccess(status)) {
-                return Page.toPage(content.data)
-            } else {
-                throw ContentException("Content not available")
+            val pageContent: PageContent = contentClient.getClient().request {
+                url("${contentClient.baseUrl}${endpoint}")
+                method = HttpMethod.Get
+                header("Authorization", "Bearer ${contentClient.accessToken}")
             }
-        } catch (e: ContentRequestException) {
-            throw e
-        } catch (e: ContentException) {
-            throw e
+            return pageContent.page
+        } catch (e: ClientRequestException) {
+            throw ContentRequestException("Failed to fetch content, ${e.message}}")
+        } catch (e: ServerResponseException) {
+            throw ContentException("Error while fetching content from server")
+        } catch (e: Exception) {
+            throw ContentException("Unexpected error while fetching content from server")
         }
     }
 
     suspend fun getAssessment(): Assessment {
+        val endpoint =
+            "/items/sections?fields=*,questions.questions_id.text,questions.questions_id.options.options_id.*"
         try {
-            return contentClient.getAssessment(
-                "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*")
-        } catch (e: ContentRequestException) {
-            throw e
-        } catch (e: ContentException) {
-            throw e
+            return contentClient.getClient().request {
+                url("${contentClient.baseUrl}${endpoint}")
+                method = HttpMethod.Get
+                header("Authorization", "Bearer ${contentClient.accessToken}")
+            }
+        } catch (e: ClientRequestException) {
+            throw ContentRequestException("Failed to fetch content, ${e.message}}")
+        } catch (e: ServerResponseException) {
+            throw ContentException("Error while fetching content from server")
+        } catch (e: Exception) {
+            throw ContentException("Unexpected error while fetching content from server")
         }
-
     }
 
     suspend fun getAsset(assetID: String): ByteArray {
@@ -67,11 +74,5 @@ class ContentService(private val contentClient: ContentClient) {
             throw ContentException(e.localizedMessage)
         }
     }
-
-    private fun canAccess(status: String): Boolean {
-        val states: List<String> = ConfigProvider.getList(ACCESSIBILITY_STATUS)
-        return states.contains(status)
-    }
-
 
 }

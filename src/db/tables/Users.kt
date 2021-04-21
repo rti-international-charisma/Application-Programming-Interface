@@ -1,7 +1,7 @@
 package com.rti.charisma.api.db.tables
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.ktor.auth.Principal
+import io.ktor.auth.*
 import org.jetbrains.exposed.sql.Table
 
 object Users: Table() {

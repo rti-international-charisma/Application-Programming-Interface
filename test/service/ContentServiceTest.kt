@@ -9,6 +9,7 @@ import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.HomePageFixture
 import com.rti.charisma.api.model.ImagesInPage
 import com.rti.charisma.api.model.Page
+import io.ktor.client.*
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,12 +29,14 @@ class ContentServiceTest {
     fun `it should parse homepage response `() = runBlockingTest {
         val expectedHomePage = HomePageFixture().homePageResult()
 
+        coEvery { contentClient.getClient() } returns mockHttpClient()
         coEvery { contentClient.request("/items/homepage?fields=*.*.*") } returns HomePageFixture().publishedContent()
 
         val homePage = contentService.getHomePage()
 
         assertEquals(expectedHomePage, homePage)
     }
+
 
     @Test
     fun `it should parse homepage response if content in draft state`() = runBlockingTest {
@@ -118,7 +121,7 @@ class ContentServiceTest {
         val expectedAssessmentContent = AssessmentFixture.assessment()
 
         coEvery {
-            contentClient.getAssessment(
+            contentClient.request(
                 "/items/sections?fields=*," +
                         "questions.questions_id.text,questions.questions_id.options.options_id.*"
             )

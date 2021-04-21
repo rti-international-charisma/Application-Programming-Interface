@@ -2,12 +2,12 @@ package com.rti.charisma.api.service
 
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.config.LOGIN_ATTEMPTS
-import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
-import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.exception.LoginException
+import com.rti.charisma.api.exception.SecurityQuestionException
+import com.rti.charisma.api.exception.UserAlreadyExistException
 import com.rti.charisma.api.model.UserResponse
 import com.rti.charisma.api.repository.UserRepository
 import com.rti.charisma.api.route.Login

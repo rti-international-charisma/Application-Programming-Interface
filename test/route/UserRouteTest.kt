@@ -2,7 +2,7 @@ package route
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.rti.charisma.api.model.ErrorResponse
+import com.rti.charisma.api.route.response.ErrorResponse
 import com.rti.charisma.api.loginModule
 import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.db.tables.User

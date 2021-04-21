@@ -2,7 +2,7 @@ package com.rti.charisma.api.util
 
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.config.HASH_SECRET_KEY
-import io.ktor.util.hex
+import io.ktor.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
