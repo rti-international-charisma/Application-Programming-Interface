@@ -186,7 +186,8 @@ class ContentServiceTest {
 		"id": "intro page",
 		"title": "This is the landing page",
 		"introduction": "This is introduction",
-		"summary": "This is description",
+		"summary": "This is summary",
+		"description": "This is description",
 		"status": "published",
         "image_url": "/assets/image-id",
 		"images": [
@@ -206,8 +207,9 @@ class ContentServiceTest {
     private fun createPage(): Page {
         return Page(
             "This is the landing page",
-            "This is description",
             "This is introduction",
+            "This is summary",
+            "This is description",
             mutableListOf(ImagesInPage("Image 1", "/assets/image1"))
         )
     }

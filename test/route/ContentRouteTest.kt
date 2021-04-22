@@ -111,8 +111,9 @@ class ContentRouteTest {
     private fun introPageJson(): String {
         return """{
   "title" : "This is the landing page",
-  "summary" : "This is description",
   "introduction" : "This is introduction",
+  "summary" : "This is summary",
+  "description" : "This is description",
   "images" : [ {
     "title" : "Image 1",
     "imageUrl" : "/assets/image1"
@@ -126,8 +127,9 @@ class ContentRouteTest {
     private fun introPage(): Page {
         return Page(
             "This is the landing page",
-            "This is description",
             "This is introduction",
+            "This is summary",
+            "This is description",
             mutableListOf(ImagesInPage("Image 1", "/assets/image1"), ImagesInPage("Image 2", "/assets/image2"))
         )
     }

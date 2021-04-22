@@ -6,8 +6,9 @@ import java.util.stream.Collectors
 
 data class Page(
     val title: String,
-    val summary: String,
     val introduction: String,
+    val summary: String,
+    val description: String,
     val images: List<ImagesInPage>
 ) {
     companion object {
@@ -16,6 +17,7 @@ data class Page(
                 title = (data["title"] ?: "") as String,
                 introduction = (data["introduction"] ?: "") as String,
                 summary = (data["summary"] ?: "") as String,
+                description = (data["description"] ?: "") as String,
                 images = (data["images"] as List<Map<String, Any>>).stream()
                     .map { imageData -> ImagesInPage.toImagesInPage(imageData["directus_files_id"] as Map<String, Any>) }
                     .collect(Collectors.toList())
