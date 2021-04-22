@@ -10,8 +10,8 @@ import com.rti.charisma.api.model.AssessmentSection
 object AssessmentSectionConversions {
     object Serializer : JsonSerializer<AssessmentSection>() {
         override fun serialize(value: AssessmentSection, gen: JsonGenerator, serializers: SerializerProvider) {
-            if (canAccess(value.status)) {
-                with(gen) {
+            with(gen) {
+                if (canAccess(value.status)) {
                     writeStartObject()
                     writeStringField("section", value.section)
                     writeStringField("introduction", value.introduction)
@@ -39,6 +39,6 @@ object AssessmentSectionConversions {
 
     private fun canAccess(status: String): Boolean {
         val states: List<String> = ConfigProvider.getList(ACCESSIBILITY_STATUS)
-        return states.contains(status)
+        return states.contains(status.toLowerCase())
     }
 }

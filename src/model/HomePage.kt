@@ -17,24 +17,8 @@ data class HomePage(
     val status: String,
     val introduction: String,
     @JsonProperty("hero_image")
-    val heroImage: PageImage,
-    val images: List<PageImage>,
+    val heroImage: HeroImage,
     @JsonProperty("video_section")
     val videoSection: VideoSection,
-    val steps: List<Step>,
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class Step(
-    val title: String,
-    @JsonProperty("sub_title") val subTitle: String,
-    @JsonProperty("background_image") val backgroundImageUrl: String,
-    @JsonProperty("image") val imageUrl: String
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class VideoSection(
-    var introduction: String = "",
-    var summary: String = "",
-    var videos: List<PageVideo> = emptyList()
+    val steps: List<Step>
 )

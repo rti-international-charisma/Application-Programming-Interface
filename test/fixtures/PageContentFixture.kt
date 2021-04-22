@@ -1,41 +1,43 @@
 package com.rti.charisma.api.fixtures
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.rti.charisma.api.client.CmsContent
 import com.rti.charisma.api.model.*
 
-class HomePageFixture {
+object PageContentFixture {
 
-    fun homePageResult(): HomePage {
-        val heroImage = PageImage(
+    fun withVideoSectionAndSteps(): Page {
+        val heroImage = HeroImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",
             "summary",
-            "/assets/hero-image-id"
+            "hero-image-id"
         )
-        val image1 = PageImage("image1-title", "intro", "summary", "/assets/image1-id")
-        val image2 = PageImage("image2-title", "intro", "summary", "/assets/image2-id")
-        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video_image1", "action1")
-        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video_image2", "action2")
-        val step1 = Step("title-1", "sub-title-1", "/assets/bg_image1", "/assets/image1")
-        val step2 = Step("title-2", "sub-title-2", "/assets/bg_image2", "/assets/image2")
+        val image1 = PageImage(ImageFile("image-1", "image-1 title"))
+        val image2 = PageImage(ImageFile("image-2", "image-2 title"))
+        val video1 = PageVideo("video-title1", "description1", "file1", "video_image1", "action1")
+        val video2 = PageVideo("video-title2", "description2", "file2", "video_image2", "action2")
+        val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
+        val step2 = Step("title-2", "sub-title-2", "bg_image2", "image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
             mutableListOf(video1, video2)
         )
-        return HomePage(
+        return Page(
             "This is the landing page",
-            "This is description",
             "This is introduction",
+            "This is description",
+            "This is summary",
+            "published",
             heroImage,
             mutableListOf(image1, image2),
             videoSection,
             mutableListOf(step1, step2)
         )
+
     }
 
-    fun archivedContent(): CmsContent {
+    fun archivedContent(): PageContent {
         val content = """{
 	"data": {
 		"id": "homepage",
@@ -53,17 +55,18 @@ class HomePageFixture {
 		}
 	}
 }"""
-        return jacksonObjectMapper().readValue(content, CmsContent::class.java)
+        return jacksonObjectMapper().readValue(content, PageContent::class.java)
     }
 
 
-    fun publishedContent(): CmsContent {
+    fun pageFromCmsWithVideos(): PageContent {
         val content = """{
 	"data": {
 		"id": "homepage",
 		"title": "This is the landing page",
 		"introduction": "This is introduction",
 		"description": "This is description",
+		"summary": "This is summary",
 		"status": "published",
 		"video_section": {
 			"id": "video_section",
@@ -107,24 +110,22 @@ class HomePageFixture {
 				"image": "image2"
 			}
 		],
-        "images" : [
-             {
-                "name": " image 1",
-                "status": "published",
-                "title": "image1-title",
-                "summary": "summary",
-                "introduction": "intro",
-                "image_url": "image1-id"
-		    },
+       "images": [{
+                "id": 8,
+                "pages_id": "intro",
+                "directus_files_id": {
+                    "id": "image-1",
+                    "title": "image-1 title"
+                }
+            },
             {
-                "name": " image 2",
-                "status": "published",
-                "title": "image2-title",
-                "summary": "summary",
-                "introduction": "intro",
-                "image_url": "image2-id"
-		    }
-        ],
+                "id": 9,
+                "pages_id": "intro",
+                "directus_files_id": {
+                    "id": "image-2",
+                    "title": "image-2 title"
+                }
+         }],
 		"hero_image": {
 			"name": "hero image",
 			"status": "published",
@@ -135,10 +136,10 @@ class HomePageFixture {
 		}
 	}
 }"""
-        return jacksonObjectMapper().readValue(content, CmsContent::class.java)
+        return jacksonObjectMapper().readValue(content, PageContent::class.java)
     }
 
-    fun draftContent(): CmsContent {
+    fun draftContent(): PageContent {
         val content = """{
 	"data": {
 		"id": "homepage",
@@ -216,15 +217,16 @@ class HomePageFixture {
 		}
 	}
 }"""
-        return jacksonObjectMapper().readValue(content, CmsContent::class.java)
+        return jacksonObjectMapper().readValue(content, PageContent::class.java)
     }
 
 
-    fun homePageReponseJson(): String {
+    fun pageWithVideoSectionResponseJson(): String {
         return """{
   "title" : "This is the landing page",
-  "description" : "This is description",
   "introduction" : "This is introduction",
+  "description" : "This is description",
+  "summary" : "This is summary",
   "heroImage" : {
     "title" : "Hero Image",
     "introduction" : "<div><span>some styled introduction</span></div>",
@@ -233,13 +235,9 @@ class HomePageFixture {
   },
   "images" : [ {
     "title" : "image1-title",
-    "introduction" : "intro",
-    "summary" : "summary",
     "imageUrl" : "/assets/image1-id"
   }, {
     "title" : "image2-title",
-    "introduction" : "intro",
-    "summary" : "summary",
     "imageUrl" : "/assets/image2-id"
   } ],
   "videoSection" : {
@@ -273,33 +271,116 @@ class HomePageFixture {
 }"""
     }
 
-    fun homePageStubResponse(): HomePage {
-        val heroImage = PageImage(
+    fun pageWithVideoSection(status: String): Page {
+        val heroImage = HeroImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",
             "summary",
-            "/assets/hero-image-id"
+            "hero-image-id"
         )
-        val image1 = PageImage("image1-title", "intro", "summary", "/assets/image1-id")
-        val image2 = PageImage("image2-title", "intro", "summary", "/assets/image2-id")
-        val video1 = PageVideo("video-title1", "description1", "/assets/file1", "/assets/video-image-1", "action1")
-        val video2 = PageVideo("video-title2", "description2", "/assets/file2", "/assets/video-image-2", "action2")
-        val step1 = Step("title-1", "sub-title-1", "/assets/bg_image1", "/assets/image1")
-        val step2 = Step("title-2", "sub-title-2", "/assets/bg_image2", "/assets/image2")
+        val image1 = PageImage(ImageFile(title = "image1-title", imageUrl = "image1-id"))
+        val image2 = PageImage(ImageFile(title = "image2-title", imageUrl = "image2-id"))
+        val video1 = PageVideo("video-title1", "description1", "file1", "video-image-1", "action1")
+        val video2 = PageVideo("video-title2", "description2", "file2", "video-image-2", "action2")
+        val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
+        val step2 = Step("title-2", "sub-title-2", "bg_image2", "image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
             mutableListOf(video1, video2)
         )
-        return HomePage(
+        return Page(
             "This is the landing page",
-            "This is description",
             "This is introduction",
+            "This is description",
+            "This is summary",
+            status,
             heroImage,
             mutableListOf(image1, image2),
             videoSection,
             mutableListOf(step1, step2)
         )
+    }
+
+    fun withNoVideoSectionAndSteps(status: String): Page {
+        return Page(
+            "This is the landing page",
+            "This is introduction",
+            "This is description",
+            "This is summary",
+            status,
+            null,
+            images = mutableListOf(
+                PageImage(ImageFile("image-1", "image-1 title")),
+                PageImage(ImageFile("image-2", "image-2 title"))
+            ),
+            null,
+            null
+        )
+    }
+
+
+    fun archivedPageContent(): PageContent {
+        val content = """{
+            "data": {
+		"id": "intro page",
+		"title": "This is the landing page",
+		"introduction": "This is introduction",
+		"summary": "This is description",
+		"status": "archived",
+        "image_url": "/assets/image-id",
+		"images": []
+}
+}"""
+        return jacksonObjectMapper().readValue(content, PageContent::class.java)
+    }
+
+    fun pageFromCmsWithImages(): PageContent {
+        val content = """{
+            "data": {
+		"id": "intro page",
+		"title": "This is the landing page",
+		"introduction": "This is introduction",
+		"description": "This is description",
+		"summary": "This is summary",
+		"status": "published",
+        "image_url": "image-id",
+		"images": [{
+                "id": 8,
+                "pages_id": "intro",
+                "directus_files_id": {
+                    "id": "image-1",
+                    "title": "image-1 title"
+                }
+            },
+            {
+                "id": 9,
+                "pages_id": "intro",
+                "directus_files_id": {
+                    "id": "image-2",
+                    "title": "image-2 title"
+                }
+            }]
+}
+}"""
+        return jacksonObjectMapper().readValue(content, PageContent::class.java)
+    }
+
+
+    fun pageWithoutVideoSectionJson(): String {
+        return """{
+  "title" : "This is the landing page",
+  "introduction" : "This is introduction",
+  "description" : "This is description",
+  "summary" : "This is summary",
+  "images" : [ {
+    "title" : "image-1 title",
+    "imageUrl" : "/assets/image-1"
+  }, {
+    "title" : "image-2 title",
+    "imageUrl" : "/assets/image-2"
+  } ]
+}"""
     }
 
 }

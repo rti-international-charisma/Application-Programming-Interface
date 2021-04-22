@@ -3,49 +3,33 @@ package service
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
-import com.rti.charisma.api.model.*
-import io.ktor.client.features.*
-import io.ktor.client.request.*
-import io.ktor.http.*
+import com.rti.charisma.api.model.Assessment
+import com.rti.charisma.api.model.Page
+import com.rti.charisma.api.model.PageContent
 
 class ContentService(private val contentClient: ContentClient) {
 
-    suspend fun getHomePage(): HomePage {
+    suspend fun getHomePage(): Page {
 
         val endpoint = "/items/homepage?fields=*.*.*"
         //supports 3 levels of information
-        try {
-            val content: HomePageContent = contentClient.getClient().request {
-                url("${contentClient.baseUrl}${endpoint}")
-                method = HttpMethod.Get
-                header("Authorization", "Bearer ${contentClient.accessToken}")
-            }
-            return content.homepage
-        } catch (e: ClientRequestException) {
-            throw ContentRequestException("Failed to fetch content, ${e.message}}")
-        } catch (e: ServerResponseException) {
-            throw ContentException("Error while fetching content from server")
-        } catch (e: Exception) {
-            throw ContentException("Unexpected error while fetching content from server")
-        }
+        return pageRequest(endpoint)
     }
 
     suspend fun getPage(pageId: String): Page {
         val endpoint = "/items/pages/${pageId}?fields=*.*.*"
         //supports 3 levels of information
+        return pageRequest(endpoint)
+    }
+
+    private suspend fun pageRequest(endpoint: String): Page {
         try {
-            val pageContent: PageContent = contentClient.getClient().request {
-                url("${contentClient.baseUrl}${endpoint}")
-                method = HttpMethod.Get
-                header("Authorization", "Bearer ${contentClient.accessToken}")
-            }
-            return pageContent.page
-        } catch (e: ClientRequestException) {
-            throw ContentRequestException("Failed to fetch content, ${e.message}}")
-        } catch (e: ServerResponseException) {
-            throw ContentException("Error while fetching content from server")
+            val content: PageContent = contentClient.getPage(endpoint)
+            return content.page
+        } catch (e: ContentRequestException) {
+            throw ContentRequestException(e.localizedMessage)
         } catch (e: Exception) {
-            throw ContentException("Unexpected error while fetching content from server")
+            throw ContentException(e.localizedMessage)
         }
     }
 
@@ -53,23 +37,19 @@ class ContentService(private val contentClient: ContentClient) {
         val endpoint =
             "/items/sections?fields=*,questions.questions_id.text,questions.questions_id.options.options_id.*"
         try {
-            return contentClient.getClient().request {
-                url("${contentClient.baseUrl}${endpoint}")
-                method = HttpMethod.Get
-                header("Authorization", "Bearer ${contentClient.accessToken}")
-            }
-        } catch (e: ClientRequestException) {
-            throw ContentRequestException("Failed to fetch content, ${e.message}}")
-        } catch (e: ServerResponseException) {
-            throw ContentException("Error while fetching content from server")
+            return contentClient.getAssessment(endpoint)
+        } catch (e: ContentRequestException) {
+            throw ContentRequestException(e.localizedMessage)
         } catch (e: Exception) {
-            throw ContentException("Unexpected error while fetching content from server")
+            throw ContentException(e.localizedMessage)
         }
     }
 
-    suspend fun getAsset(assetID: String): ByteArray {
+    suspend fun getAsset(assetId: String): ByteArray {
         try {
-            return contentClient.requestAsset("/assets/${assetID}")
+            return contentClient.getAsset("/assets/${assetId}")
+        }catch (e: ContentRequestException) {
+            throw ContentRequestException(e.localizedMessage)
         } catch (e: Exception) {
             throw ContentException(e.localizedMessage)
         }

@@ -107,7 +107,7 @@ fun Application.commonModule() {
             call.respond(HttpStatusCode.Unauthorized, ErrorResponse(e.localizedMessage))
         }
 
-        exception<LoginAttemptsExhaustedException> { e ->
+        exception<LoginAttemptsExhaustedException> { _ ->
             call.respond(HttpStatusCode.Unauthorized, ErrorResponse("Reset Password"))
         }
 
