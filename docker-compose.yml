@@ -1,7 +1,6 @@
 version: '3.4'
 
-x-aws-cluster: 'arn:aws:ecs:ap-south-1:402711366397:cluster/charisma-directus'
-x-aws-vpc: 'vpc-061f295db5349230b'
+
 
 services:
   apidb:
