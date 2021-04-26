@@ -2,6 +2,7 @@ package com.rti.charisma.api.route
 
 import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.contentModule
+import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
@@ -119,7 +120,7 @@ class ContentRouteTest {
 
     @Test
     fun `GET assessment should return 200 OK with only published sections`() = testApp {
-        coEvery { contentService.getAssessment() } returns AssessmentFixture.archivedCmsContent()
+        coEvery { contentService.getAssessment() } returns AssessmentFixture.archivedAssessmentCmsContent()
 
         handleRequest(HttpMethod.Get, "/assessment") {
         }.apply {
@@ -129,8 +130,6 @@ class ContentRouteTest {
         }
     }
 
-
-
     @Test
     fun `GET assessment should throw 400 bad request error if error while fetching content`() = testApp {
         coEvery { contentService.getAssessment() } throws ContentRequestException("some error")
@@ -138,6 +137,16 @@ class ContentRouteTest {
         handleRequest(HttpMethod.Get, "/assessment") {
         }.apply {
             assertEquals(400, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `GET assessment should throw 500 bad request error if error while fetching content`() = testApp {
+        coEvery { contentService.getAssessment() } throws ContentException("some error")
+
+        handleRequest(HttpMethod.Get, "/assessment") {
+        }.apply {
+            assertEquals(500, response.status()?.value)
         }
     }
 

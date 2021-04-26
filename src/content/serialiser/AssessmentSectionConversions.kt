@@ -13,13 +13,16 @@ object AssessmentSectionConversions {
             with(gen) {
                 if (canAccess(value.status)) {
                     writeStartObject()
+                    writeStringField("id", value.id)
                     writeStringField("section", value.section)
                     writeStringField("introduction", value.introduction)
                     writeArrayFieldStart("questions")
                     for (question in value.questions) {
                         writeStartObject()
+                        writeStringField("id", question.id)
                         writeStringField("text", question.text)
                         writeStringField("description", question.description)
+                        writeBooleanField("positiveNarrative", question.positiveNarrative)
                         writeArrayFieldStart("options")
                         for (option in question.options) {
                             writeStartObject()

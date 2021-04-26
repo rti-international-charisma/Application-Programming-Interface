@@ -17,10 +17,10 @@ data class PageContent(
 @JsonInclude(Include.NON_NULL)
 @JsonSerialize(using = PageConversions.Serializer::class)
 data class Page(
-    val title: String,
-    val introduction: String,
-    val description: String,
-    val summary: String,
+    val title: String?,
+    val introduction: String?,
+    val description: String?,
+    val summary: String?,
     val status: String,
     @JsonProperty("hero_image", required = false)
     val heroImage: HeroImage?,
@@ -39,6 +39,7 @@ data class PageImage(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class ImageFile(
     @JsonProperty("id")
     val imageUrl: String = "",
@@ -47,6 +48,7 @@ data class ImageFile(
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class HeroImage(
     var title: String = "",
     var introduction: String = "",
@@ -56,22 +58,23 @@ data class HeroImage(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class PageVideo(
     var title: String = "",
     var description: String = "",
     @JsonProperty("video_url")
-    var videoUrl: String = "",
-    @JsonProperty("video_image")
-    var videoImage: String = "",
+    var videoUrl: String?,
+    @JsonProperty("video_image", required = false)
+    var videoImage: String?,
     @JsonProperty("action_text")
-    var actionText: String = ""
+    var actionText: String?
 )
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Step(
     val title: String,
-    @JsonProperty("sub_title") val subTitle: String,
+    @JsonProperty("sub_title", required = false) val subTitle: String?,
     @JsonProperty("background_image") val backgroundImageUrl: String,
     @JsonProperty("image") val imageUrl: String
 )

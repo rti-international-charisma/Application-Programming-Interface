@@ -31,7 +31,7 @@ class PageConversionsTest {
         val pageContent = PageContentFixture.withNoVideoSectionAndSteps("published")
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(PageContentFixture.pageWithoutVideoSectionJson(),json)
+        assertEquals(PageContentFixture.pageWithoutVideoSectionJson(), json)
     }
 
 }
