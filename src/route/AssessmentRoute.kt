@@ -17,15 +17,16 @@ data class Question(val questionId: String, val score: Int)
 
 @KtorExperimentalLocationsAPI
 fun Routing.assessmentRoute(assessmentService: AssessmentService) {
+    authenticate("jwt") {
         post("assessment/scores") {
             val user = call.principal<User>()
-            val assessmentScore = jacksonObjectMapper().readValue<List<AssessmentResult>>(call.receiveText())
             if (user == null) {
                 call.respond(HttpStatusCode.Unauthorized)
             } else {
+                val assessmentScore = jacksonObjectMapper().readValue<List<AssessmentResult>>(call.receiveText())
                 assessmentService.addAssessmentScore(user.id, assessmentScore)
                 call.respond(HttpStatusCode.Created)
             }
         }
-
+    }
 }

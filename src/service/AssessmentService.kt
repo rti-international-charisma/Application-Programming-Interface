@@ -5,11 +5,8 @@ import com.rti.charisma.api.db.tables.SectionScore
 import com.rti.charisma.api.repository.AssessmentRepository
 import com.rti.charisma.api.route.AssessmentResult
 import com.rti.charisma.api.route.Question
-import java.util.stream.Collectors
 
 class AssessmentService(private val assessmentRepository: AssessmentRepository) {
-
-
     fun addAssessmentScore(userId: Int, assessmentResults: List<AssessmentResult>) {
         if (assessmentRepository.userScoreExists(userId)) {
             assessmentRepository.replaceScore(toSectionScore(userId, assessmentResults))
@@ -19,7 +16,7 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
     }
 
     private fun toSectionScore(userId: Int, assessmentResults: List<AssessmentResult>): List<SectionScore> {
-        return assessmentResults.stream()
+        return assessmentResults
             .map { section ->
             SectionScore(
                 user = userId,
@@ -27,12 +24,12 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
                 sectionType = section.sectionType,
                 answers = toData(section.questions)
             )
-        }.collect(Collectors.toList())
+        }
     }
 
     private fun toData(questions: List<Question>): List<Answer> {
-       return questions.stream().map{ question ->
+       return questions.map{ question ->
             Answer(questionId = question.questionId, score = question.score)
-        }.collect(Collectors.toList())
+        }
     }
 }
