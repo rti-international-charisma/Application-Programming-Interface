@@ -1,12 +1,8 @@
 package route.response
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
-import com.rti.charisma.api.model.AssessmentSection
-import com.rti.charisma.api.model.Option
-import com.rti.charisma.api.model.Question
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class PageConversionsTest {
@@ -35,7 +31,7 @@ class PageConversionsTest {
         val pageContent = PageContentFixture.withNoVideoSectionAndSteps("published")
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(PageContentFixture.pageWithoutVideoSectionJson(),json)
+        assertEquals(PageContentFixture.pageWithoutVideoSectionJson(), json)
     }
 
 }

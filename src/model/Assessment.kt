@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.rti.charisma.api.route.response.AssessmentSectionConversions
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class Assessment(
     @JsonProperty("assessment")
     @JsonAlias("data", "assessment")
@@ -14,6 +15,7 @@ data class Assessment(
 @JsonIgnoreProperties(value = ["status"], allowSetters = true, ignoreUnknown=true)
 @JsonSerialize(using = AssessmentSectionConversions.Serializer::class)
 data class AssessmentSection(
+    val id: String,
     @JsonProperty("section")
     @JsonAlias("title", "section")
     val section: String,
@@ -26,8 +28,11 @@ data class AssessmentSection(
 @JsonTypeName("questions_id")
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 data class Question(
+    val id: String,
     val text: String,
-    val description: String,
+    @JsonProperty(required = false)
+    val description: String?,
+    val positiveNarrative: Boolean,
     val options: List<Option>
 )
 

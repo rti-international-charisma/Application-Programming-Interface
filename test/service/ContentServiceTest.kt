@@ -5,7 +5,7 @@ import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
-import com.rti.charisma.api.model.*
+import com.rti.charisma.api.model.Page
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,7 +37,8 @@ class ContentServiceTest {
         val pageId = "test-page"
 
         coEvery {
-            contentClient.getPage("/items/pages/${pageId}?fields=*.*.*") } returns PageContentFixture.pageFromCmsWithImages()
+            contentClient.getPage("/items/pages/${pageId}?fields=*.*.*")
+        } returns PageContentFixture.pageFromCmsWithImages()
 
         val pageContent = contentService.getPage(pageId)
 
@@ -82,26 +83,22 @@ class ContentServiceTest {
 
     @Test
     fun `it should parse assessment response`() = runBlockingTest {
-        val expectedAssessmentContent = AssessmentFixture.assessment()
-
         coEvery {
             contentClient.getAssessment(
-                "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*"
+                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
             )
         } returns AssessmentFixture.assessmentCmsContent()
 
         val assessment = contentService.getAssessment()
 
-        assertEquals(expectedAssessmentContent, assessment)
+        assertEquals(AssessmentFixture.assessment(), assessment)
     }
 
     @Test
     fun `it should throw exception on error processing assessment response`() = runBlockingTest {
         coEvery {
             contentClient.getAssessment(
-                "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*"
+                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
             )
         } throws (ContentException("Content error"))
         assertFailsWith(
@@ -114,8 +111,7 @@ class ContentServiceTest {
     fun `it should throw exception on error fetching assessment response`() = runBlockingTest {
         coEvery {
             contentClient.getAssessment(
-                "/items/sections?fields=*," +
-                        "questions.questions_id.text,questions.questions_id.options.options_id.*"
+                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
             )
         } throws (ContentRequestException("Content Request Error"))
         assertFailsWith(

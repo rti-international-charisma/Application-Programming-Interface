@@ -22,20 +22,9 @@ class ContentService(private val contentClient: ContentClient) {
         return pageRequest(endpoint)
     }
 
-    private suspend fun pageRequest(endpoint: String): Page {
-        try {
-            val content: PageContent = contentClient.getPage(endpoint)
-            return content.page
-        } catch (e: ContentRequestException) {
-            throw ContentRequestException(e.localizedMessage)
-        } catch (e: Exception) {
-            throw ContentException(e.localizedMessage)
-        }
-    }
-
     suspend fun getAssessment(): Assessment {
         val endpoint =
-            "/items/sections?fields=*,questions.questions_id.text,questions.questions_id.options.options_id.*"
+            "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
         try {
             return contentClient.getAssessment(endpoint)
         } catch (e: ContentRequestException) {
@@ -54,5 +43,14 @@ class ContentService(private val contentClient: ContentClient) {
             throw ContentException(e.localizedMessage)
         }
     }
-
+    private suspend fun pageRequest(endpoint: String): Page {
+        try {
+            val content: PageContent = contentClient.getPage(endpoint)
+            return content.page
+        } catch (e: ContentRequestException) {
+            throw ContentRequestException(e.localizedMessage)
+        } catch (e: Exception) {
+            throw ContentException(e.localizedMessage)
+        }
+    }
 }

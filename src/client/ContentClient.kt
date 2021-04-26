@@ -59,11 +59,12 @@ class ContentClient {
                    client.close()
          */
         try {
-            return client.request {
+            val page =  client.request<PageContent> {
                 url("$baseUrl${endpoint}")
                 method = HttpMethod.Get
                 header("Authorization", "Bearer $accessToken")
             }
+            return page
         } catch (e: ClientRequestException) {
             throw ContentRequestException("Failed to fetch content, ${e.message}}")
         } catch (e: ServerResponseException) {
