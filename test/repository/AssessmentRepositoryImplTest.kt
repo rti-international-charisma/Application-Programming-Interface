@@ -25,14 +25,6 @@ class AssessmentRepositoryImplTest {
         TransactionManager.closeAndUnregister(db)
     }
 
-    @AfterEach
-    fun clearDB() {
-        transaction {
-            Answers.deleteAll()
-            SectionScores.deleteAll()
-        }
-    }
-
     @BeforeAll
     fun setup() {
         db = CharismaDB.init(InMemoryDB.inMemoryDataSource())
