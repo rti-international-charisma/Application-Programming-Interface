@@ -1,4 +1,4 @@
-package com.rti.charisma.api.route.response
+package com.rti.charisma.api.content.serialiser
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer

@@ -6,10 +6,6 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import service.ContentService
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//data class HomePage(val data: MutableMap<String, Any>)
-
-//TODO
 
 
 @KtorExperimentalLocationsAPI
@@ -24,20 +20,21 @@ fun Routing.contentRoute(contentService: ContentService) {
         call.respond(introPage)
     }
 
-    get("/aboutus") {
-        val introPage = contentService.getPage("aboutus")
-        call.respond(introPage)
-    }
-
     get("/assessment") {
         val assessment = contentService.getAssessment()
         call.respond(assessment)
+    }
+
+    get("/aboutus") {
+        val introPage = contentService.getPage("aboutus")
+        call.respond(introPage)
     }
 
     get("/assets/{assetID}") {
         val asset = contentService.getAsset("${call.parameters["assetID"]}")
         call.respondBytes(asset)
     }
+
 }
 
 

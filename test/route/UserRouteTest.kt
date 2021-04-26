@@ -8,9 +8,10 @@ import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
 import com.rti.charisma.api.exception.LoginException
-import com.rti.charisma.api.model.UserResponse
+import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
+import com.rti.charisma.api.service.AssessmentService
 import com.rti.charisma.api.service.UserService
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -27,6 +28,7 @@ import javax.sql.DataSource
 
 class UserRouteTest {
     private val userService = mockk<UserService>(relaxed = true)
+    private val assessmentService = mockk<AssessmentService>(relaxed = true)
 
     @Test
     fun `it should return 200 OK when user is registered successfully`() = testApp {
@@ -123,8 +125,9 @@ class UserRouteTest {
         return withTestApplication({
             commonModule()
             loginModule(
-                    inMemoryDataSoure(),
-                    userService
+                inMemoryDataSoure(),
+                userService,
+                assessmentService
             )
         }){ callback()}
     }

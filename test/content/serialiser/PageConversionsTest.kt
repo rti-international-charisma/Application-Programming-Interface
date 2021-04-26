@@ -1,4 +1,4 @@
-package route.response
+package com.rti.charisma.api.content.serialiser
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.rti.charisma.api.fixtures.PageContentFixture

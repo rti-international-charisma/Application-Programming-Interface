@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonInclude.Include
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import com.rti.charisma.api.route.response.PageConversions
+import com.rti.charisma.api.content.serialiser.PageConversions
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class PageContent(

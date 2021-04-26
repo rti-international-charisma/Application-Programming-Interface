@@ -1,4 +1,4 @@
-package com.rti.charisma.api.model
+package com.rti.charisma.api.route.response
 
 import com.rti.charisma.api.db.tables.User
 

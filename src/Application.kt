@@ -9,11 +9,14 @@ import com.rti.charisma.api.config.DB_URL
 import com.rti.charisma.api.config.DB_USER
 import com.rti.charisma.api.db.CharismaDB
 import com.rti.charisma.api.exception.*
+import com.rti.charisma.api.repository.AssessmentRepositoryImpl
 import com.rti.charisma.api.repository.UserRepositoryImpl
+import com.rti.charisma.api.route.assessmentRoute
 import com.rti.charisma.api.route.contentRoute
 import com.rti.charisma.api.route.healthRoute
 import com.rti.charisma.api.route.response.ErrorResponse
 import com.rti.charisma.api.route.userRoute
+import com.rti.charisma.api.service.AssessmentService
 import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
 import com.viartemev.ktor.flyway.FlywayFeature
@@ -47,17 +50,12 @@ fun main() {
 fun Application.main() {
     val contentService = ContentService(ContentClient())
     val userService = UserService(UserRepositoryImpl(), JWTService)
+    val assessmentService = AssessmentService(AssessmentRepositoryImpl())
 
     commonModule()
-    loginModule(getDataSource(), userService)
+    loginModule(getDataSource(), userService, assessmentService)
     contentModule(contentService)
     healthCheckModule()
-}
-
-fun Application.healthCheckModule() {
-    routing {
-        healthRoute()
-    }
 }
 
 fun Application.commonModule() {
@@ -103,7 +101,7 @@ fun Application.commonModule() {
             call.respond(HttpStatusCode.BadRequest, ErrorResponse(e.localizedMessage))
         }
 
-        exception<LoginException> {e ->
+        exception<LoginException> { e ->
             call.respond(HttpStatusCode.Unauthorized, ErrorResponse(e.localizedMessage))
         }
 
@@ -137,7 +135,11 @@ fun getDataSource(): HikariDataSource {
     return HikariDataSource(config)
 }
 
-fun Application.loginModule(postgresDbDataSource: DataSource, userService: UserService) {
+fun Application.loginModule(
+    postgresDbDataSource: DataSource,
+    userService: UserService,
+    assessmentService: AssessmentService
+) {
 
     CharismaDB.init(postgresDbDataSource)
 
@@ -161,6 +163,7 @@ fun Application.loginModule(postgresDbDataSource: DataSource, userService: UserS
 
     routing {
         userRoute(userService)
+        assessmentRoute(assessmentService)
     }
 }
 
@@ -172,5 +175,10 @@ fun Application.contentModule(contentService: ContentService) {
 
 }
 
+fun Application.healthCheckModule() {
+    routing {
+        healthRoute()
+    }
+}
 
 

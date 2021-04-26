@@ -3,8 +3,8 @@ package com.rti.charisma.api.route
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.rti.charisma.api.db.tables.User
-import com.rti.charisma.api.model.Response
-import com.rti.charisma.api.model.UsernameAvailability
+import com.rti.charisma.api.route.response.Response
+import com.rti.charisma.api.route.response.UsernameAvailability
 import com.rti.charisma.api.service.UserService
 import io.ktor.application.*
 import io.ktor.auth.*

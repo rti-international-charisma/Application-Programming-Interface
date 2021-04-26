@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-@ExperimentalCoroutinesApi
 class ContentServiceTest {
 
     private val contentClient = mockk<ContentClient>(relaxed = true)

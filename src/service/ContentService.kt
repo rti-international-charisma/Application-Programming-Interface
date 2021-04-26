@@ -10,7 +10,6 @@ import com.rti.charisma.api.model.PageContent
 class ContentService(private val contentClient: ContentClient) {
 
     suspend fun getHomePage(): Page {
-
         val endpoint = "/items/homepage?fields=*.*.*"
         //supports 3 levels of information
         return pageRequest(endpoint)

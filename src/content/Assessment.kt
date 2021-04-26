@@ -2,7 +2,7 @@ package com.rti.charisma.api.model
 
 import com.fasterxml.jackson.annotation.*
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import com.rti.charisma.api.route.response.AssessmentSectionConversions
+import com.rti.charisma.api.content.serialiser.AssessmentSectionConversions
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
