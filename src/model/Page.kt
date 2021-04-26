@@ -1,91 +1,87 @@
 package com.rti.charisma.api.model
 
-import com.rti.charisma.api.config.CMS_ASSETS_URL
-import com.rti.charisma.api.config.ConfigProvider
-import java.util.stream.Collectors
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonInclude.Include
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.rti.charisma.api.route.response.PageConversions
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class PageContent(
+    @JsonProperty("data")
+    val page: Page
+)
+
+@JsonIgnoreProperties(value = ["status"], allowSetters = true, ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+@JsonSerialize(using = PageConversions.Serializer::class)
 data class Page(
-    val title: String,
-    val introduction: String,
-    val summary: String,
-    val description: String,
-    val images: List<ImagesInPage>
-) {
-    companion object {
-        fun toPage(data: Map<String, Any>): Page {
-            return Page(
-                title = (data["title"] ?: "") as String,
-                introduction = (data["introduction"] ?: "") as String,
-                summary = (data["summary"] ?: "") as String,
-                description = (data["description"] ?: "") as String,
-                images = (data["images"] as List<Map<String, Any>>).stream()
-                    .map { imageData -> ImagesInPage.toImagesInPage(imageData["directus_files_id"] as Map<String, Any>) }
-                    .collect(Collectors.toList())
-            )
-        }
-    }
-}
+    val title: String?,
+    val introduction: String?,
+    val description: String?,
+    val summary: String?,
+    val status: String,
+    @JsonProperty("hero_image", required = false)
+    val heroImage: HeroImage?,
+    @JsonProperty("images", required = false)
+    val images: List<PageImage>?,
+    @JsonProperty("video_section", required = false)
+    val videoSection: VideoSection?,
+    @JsonProperty(required = false)
+    val steps: List<Step>?
+)
 
-data class ImagesInPage(
-    val title: String = "",
-    val imageUrl: String = "",
-) {
-    companion object {
-        fun toImagesInPage(data: Map<String, Any>): ImagesInPage {
-            return ImagesInPage(
-                title = (data["title"] ?: "") as String,
-                imageUrl = if (data["id"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["id"]}" else ""
-            )
-        }
-    }
-}
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class PageImage(
+    @JsonProperty("directus_files_id")
+    val imageFile: ImageFile
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class ImageFile(
+    @JsonProperty("id")
+    val imageUrl: String = "",
+    val title: String = ""
+)
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class HeroImage(
     var title: String = "",
     var introduction: String = "",
     var summary: String = "",
+    @JsonProperty("image_url")
     var imageUrl: String = ""
-) {
-    companion object {
-        fun toPageImage(data: Any?): PageImage {
-            return if (data is Map<*, *>) {
-                PageImage(
-                    title = (data["title"] ?: "") as String,
-                    introduction = (data["introduction"] ?: "") as String,
-                    summary = (data["summary"] ?: "") as String,
-                    imageUrl = if (data["image_url"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["image_url"]}" else ""
-                )
-            } else {
-                PageImage()
-            }
-        }
-    }
-}
+)
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class PageVideo(
     var title: String = "",
     var description: String = "",
-    var videoUrl: String = "",
-    var videoImage: String = "",
-    var actionText: String = "",
-    var actionLink: String = "",
-    var isPrivate: Boolean = false
-) {
-    companion object {
-        fun toPageVideo(data: Any): PageVideo {
-            return if (data is Map<*, *>) {
-                PageVideo(
-                    title = (data["title"] ?: "") as String,
-                    description = (data["description"] ?: "") as String,
-                    videoUrl = if (data["video_url"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_url"]}" else "",
-                    videoImage = if (data["video_image"] != null) "${ConfigProvider.get(CMS_ASSETS_URL)}/${data["video_image"]}" else "",
-                    actionText = (data["action_text"] ?: "") as String,
-                    actionLink = (data["action_link"] ?: "") as String,
-                    isPrivate = (data["is_private"]) as Boolean
-                )
-            } else {
-                return PageVideo()
-            }
-        }
-    }
-}
+    @JsonProperty("video_url")
+    var videoUrl: String?,
+    @JsonProperty("video_image", required = false)
+    var videoImage: String?,
+    @JsonProperty("action_text")
+    var actionText: String?
+)
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class Step(
+    val title: String,
+    @JsonProperty("sub_title", required = false) val subTitle: String?,
+    @JsonProperty("background_image") val backgroundImageUrl: String,
+    @JsonProperty("image") val imageUrl: String
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class VideoSection(
+    var introduction: String = "",
+    var summary: String = "",
+    var videos: List<PageVideo> = emptyList()
+)

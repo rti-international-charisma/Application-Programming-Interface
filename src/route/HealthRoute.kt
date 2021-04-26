@@ -1,10 +1,9 @@
 package com.rti.charisma.api.route
 
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.respond
-import io.ktor.routing.Routing
-import io.ktor.routing.get
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.response.*
+import io.ktor.routing.*
 
 fun Routing.healthRoute() {
     get("/health") {

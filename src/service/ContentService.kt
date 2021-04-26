@@ -1,77 +1,56 @@
 package service
 
-import com.rti.charisma.api.client.CmsContent
-import com.rti.charisma.api.client.CmsList
 import com.rti.charisma.api.client.ContentClient
-import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
-import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.model.Assessment
-import com.rti.charisma.api.model.HomePage
 import com.rti.charisma.api.model.Page
+import com.rti.charisma.api.model.PageContent
 
 class ContentService(private val contentClient: ContentClient) {
 
-    suspend fun getHomePage(): HomePage {
+    suspend fun getHomePage(): Page {
+
+        val endpoint = "/items/homepage?fields=*.*.*"
         //supports 3 levels of information
-        try {
-            val content: CmsContent = contentClient.request("/items/homepage?fields=*.*.*")
-            val status: String = (content.data["status"] ?: "") as String
-            if (canAccess(status)) {
-                return HomePage.toHomePage(content.data)
-            } else {
-                throw ContentException("Content not available")
-            }
-        } catch (e: ContentRequestException) {
-            throw e
-        } catch (e: ContentException) {
-            throw e
-        }
+        return pageRequest(endpoint)
     }
 
     suspend fun getPage(pageId: String): Page {
+        val endpoint = "/items/pages/${pageId}?fields=*.*.*"
         //supports 3 levels of information
-        try {
-            val content: CmsContent = contentClient.request("/items/pages/${pageId}?fields=*.*.*")
-            val status: String = (content.data["status"] ?: "") as String
-            if (canAccess(status)) {
-                return Page.toPage(content.data)
-            } else {
-                throw ContentException("Content not available")
-            }
-        } catch (e: ContentRequestException) {
-            throw e
-        } catch (e: ContentException) {
-            throw e
-        }
+        return pageRequest(endpoint)
     }
 
     suspend fun getAssessment(): Assessment {
+        val endpoint =
+            "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
         try {
-            val content: CmsList = contentClient.requestList("/items/sections?fields=*," +
-                    "questions.questions_id.text,questions.questions_id.options.options_id.*")
-                return Assessment.toAssessment(content.data)
+            return contentClient.getAssessment(endpoint)
         } catch (e: ContentRequestException) {
-            throw e
-        } catch (e: ContentException) {
-            throw e
-        }
-
-    }
-
-    suspend fun getAsset(assetID: String): ByteArray {
-        try {
-            return contentClient.requestAsset("/assets/${assetID}")
+            throw ContentRequestException(e.localizedMessage)
         } catch (e: Exception) {
             throw ContentException(e.localizedMessage)
         }
     }
 
-    private fun canAccess(status: String): Boolean {
-        val states: List<String> = ConfigProvider.getList(ACCESSIBILITY_STATUS)
-        return states.contains(status)
+    suspend fun getAsset(assetId: String): ByteArray {
+        try {
+            return contentClient.getAsset("/assets/${assetId}")
+        }catch (e: ContentRequestException) {
+            throw ContentRequestException(e.localizedMessage)
+        } catch (e: Exception) {
+            throw ContentException(e.localizedMessage)
+        }
     }
-
-
+    private suspend fun pageRequest(endpoint: String): Page {
+        try {
+            val content: PageContent = contentClient.getPage(endpoint)
+            return content.page
+        } catch (e: ContentRequestException) {
+            throw ContentRequestException(e.localizedMessage)
+        } catch (e: Exception) {
+            throw ContentException(e.localizedMessage)
+        }
+    }
 }
