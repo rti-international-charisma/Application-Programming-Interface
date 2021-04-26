@@ -8,7 +8,7 @@ import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
 import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
-import com.rti.charisma.api.model.UserResponse
+import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.repository.UserRepository
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup

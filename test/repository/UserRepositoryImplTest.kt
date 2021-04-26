@@ -3,6 +3,7 @@ package repository
 import com.rti.charisma.api.db.CharismaDB
 import com.rti.charisma.api.db.tables.SecurityQuestions
 import com.rti.charisma.api.db.tables.Users
+import com.rti.charisma.api.repository.InMemoryDB
 import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.Signup
 import com.zaxxer.hikari.HikariConfig
@@ -24,14 +25,6 @@ class UserRepositoryImplTest {
 
     private lateinit var db: Database
 
-    private fun inMemoryDataSoure(): DataSource {
-        val config = HikariConfig()
-        config.jdbcUrl = "jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1"
-        config.driverClassName = "org.h2.Driver"
-        config.validate()
-        return HikariDataSource(config)
-    }
-
     @AfterAll
     fun cleanup() {
         TransactionManager.closeAndUnregister(db)
@@ -39,7 +32,7 @@ class UserRepositoryImplTest {
 
     @BeforeAll
     fun setup() {
-       db = CharismaDB.init(inMemoryDataSoure())
+        db = CharismaDB.init(InMemoryDB.inMemoryDataSource())
         transaction {
             SchemaUtils.create(Users, SecurityQuestions)
             SecurityQuestions.insert {
@@ -110,7 +103,7 @@ class UserRepositoryImplTest {
     @Test
     fun `it should hash username and password `() {
         val signupModel = Signup("username1, ", "password", 1, "Answer")
-        val userId = userRepository.registerUser(signupModel,5)
+        val userId = userRepository.registerUser(signupModel, 5)
         val user = userRepository.findUserById(userId)
         assertNotEquals("password", user?.password)
     }
