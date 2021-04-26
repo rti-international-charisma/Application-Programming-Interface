@@ -22,6 +22,7 @@ object AssessmentSectionConversions {
                         writeStringField("id", question.id)
                         writeStringField("text", question.text)
                         writeStringField("description", question.description)
+                        writeBooleanField("positiveNarrative", question.positiveNarrative)
                         writeArrayFieldStart("options")
                         for (option in question.options) {
                             writeStartObject()

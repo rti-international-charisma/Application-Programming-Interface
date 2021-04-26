@@ -15,6 +15,7 @@ object AssessmentFixture {
     "id" : "qid-1",
     "text" : "question text1",
     "description" : "description1",
+    "positiveNarrative" : true,
     "options" : [ {
       "text" : "option1",
       "weightage" : 1
@@ -26,6 +27,7 @@ object AssessmentFixture {
     "id" : "qid-2",
     "text" : "question text2",
     "description" : "description2",
+    "positiveNarrative" : false,
     "options" : [ {
       "text" : "option1",
       "weightage" : 1
@@ -371,6 +373,7 @@ object AssessmentFixture {
       "id" : "qid1",
       "text" : "question 1",
       "description" : "description 1",
+      "positiveNarrative" : true,
       "options" : [ {
         "text" : "disagree",
         "weightage" : 2
@@ -385,6 +388,7 @@ object AssessmentFixture {
       "id" : "qid3",
       "text" : "question 3",
       "description" : "description 3",
+      "positiveNarrative" : false,
       "options" : [ {
         "text" : "agree",
         "weightage" : 4
@@ -401,6 +405,7 @@ object AssessmentFixture {
       "id" : "qid2",
       "text" : "question 2",
       "description" : "description 2",
+      "positiveNarrative" : true,
       "options" : [ {
         "text" : "disagree",
         "weightage" : 2
@@ -432,6 +437,7 @@ object AssessmentFixture {
       "id" : "qid1",
       "text" : "question 1",
       "description" : "description 1",
+      "positiveNarrative" : false,
       "options" : [ {
         "text" : "disagree",
         "weightage" : 2
@@ -446,6 +452,7 @@ object AssessmentFixture {
       "id" : "qid3",
       "text" : "question 3",
       "description" : "description 3",
+      "positiveNarrative" : false,
       "options" : [ {
         "text" : "agree",
         "weightage" : 4
