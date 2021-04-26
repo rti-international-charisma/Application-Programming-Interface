@@ -17,14 +17,14 @@ object AssessmentSectionConversions {
                     writeStringField("section", value.section)
                     writeStringField("introduction", value.introduction)
                     writeArrayFieldStart("questions")
-                    for (question in value.questions) {
+                    value.questions.forEach { question ->
                         writeStartObject()
                         writeStringField("id", question.id)
                         writeStringField("text", question.text)
                         writeStringField("description", question.description)
                         writeBooleanField("positiveNarrative", question.positiveNarrative)
                         writeArrayFieldStart("options")
-                        for (option in question.options) {
+                        question.options.forEach { option ->
                             writeStartObject()
                             writeStringField("text", option.text)
                             writeNumberField("weightage", option.weightage)
