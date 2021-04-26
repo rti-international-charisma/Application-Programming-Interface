@@ -90,7 +90,7 @@ object AssessmentFixture {
                         "id": "qid1",
                         "text": "question 1",
                         "description": "description 1",
-                        "positiveNarrative": true,
+                        "positive_narrative": true,
                         "options": [
                             {
                                 "options_id": {
@@ -127,7 +127,7 @@ object AssessmentFixture {
                         "id": "qid3",
                         "text": "question 3",
                         "description": "description 3",
-                        "positiveNarrative": false,
+                        "positive_narrative": false,
                         "options": [
                             {
                                 "options_id": {
@@ -163,7 +163,7 @@ object AssessmentFixture {
                         "id": "qid2",
                         "text": "question 2",
                         "description": "description 2",
-                        "positiveNarrative": true,
+                        "positive_narrative": true,
                         "options": [
                             {
                                 "options_id": {

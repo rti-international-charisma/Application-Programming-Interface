@@ -32,6 +32,8 @@ data class Question(
     val text: String,
     @JsonProperty(required = false)
     val description: String?,
+    @JsonProperty("positiveNarrative")
+    @JsonAlias("positive_narrative")
     val positiveNarrative: Boolean,
     val options: List<Option>
 )
