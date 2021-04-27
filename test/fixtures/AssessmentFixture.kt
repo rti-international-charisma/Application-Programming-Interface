@@ -5,6 +5,9 @@ import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.content.AssessmentSection
 import com.rti.charisma.api.content.Option
 import com.rti.charisma.api.content.Question
+import com.rti.charisma.api.route.AssessmentResult
+import com.rti.charisma.api.route.response.AssessmentScoreResponse
+import com.rti.charisma.api.route.Question as AssessmentResultQuestion
 
 object AssessmentFixture {
     fun assessmentSectionsJson(): String = """{
@@ -464,6 +467,45 @@ object AssessmentFixture {
   } ]
 }"""
 
+    }
+
+    fun assessmentResult(): AssessmentScoreResponse {
+
+        val section1 = AssessmentResult("sectionid-1", "sectiontype-1", mutableListOf(
+            AssessmentResultQuestion("question1", 11),
+            AssessmentResultQuestion("question2", 12)
+        ))
+        val section2 = AssessmentResult("sectionid-2", "sectiontype-2", mutableListOf(
+            AssessmentResultQuestion("question3", 21),
+            AssessmentResultQuestion("question4", 22)
+        ))
+        return AssessmentScoreResponse(mutableListOf(section1, section2))
+    }
+
+    fun assessmentResultResponse(): Any? {
+       return """{
+  "sections" : [ {
+    "sectionId" : "sectionid-1",
+    "sectionType" : "sectiontype-1",
+    "answers" : [ {
+      "questionId" : "question1",
+      "score" : 11
+    }, {
+      "questionId" : "question2",
+      "score" : 12
+    } ]
+  }, {
+    "sectionId" : "sectionid-2",
+    "sectionType" : "sectiontype-2",
+    "answers" : [ {
+      "questionId" : "question3",
+      "score" : 21
+    }, {
+      "questionId" : "question4",
+      "score" : 22
+    } ]
+  } ]
+}"""
     }
 
 }
