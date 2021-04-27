@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
 import com.rti.charisma.api.config.ConfigProvider
-import com.rti.charisma.api.model.Page
+import com.rti.charisma.api.content.Page
 
 object PageConversions {
     object Serializer : JsonSerializer<Page>() {

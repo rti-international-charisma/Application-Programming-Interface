@@ -74,6 +74,26 @@ class AssessmentRepositoryImplTest {
     }
 
     @Test
+    fun `it should return false is user score does not exists`() {
+        transaction {
+            var assessmentSectionId = SectionScores.insert {
+                it[SectionScores.userId] = testUserId
+                it[SectionScores.sectionId] = "test-assessment-section-id"
+                it[SectionScores.sectionType] = "TEST SECTION"
+            } get SectionScores.id
+
+            Answers.insert {
+                it[questionId] = "test-question-id"
+                it[score] = 3
+                it[Answers.assessmentSectionId] = assessmentSectionId
+            }
+        }
+        val userScoreExists = repository.userScoreExists(2334)
+
+        assertFalse(userScoreExists)
+    }
+
+    @Test
     fun `it should insert user score with all sections and answers`() {
         //given
         val sectionScore1 = createSectionEntry("section-id-1", "section-type-1", 11, 12)
@@ -130,7 +150,15 @@ class AssessmentRepositoryImplTest {
             assertEquals(3, sectionScoresFromDB.count())
 
             val sectionTypes = sectionScoresFromDB.map { it[SectionScores.sectionType] }
-            assertTrue(sectionTypes.containsAll(mutableListOf("section-type-11", "section-type-new-12", "section-type-13")))
+            assertTrue(
+                sectionTypes.containsAll(
+                    mutableListOf(
+                        "section-type-11",
+                        "section-type-new-12",
+                        "section-type-13"
+                    )
+                )
+            )
             assertFalse(sectionTypes.contains("section-type-12"))
 
             val sectionIds = sectionScoresFromDB.map { it[SectionScores.id] }
@@ -152,6 +180,56 @@ class AssessmentRepositoryImplTest {
         }
 
     }
+
+    @Test
+    fun `it should return all sections and relevant answers for a user`() {
+        //given
+        val sectionScore1 = createSectionEntry("section-id-1", "section-type-1", 11, 12)
+        val sectionScore2 = createSectionEntry("section-id-2", "section-type-2", 21, 22)
+        repository.insertScore(mutableListOf(sectionScore1, sectionScore2))
+
+        //when
+        val userSections: List<SectionScore> = repository.findSectionsByUser(userId = testUserId)
+
+        //then
+        assertEquals(2, userSections.size)
+        assertEquals("section-id-1", userSections[0].sectionId)
+        assertEquals("section-type-1", userSections[0].sectionType)
+        assertEquals(2, userSections[0].answers.size)
+        assertEquals("section-id-2", userSections[1].sectionId)
+        assertEquals("section-type-2", userSections[1].sectionType)
+        assertEquals(2, userSections[1].answers.size)
+    }
+
+    @Test
+    fun `it should return empty list if no scores found for user`() {
+        //when
+        val userSections: List<SectionScore> = repository.findSectionsByUser(userId = 1231)
+
+        //then
+        assertTrue(userSections.isEmpty())
+
+    }
+
+    @Test
+    fun `it should return empty answers list if no answers in sections found for user`() {
+        //given
+       transaction {  SectionScores.insert {
+           it[SectionScores.sectionId] = "section1"
+           it[SectionScores.sectionType] = "sectionType1"
+           it[SectionScores.userId] = testUserId
+       }}
+
+        //when
+        val userSections: List<SectionScore> = repository.findSectionsByUser(testUserId)
+
+        //then
+        assertEquals(1, userSections.size)
+        assertEquals("section1", userSections[0].sectionId)
+        assertEquals("sectionType1", userSections[0].sectionType)
+        assertTrue(userSections[0].answers.isEmpty())
+    }
+
 
     private fun createSectionEntry(sectionId: String, sectionType: String, score1: Int, score2: Int): SectionScore {
         return SectionScore(

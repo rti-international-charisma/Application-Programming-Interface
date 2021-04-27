@@ -2,9 +2,9 @@ package content.serialiser
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.rti.charisma.api.fixtures.AssessmentFixture
-import com.rti.charisma.api.model.AssessmentSection
-import com.rti.charisma.api.model.Option
-import com.rti.charisma.api.model.Question
+import com.rti.charisma.api.content.AssessmentSection
+import com.rti.charisma.api.content.Option
+import com.rti.charisma.api.content.Question
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

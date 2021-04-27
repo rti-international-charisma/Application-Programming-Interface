@@ -2,7 +2,6 @@ package com.rti.charisma.api.service
 
 import com.rti.charisma.api.db.tables.Answer
 import com.rti.charisma.api.db.tables.SectionScore
-import com.rti.charisma.api.db.tables.SectionScores
 import com.rti.charisma.api.repository.AssessmentRepository
 import com.rti.charisma.api.route.AssessmentResult
 import com.rti.charisma.api.route.Question
@@ -17,15 +16,21 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
         }
     }
 
-    fun getAssessmentScore(userId: Int) : AssessmentScoreResponse {
-        val scores = assessmentRepository.findByUser(userId)
-        return fromSectionScore(scores);
+    fun getAssessmentScore(userId: Int): AssessmentScoreResponse {
+        val sections: List<SectionScore> = assessmentRepository.findSectionsByUser(userId)
+        return fromSectionScore(sections)
     }
 
-    private fun fromSectionScore(scores: List<SectionScores>): AssessmentScoreResponse {
-        TODO("Not yet implemented")
+    private fun fromSectionScore(sections: List<SectionScore>): AssessmentScoreResponse {
+        val sectionScores = sections.map { sectionScore ->
+            AssessmentResult(
+                sectionScore.sectionId,
+                sectionScore.sectionType,
+                sectionScore.answers.map { answer -> Question(answer.questionId, answer.score) }
+            )
+        }
+        return AssessmentScoreResponse(sectionScores)
     }
-
 
     private fun toSectionScore(userId: Int, assessmentResults: List<AssessmentResult>): List<SectionScore> {
         return assessmentResults.map { section ->
@@ -33,16 +38,10 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
                 user = userId,
                 sectionId = section.sectionId,
                 sectionType = section.sectionType,
-                answers = toData(section.answers)
+                answers = section.answers
+                    .map { question -> Answer(questionId = question.questionId, score = question.score) }
             )
         }
     }
-
-    private fun toData(questions: List<Question>): List<Answer> {
-       return questions.map{ question ->
-            Answer(questionId = question.questionId, score = question.score)
-        }
-    }
-
 
 }

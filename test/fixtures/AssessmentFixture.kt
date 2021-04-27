@@ -1,10 +1,10 @@
 package com.rti.charisma.api.fixtures
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.rti.charisma.api.model.Assessment
-import com.rti.charisma.api.model.AssessmentSection
-import com.rti.charisma.api.model.Option
-import com.rti.charisma.api.model.Question
+import com.rti.charisma.api.content.Assessment
+import com.rti.charisma.api.content.AssessmentSection
+import com.rti.charisma.api.content.Option
+import com.rti.charisma.api.content.Question
 
 object AssessmentFixture {
     fun assessmentSectionsJson(): String = """{
