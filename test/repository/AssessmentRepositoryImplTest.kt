@@ -57,7 +57,6 @@ class AssessmentRepositoryImplTest {
         }
     }
 
-    @Test
     fun `it should return true is user score exists`() {
         val userScoreExists = repository.userScoreExists(testUserId)
 
