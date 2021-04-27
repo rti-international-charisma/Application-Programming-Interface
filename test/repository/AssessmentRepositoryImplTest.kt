@@ -42,16 +42,11 @@ class AssessmentRepositoryImplTest {
                 it[sec_answer] = "hashed-answer"
                 it[loginAttempts] = 5
             } get Users.id
-        }
-    }
 
-    @Test
-    fun `it should return true is user score exists`() {
-        transaction {
-            var assessmentSectionId = SectionScores.insert {
-                it[SectionScores.userId] = testUserId
-                it[SectionScores.sectionId] = "test-assessment-section-id"
-                it[SectionScores.sectionType] = "TEST SECTION"
+            val assessmentSectionId = SectionScores.insert {
+                it[userId] = testUserId
+                it[sectionId] = "test-assessment-section-id"
+                it[sectionType] = "TEST SECTION"
             } get SectionScores.id
 
             Answers.insert {
@@ -60,12 +55,16 @@ class AssessmentRepositoryImplTest {
                 it[Answers.assessmentSectionId] = assessmentSectionId
             }
         }
+    }
+
+    @Test
+    fun `it should return true is user score exists`() {
         val userScoreExists = repository.userScoreExists(testUserId)
 
         assertTrue(userScoreExists)
     }
 
-    @Test
+
     fun `it should insert user score with all sections and answers`() {
         //given
         val sectionScore1 = createSectionEntry("section-id-1", "section-type-1", 11, 12)
@@ -102,7 +101,7 @@ class AssessmentRepositoryImplTest {
 
     }
 
-    @Test
+
     fun `it should update user score with all sections and answers`() {
         //given
         val sectionScore1 = createSectionEntry("section-id-1", "section-type-1", 11, 12)
@@ -152,7 +151,7 @@ class AssessmentRepositoryImplTest {
             sectionType = sectionType,
             answers = mutableListOf(
                 Answer(questionId = "question-$score1", score = score1),
-                Answer(questionId = "question-$score2", score = score2),
+                Answer(questionId = "question-$score2", score = score2)
             )
         )
     }
