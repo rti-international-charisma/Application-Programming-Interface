@@ -3,7 +3,7 @@ package com.rti.charisma.api.db.tables
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
 
-object Answers : Table() {
+object Answers : Table("answers") {
     val id = integer("id").autoIncrement()
     val assessmentSectionId = integer("section_id").references(SectionScores.id, onDelete = ReferenceOption.CASCADE)
     val questionId = varchar("question_id", length = 255)
