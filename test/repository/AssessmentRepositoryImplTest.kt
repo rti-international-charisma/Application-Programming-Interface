@@ -59,8 +59,6 @@ class AssessmentRepositoryImplTest {
 
     @Test
     fun `it should return true is user score exists`() {
-        val list = repository.findByUser(testUserId)
-        print("Scores : $list")
         val userScoreExists = repository.userScoreExists(testUserId)
 
         assertTrue(userScoreExists)

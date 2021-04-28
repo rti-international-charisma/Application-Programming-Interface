@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS sectionscores (
+CREATE TABLE IF NOT EXISTS section_scores (
 	id INT GENERATED ALWAYS AS IDENTITY,
 	user_id INT,
 	section_id varchar(255),
@@ -19,6 +19,6 @@ CREATE TABLE IF NOT EXISTS answers (
 	PRIMARY KEY(id),
 	CONSTRAINT fk_user_section
       FOREIGN KEY(section_id)
-	  REFERENCES sectionscores(id)
+	  REFERENCES section_scores(id)
 	  ON DELETE CASCADE
 );
