@@ -27,7 +27,7 @@ class UserRepositoryImplTest {
 
     @AfterAll
     fun cleanup() {
-        TransactionManager.closeAndUnregister(db)
+//        TransactionManager.closeAndUnregister(db)
     }
 
     @BeforeAll

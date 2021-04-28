@@ -22,7 +22,7 @@ class AssessmentRepositoryImplTest {
 
     @AfterAll
     fun cleanup() {
-        TransactionManager.closeAndUnregister(db)
+//        TransactionManager.closeAndUnregister(db)
     }
 
     @BeforeAll
