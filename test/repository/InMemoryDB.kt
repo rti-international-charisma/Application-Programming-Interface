@@ -9,6 +9,7 @@ object InMemoryDB {
         val config = HikariConfig()
         config.jdbcUrl = "jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1"
         config.driverClassName = "org.h2.Driver"
+        config.maximumPoolSize = 2
         config.validate()
         return HikariDataSource(config)
     }
