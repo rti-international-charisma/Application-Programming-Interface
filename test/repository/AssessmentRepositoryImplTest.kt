@@ -20,11 +20,6 @@ class AssessmentRepositoryImplTest {
     private lateinit var db: Database
     private val repository: AssessmentRepository = AssessmentRepositoryImpl()
 
-    @AfterAll
-    fun cleanup() {
-        TransactionManager.closeAndUnregister(db)
-    }
-
     @BeforeAll
     fun setup() {
         db = CharismaDB.init(InMemoryDB.inMemoryDataSource())

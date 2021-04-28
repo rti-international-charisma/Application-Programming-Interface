@@ -6,8 +6,6 @@ import com.rti.charisma.api.db.tables.Users
 import com.rti.charisma.api.repository.InMemoryDB
 import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.Signup
-import com.zaxxer.hikari.HikariConfig
-import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.insert
@@ -18,17 +16,11 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import javax.sql.DataSource
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserRepositoryImplTest {
 
     private lateinit var db: Database
-
-    @AfterAll
-    fun cleanup() {
-        TransactionManager.closeAndUnregister(db)
-    }
 
     @BeforeAll
     fun setup() {
