@@ -29,7 +29,7 @@ class AssessmentRepositoryImplTest {
     fun setup() {
         db = CharismaDB.init(InMemoryDB.inMemoryDataSource())
         transaction {
-            SchemaUtils.create(SectionScores, Answers)
+            SchemaUtils.create(SectionScores, Answers, SecurityQuestions, Users)
 
             val securityQuestionId = SecurityQuestions.insert {
                 it[question] = "Security Question 1"
