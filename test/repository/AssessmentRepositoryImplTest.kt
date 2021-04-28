@@ -16,7 +16,7 @@ import kotlin.test.assertNotNull
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AssessmentRepositoryImplTest {
-    private var testUserId: Int = 0
+    private var testUserId: Int = 3
     private lateinit var db: Database
     private val repository: AssessmentRepository = AssessmentRepositoryImpl()
 
@@ -29,19 +29,7 @@ class AssessmentRepositoryImplTest {
     fun setup() {
         db = CharismaDB.init(InMemoryDB.inMemoryDataSource())
         transaction {
-            SchemaUtils.create(Users, SecurityQuestions, SectionScores, Answers)
-
-            var securityQuestionId = SecurityQuestions.insert {
-                it[question] = "Security Question 1"
-            } get SecurityQuestions.sec_q_id
-
-            testUserId = Users.insert {
-                it[username] = "username"
-                it[password] = "hashed-password"
-                it[sec_q_id] = securityQuestionId
-                it[sec_answer] = "hashed-answer"
-                it[loginAttempts] = 5
-            } get Users.id
+            SchemaUtils.create(SectionScores, Answers)
 
             val assessmentSectionId = SectionScores.insert {
                 it[userId] = testUserId
