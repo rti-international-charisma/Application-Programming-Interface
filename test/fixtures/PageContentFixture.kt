@@ -1,7 +1,7 @@
 package com.rti.charisma.api.fixtures
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.rti.charisma.api.model.*
+import com.rti.charisma.api.content.*
 
 object PageContentFixture {
 

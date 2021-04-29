@@ -4,7 +4,10 @@ import com.rti.charisma.api.db.tables.Answer
 import com.rti.charisma.api.db.tables.Answers
 import com.rti.charisma.api.db.tables.SectionScore
 import com.rti.charisma.api.db.tables.SectionScores
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class AssessmentRepositoryImpl : AssessmentRepository {
@@ -25,7 +28,7 @@ class AssessmentRepositoryImpl : AssessmentRepository {
 
     override fun replaceScore(sections: List<SectionScore>) {
         transaction {
-            if (sections.isNotEmpty()){
+            if (sections.isNotEmpty()) {
                 SectionScores.deleteWhere { SectionScores.userId eq sections[0].user }
                 sections.forEach { score ->
                     val userSectionId = insertSectionScore(score)
@@ -37,10 +40,35 @@ class AssessmentRepositoryImpl : AssessmentRepository {
         }
     }
 
-    override fun findByUser(userId: Int): List<SectionScores> {
-        TODO("Not yet implemented")
+    override fun findSectionsByUser(userId: Int): List<SectionScore> {
+        return transaction {
+            SectionScores.select { SectionScores.userId eq userId }
+                .map {
+                    SectionScore(
+                        id = it[SectionScores.id],
+                        user = it[SectionScores.userId],
+                        sectionId = it[SectionScores.sectionId],
+                        sectionType = it[SectionScores.sectionType],
+                        answers = findAnswersByAssessmentSectionId(it[SectionScores.id])
+                    )
+                }
+
+        }
     }
 
+
+    override fun findAnswersByAssessmentSectionId(userSectionId: Int): List<Answer> {
+        return transaction {
+            Answers.select { Answers.assessmentSectionId eq userSectionId }
+            .map {
+                Answer(
+                    id = it[Answers.id],
+                    assessmentSectionId = it[Answers.assessmentSectionId],
+                    questionId = it[Answers.questionId],
+                    score = it[Answers.score]
+                )
+            } }
+    }
 
     private fun insertAnswer(answer: Answer, assessmentSectionId: Int) {
         Answers.insert {

@@ -1,4 +1,4 @@
-package com.rti.charisma.api.model
+package com.rti.charisma.api.content
 
 import com.fasterxml.jackson.annotation.*
 import com.fasterxml.jackson.databind.annotation.JsonSerialize

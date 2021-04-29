@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
 import com.rti.charisma.api.config.ConfigProvider
-import com.rti.charisma.api.model.Page
+import com.rti.charisma.api.content.Page
 
 object PageConversions {
     object Serializer : JsonSerializer<Page>() {
@@ -30,7 +30,7 @@ object PageConversions {
 
                     if (value.images != null) {
                         writeArrayFieldStart("images")
-                        for (image in value.images!!) {
+                        value.images.forEach { image ->
                             writeStartObject()
                             writeStringField("title", image.imageFile.title)
                             writeStringField("imageUrl", "/assets/${image.imageFile.imageUrl}")
@@ -45,7 +45,7 @@ object PageConversions {
                         writeStringField("introduction", value.videoSection.introduction)
                         writeStringField("summary", value.videoSection.summary)
                         writeArrayFieldStart("videos")
-                        for (video in videoSection.videos) {
+                        videoSection.videos.forEach { video ->
                             writeStartObject()
                             writeStringField("title", video.title)
                             writeStringField("description", video.description)
@@ -60,7 +60,7 @@ object PageConversions {
 
                     if (value.steps != null) {
                         writeArrayFieldStart("steps")
-                        for (step in value.steps) {
+                        value.steps.forEach { step ->
                             writeStartObject()
                             writeStringField("title", step.title)
                             writeStringField("subTitle", step.subTitle)

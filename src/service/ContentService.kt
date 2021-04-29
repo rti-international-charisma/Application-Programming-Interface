@@ -3,9 +3,9 @@ package service
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
-import com.rti.charisma.api.model.Assessment
-import com.rti.charisma.api.model.Page
-import com.rti.charisma.api.model.PageContent
+import com.rti.charisma.api.content.Assessment
+import com.rti.charisma.api.content.Page
+import com.rti.charisma.api.content.PageContent
 
 class ContentService(private val contentClient: ContentClient) {
 

@@ -12,7 +12,7 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-data class AssessmentResult(val sectionId: String, val sectionType: String, val questions: List<Question>)
+data class AssessmentResult(val sectionId: String, val sectionType: String, val answers: List<Question>)
 data class Question(val questionId: String, val score: Int)
 
 @KtorExperimentalLocationsAPI
@@ -26,6 +26,16 @@ fun Routing.assessmentRoute(assessmentService: AssessmentService) {
                 val assessmentScore = jacksonObjectMapper().readValue<List<AssessmentResult>>(call.receiveText())
                 assessmentService.addAssessmentScore(user.id, assessmentScore)
                 call.respond(HttpStatusCode.Created)
+            }
+        }
+
+        get("assessment/scores") {
+            val user = call.principal<User>()
+            if (user == null) {
+                call.respond(HttpStatusCode.Unauthorized)
+            } else {
+                val assessmentScores = assessmentService.getAssessmentScore(user.id)
+                call.respond(assessmentScores)
             }
         }
     }

@@ -6,8 +6,8 @@ import com.rti.charisma.api.config.CMS_BASE_URL
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
-import com.rti.charisma.api.model.Assessment
-import com.rti.charisma.api.model.PageContent
+import com.rti.charisma.api.content.Assessment
+import com.rti.charisma.api.content.PageContent
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.*
