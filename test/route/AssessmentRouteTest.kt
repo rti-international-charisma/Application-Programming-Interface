@@ -5,6 +5,7 @@ import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.loginModule
 import com.rti.charisma.api.route.AssessmentResult
+import com.rti.charisma.api.route.AssessmentScoreRequest
 import com.rti.charisma.api.route.Question
 import com.rti.charisma.api.service.AssessmentService
 import com.rti.charisma.api.service.UserService
@@ -15,7 +16,6 @@ import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Ignore
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import javax.sql.DataSource
@@ -26,24 +26,35 @@ class AssessmentRouteTest {
 
     @Test
     fun `it should return 201 Created when user scores are added successfully`() = testApp {
-        val assessmentResult1 = AssessmentResult(
-            "section1", "sectiontype1",
-            mutableListOf(Question("q1", 3))
+        val assessmentResultRequest = AssessmentScoreRequest(
+                listOf(
+                        AssessmentResult(
+                                "section1",
+                                "sectiontype1",
+                                mutableListOf(Question("q1", 3))
+                        )
+                )
         )
+
         handleRequest(HttpMethod.Post, "assessment/scores") {
-            setBody(jacksonObjectMapper().writeValueAsString(mutableListOf(assessmentResult1)))
+            setBody(jacksonObjectMapper().writeValueAsString(mutableListOf(assessmentResultRequest)))
         }.apply {
            // assertEquals(201, response.status()?.value)
         }
     }
     @Test
     fun `it should return 401 if user id not found while adding scores`() = testApp {
-        val assessmentResult1 = AssessmentResult(
-            "section1", "sectiontype1",
-            mutableListOf(Question("q1", 3))
+        val assessmentResultRequest = AssessmentScoreRequest(
+                listOf(
+                        AssessmentResult(
+                                "section1",
+                                "sectiontype1",
+                                mutableListOf(Question("q1", 3))
+                        )
+                )
         )
         handleRequest(HttpMethod.Post, "assessment/scores") {
-            setBody(jacksonObjectMapper().writeValueAsString(mutableListOf(assessmentResult1)))
+            setBody(jacksonObjectMapper().writeValueAsString(mutableListOf(assessmentResultRequest)))
         }.apply {
             assertEquals(401, response.status()?.value)
         }
