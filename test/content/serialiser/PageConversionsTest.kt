@@ -17,6 +17,16 @@ class PageConversionsTest {
     }
 
     @Test
+    fun `it should serialise page content with counselling modules`() {
+
+        val pageContent = PageContentFixture.pageWithCounsellingModules("published")
+
+        val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
+
+        assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), json)
+    }
+
+    @Test
     fun `it should serialise only published page`() {
         val pageContent = PageContentFixture.pageWithVideoSection("archived")
 
@@ -27,7 +37,6 @@ class PageConversionsTest {
 
     @Test
     fun `it should not serialised null content`() {
-
         val pageContent = PageContentFixture.withNoVideoSectionAndSteps("published")
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 

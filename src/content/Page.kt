@@ -1,5 +1,6 @@
 package com.rti.charisma.api.content
 
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonInclude.Include
@@ -17,6 +18,7 @@ data class PageContent(
 @JsonInclude(Include.NON_NULL)
 @JsonSerialize(using = PageConversions.Serializer::class)
 data class Page(
+    val id: String,
     val title: String?,
     val introduction: String?,
     val description: String?,
@@ -29,10 +31,48 @@ data class Page(
     @JsonProperty("video_section", required = false)
     val videoSection: VideoSection?,
     @JsonProperty(required = false)
-    val steps: List<Step>?
+    val steps: List<Step>?,
+    @JsonAlias("counselling_module_sections")
+    val counsellingModuleSections: List<CounsellingModuleSection>?,
+    @JsonAlias("counselling_module_action_points")
+    val counsellingModuleActionPoints: List<CounsellingModuleActionPoint>?
+)
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class CounsellingModuleSection(
+    val id: String,
+    val title: String,
+    val introduction: String,
+    val summary: String?,
+    @JsonAlias("module_name")
+    val moduleName: String?,
+    @JsonAlias("accordion_content")
+    val accordionContent: List<AccordionContent>?
+)
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class AccordionContent(
+    val id: String,
+    val title: String,
+    val description: String
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class CounsellingModuleActionPoint(
+    val id: String,
+    val title: String,
+    @JsonAlias("module_name")
+    val moduleName: String
+)
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class PageImage(
     @JsonProperty("directus_files_id")
     val imageFile: ImageFile
@@ -51,8 +91,8 @@ data class ImageFile(
 @JsonInclude(Include.NON_NULL)
 data class HeroImage(
     var title: String = "",
-    var introduction: String = "",
-    var summary: String = "",
+    var introduction: String? = "",
+    var summary: String? = "",
     @JsonProperty("image_url")
     var imageUrl: String = ""
 )
@@ -74,9 +114,12 @@ data class PageVideo(
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Step(
     val title: String,
-    @JsonProperty("sub_title", required = false) val subTitle: String?,
-    @JsonProperty("background_image") val backgroundImageUrl: String,
-    @JsonProperty("image") val imageUrl: String
+    @JsonProperty("sub_title", required = false)
+    val subTitle: String?,
+    @JsonProperty("background_image")
+    val backgroundImageUrl: String,
+    @JsonProperty("image")
+    val imageUrl: String
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

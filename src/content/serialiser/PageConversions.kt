@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
 import com.rti.charisma.api.config.ConfigProvider
+import com.rti.charisma.api.content.HeroImage
 import com.rti.charisma.api.content.Page
 
 object PageConversions {
@@ -13,17 +14,19 @@ object PageConversions {
             with(gen) {
                 if (canAccess(value.status)) {
                     writeStartObject()
+                    // writeStringField("id", value.id)
                     writeStringField("title", value.title)
                     writeStringField("introduction", value.introduction)
                     writeStringField("description", value.description)
                     writeStringField("summary", value.summary)
 
                     if (value.heroImage != null) {
+                        val heroImage: HeroImage = value.heroImage
                         writeObjectFieldStart("heroImage")
-                        writeStringField("title", value.heroImage?.title)
-                        writeStringField("introduction", value.heroImage?.introduction)
-                        writeStringField("summary", value.heroImage?.summary)
-                        writeStringField("imageUrl", "/assets/${value.heroImage?.imageUrl}")
+                        writeStringField("title", heroImage.title)
+                        writeStringField("introduction", heroImage.introduction)
+                        writeStringField("summary", heroImage.summary)
+                        writeStringField("imageUrl", "/assets/${heroImage.imageUrl}")
                         writeEndObject()
 
                     }
@@ -66,6 +69,42 @@ object PageConversions {
                             writeStringField("subTitle", step.subTitle)
                             writeStringField("backgroundImageUrl", "/assets/${step.backgroundImageUrl}")
                             writeStringField("imageUrl", "/assets/${step.imageUrl}")
+                            writeEndObject()
+                        }
+                        writeEndArray()
+                    }
+
+                    if (value.counsellingModuleSections != null) {
+                        writeArrayFieldStart("counsellingModuleSections")
+                        val counsellingModuleSections = value.counsellingModuleSections
+                        counsellingModuleSections.forEach { section ->
+                            writeStartObject()
+                            writeStringField("id", section.id)
+                            writeStringField("title", section.title)
+                            writeStringField("introduction", section.introduction)
+                            writeStringField("summary", section.summary)
+                            if (section.accordionContent != null) {
+                                writeArrayFieldStart("accordionContent")
+                                section.accordionContent.forEach { accordion ->
+                                    writeStartObject()
+                                    writeStringField("id", accordion.id)
+                                    writeStringField("description", accordion.description)
+                                    writeStringField("title", accordion.title)
+                                    writeEndObject()
+                                }
+                                writeEndArray()
+                            }
+                            writeEndObject()
+                        }
+                        writeEndArray()
+                    }
+                    if (value.counsellingModuleActionPoints != null) {
+                        writeArrayFieldStart("counsellingModuleActionPoints")
+                        val counsellingModuleActionPoints = value.counsellingModuleActionPoints
+                        counsellingModuleActionPoints.forEach { actionPoint ->
+                            writeStartObject()
+                            writeStringField("id", actionPoint.id)
+                            writeStringField("title", actionPoint.title)
                             writeEndObject()
                         }
                         writeEndArray()
