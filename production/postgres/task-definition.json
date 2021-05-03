@@ -81,7 +81,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/prod-apidb:3",
+  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/prod-apidb:5",
   "family": "prod-apidb",
   "requiresAttributes": [
     {
@@ -163,7 +163,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 3,
+  "revision": 5,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
@@ -171,10 +171,10 @@
     {
       "efsVolumeConfiguration": {
         "transitEncryptionPort": null,
-        "fileSystemId": "fs-1063ddb5",
+        "fileSystemId": "fs-245be281",
         "authorizationConfig": {
           "iam": "ENABLED",
-          "accessPointId": "fsap-0698700582f30e113"
+          "accessPointId": "fsap-049713065553a19a5"
         },
         "transitEncryption": "ENABLED",
         "rootDirectory": "/"
