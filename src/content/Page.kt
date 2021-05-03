@@ -67,7 +67,11 @@ data class PageVideo(
     @JsonProperty("video_image", required = false)
     var videoImage: String?,
     @JsonProperty("action_text")
-    var actionText: String?
+    var actionText: String?,
+    @JsonProperty("action_link")
+    var actionLink: String?,
+    @JsonProperty("is_private")
+    var isPrivate: Boolean
 )
 
 

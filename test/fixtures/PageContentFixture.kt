@@ -14,8 +14,8 @@ object PageContentFixture {
         )
         val image1 = PageImage(ImageFile("image-1", "image-1 title"))
         val image2 = PageImage(ImageFile("image-2", "image-2 title"))
-        val video1 = PageVideo("video-title1", "description1", "file1", "video_image1", "action1")
-        val video2 = PageVideo("video-title2", "description2", "file2", "video_image2", "action2")
+        val video1 = PageVideo("video-title1", "description1", "file1", "video_image1", "action1", "/assessment/intro", false)
+        val video2 = PageVideo("video-title2", "description2", "file2", "video_image2", "action2", "/assessment/intro", false)
         val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
         val step2 = Step("title-2", "sub-title-2", "bg_image2", "image2")
         val videoSection = VideoSection(
@@ -78,6 +78,7 @@ object PageContentFixture {
 					"status": "published",
 					"video_url": "file1",
 					"action_text": "action1",
+                    "action_link": "/assessment/intro",
 					"title": "video-title1",
 					"description": "description1",
 					"video_section": "video_section",
@@ -88,6 +89,7 @@ object PageContentFixture {
 					"status": "published",
 					"video_url": "file2",
 					"action_text": "action2",
+                    "action_link": "/assessment/intro",
 					"title": "video-title2",
 					"description": "description2",
 					"video_section": "video_section",
@@ -248,13 +250,17 @@ object PageContentFixture {
       "description" : "description1",
       "videoUrl" : "/assets/file1",
       "videoImage" : "/assets/video-image-1",
-      "actionText" : "action1"
+      "actionText" : "action1",
+      "actionLink" : "/assessment/intro",
+      "isPrivate" : false
     }, {
       "title" : "video-title2",
       "description" : "description2",
       "videoUrl" : "/assets/file2",
       "videoImage" : "/assets/video-image-2",
-      "actionText" : "action2"
+      "actionText" : "action2",
+      "actionLink" : "/assessment/intro",
+      "isPrivate" : false
     } ]
   },
   "steps" : [ {
@@ -280,8 +286,8 @@ object PageContentFixture {
         )
         val image1 = PageImage(ImageFile(title = "image1-title", imageUrl = "image1-id"))
         val image2 = PageImage(ImageFile(title = "image2-title", imageUrl = "image2-id"))
-        val video1 = PageVideo("video-title1", "description1", "file1", "video-image-1", "action1")
-        val video2 = PageVideo("video-title2", "description2", "file2", "video-image-2", "action2")
+        val video1 = PageVideo("video-title1", "description1", "file1", "video-image-1", "action1", "/assessment/intro", false)
+        val video2 = PageVideo("video-title2", "description2", "file2", "video-image-2", "action2", "/assessment/intro", false)
         val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
         val step2 = Step("title-2", "sub-title-2", "bg_image2", "image2")
         val videoSection = VideoSection(
