@@ -24,7 +24,16 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [],
+      "environment": [
+        {
+          "name": "environment",
+          "value": "development"
+        },
+        {
+          "name": "health_check_endpoint",
+          "value": "/server/health"
+        }
+      ],
       "ulimits": null,
       "dnsServers": null,
       "mountPoints": [],
@@ -41,6 +50,42 @@
         {
           "valueFrom": "API_USER",
           "name": "db_user"
+        },
+        {
+          "valueFrom": "API_ACCESS_TOKEN",
+          "name": "access_token"
+        },
+        {
+          "valueFrom": "API_ACCESSIBLE_STATE",
+          "name": "accessible_state"
+        },
+        {
+          "valueFrom": "API_ASSETS_URL",
+          "name": "assets_url"
+        },
+        {
+          "valueFrom": "API_CMS_URL",
+          "name": "base_url"
+        },
+        {
+          "valueFrom": "API_HASH_SECRET",
+          "name": "hash_secret"
+        },
+        {
+          "valueFrom": "API_JWT_SECRET",
+          "name": "jwt_secret"
+        },
+        {
+          "valueFrom": "API_LOGIN_ATTEMPTS",
+          "name": "login_attempts"
+        },
+        {
+          "valueFrom": "API_PORT",
+          "name": "port"
+        },
+        {
+          "valueFrom": "API_ROOT_PATH",
+          "name": "rootPath"
         }
       ],
       "dockerSecurityOptions": null,
@@ -75,7 +120,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/charisma-api-td:7",
+  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/charisma-api-td:11",
   "family": "charisma-api-td",
   "requiresAttributes": [
     {
@@ -139,7 +184,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 7,
+  "revision": 11,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
