@@ -31,7 +31,7 @@
         {
           "readOnly": null,
           "containerPath": "/var/lib/postgresql/data",
-          "sourceVolume": "api-prod-data"
+          "sourceVolume": "pg-data"
         }
       ],
       "workingDirectory": null,
@@ -81,7 +81,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/prod-apidb:1",
+  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/prod-apidb:3",
   "family": "prod-apidb",
   "requiresAttributes": [
     {
@@ -163,7 +163,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 1,
+  "revision": 3,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
@@ -179,7 +179,7 @@
         "transitEncryption": "ENABLED",
         "rootDirectory": "/"
       },
-      "name": "api-prod-data",
+      "name": "pg-data",
       "host": null,
       "dockerVolumeConfiguration": null
     }
