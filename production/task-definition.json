@@ -24,12 +24,37 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [],
+      "environment": [
+        {
+          "name": "environment",
+          "value": "development"
+        },
+        {
+          "name": "health_check_endpoint",
+          "value": "/server/health"
+        }
+      ],
       "ulimits": null,
       "dnsServers": null,
       "mountPoints": [],
       "workingDirectory": null,
       "secrets": [
+        {
+          "valueFrom": "PROD_API_ACCESS_TOKEN",
+          "name": "access_token"
+        },
+        {
+          "valueFrom": "PROD_API_ACCESSIBLE_STATE",
+          "name": "accessible_state"
+        },
+        {
+          "valueFrom": "PROD_API_ASSETS_URL",
+          "name": "assets_url"
+        },
+        {
+          "valueFrom": "PROD_API_CMS_URL",
+          "name": "base_url"
+        },
         {
           "valueFrom": "PROD_API_PASSWORD",
           "name": "db_password"
@@ -41,6 +66,26 @@
         {
           "valueFrom": "PROD_API_DBUSER",
           "name": "db_user"
+        },
+        {
+          "valueFrom": "PROD_API_HASH_SECRET",
+          "name": "hash_secret"
+        },
+        {
+          "valueFrom": "PROD_API_JWT_SECRET",
+          "name": "jwt_secret"
+        },
+        {
+          "valueFrom": "PROD_API_LOGIN_ATTEMPTS",
+          "name": "login_attempts"
+        },
+        {
+          "valueFrom": "PROD_API_PORT",
+          "name": "port"
+        },
+        {
+          "valueFrom": "PROD_API_ROOT_PATH",
+          "name": "rootPath"
         }
       ],
       "dockerSecurityOptions": null,
@@ -75,7 +120,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/prod-charisma-api:1",
+  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/prod-charisma-api:3",
   "family": "prod-charisma-api",
   "requiresAttributes": [
     {
@@ -139,7 +184,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 1,
+  "revision": 3,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
