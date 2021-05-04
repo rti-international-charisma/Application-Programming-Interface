@@ -40,18 +40,6 @@
       "workingDirectory": null,
       "secrets": [
         {
-          "valueFrom": "API_PASSWORD",
-          "name": "db_password"
-        },
-        {
-          "valueFrom": "API_URL",
-          "name": "db_url"
-        },
-        {
-          "valueFrom": "API_USER",
-          "name": "db_user"
-        },
-        {
           "valueFrom": "API_ACCESS_TOKEN",
           "name": "access_token"
         },
@@ -66,6 +54,18 @@
         {
           "valueFrom": "API_CMS_URL",
           "name": "base_url"
+        },
+        {
+          "valueFrom": "API_PASSWORD",
+          "name": "db_password"
+        },
+        {
+          "valueFrom": "API_URL",
+          "name": "db_url"
+        },
+        {
+          "valueFrom": "API_USER",
+          "name": "db_user"
         },
         {
           "valueFrom": "API_HASH_SECRET",
@@ -120,7 +120,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/charisma-api-td:11",
+  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/charisma-api-td:14",
   "family": "charisma-api-td",
   "requiresAttributes": [
     {
@@ -184,18 +184,9 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 11,
+  "revision": 14,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
-  "volumes": [
-    {
-      "efsVolumeConfiguration": null,
-      "name": "pg-data",
-      "host": {
-        "sourcePath": null
-      },
-      "dockerVolumeConfiguration": null
-    }
-  ]
+  "volumes": []
 }
