@@ -11,11 +11,11 @@ import com.rti.charisma.api.route.CONSENT
 
 
 object PrePModules {
-    const val PREP_ABUSE: String = "ktor.application.prep_modules.prep-abuse"
-    const val PREP_NEUTRAL: String = "ktor.application.prep_modules.prep-neutral"
-    const val PREP_AGREE: String = "ktor.application.prep_modules.prep-agree"
-    const val PREP_OPPOSE: String = "ktor.application.prep_modules.prep-oppose"
-    const val PREP_UNAWARE: String = "ktor.application.prep_modules.prep-unaware"
+    const val PREP_ABUSE: String = "ktor.application.prep_modules.prep_abuse"
+    const val PREP_NEUTRAL: String = "ktor.application.prep_modules.prep_neutral"
+    const val PREP_AGREE: String = "ktor.application.prep_modules.prep_agree"
+    const val PREP_OPPOSE: String = "ktor.application.prep_modules.prep_oppose"
+    const val PREP_UNAWARE: String = "ktor.application.prep_modules.prep_unaware"
 
     fun getModuleId(key: String): String {
         return (ConfigProvider.get(key))
