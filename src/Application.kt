@@ -117,6 +117,7 @@ fun Application.commonModule() {
     install(CORS) {
         anyHost()
         header("Content-Type")
+        header("Authorization")
         allowCredentials = true
         header(HttpHeaders.AccessControlAllowOrigin)
     }

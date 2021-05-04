@@ -52,9 +52,11 @@ object PageConversions {
                             writeStartObject()
                             writeStringField("title", video.title)
                             writeStringField("description", video.description)
-                            writeStringField("videoUrl", "/assets/${video.videoUrl}")
-                            writeStringField("videoImage", "/assets/${video.videoImage}")
+                            writeStringField("videoUrl", if (video.videoUrl == null) "" else "/assets/${video.videoUrl}")
+                            writeStringField("videoImage", if (video.videoImage == null) "" else "/assets/${video.videoImage}")
                             writeStringField("actionText", video.actionText)
+                            writeStringField("actionLink", video.actionLink)
+                            writeBooleanField("isPrivate", video.isPrivate)
                             writeEndObject()
                         }
                         writeEndArray()
