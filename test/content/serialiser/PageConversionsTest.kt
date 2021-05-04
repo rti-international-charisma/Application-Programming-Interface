@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class PageConversionsTest {
     @Test
-    fun `it should serialise page content `() {
+    fun `it should serialise page content with video section `() {
 
         val pageContent = PageContentFixture.pageWithVideoSection("published")
 
@@ -36,7 +36,7 @@ class PageConversionsTest {
     }
 
     @Test
-    fun `it should not serialised null content`() {
+    fun `it should not serialised minimal content - no video and counselling modules`() {
         val pageContent = PageContentFixture.withNoVideoSectionAndSteps("published")
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 

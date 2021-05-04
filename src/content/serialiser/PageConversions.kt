@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
 import com.rti.charisma.api.config.ConfigProvider
-import com.rti.charisma.api.content.HeroImage
 import com.rti.charisma.api.content.Page
 
 object PageConversions {
@@ -14,24 +13,20 @@ object PageConversions {
             with(gen) {
                 if (canAccess(value.status)) {
                     writeStartObject()
-                    // writeStringField("id", value.id)
                     writeStringField("title", value.title)
                     writeStringField("introduction", value.introduction)
                     writeStringField("description", value.description)
                     writeStringField("summary", value.summary)
 
-                    if (value.heroImage != null) {
-                        val heroImage: HeroImage = value.heroImage
+                    value.heroImage?.let {
                         writeObjectFieldStart("heroImage")
-                        writeStringField("title", heroImage.title)
-                        writeStringField("introduction", heroImage.introduction)
-                        writeStringField("summary", heroImage.summary)
-                        writeStringField("imageUrl", "/assets/${heroImage.imageUrl}")
+                        writeStringField("title", it.title)
+                        writeStringField("introduction", it.introduction)
+                        writeStringField("summary", it.summary)
+                        writeStringField("imageUrl", "/assets/${it.imageUrl}")
                         writeEndObject()
-
                     }
-
-                    if (value.images != null) {
+                    value.images?.let {
                         writeArrayFieldStart("images")
                         value.images.forEach { image ->
                             writeStartObject()
@@ -41,19 +36,23 @@ object PageConversions {
                         }
                         writeEndArray()
                     }
-
-                    if (value.videoSection != null) {
-                        val videoSection = value.videoSection
+                    value.videoSection?.let {
                         writeObjectFieldStart("videoSection")
-                        writeStringField("introduction", value.videoSection.introduction)
-                        writeStringField("summary", value.videoSection.summary)
+                        writeStringField("introduction", it.introduction)
+                        writeStringField("summary", it.summary)
                         writeArrayFieldStart("videos")
-                        videoSection.videos.forEach { video ->
+                        it.videos.forEach { video ->
                             writeStartObject()
                             writeStringField("title", video.title)
                             writeStringField("description", video.description)
-                            writeStringField("videoUrl", if (video.videoUrl == null) "" else "/assets/${video.videoUrl}")
-                            writeStringField("videoImage", if (video.videoImage == null) "" else "/assets/${video.videoImage}")
+                            writeStringField(
+                                "videoUrl",
+                                if (video.videoUrl == null) "" else "/assets/${video.videoUrl}"
+                            )
+                            writeStringField(
+                                "videoImage",
+                                if (video.videoImage == null) "" else "/assets/${video.videoImage}"
+                            )
                             writeStringField("actionText", video.actionText)
                             writeStringField("actionLink", video.actionLink)
                             writeBooleanField("isPrivate", video.isPrivate)
@@ -63,9 +62,9 @@ object PageConversions {
                         writeEndObject()
                     }
 
-                    if (value.steps != null) {
+                    value.steps?.let {
                         writeArrayFieldStart("steps")
-                        value.steps.forEach { step ->
+                        it.forEach { step ->
                             writeStartObject()
                             writeStringField("title", step.title)
                             writeStringField("subTitle", step.subTitle)
@@ -76,18 +75,17 @@ object PageConversions {
                         writeEndArray()
                     }
 
-                    if (value.counsellingModuleSections != null) {
+                    value.counsellingModuleSections?.let {
                         writeArrayFieldStart("counsellingModuleSections")
-                        val counsellingModuleSections = value.counsellingModuleSections
-                        counsellingModuleSections.forEach { section ->
+                        it.forEach { section ->
                             writeStartObject()
                             writeStringField("id", section.id)
                             writeStringField("title", section.title)
                             writeStringField("introduction", section.introduction)
                             writeStringField("summary", section.summary)
-                            if (section.accordionContent != null) {
+                            section.accordionContent?.let { accordions ->
                                 writeArrayFieldStart("accordionContent")
-                                section.accordionContent.forEach { accordion ->
+                                accordions.forEach { accordion ->
                                     writeStartObject()
                                     writeStringField("id", accordion.id)
                                     writeStringField("description", accordion.description)
@@ -100,10 +98,9 @@ object PageConversions {
                         }
                         writeEndArray()
                     }
-                    if (value.counsellingModuleActionPoints != null) {
+                    value.counsellingModuleActionPoints?.let {
                         writeArrayFieldStart("counsellingModuleActionPoints")
-                        val counsellingModuleActionPoints = value.counsellingModuleActionPoints
-                        counsellingModuleActionPoints.forEach { actionPoint ->
+                        it.forEach { actionPoint ->
                             writeStartObject()
                             writeStringField("id", actionPoint.id)
                             writeStringField("title", actionPoint.title)

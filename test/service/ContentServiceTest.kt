@@ -90,6 +90,9 @@ class ContentServiceTest {
 
             val pageContent = contentService.getModule(score, consent)
             assertEquals(expectedPageContent, pageContent)
+
+            verify { PrePModules.getModuleId(eq(moduleName)) }
+
         }
 
     @Test
