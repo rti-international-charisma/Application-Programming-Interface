@@ -2,16 +2,15 @@ package com.rti.charisma.api.service
 
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.config.LOGIN_ATTEMPTS
+import com.rti.charisma.api.config.RESET_ATTEMPTS
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
-import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
-import com.rti.charisma.api.exception.LoginException
-import com.rti.charisma.api.exception.SecurityQuestionException
-import com.rti.charisma.api.exception.UserAlreadyExistException
+import com.rti.charisma.api.exception.*
 import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.repository.UserRepository
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
+import com.rti.charisma.api.route.VerifySecQuestion
 import com.rti.charisma.api.util.hash
 
 class UserService(private val userRepository: UserRepository, private val jwtService : JWTService) {
@@ -20,7 +19,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
             throw UserAlreadyExistException()
         } else {
             userRepository.getSecurityQuestions(signupModel.secQuestionId).firstOrNull()?.let {
-                return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt())
+                return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt(), 5)
             } ?: run {
                 throw SecurityQuestionException("Security question with Id: ${signupModel.secQuestionId} is not present")
             }
@@ -61,5 +60,46 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
     fun isUsernameAvailable(username: String): Boolean {
         userRepository.findUserByUsername(username)?.let { return false }
         return true
+    }
+
+    fun verifySecurityQuestion(verifySecQuestion: VerifySecQuestion): UserResponse {
+        val user = userRepository.findUserByUsername(verifySecQuestion.username)
+        user?.let {
+            if (user.resetPasswordAttemptsLeft <= 0) {
+                throw ResetPasswordAttemptsExhaustedException("This account is deactivated. Please create a new account")
+            }
+
+            if (verifySecQuestion.secQuestionId == user.sec_q_id) {
+                if (verifySecQuestion.secQuestionAnswer.hash() == user.sec_answer) {
+                    user.resetPasswordAttemptsLeft = ConfigProvider.get(RESET_ATTEMPTS).toInt()
+                    userRepository.updateUser(user)
+                    return UserResponse(user, resetPasswordToken = jwtService.generateResetPasswordToken(user))
+                } else {
+                    if (user.resetPasswordAttemptsLeft == 1) {
+                        throw ResetPasswordAttemptsExhaustedException("The answer you have entered does not match what we have on file and this account will be deactivated." +
+                                " Please create a new account")
+                    } else if (user.resetPasswordAttemptsLeft > 0) {
+                        user.resetPasswordAttemptsLeft--
+                        userRepository.updateUser(user)
+                        throw LoginException("The answer you have entered does not match what we have on file. " +
+                                "Please try again, you have 4 number of attempts left.")
+                    }
+                }
+            } else {
+                throw LoginException("Incorrect security question")
+            }
+        } ?: run {
+            throw LoginException("User does not exist")
+        }
+        throw LoginException("Something went wrong")
+    }
+
+    fun updatePassword(userId: Int, newPassword: String?) {
+        newPassword?.let {
+            val user = userRepository.findUserById(userId)
+            userRepository.updateUser(user!!.copy(password = newPassword.hash()))
+        } ?: run {
+            throw LoginException("Something went wrong")
+        }
     }
 }

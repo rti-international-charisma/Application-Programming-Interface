@@ -27,7 +27,7 @@ class UserRepositoryImpl: UserRepository {
         Users.select { Users.username eq username }.firstOrNull()?.let { true } ?: false
     }
 
-    override fun registerUser(signup: Signup, initialLoginAttempts: Int): Int {
+    override fun registerUser(signup: Signup, initialLoginAttempts: Int, initialResetPasswordAttempts: Int): Int {
         val user = transaction {
             Users.insert {
                 it[username] = signup.username
@@ -35,6 +35,7 @@ class UserRepositoryImpl: UserRepository {
                 it[sec_q_id] = signup.secQuestionId
                 it[sec_answer] = signup.secQuestionAnswer.hash()
                 it[loginAttempts] = initialLoginAttempts
+                it[resetPasswordAttempts] = initialResetPasswordAttempts
             }
         }
         return user[Users.id]
@@ -52,6 +53,8 @@ class UserRepositoryImpl: UserRepository {
         transaction {
             Users.update({ Users.id eq user.id }) {
                 it[loginAttempts] = user.loginAttemptsLeft
+                it[resetPasswordAttempts] = user.resetPasswordAttemptsLeft
+                it[password] = user.password
             }
         }
     }
@@ -62,7 +65,9 @@ class UserRepositoryImpl: UserRepository {
                 username = this[Users.username],
                 sec_q_id = this[Users.sec_q_id],
                 password = this[Users.password],
-                loginAttemptsLeft = this[Users.loginAttempts]
+                sec_answer = this[Users.sec_answer],
+                loginAttemptsLeft = this[Users.loginAttempts],
+                resetPasswordAttemptsLeft = this[Users.resetPasswordAttempts]
         )
 
     private fun ResultRow.toSecurityQuestion(): SecurityQuestion = SecurityQuestion(

@@ -36,6 +36,7 @@ class AssessmentRepositoryImplTest {
                 it[sec_q_id] = securityQuestionId
                 it[sec_answer] = "hashed-answer"
                 it[loginAttempts] = 5
+                it[resetPasswordAttempts] = 5
             } get Users.id
         }
     }
@@ -48,6 +49,7 @@ class AssessmentRepositoryImplTest {
                 it[sec_q_id] = securityQuestionId
                 it[sec_answer] = "hashed-answer"
                 it[loginAttempts] = 5
+                it[resetPasswordAttempts] = 5
             } get Users.id
         }
     }
