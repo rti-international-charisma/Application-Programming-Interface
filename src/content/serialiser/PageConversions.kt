@@ -38,7 +38,6 @@ object PageConversions {
                         }
                         writeEndArray()
                     }
-
                     if (value.videoSection != null) {
                         val videoSection = value.videoSection
                         writeObjectFieldStart("videoSection")

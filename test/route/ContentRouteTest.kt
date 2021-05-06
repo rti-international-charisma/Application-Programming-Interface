@@ -142,7 +142,7 @@ class ContentRouteTest {
 
     @Test
     fun `GET assessment should throw 500 bad request error if error while fetching content`() = testApp {
-        coEvery { contentService.getAssessment() } throws ContentException("some error")
+        coEvery { contentService.getAssessment() } throws ContentException("some error", RuntimeException())
 
         handleRequest(HttpMethod.Get, "/assessment") {
         }.apply {

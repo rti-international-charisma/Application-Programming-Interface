@@ -6,8 +6,10 @@ import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.content.Page
 import com.rti.charisma.api.content.PageContent
+import org.slf4j.LoggerFactory
 
 class ContentService(private val contentClient: ContentClient) {
+    private val logger = LoggerFactory.getLogger(ContentService::class.java)
 
     suspend fun getHomePage(): Page {
         val endpoint = "/items/homepage?fields=*.*.*"
@@ -29,7 +31,7 @@ class ContentService(private val contentClient: ContentClient) {
         } catch (e: ContentRequestException) {
             throw ContentRequestException(e.localizedMessage)
         } catch (e: Exception) {
-            throw ContentException(e.localizedMessage)
+            throw ContentException(e.localizedMessage, e)
         }
     }
 
@@ -39,17 +41,21 @@ class ContentService(private val contentClient: ContentClient) {
         }catch (e: ContentRequestException) {
             throw ContentRequestException(e.localizedMessage)
         } catch (e: Exception) {
-            throw ContentException(e.localizedMessage)
+            throw ContentException(e.localizedMessage, e)
         }
     }
     private suspend fun pageRequest(endpoint: String): Page {
+        logger.info("Ready to fetch content, $endpoint")
         try {
             val content: PageContent = contentClient.getPage(endpoint)
+            logger.info("Retrieved content, $content")
             return content.page
         } catch (e: ContentRequestException) {
+            logger.warn("Content request failed, ${e.localizedMessage}")
             throw ContentRequestException(e.localizedMessage)
         } catch (e: Exception) {
-            throw ContentException(e.localizedMessage)
+            logger.warn("Failed to get content from server, ${e.localizedMessage}")
+            throw ContentException(e.localizedMessage, e)
         }
     }
 }

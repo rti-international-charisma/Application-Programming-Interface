@@ -1,18 +1,20 @@
 package service
 
 import com.rti.charisma.api.client.ContentClient
+import com.rti.charisma.api.content.Page
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
-import com.rti.charisma.api.content.Page
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
+@ExperimentalCoroutinesApi
 class ContentServiceTest {
 
     private val contentClient = mockk<ContentClient>(relaxed = true)
@@ -45,7 +47,10 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error processing response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentException("Content error"))
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentException(
+            "Content error",
+            Exception()
+        ))
         assertFailsWith(
             exceptionClass = ContentException::class,
             block = { contentService.getHomePage() }
@@ -54,7 +59,9 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error fetching response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentRequestException("Content error"))
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentRequestException(
+            "Content error"
+        ))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
             block = { contentService.getHomePage() }
@@ -63,7 +70,10 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error processing page response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentException("Content error"))
+        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentException(
+            "Content error",
+            Exception()
+        ))
         assertFailsWith(
             exceptionClass = ContentException::class,
             block = { contentService.getPage("test-page") }
@@ -72,7 +82,9 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error fetching page response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentRequestException("Content Request Error"))
+        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentRequestException(
+            "Content Request Error"
+        ))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
             block = { contentService.getPage("test-page") }
@@ -98,7 +110,7 @@ class ContentServiceTest {
             contentClient.getAssessment(
                 "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
             )
-        } throws (ContentException("Content error"))
+        } throws (ContentException("Content error", RuntimeException()))
         assertFailsWith(
             exceptionClass = ContentException::class,
             block = { contentService.getAssessment() }

@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.rti.charisma.api.config.ACCESS_TOKEN
 import com.rti.charisma.api.config.CMS_BASE_URL
 import com.rti.charisma.api.config.ConfigProvider
-import com.rti.charisma.api.exception.ContentException
-import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.content.PageContent
+import com.rti.charisma.api.exception.ContentException
+import com.rti.charisma.api.exception.ContentRequestException
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.*
@@ -15,14 +15,15 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import org.slf4j.LoggerFactory
 import java.text.DateFormat
 
-
 class ContentClient {
-    val accessToken = ConfigProvider.get(ACCESS_TOKEN)
-    val baseUrl = ConfigProvider.get(CMS_BASE_URL)
+    private val accessToken = ConfigProvider.get(ACCESS_TOKEN)
+    private val baseUrl = ConfigProvider.get(CMS_BASE_URL)
+    private val logger = LoggerFactory.getLogger(ContentClient::class.java)
 
-    val client: HttpClient =
+    private val client: HttpClient =
         HttpClient(Apache) {
             install(Logging) {
                 logger = Logger.DEFAULT
@@ -36,19 +37,16 @@ class ContentClient {
                 }
             }
             engine {
-                // this: ApacheEngineConfig
                 followRedirects = true
                 socketTimeout = 10_000
                 connectTimeout = 10_000
                 connectionRequestTimeout = 20_000
                 customizeClient {
-                    // this: HttpAsyncClientBuilder
                     setMaxConnTotal(1000)
                     setMaxConnPerRoute(100)
                     //
                 }
                 customizeRequest {
-                    // this: RequestConfig.Builder
                 }
             }
         }
@@ -58,24 +56,7 @@ class ContentClient {
             kotlinx.coroutines.JobCancellationException: Parent job is Completed
                    client.close()
          */
-        try {
-            val page =  client.request<PageContent> {
-                url("$baseUrl${endpoint}")
-                method = HttpMethod.Get
-                header("Authorization", "Bearer $accessToken")
-            }
-            return page
-        } catch (e: ClientRequestException) {
-            throw ContentRequestException("Failed to fetch content, ${e.message}}")
-        } catch (e: ServerResponseException) {
-            throw ContentException("Error while fetching content from server")
-        } catch (e: Exception) {
-            throw ContentException("Unexpected error while fetching content from server")
-        }
-
-    }
-
-    suspend fun getAssessment(endpoint: String): Assessment {
+        logger.info("Sending request to cms, '$endpoint'")
         try {
             return client.request {
                 url("$baseUrl${endpoint}")
@@ -83,20 +64,56 @@ class ContentClient {
                 header("Authorization", "Bearer $accessToken")
             }
         } catch (e: ClientRequestException) {
-            throw ContentRequestException("Failed to fetch content, ${e.message}}")
+            logger.warn("Bad request for, '$endpoint', ${e.localizedMessage}")
+            throw ContentRequestException("Failed to fetch content, ${e.localizedMessage}}")
         } catch (e: ServerResponseException) {
-            throw ContentException("Error while fetching content from server")
+            logger.warn("CMS failed to process request, '$endpoint', ${e.localizedMessage}")
+            throw ContentException("Failed while fetching content from server", e)
         } catch (e: Exception) {
-            throw ContentException("Unexpected error while fetching content from server")
+            logger.error("Unexpected failure for, '$endpoint', ${e.stackTrace}")
+            throw ContentException("Unexpected failure while fetching content from server", e)
+        }
+    }
+
+    suspend fun getAssessment(endpoint: String): Assessment {
+        logger.info("Sending request to cms, '$endpoint'")
+
+        try {
+            return client.request {
+                url("$baseUrl${endpoint}")
+                method = HttpMethod.Get
+                header("Authorization", "Bearer $accessToken")
+            }
+        }  catch (e: ClientRequestException) {
+            logger.warn("Bad request for assessment, '$endpoint', ${e.localizedMessage}")
+            throw ContentRequestException("Failed to fetch content, ${e.localizedMessage}}")
+        } catch (e: ServerResponseException) {
+            logger.warn("CMS failed to process assessment request, '$endpoint', ${e.localizedMessage}")
+            throw ContentException("Failed while fetching content from server", e)
+        } catch (e: Exception) {
+            logger.error("Unexpected failure for, '$endpoint', ${e.stackTrace}")
+            throw ContentException("Unexpected failure while fetching assessment content from server", e)
         }
 
     }
 
     suspend fun getAsset(endpoint: String): ByteArray {
-        return client.request {
-            url("$baseUrl${endpoint}")
-            method = HttpMethod.Get
-            header("Authorization", "Bearer $accessToken")
+        logger.info("Sending request to cms, '$endpoint'")
+        try{
+            return client.request {
+                url("$baseUrl${endpoint}")
+                method = HttpMethod.Get
+                header("Authorization", "Bearer $accessToken")
+            }
+        } catch (e: ClientRequestException) {
+            logger.warn("Bad request for asset, '$endpoint', ${e.localizedMessage}")
+            throw ContentRequestException("Failed to fetch asset, ${e.localizedMessage}}")
+        } catch (e: ServerResponseException) {
+            logger.warn("CMS failed to process asset request, '$endpoint', ${e.localizedMessage}")
+            throw ContentException("Failed while fetching asset from server", e)
+        } catch (e: Exception) {
+            logger.error("Unexpected failure for, '$endpoint', ${e.stackTrace}")
+            throw ContentException("Unexpected failure while fetching asset content from server", e)
         }
     }
 }
