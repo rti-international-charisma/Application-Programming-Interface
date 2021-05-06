@@ -8,9 +8,18 @@ import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
 import io.mockk.coEvery
 import io.mockk.mockk
+import com.rti.charisma.api.route.CONSENT
+import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.After
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtensionContext
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
+import java.util.stream.Stream
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
@@ -19,6 +28,12 @@ class ContentServiceTest {
 
     private val contentClient = mockk<ContentClient>(relaxed = true)
     private val contentService = ContentService(contentClient)
+
+    @After
+    fun afterTests() {
+        unmockkAll()
+    }
+
 
     @Test
     fun `it should parse page response with video sections and steps`() = runBlockingTest {
@@ -43,6 +58,70 @@ class ContentServiceTest {
         val pageContent = contentService.getPage(pageId)
 
         assertEquals(expectedPageContent, pageContent)
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(PrepScoreProvider::class)
+    fun `it fetch prep counselling module based on score and consent`(score: Int, consent: CONSENT, moduleName: String) = runBlockingTest {
+        mockkObject(PrePModules)
+        every { PrePModules.getModuleId(any()) } returns "moduleId"
+
+        coEvery { contentClient.getPage(any()) } returns PageContentFixture.contentWithCounsellingModules()
+
+        contentService.getModule(score, consent)
+
+        coVerify {
+            contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,*.accordion_content.*")
+        }
+
+        verify { PrePModules.getModuleId(eq(moduleName)) }
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(PrepScoreProvider::class)
+    fun `it should parse page response for counselling modules`(score: Int, consent: CONSENT, moduleName: String) =
+        runBlockingTest {
+            mockkObject(PrePModules)
+            every { PrePModules.getModuleId(any()) } returns "moduleId"
+
+            val expectedPageContent = PageContentFixture.pageWithCounsellingModules("Published")
+
+            coEvery {
+                contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,*.accordion_content.*")
+            } returns PageContentFixture.contentWithCounsellingModules()
+
+            val pageContent = contentService.getModule(score, consent)
+            assertEquals(expectedPageContent, pageContent)
+
+            verify { PrePModules.getModuleId(eq(moduleName)) }
+
+        }
+
+    @Test
+    fun `it should throw content exception if module not found`() = runBlockingTest {
+        coEvery { contentClient.getPage(any()) } throws (ContentRequestException("Content not found"))
+        assertFailsWith(
+            exceptionClass = ContentRequestException::class,
+            block = { contentService.getModule(13, CONSENT.OPPOSE) }
+        )
+    }
+
+    @Test
+    fun `it should throw content request exception if error fetching module content`() = runBlockingTest {
+        coEvery { contentClient.getPage(any()) } throws (ContentRequestException("Content error"))
+        assertFailsWith(
+            exceptionClass = ContentRequestException::class,
+            block = { contentService.getModule(13, CONSENT.OPPOSE) }
+        )
+    }
+
+    @Test
+    fun `it should throw content  exception if module name cannot be identified`() = runBlockingTest {
+        assertFailsWith(
+            exceptionClass = ContentRequestException::class,
+            block = { contentService.getModule(55, CONSENT.OPPOSE) }
+        )
+        coVerify(exactly = 0, verifyBlock = { contentClient.getPage(any()) })
     }
 
     @Test
@@ -129,6 +208,21 @@ class ContentServiceTest {
             block = { contentService.getAssessment() }
         )
     }
+}
 
-
+class PrepScoreProvider : ArgumentsProvider {
+    override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
+        return Stream.of(
+            Arguments.of(13, CONSENT.UNAWARE, PrePModules.PREP_ABUSE),
+            Arguments.of(42, CONSENT.AGREE,  PrePModules.PREP_ABUSE),
+            Arguments.of(1, CONSENT.AGREE, PrePModules.PREP_AGREE),
+            Arguments.of(1, CONSENT.NEUTRAL, PrePModules.PREP_NEUTRAL),
+            Arguments.of(1, CONSENT.UNAWARE, PrePModules.PREP_UNAWARE),
+            Arguments.of(1, CONSENT.OPPOSE, PrePModules.PREP_OPPOSE),
+            Arguments.of(12, CONSENT.AGREE, PrePModules.PREP_AGREE),
+            Arguments.of(12, CONSENT.NEUTRAL, PrePModules.PREP_NEUTRAL),
+            Arguments.of(12, CONSENT.UNAWARE, PrePModules.PREP_UNAWARE),
+            Arguments.of(12, CONSENT.OPPOSE, PrePModules.PREP_OPPOSE)
+        )
+    }
 }

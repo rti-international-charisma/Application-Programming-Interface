@@ -20,4 +20,3 @@ object ConfigProvider {
 
     fun getList(key: String): List<String> = config.property(key).getList()
 }
-

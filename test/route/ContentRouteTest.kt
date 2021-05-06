@@ -57,6 +57,18 @@ class ContentRouteTest {
     }
 
     @Test
+    fun `GET page should return 200 OK with counselling modules json response`() = testApp {
+        coEvery { contentService.getModule(13, CONSENT.OPPOSE) } returns PageContentFixture.pageWithCounsellingModules("Published")
+
+        handleRequest(HttpMethod.Get, "assessment/module?partner_score=13&prep_consent=oppose") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content)
+        }
+    }
+
+    @Test
     fun `GET page should return 200 OK with empty json response`() = testApp {
         coEvery { contentService.getPage("assessment-intro") } returns PageContentFixture.withNoVideoSectionAndSteps("Archived")
 

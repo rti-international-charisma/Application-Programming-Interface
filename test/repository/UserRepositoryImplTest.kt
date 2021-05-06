@@ -11,11 +11,8 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserRepositoryImplTest {
@@ -25,6 +22,9 @@ class UserRepositoryImplTest {
     @BeforeAll
     fun setup() {
         db = CharismaDB.init(InMemoryDB.inMemoryDataSource())
+    }
+    @BeforeEach
+    fun setupData() {
         transaction {
             SchemaUtils.create(Users, SecurityQuestions)
             SecurityQuestions.insert {
@@ -44,6 +44,13 @@ class UserRepositoryImplTest {
                 it[sec_answer] = "hashed-answer"
                 it[loginAttempts] = 5
             }
+        }
+    }
+
+    @AfterEach
+    fun cleanupData(){
+        transaction {
+            SchemaUtils.drop(Users, SecurityQuestions)
         }
     }
 
