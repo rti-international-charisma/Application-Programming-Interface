@@ -26,6 +26,19 @@ object PageConversions {
                         writeStringField("imageUrl", "/assets/${it.imageUrl}")
                         writeEndObject()
                     }
+
+                    value.videoUrl?.let {
+                        writeObjectFieldStart("moduleVideo")
+                        writeStringField("videoUrl", "/assets/${it.videoUrl}")
+                        writeEndObject()
+                    }
+
+                    value.moduleImage?.let {
+                        writeObjectFieldStart("moduleImage")
+                        writeStringField("imageUrl", "/assets/${it.moduleImage}")
+                        writeEndObject()
+                    }
+
                     value.images?.let {
                         writeArrayFieldStart("images")
                         value.images.forEach { image ->

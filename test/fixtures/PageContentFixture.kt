@@ -35,6 +35,8 @@ object PageContentFixture {
             videoSection,
             mutableListOf(step1, step2),
             null,
+            null,
+            null,
             null
         )
 
@@ -207,6 +209,8 @@ object PageContentFixture {
             videoSection,
             mutableListOf(step1, step2),
             null,
+            null,
+            null,
             null
         )
     }
@@ -224,6 +228,8 @@ object PageContentFixture {
                 PageImage(ImageFile("image-1", "image-1 title")),
                 PageImage(ImageFile("image-2", "image-2 title"))
             ),
+            null,
+            null,
             null,
             null,
             null,
@@ -290,6 +296,12 @@ object PageContentFixture {
   "hero_image": {
     "title": "PrEp Hero Image",
     "image_url": "1c2eea87-f593-41c2-b6ba-da69a3133c9a"
+  },
+  "video_url": {
+    "id": "videourl"
+  },
+  "module_image": {
+    "id": "moduleimage"
   },
   "counselling_module_action_points": [{
     "id": "model_prep_use_action_point_1",
@@ -403,6 +415,12 @@ object PageContentFixture {
         )
         val counsellingActionPoints =
             listOf(actionPoint1, actionPoint2, actionPoint3, actionPoint4, actionPoint5, actionPoint6)
+        val moduleVideo = CounsellingModuleVideo(
+            "videourl"
+        )
+        val moduleImage = CounsellingModuleImage(
+            "moduleimage"
+        )
         val section1 = CounsellingModuleSection(
             "section_4",
             "How to use PrEP without anyone knowing",
@@ -456,6 +474,8 @@ object PageContentFixture {
             null,
             null,
             null,
+            moduleVideo,
+            moduleImage,
             counsellingSections,
             counsellingActionPoints
 
@@ -473,6 +493,12 @@ object PageContentFixture {
     "introduction" : "",
     "summary" : "",
     "imageUrl" : "/assets/1c2eea87-f593-41c2-b6ba-da69a3133c9a"
+  },
+  "moduleVideo" : {
+    "videoUrl" : "/assets/videourl"
+  },
+  "moduleImage" : {
+    "imageUrl" : "/assets/moduleimage"
   },
   "counsellingModuleSections" : [ {
     "id" : "section_4",
