@@ -32,12 +32,29 @@ data class Page(
     val videoSection: VideoSection?,
     @JsonProperty(required = false)
     val steps: List<Step>?,
+    @JsonAlias("video_url")
+    val videoUrl: CounsellingModuleVideo?,
+    @JsonAlias("module_image")
+    val moduleImage: CounsellingModuleImage?,
     @JsonAlias("counselling_module_sections")
     val counsellingModuleSections: List<CounsellingModuleSection>?,
     @JsonAlias("counselling_module_action_points")
     val counsellingModuleActionPoints: List<CounsellingModuleActionPoint>?
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class CounsellingModuleVideo(
+    @JsonProperty("id")
+    val videoUrl: String? = ""
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class CounsellingModuleImage(
+    @JsonProperty("id")
+    val moduleImage: String? = ""
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
