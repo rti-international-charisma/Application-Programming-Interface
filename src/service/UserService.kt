@@ -76,13 +76,15 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
                     return UserResponse(user, resetPasswordToken = jwtService.generateResetPasswordToken(user))
                 } else {
                     if (user.resetPasswordAttemptsLeft == 1) {
+                        user.resetPasswordAttemptsLeft--
+                        userRepository.updateUser(user)
                         throw ResetPasswordAttemptsExhaustedException("The answer you have entered does not match what we have on file and this account will be deactivated." +
                                 " Please create a new account")
                     } else if (user.resetPasswordAttemptsLeft > 0) {
                         user.resetPasswordAttemptsLeft--
                         userRepository.updateUser(user)
                         throw LoginException("The answer you have entered does not match what we have on file. " +
-                                "Please try again, you have 4 number of attempts left.")
+                                "Please try again, you have ${user.resetPasswordAttemptsLeft} number of attempts left.")
                     }
                 }
             } else {

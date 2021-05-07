@@ -306,4 +306,26 @@ class UserServiceTest {
         assertNotNull(userResponse)
         assertNotNull(userResponse.resetPasswordToken)
     }
+
+    @Test
+    fun `it should throw error when updating password if password is null`() {
+        val user = User(1, "username", 1, 5, 2,"oldHashedAnswer", "hashedPassword")
+
+        every { userRepository.findUserById(1) } returns user
+        assertFailsWith(LoginException::class) {
+            userService.updatePassword(1, null)
+        }
+    }
+
+    @Test
+    fun `it should update password`() {
+        val user = User(1, "username", 1, 5, 2,"oldHashedAnswer", "hashedPassword")
+
+        every { userRepository.findUserById(1) } returns user
+
+        userService.updatePassword(1, "newpassword")
+
+        verify { userRepository.updateUser(user.copy(password = "newpassword".hash())) }
+
+    }
 }
