@@ -11,6 +11,7 @@ import java.util.*
 object JWTService {
 
     private const val issuer = "charismaApi"
+    private const val resetPassIssuer = "CharismaApiResetPassword"
     private val algorithm = Algorithm.HMAC512(ConfigProvider.get(JWT_SECRET))
     private const val validityInMs = 60000 * 15 // 15 minutes (milli seconds in minute * X)
 
@@ -19,6 +20,11 @@ object JWTService {
         .withIssuer(issuer)
         .build()
 
+    val resetPassVerifier: JWTVerifier = JWT
+            .require(algorithm)
+            .withIssuer(resetPassIssuer)
+            .build()
+
     fun generateToken(user: User): String = JWT.create()
         .withSubject("Authentication")
         .withIssuer(issuer)
@@ -26,6 +32,13 @@ object JWTService {
         .withExpiresAt(expiresAt())
         .sign(algorithm)
 
+
+    fun generateResetPasswordToken(user: User): String = JWT.create()
+            .withSubject("ResetPassword")
+            .withIssuer(resetPassIssuer)
+            .withClaim("id", user.id)
+            .withExpiresAt(expiresAt())
+            .sign(algorithm)
 
     private fun expiresAt() = Date(System.currentTimeMillis() + validityInMs)
 }

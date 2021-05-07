@@ -43,6 +43,7 @@ class UserRepositoryImplTest {
                 it[sec_q_id] = 1
                 it[sec_answer] = "hashed-answer"
                 it[loginAttempts] = 5
+                it[resetPasswordAttempts] = 5
             }
         }
     }
@@ -95,14 +96,14 @@ class UserRepositoryImplTest {
     @Test
     fun `it should register user `() {
         val signupModel = Signup("username1, ", "password", 1, "Answer")
-        val userId = userRepository.registerUser(signupModel, 5)
+        val userId = userRepository.registerUser(signupModel, 5, 5)
         assertNotNull(userId)
     }
 
     @Test
     fun `it should hash username and password `() {
         val signupModel = Signup("username1, ", "password", 1, "Answer")
-        val userId = userRepository.registerUser(signupModel, 5)
+        val userId = userRepository.registerUser(signupModel, 5, 5)
         val user = userRepository.findUserById(userId)
         assertNotEquals("password", user?.password)
     }

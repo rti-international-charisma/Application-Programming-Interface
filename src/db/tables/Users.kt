@@ -11,6 +11,7 @@ object Users: Table() {
     val sec_q_id = integer("sec_q_id").references(SecurityQuestions.sec_q_id)
     val sec_answer = varchar("sec_answer", 50)
     val loginAttempts = integer("login_attempts_left")
+    val resetPasswordAttempts = integer("reset_password_attempts_left")
     override val primaryKey: PrimaryKey = PrimaryKey(id)
 
 }
@@ -20,6 +21,10 @@ data class User(
     val username: String,
     val sec_q_id: Int = 0,
     var loginAttemptsLeft: Int,
+    var resetPasswordAttemptsLeft: Int,
+
+    @JsonIgnore
+    val sec_answer: String,
 
     @JsonIgnore
     val password: String

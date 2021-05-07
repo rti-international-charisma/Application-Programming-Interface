@@ -11,15 +11,14 @@ import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
+import com.rti.charisma.api.route.VerifySecQuestion
 import com.rti.charisma.api.service.AssessmentService
+import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.http.HttpMethod
-import io.ktor.server.testing.TestApplicationEngine
-import io.ktor.server.testing.handleRequest
-import io.ktor.server.testing.setBody
-import io.ktor.server.testing.withTestApplication
+import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.*
@@ -61,7 +60,7 @@ class UserRouteTest {
     @Test
     fun `it should login user`() = testApp {
         val loginModel = Login("username", "password")
-        every { userService.login(loginModel) } returns UserResponse(User(1, "username", password = "hashedPassword", loginAttemptsLeft = 5), "jwt-token")
+        every { userService.login(loginModel) } returns UserResponse(User(1, "username", password = "hashedPassword", loginAttemptsLeft = 5, resetPasswordAttemptsLeft = 5, sec_answer = "hashedAnswer"), "jwt-token")
         handleRequest(HttpMethod.Post, "/login") {
             setBody(jacksonObjectMapper().writeValueAsString(loginModel))
         }.apply {
@@ -120,6 +119,66 @@ class UserRouteTest {
         }
     }
 
+    @Test
+    fun `it should return 200 verify security question`() = testApp {
+        val verifySecQuestion = VerifySecQuestion("username", 1, "SecAnswer")
+
+        every { userService.verifySecurityQuestion(verifySecQuestion) } returns UserResponse(User(
+                1,
+                "username",
+                password = "hashedPassword",
+                loginAttemptsLeft = 5,
+                resetPasswordAttemptsLeft = 5,
+                sec_answer = "hashedAnswer"
+        ), resetPasswordToken = "reset-password-jwt-token")
+
+        handleRequest(HttpMethod.Post, "/verify-securityquestion") {
+            setBody(jacksonObjectMapper().writeValueAsString(verifySecQuestion))
+        }.apply {
+            assertEquals(200, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `reset-password should throw 401 if token is invalid`() = testApp {
+        every { userService.findUserById(1) } returns User(1, "username", 1, 5, 5, "hashedAnswer", "hashedPassword")
+        handleRequest(HttpMethod.Post, "/reset-password") {
+                addHeader("Authorization", "invalid token")
+        }.apply {
+            assertEquals(401, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `reset-password should throw 401 if token is expired`() = testApp {
+        every { userService.findUserById(1) } returns User(1, "username", 1, 5, 5, "hashedAnswer", "hashedPassword")
+        handleRequest(HttpMethod.Post, "/reset-password") {
+            addHeader("Authorization", "Bearer ${getExpiredToken()}")
+        }.apply {
+            assertEquals(401, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `reset-password should return 200 for valid token`() = testApp {
+        every { userService.findUserById(1) } returns User(1, "username", 1, 5, 5, "hashedAnswer", "hashedPassword")
+        handleRequest(HttpMethod.Post, "/reset-password") {
+            addHeader("Authorization", "Bearer ${getToken()}")
+            setBody("""{
+                         "newPassword": "newpassword"
+                        }"""
+            )
+        }.apply {
+            assertEquals(200, response.status()?.value)
+        }
+    }
+
+    private fun getToken(): String {
+        val user = User(1, "username", 1, 5, 5, "hashedAnswer", "hashedPassword")
+        return JWTService.generateResetPasswordToken(user)
+    }
+
+    private fun getExpiredToken() = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJSZXNldFBhc3N3b3JkIiwiaXNzIjoiQ2hhcmlzbWFBcGlSZXNldFBhc3N3b3JkIiwiaWQiOjEsImV4cCI6MTYyMDMyMjk4Nn0.ks2RwJsl0ZinLc0qRk1g2Zyd-Is5SWOPXTd2CYfHkCqr5qY6nV6MPx_OYGwO2CwvGgyKPx8lR_bQddWpV2fkCQ"
 
     private fun testApp(callback: TestApplicationEngine.() -> Unit){
         return withTestApplication({
