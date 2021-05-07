@@ -19,7 +19,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
             throw UserAlreadyExistException()
         } else {
             userRepository.getSecurityQuestions(signupModel.secQuestionId).firstOrNull()?.let {
-                return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt(), 5)
+                return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt(), ConfigProvider.get(RESET_ATTEMPTS).toInt())
             } ?: run {
                 throw SecurityQuestionException("Security question with Id: ${signupModel.secQuestionId} is not present")
             }
