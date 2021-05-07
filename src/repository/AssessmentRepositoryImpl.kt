@@ -4,13 +4,13 @@ import com.rti.charisma.api.db.tables.Answer
 import com.rti.charisma.api.db.tables.Answers
 import com.rti.charisma.api.db.tables.SectionScore
 import com.rti.charisma.api.db.tables.SectionScores
-import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class AssessmentRepositoryImpl : AssessmentRepository {
+
     override fun insertScore(sections: List<SectionScore>) {
         transaction {
             sections.forEach { score ->
@@ -60,14 +60,15 @@ class AssessmentRepositoryImpl : AssessmentRepository {
     override fun findAnswersByAssessmentSectionId(userSectionId: Int): List<Answer> {
         return transaction {
             Answers.select { Answers.assessmentSectionId eq userSectionId }
-            .map {
-                Answer(
-                    id = it[Answers.id],
-                    assessmentSectionId = it[Answers.assessmentSectionId],
-                    questionId = it[Answers.questionId],
-                    score = it[Answers.score]
-                )
-            } }
+                .map {
+                    Answer(
+                        id = it[Answers.id],
+                        assessmentSectionId = it[Answers.assessmentSectionId],
+                        questionId = it[Answers.questionId],
+                        score = it[Answers.score]
+                    )
+                }
+        }
     }
 
     private fun insertAnswer(answer: Answer, assessmentSectionId: Int) {

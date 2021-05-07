@@ -17,6 +17,7 @@ import com.rti.charisma.api.route.healthRoute
 import com.rti.charisma.api.route.response.ErrorResponse
 import com.rti.charisma.api.route.userRoute
 import com.rti.charisma.api.service.AssessmentService
+import com.rti.charisma.api.service.ContentService
 import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
 import com.viartemev.ktor.flyway.FlywayFeature
@@ -36,7 +37,6 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.util.date.*
 import org.slf4j.event.Level
-import service.ContentService
 import javax.sql.DataSource
 
 
@@ -68,7 +68,7 @@ fun Application.commonModule() {
         options { outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
                 ContentType.Text.CSS -> CachingOptions(
-                    CacheControl.MaxAge(maxAgeSeconds = 60),
+                    CacheControl.MaxAge(maxAgeSeconds = 60 * 60),
                     expires = null as? GMTDate?
                 )
                 else -> null
@@ -88,8 +88,13 @@ fun Application.commonModule() {
         exception<ContentRequestException> { e ->
             call.respond(HttpStatusCode.BadRequest, ErrorResponse(e.localizedMessage))
         }
-
         exception<ContentException> { e ->
+            call.respond(HttpStatusCode.InternalServerError, ErrorResponse(e.localizedMessage))
+        }
+        exception<ContentServerException> { e ->
+            call.respond(HttpStatusCode.BadGateway, ErrorResponse(e.localizedMessage))
+        }
+        exception<DataBaseException> { e ->
             call.respond(HttpStatusCode.InternalServerError, ErrorResponse(e.localizedMessage))
         }
 

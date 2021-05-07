@@ -65,8 +65,6 @@ dependencies {
     testCompile "io.ktor:ktor-server-test-host:$ktor_version"
     testCompile "org.testcontainers:testcontainers:1.15.2"
     testCompile "org.testcontainers:junit-jupiter:1.15.2"
-
-
     testCompile "com.h2database:h2:1.4.200"
 }
 
@@ -91,9 +89,9 @@ compileTestKotlin {
 }
 
 shadowJar {
-    baseName = 'charisma-api-fat'
-    classifier = null
-    version = null
+    archivesBaseName = 'charisma-api-fat'
+    archiveClassifier.set('')
+    archiveVersion.set('')
 }
 
 
@@ -112,7 +110,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.7
+                minimum = 0.69
             }
         }
 

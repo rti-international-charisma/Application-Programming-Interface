@@ -1,9 +1,10 @@
-package service
+package com.rti.charisma.api.service
 
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.content.Page
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
+import com.rti.charisma.api.exception.ContentServerException
 import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
 import com.rti.charisma.api.route.CONSENT
@@ -32,7 +33,6 @@ class ContentServiceTest {
         unmockkAll()
     }
 
-
     @Test
     fun `it should parse page response with video sections and steps`() = runBlockingTest {
         val expectedHomePage = PageContentFixture.withVideoSectionAndSteps()
@@ -60,7 +60,11 @@ class ContentServiceTest {
 
     @ParameterizedTest
     @ArgumentsSource(PrepScoreProvider::class)
-    fun `it fetch prep counselling module based on score and consent`(score: Int, consent: CONSENT, moduleName: String) = runBlockingTest {
+    fun `it fetch prep counselling module based on score and consent`(
+        score: Int,
+        consent: CONSENT,
+        moduleName: String
+    ) = runBlockingTest {
         mockkObject(PrePModules)
         every { PrePModules.getModuleId(any()) } returns "moduleId"
 
@@ -95,11 +99,22 @@ class ContentServiceTest {
 
         }
 
+    @ParameterizedTest
+    @ArgumentsSource(InvalidPrepScoreProvider::class)
+    fun `it should throw content  exception if module name cannot be identified`(score: Int, consent: CONSENT) =
+        runBlockingTest {
+            assertFailsWith(
+                exceptionClass = ContentRequestException::class,
+                block = { contentService.getModule(score, consent) }
+            )
+            coVerify(exactly = 0, verifyBlock = { contentClient.getPage(any()) })
+        }
+
     @Test
     fun `it should throw content exception if module not found`() = runBlockingTest {
-        coEvery { contentClient.getPage(any()) } throws (ContentException("Content not found"))
+        coEvery { contentClient.getPage(any()) } throws (ContentRequestException("Content not found"))
         assertFailsWith(
-            exceptionClass = ContentException::class,
+            exceptionClass = ContentRequestException::class,
             block = { contentService.getModule(13, CONSENT.OPPOSE) }
         )
     }
@@ -114,17 +129,23 @@ class ContentServiceTest {
     }
 
     @Test
-    fun `it should throw content  exception if module name cannot be determined`() = runBlockingTest {
+    fun `it should throw exception on error processing response`() = runBlockingTest {
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentServerException(
+            "Content error",
+            Exception()
+        ))
         assertFailsWith(
-            exceptionClass = ContentException::class,
-            block = { contentService.getModule(55, CONSENT.OPPOSE) }
+            exceptionClass = ContentServerException::class,
+            block = { contentService.getHomePage() }
         )
-        coVerify(exactly = 0, verifyBlock = { contentClient.getPage(any()) })
     }
 
     @Test
-    fun `it should throw exception on error processing response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentException("Content error"))
+    fun `it should throw unexpected exception on error processing response`() = runBlockingTest {
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentException(
+            "Content error",
+            RuntimeException()
+        ))
         assertFailsWith(
             exceptionClass = ContentException::class,
             block = { contentService.getHomePage() }
@@ -133,7 +154,9 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error fetching response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentRequestException("Content error"))
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentRequestException(
+            "Content error"
+        ))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
             block = { contentService.getHomePage() }
@@ -142,16 +165,21 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error processing page response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentException("Content error"))
+        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentServerException(
+            "Content error",
+            Exception()
+        ))
         assertFailsWith(
-            exceptionClass = ContentException::class,
+            exceptionClass = ContentServerException::class,
             block = { contentService.getPage("test-page") }
         )
     }
 
     @Test
     fun `it should throw exception on error fetching page response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentRequestException("Content Request Error"))
+        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentRequestException(
+            "Content Request Error"
+        ))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
             block = { contentService.getPage("test-page") }
@@ -177,7 +205,7 @@ class ContentServiceTest {
             contentClient.getAssessment(
                 "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
             )
-        } throws (ContentException("Content error"))
+        } throws (ContentException("Content error", RuntimeException()))
         assertFailsWith(
             exceptionClass = ContentException::class,
             block = { contentService.getAssessment() }
@@ -196,13 +224,29 @@ class ContentServiceTest {
             block = { contentService.getAssessment() }
         )
     }
+
+    @Test
+    fun `it should throw Content Server exception on error fetching assessment response`() = runBlockingTest {
+        coEvery {
+            contentClient.getAssessment(
+                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
+            )
+        } throws (ContentServerException("Content Request Error", RuntimeException()))
+        assertFailsWith(
+            exceptionClass = ContentServerException::class,
+            block = { contentService.getAssessment() }
+        )
+    }
 }
 
 class PrepScoreProvider : ArgumentsProvider {
     override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
         return Stream.of(
             Arguments.of(13, CONSENT.UNAWARE, PrePModules.PREP_ABUSE),
-            Arguments.of(42, CONSENT.AGREE,  PrePModules.PREP_ABUSE),
+            Arguments.of(13, CONSENT.AGREE, PrePModules.PREP_ABUSE),
+            Arguments.of(13, CONSENT.NEUTRAL, PrePModules.PREP_ABUSE),
+            Arguments.of(13, CONSENT.OPPOSE, PrePModules.PREP_ABUSE),
+            Arguments.of(42, CONSENT.AGREE, PrePModules.PREP_ABUSE),
             Arguments.of(1, CONSENT.AGREE, PrePModules.PREP_AGREE),
             Arguments.of(1, CONSENT.NEUTRAL, PrePModules.PREP_NEUTRAL),
             Arguments.of(1, CONSENT.UNAWARE, PrePModules.PREP_UNAWARE),
@@ -211,6 +255,16 @@ class PrepScoreProvider : ArgumentsProvider {
             Arguments.of(12, CONSENT.NEUTRAL, PrePModules.PREP_NEUTRAL),
             Arguments.of(12, CONSENT.UNAWARE, PrePModules.PREP_UNAWARE),
             Arguments.of(12, CONSENT.OPPOSE, PrePModules.PREP_OPPOSE)
+        )
+    }
+}
+
+class InvalidPrepScoreProvider : ArgumentsProvider {
+    override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
+        return Stream.of(
+            Arguments.of(50, CONSENT.UNAWARE),
+            Arguments.of(-1, CONSENT.AGREE),
+            Arguments.of(43, CONSENT.AGREE),
         )
     }
 }

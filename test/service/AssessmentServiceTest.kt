@@ -2,6 +2,8 @@ package service
 
 import com.rti.charisma.api.db.tables.Answer
 import com.rti.charisma.api.db.tables.SectionScore
+import com.rti.charisma.api.exception.ContentRequestException
+import com.rti.charisma.api.exception.DataBaseException
 import com.rti.charisma.api.repository.AssessmentRepository
 import com.rti.charisma.api.route.AssessmentResult
 import com.rti.charisma.api.route.Question
@@ -9,11 +11,11 @@ import com.rti.charisma.api.service.AssessmentService
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import kotlin.test.assertSame
+import java.lang.RuntimeException
+import kotlin.test.assertFailsWith
 
 class AssessmentServiceTest {
     private val repository = mockk<AssessmentRepository>(relaxed = true)
@@ -21,13 +23,13 @@ class AssessmentServiceTest {
 
 
     @Test
-    fun `it should insert scores for a user`()  {
+    fun `it should insert scores for a user`() {
         val userId = 2
         every { repository.userScoreExists(userId) } returns false
 
         val expectedSections = expected(userId)
 
-        val section1 = request()
+        val section1 = givenAssessmentResult()
         val assessmentResults = mutableListOf(section1)
 
         //when
@@ -38,10 +40,25 @@ class AssessmentServiceTest {
     }
 
     @Test
+    fun `it should throw error if failed to insert scores for a user`() {
+        val userId = 2
+        every { repository.userScoreExists(userId) } returns false
+        every { repository.insertScore(any()) } throws RuntimeException()
+        val section1 = givenAssessmentResult()
+        val assessmentResults = mutableListOf(section1)
+
+        assertFailsWith(
+            exceptionClass = DataBaseException::class,
+            block = { service.addAssessmentScore(userId, assessmentResults) }
+        )
+
+    }
+
+    @Test
     fun `it should replace scores for a user`() {
         val userId = 2
         val expectedSections = expected(userId)
-        val section1 = request()
+        val section1 = givenAssessmentResult()
         val assessmentResults = mutableListOf(section1)
 
         every { repository.userScoreExists(userId) } returns true
@@ -53,24 +70,38 @@ class AssessmentServiceTest {
         verify { repository.replaceScore(eq(expectedSections)) }
     }
 
+   @Test
+    fun `it should throw exception if failed to replace scores for a user`() {
+       val userId = 2
+       every { repository.userScoreExists(userId) } returns true
+       every { repository.replaceScore(any()) } throws RuntimeException()
+       val section1 = givenAssessmentResult()
+       val assessmentResults = mutableListOf(section1)
+
+       assertFailsWith(
+           exceptionClass = DataBaseException::class,
+           block = { service.addAssessmentScore(userId, assessmentResults) }
+       )
+    }
 
     @Test
     fun `it should return scores for a user`() {
         val userId = 2
 
-        val sectionScore1 =  SectionScore(
+        val sectionScore1 = SectionScore(
             user = userId,
             sectionId = "section-1",
             sectionType = "section-type1",
             answers = mutableListOf(Answer(questionId = "question1", score = 11))
         )
-        val sectionScore2 =  SectionScore(
+        val sectionScore2 = SectionScore(
             user = userId,
             sectionId = "section-2",
             sectionType = "section-type2",
             answers = mutableListOf(
                 Answer(questionId = "question2", score = 22),
-                Answer(questionId = "question3", score = 33))
+                Answer(questionId = "question3", score = 33)
+            )
         )
         every { repository.findSectionsByUser(userId) } returns mutableListOf(sectionScore1, sectionScore2)
 
@@ -109,7 +140,7 @@ class AssessmentServiceTest {
         assertTrue(assessmentScore.sections.isEmpty())
     }
 
-    private fun request(): AssessmentResult {
+    private fun givenAssessmentResult(): AssessmentResult {
         return AssessmentResult(
             "section-1",
             "section-type",

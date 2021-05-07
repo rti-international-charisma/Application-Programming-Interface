@@ -2,23 +2,43 @@ package com.rti.charisma.api.service
 
 import com.rti.charisma.api.db.tables.Answer
 import com.rti.charisma.api.db.tables.SectionScore
+import com.rti.charisma.api.exception.DataBaseException
 import com.rti.charisma.api.repository.AssessmentRepository
 import com.rti.charisma.api.route.AssessmentResult
 import com.rti.charisma.api.route.Question
 import com.rti.charisma.api.route.response.AssessmentScoreResponse
+import org.slf4j.LoggerFactory
 
 class AssessmentService(private val assessmentRepository: AssessmentRepository) {
+    private val logger = LoggerFactory.getLogger(AssessmentService::class.java)
+
     fun addAssessmentScore(userId: Int, assessmentResults: List<AssessmentResult>) {
-        if (assessmentRepository.userScoreExists(userId)) {
-            assessmentRepository.replaceScore(toSectionScore(userId, assessmentResults))
-        } else {
-            assessmentRepository.insertScore(toSectionScore(userId, assessmentResults))
+        try {
+
+            if (assessmentRepository.userScoreExists(userId)) {
+                logger.info("Updating assessment scores for, $userId")
+                assessmentRepository.replaceScore(toSectionScore(userId, assessmentResults))
+            } else {
+                logger.info("Inserting assessment scores for, $userId")
+                assessmentRepository.insertScore(toSectionScore(userId, assessmentResults))
+            }
+        } catch (e: Exception) {
+            logger.error("Failed to update scores for, $userId, ${e.printStackTrace()}")
+            throw DataBaseException("Failed to update scores", e)
         }
     }
 
     fun getAssessmentScore(userId: Int): AssessmentScoreResponse {
-        val sections: List<SectionScore> = assessmentRepository.findSectionsByUser(userId)
-        return fromSectionScore(sections)
+        try {
+            val sections: List<SectionScore> = assessmentRepository.findSectionsByUser(userId)
+            logger.info("Successfully fetched assessment scores for, $userId")
+
+            return fromSectionScore(sections)
+
+        } catch (e: Exception) {
+            logger.error("Failed to get scores for, $userId, ${e.printStackTrace()}")
+            throw DataBaseException("Failed to get scores", e)
+        }
     }
 
     private fun fromSectionScore(sections: List<SectionScore>): AssessmentScoreResponse {
@@ -43,7 +63,5 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
             )
         }
     }
-
-
 
 }
