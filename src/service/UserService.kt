@@ -8,20 +8,25 @@ import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
 import com.rti.charisma.api.exception.LoginException
 import com.rti.charisma.api.exception.SecurityQuestionException
 import com.rti.charisma.api.exception.UserAlreadyExistException
-import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.repository.UserRepository
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
+import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.util.hash
+import org.slf4j.LoggerFactory
 
 class UserService(private val userRepository: UserRepository, private val jwtService : JWTService) {
+    private val logger = LoggerFactory.getLogger(UserService::class.java)
+
     fun registerUser(signupModel: Signup): Int {
         if (userRepository.doesUserExist(signupModel.username)) {
+            logger.warn("User already exists")
             throw UserAlreadyExistException()
         } else {
             userRepository.getSecurityQuestions(signupModel.secQuestionId).firstOrNull()?.let {
                 return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt())
             } ?: run {
+                logger.warn("Security question does not exist, ${signupModel.secQuestionId}")
                 throw SecurityQuestionException("Security question with Id: ${signupModel.secQuestionId} is not present")
             }
         }
@@ -32,6 +37,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
         if (securityQuestions.isNotEmpty()) {
             return securityQuestions
         } else {
+            logger.warn("Failed to get Security question with Id, $secQId")
             throw SecurityQuestionException("Security question with Id: $secQId is not present")
         }
     }
@@ -49,11 +55,13 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
                     userRepository.updateUser(user)
                     throw LoginException("Username and password do not match. You have ${user.loginAttemptsLeft} Login attempts left.")
                 } else {
+                    logger.warn("Login attempts exhausted for user, ${user.id}")
                     throw LoginAttemptsExhaustedException()
                 }
             }
         }
-        throw LoginException("User does not exist.")
+        logger.warn("User does not exist, ${loginModel.username}")
+        throw LoginException("User does not exist")
     }
 
     fun findUserById(userId: Int): User? = userRepository.findUserById(userId)

@@ -36,6 +36,15 @@ class PageConversionsTest {
     }
 
     @Test
+    fun `it should return empty page for no status`() {
+        val pageContent = PageContentFixture.pageWithVideoSection("")
+
+        val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
+
+        assertEquals("""{ }""", json)
+    }
+
+    @Test
     fun `it should not serialised minimal content - no video and counselling modules`() {
         val pageContent = PageContentFixture.withNoVideoSectionAndSteps("published")
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
