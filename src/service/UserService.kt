@@ -74,6 +74,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
         val user = userRepository.findUserByUsername(verifySecQuestion.username)
         user?.let {
             if (user.resetPasswordAttemptsLeft <= 0) {
+                logger.warn("This account is deactivated. Please create a new account. UserId ${user.id}")
                 throw ResetPasswordAttemptsExhaustedException("This account is deactivated. Please create a new account")
             }
 
@@ -86,21 +87,26 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
                     if (user.resetPasswordAttemptsLeft == 1) {
                         user.resetPasswordAttemptsLeft--
                         userRepository.updateUser(user)
+                        logger.warn("Deactivating account. Reset password attempts exhausted userId: ${user.id}")
                         throw ResetPasswordAttemptsExhaustedException("The answer you have entered does not match what we have on file and this account will be deactivated." +
                                 " Please create a new account")
                     } else if (user.resetPasswordAttemptsLeft > 0) {
                         user.resetPasswordAttemptsLeft--
                         userRepository.updateUser(user)
+                        logger.warn("Incorrect secret question answer . Decrementing reset password attempts for userId: ${user.id}")
                         throw LoginException("The answer you have entered does not match what we have on file. " +
                                 "Please try again, you have ${user.resetPasswordAttemptsLeft} number of attempts left.")
                     }
                 }
             } else {
+                logger.warn("Incorrect security question UserId: ${user.id}")
                 throw LoginException("Incorrect security question")
             }
         } ?: run {
+            logger.warn("User does not exist Username: ${verifySecQuestion.username}")
             throw LoginException("User does not exist")
         }
+        logger.error("Something went wrong while verifying security question for Username: ${verifySecQuestion.username}")
         throw LoginException("Something went wrong")
     }
 
@@ -109,6 +115,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
             val user = userRepository.findUserById(userId)
             userRepository.updateUser(user!!.copy(password = newPassword.hash()))
         } ?: run {
+            logger.error("Something went wrong while updating password for UserId: $userId")
             throw LoginException("Something went wrong")
         }
     }
