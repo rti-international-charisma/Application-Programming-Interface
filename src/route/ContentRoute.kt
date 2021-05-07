@@ -1,30 +1,21 @@
 package com.rti.charisma.api.route
 
+import com.rti.charisma.api.service.ContentService
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import service.ContentService
+import io.ktor.util.pipeline.*
 
 
 @KtorExperimentalLocationsAPI
 fun Routing.contentRoute(contentService: ContentService) {
+
     get("/home") {
         val homePage = contentService.getHomePage()
         call.respond(homePage)
     }
-
-    get("/assessment/intro") {
-        val introPage = contentService.getPage("assessment-intro")
-        call.respond(introPage)
-    }
-
-    get("/aboutus") {
-        val introPage = contentService.getPage("aboutus")
-        call.respond(introPage)
-    }
-
     get("/assessment") {
         val assessment = contentService.getAssessment()
         call.respond(assessment)
@@ -48,6 +39,19 @@ fun Routing.contentRoute(contentService: ContentService) {
         call.respondBytes(asset)
     }
 
+    get("/assessment/intro") {
+       getPage("assessment-intro", contentService)
+
+    }
+
+    get("/aboutus") {
+        getPage("aboutus", contentService)
+    }
+
+}
+
+private suspend fun PipelineContext<Unit, ApplicationCall>.getPage(pageId: String, contentService: ContentService) {
+    pageId.let { call.respond(contentService.getPage(pageId)) }
 }
 
 enum class CONSENT(val value: String) {

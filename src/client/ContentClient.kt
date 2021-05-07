@@ -8,6 +8,7 @@ import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.content.PageContent
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
+import com.rti.charisma.api.exception.ContentServerException
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.*
@@ -70,7 +71,7 @@ class ContentClient {
             logger.warn("CMS failed to process request, '$endpoint', ${e.localizedMessage}")
             throw ContentException("Failed while fetching content from server", e)
         } catch (e: Exception) {
-            logger.error("Unexpected failure for, '$endpoint', ${e.stackTrace}")
+            logger.error("Unexpected failure for, '$endpoint', ${e.printStackTrace()}")
             throw ContentException("Unexpected failure while fetching content from server", e)
         }
     }
@@ -91,7 +92,7 @@ class ContentClient {
             logger.warn("CMS failed to process assessment request, '$endpoint', ${e.localizedMessage}")
             throw ContentException("Failed while fetching content from server", e)
         } catch (e: Exception) {
-            logger.error("Unexpected failure for, '$endpoint', ${e.stackTrace}")
+            logger.error("Unexpected failure for, '$endpoint', ${e.printStackTrace()}")
             throw ContentException("Unexpected failure while fetching assessment content from server", e)
         }
 
@@ -110,9 +111,9 @@ class ContentClient {
             throw ContentRequestException("Failed to fetch asset, ${e.localizedMessage}}")
         } catch (e: ServerResponseException) {
             logger.warn("CMS failed to process asset request, '$endpoint', ${e.localizedMessage}")
-            throw ContentException("Failed while fetching asset from server", e)
+            throw ContentServerException("Failed while fetching asset from server", e)
         } catch (e: Exception) {
-            logger.error("Unexpected failure for, '$endpoint', ${e.stackTrace}")
+            logger.error("Unexpected failure for, '$endpoint', ${e.printStackTrace()}")
             throw ContentException("Unexpected failure while fetching asset content from server", e)
         }
     }

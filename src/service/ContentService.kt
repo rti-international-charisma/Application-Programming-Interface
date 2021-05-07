@@ -1,12 +1,12 @@
-package service
+package com.rti.charisma.api.service
 
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.content.Page
 import com.rti.charisma.api.content.PageContent
-import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
+import com.rti.charisma.api.exception.ContentServerException
 import com.rti.charisma.api.route.CONSENT
 import org.slf4j.LoggerFactory
 
@@ -48,21 +48,27 @@ class ContentService(private val contentClient: ContentClient) {
         val endpoint =
             "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
         try {
-            return contentClient.getAssessment(endpoint)
+            val assessment = contentClient.getAssessment(endpoint)
+            logger.info("Assessment content received successfully")
+            return assessment
         } catch (e: ContentRequestException) {
+            logger.warn("Request failed for assessment, ${e.localizedMessage}")
             throw ContentRequestException(e.localizedMessage)
-        } catch (e: Exception) {
-            throw ContentException(e.localizedMessage, e)
+        } catch (e: ContentServerException) {
+            logger.warn("Request failed for assessment, ${e.localizedMessage}")
+            throw ContentServerException(e.localizedMessage, e)
         }
     }
 
+    @Deprecated("To be removed")
     suspend fun getAsset(assetId: String): ByteArray {
         try {
             return contentClient.getAsset("/assets/${assetId}")
         } catch (e: ContentRequestException) {
+            logger.warn("Request failed for asset, $assetId, ${e.localizedMessage}")
             throw ContentRequestException(e.localizedMessage)
-        } catch (e: Exception) {
-            throw ContentException(e.localizedMessage, e)
+        } catch (e: ContentServerException) {
+            throw ContentServerException(e.localizedMessage, e)
         }
     }
 
@@ -83,14 +89,14 @@ class ContentService(private val contentClient: ContentClient) {
         logger.info("Sending request to fetch content, $endpoint")
         try {
             val content: PageContent = contentClient.getPage(endpoint)
-            logger.info("Retrieved content, $content")
+            logger.info("Retrieved content successfully for $endpoint")
             return content.page
         } catch (e: ContentRequestException) {
-            logger.warn("Content request failed, ${e.localizedMessage}")
+            logger.warn("Content request failed for $endpoint, ${e.localizedMessage}")
             throw ContentRequestException(e.localizedMessage)
-        } catch (e: Exception) {
-            logger.warn("Failed to get content from server, ${e.localizedMessage}")
-            throw ContentException(e.localizedMessage, e)
+        } catch (e: ContentServerException) {
+            logger.warn("Failed to get content from server for $endpoint, ${e.localizedMessage}")
+            throw ContentServerException(e.localizedMessage, e)
         }
     }
 }
