@@ -60,8 +60,8 @@ data class CounsellingModuleImage(
 @JsonInclude(Include.NON_NULL)
 data class CounsellingModuleSection(
     val id: String,
-    val title: String,
-    val introduction: String,
+    val title: String?,
+    val introduction: String?,
     val summary: String?,
     @JsonAlias("module_name")
     val moduleName: String?,

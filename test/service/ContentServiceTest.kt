@@ -60,7 +60,7 @@ class ContentServiceTest {
 
     @ParameterizedTest
     @ArgumentsSource(PrepScoreProvider::class)
-    fun `it fetch prep counselling module based on score and consent`(
+    fun `it should fetch prep counselling module based on score and consent`(
         score: Int,
         consent: CONSENT,
         moduleName: String
@@ -77,6 +77,19 @@ class ContentServiceTest {
         }
 
         verify { PrePModules.getModuleId(eq(moduleName)) }
+    }
+
+    @Test
+    fun `it should parse page response for counselling modules based on module ID`(
+    ) = runBlockingTest {
+        val expectedPageContent = PageContentFixture.pageWithCounsellingModules("Published")
+
+        coEvery {
+            contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,*.accordion_content.*")
+        } returns PageContentFixture.contentWithCounsellingModules()
+
+        val pageContent = contentService.getModuleWithoutScore("moduleId")
+        assertEquals(expectedPageContent, pageContent)
     }
 
     @ParameterizedTest
@@ -101,7 +114,7 @@ class ContentServiceTest {
 
     @ParameterizedTest
     @ArgumentsSource(InvalidPrepScoreProvider::class)
-    fun `it should throw content  exception if module name cannot be identified`(score: Int, consent: CONSENT) =
+    fun `it should throw content exception if module name cannot be identified`(score: Int, consent: CONSENT) =
         runBlockingTest {
             assertFailsWith(
                 exceptionClass = ContentRequestException::class,

@@ -31,7 +31,16 @@ fun Routing.contentRoute(contentService: ContentService) {
             val assessmentScores = contentService.getModule(partnerScore.toInt(), CONSENT.valueOf(prepConsent.toUpperCase()))
             call.respond(assessmentScores)
         }
+    }
 
+    get("assessment/module/{moduleID}") {
+        val moduleID = call.parameters["moduleID"]
+        if (moduleID.isNullOrEmpty()) {
+            call.respond(HttpStatusCode.BadRequest, "Missing required module ID parameter")
+        } else {
+            val moduleContent = contentService.getModuleWithoutScore("$moduleID")
+            call.respond(moduleContent)
+        }
     }
 
     get("/assets/{assetID}") {

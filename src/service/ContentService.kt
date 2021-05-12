@@ -44,6 +44,11 @@ class ContentService(private val contentClient: ContentClient) {
         return pageRequest(endpoint)
     }
 
+    suspend fun getModuleWithoutScore(moduleId: String): Page {
+        val endpoint = "/items/counselling_module/${moduleId}?fields=*.*,*.accordion_content.*"
+        return pageRequest(endpoint)
+    }
+
     suspend fun getAssessment(): Assessment {
         val endpoint =
             "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"

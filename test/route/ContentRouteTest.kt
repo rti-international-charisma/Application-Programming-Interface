@@ -131,6 +131,42 @@ class ContentRouteTest {
         coVerify(verifyBlock = { contentService.getModule(any(), any()) }, exactly = 0)
     }
 
+    @Test
+    fun `GET module without scores should return 200 OK with counselling modules json response`() = testApp {
+        coEvery {
+            contentService.getModuleWithoutScore("prep_use")
+        } returns PageContentFixture.pageWithCounsellingModules("Published")
+
+        handleRequest(HttpMethod.Get, "assessment/module/prep_use") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content)
+        }
+    }
+
+    @Test
+    fun `GET module without scores should return 400 Bad request if moduleID is missing`() = testApp {
+        handleRequest(HttpMethod.Get, "assessment/module") {
+        }.apply {
+            assertEquals(400, response.status()?.value)
+        }
+
+        coVerify(verifyBlock = { contentService.getModuleWithoutScore(any()) }, exactly = 0)
+    }
+
+    @Test
+    fun `GET module without scores should return 500 Bad request if moduleID is invalid`() = testApp {
+        coEvery {
+            contentService.getModuleWithoutScore("prep_use")
+        } returns PageContentFixture.pageWithCounsellingModules("Published")
+
+        handleRequest(HttpMethod.Get, "assessment/module/123") {
+        }.apply {
+            assertEquals(500, response.status()?.value)
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("arguments")
     fun `GET page should return 200 OK with empty json response`(endPoint: String, pageId: String) = testApp {
