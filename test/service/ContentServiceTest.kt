@@ -2,11 +2,14 @@ package com.rti.charisma.api.service
 
 import com.rti.charisma.api.client.ContentClient
 import com.rti.charisma.api.content.Page
+import com.rti.charisma.api.content.Referral
+import com.rti.charisma.api.content.Referrals
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.exception.ContentServerException
 import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
+import com.rti.charisma.api.fixtures.ReferralsFixture
 import com.rti.charisma.api.route.CONSENT
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,7 +40,7 @@ class ContentServiceTest {
     fun `it should parse page response with video sections and steps`() = runBlockingTest {
         val expectedHomePage = PageContentFixture.withVideoSectionAndSteps()
 
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } returns PageContentFixture.pageFromCmsWithVideos()
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } returns PageContentFixture.fromCmsWithVideos()
 
         val homePage: Page = contentService.getHomePage()
 
@@ -186,6 +189,8 @@ class ContentServiceTest {
         )
     }
 
+    //----------------Assessment------------------//
+
     @Test
     fun `it should parse assessment response`() = runBlockingTest {
         coEvery {
@@ -194,7 +199,7 @@ class ContentServiceTest {
             )
         } returns AssessmentFixture.assessmentCmsContent()
 
-        val assessment = contentService.getAssessment()
+        val assessment = contentService.getAssessments()
 
         assertEquals(AssessmentFixture.assessment(), assessment)
     }
@@ -208,7 +213,7 @@ class ContentServiceTest {
         } throws (ContentException("Content error", RuntimeException()))
         assertFailsWith(
             exceptionClass = ContentException::class,
-            block = { contentService.getAssessment() }
+            block = { contentService.getAssessments() }
         )
     }
 
@@ -221,7 +226,7 @@ class ContentServiceTest {
         } throws (ContentRequestException("Content Request Error"))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
-            block = { contentService.getAssessment() }
+            block = { contentService.getAssessments() }
         )
     }
 
@@ -234,9 +239,70 @@ class ContentServiceTest {
         } throws (ContentServerException("Content Request Error", RuntimeException()))
         assertFailsWith(
             exceptionClass = ContentServerException::class,
-            block = { contentService.getAssessment() }
+            block = { contentService.getAssessments() }
         )
     }
+
+    //----------------Referrals------------------//
+    @Test
+    fun `it should parse multiple referrals response`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals")
+        } returns ReferralsFixture.cmsResponse()
+
+        val assessment = contentService.getReferrals()
+
+        assertEquals(ReferralsFixture.givenReferrals(), assessment)
+    }
+
+    @Test
+    fun `it should parse referral response`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals")
+        } returns ReferralsFixture.cmsResponseWithOneReferral()
+
+        val assessment = contentService.getReferrals()
+
+        assertEquals(Referrals(listOf(Referral("health",
+            "Tara hospital",
+            "323423324234",
+            "50 Saxon Road, Hurlingham,\n011 535 3000",
+            "5a28b210-1697-4cc0-8c42-4d17ad0d8198"))), assessment)
+    }
+
+    @Test
+    fun `it should throw exception on error processing referrals`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals")
+        } throws (ContentException("Content error", RuntimeException()))
+        assertFailsWith(
+            exceptionClass = ContentException::class,
+            block = { contentService.getReferrals() }
+        )
+    }
+
+    @Test
+    fun `it should throw exception on error fetching referrals`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals")
+        } throws (ContentRequestException("Content Request Error"))
+        assertFailsWith(
+            exceptionClass = ContentRequestException::class,
+            block = { contentService.getReferrals() }
+        )
+    }
+
+    @Test
+    fun `it should throw Content Server exception on error fetching referrals`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals")
+        } throws (ContentServerException("Content Request Error", RuntimeException()))
+        assertFailsWith(
+            exceptionClass = ContentServerException::class,
+            block = { contentService.getReferrals() }
+        )
+    }
+
 }
 
 class PrepScoreProvider : ArgumentsProvider {

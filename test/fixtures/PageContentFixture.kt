@@ -42,7 +42,7 @@ object PageContentFixture {
 
     }
 
-    fun pageFromCmsWithVideos(): PageContent {
+    fun fromCmsWithVideos(): PageContent {
         val content = """{
 	"data": {
 		"id": "homepage",
@@ -270,7 +270,7 @@ object PageContentFixture {
     }
 
 
-    fun pageWithoutVideoSectionJson(): String {
+    fun pageWithoutVideoAndStepsJson(): String {
         return """{
   "title" : "This is the landing page",
   "introduction" : "This is introduction",
