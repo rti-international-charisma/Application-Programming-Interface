@@ -32,8 +32,18 @@ fun Routing.contentRoute(contentService: ContentService) {
         if (partnerScore.isNullOrEmpty() || prepConsent.isNullOrEmpty()) {
             call.respond(HttpStatusCode.BadRequest, "Missing required query parameters")
         } else {
-            val modules = contentService.getModules(partnerScore.toInt(), CONSENT.valueOf(prepConsent.toUpperCase()))
-            call.respond(modules)
+            val module = contentService.getModule(partnerScore.toInt(), CONSENT.valueOf(prepConsent.toUpperCase()))
+            call.respond(module)
+        }
+    }
+
+    get("/modules/{moduleId}") {
+        val moduleId = call.parameters["moduleId"]
+        if (moduleId.isNullOrEmpty()) {
+            call.respond(HttpStatusCode.BadRequest, "Missing module identifier")
+        } else {
+            val module = contentService.getModule(moduleId)
+            call.respond(module)
         }
     }
 

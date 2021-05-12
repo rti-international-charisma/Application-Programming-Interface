@@ -39,12 +39,12 @@ class ContentService(private val contentClient: ContentClient) {
         return pageRequest(endpoint)
     }
 
-    fun getModules(): List<Page> {
-        TODO("To Implement")
+    suspend fun getModule(partnerScore: Int, consent: CONSENT): Page {
+        val moduleId: String = selectModuleId(partnerScore, consent)
+        return getModule(moduleId)
     }
 
-    suspend fun getModules(partnerScore: Int, consent: CONSENT): Page {
-        val moduleId: String = selectModuleId(partnerScore, consent)
+    suspend fun getModule(moduleId: String): Page {
         val endpoint = "/items/counselling_module/${moduleId}?fields=*.*,*.accordion_content.*"
         return pageRequest(endpoint)
     }

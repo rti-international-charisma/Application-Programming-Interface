@@ -86,7 +86,7 @@ fun Application.commonModule() {
 
     install(StatusPages) {
         exception<ContentRequestException> { e ->
-            call.respond(HttpStatusCode.BadRequest, ErrorResponse(e.localizedMessage))
+            call.respond(HttpStatusCode.BadGateway, ErrorResponse(e.localizedMessage))
         }
         exception<ContentException> { e ->
             call.respond(HttpStatusCode.InternalServerError, ErrorResponse(e.localizedMessage))

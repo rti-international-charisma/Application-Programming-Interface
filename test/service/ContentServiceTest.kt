@@ -73,7 +73,7 @@ class ContentServiceTest {
 
         coEvery { contentClient.getPage(any()) } returns PageContentFixture.contentWithCounsellingModules()
 
-        contentService.getModules(score, consent)
+        contentService.getModule(score, consent)
 
         coVerify {
             contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,*.accordion_content.*")
@@ -95,7 +95,7 @@ class ContentServiceTest {
                 contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,*.accordion_content.*")
             } returns PageContentFixture.contentWithCounsellingModules()
 
-            val pageContent = contentService.getModules(score, consent)
+            val pageContent = contentService.getModule(score, consent)
             assertEquals(expectedPageContent, pageContent)
 
             verify { PrePModules.getModuleId(eq(moduleName)) }
@@ -108,7 +108,7 @@ class ContentServiceTest {
         runBlockingTest {
             assertFailsWith(
                 exceptionClass = ContentRequestException::class,
-                block = { contentService.getModules(score, consent) }
+                block = { contentService.getModule(score, consent) }
             )
             coVerify(exactly = 0, verifyBlock = { contentClient.getPage(any()) })
         }
@@ -118,7 +118,7 @@ class ContentServiceTest {
         coEvery { contentClient.getPage(any()) } throws (ContentRequestException("Content not found"))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
-            block = { contentService.getModules(13, CONSENT.OPPOSE) }
+            block = { contentService.getModule(13, CONSENT.OPPOSE) }
         )
     }
 
@@ -127,7 +127,7 @@ class ContentServiceTest {
         coEvery { contentClient.getPage(any()) } throws (ContentRequestException("Content error"))
         assertFailsWith(
             exceptionClass = ContentRequestException::class,
-            block = { contentService.getModules(13, CONSENT.OPPOSE) }
+            block = { contentService.getModule(13, CONSENT.OPPOSE) }
         )
     }
 
