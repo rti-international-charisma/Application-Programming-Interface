@@ -6,6 +6,7 @@ import com.rti.charisma.api.config.CMS_BASE_URL
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.content.PageContent
+import com.rti.charisma.api.content.Referrals
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.exception.ContentServerException
@@ -78,7 +79,6 @@ class ContentClient {
 
     suspend fun getAssessment(endpoint: String): Assessment {
         logger.info("Sending request to cms, '$endpoint'")
-
         try {
             return client.request {
                 url("$baseUrl${endpoint}")
@@ -96,6 +96,26 @@ class ContentClient {
             throw ContentException("Unexpected failure while fetching assessment content from server", e)
         }
 
+    }
+
+    suspend fun getReferrals(endpoint: String): Referrals {
+        logger.info("Sending request to cms, '$endpoint'")
+        try {
+            return client.request {
+                url("$baseUrl${endpoint}")
+                method = HttpMethod.Get
+                header("Authorization", "Bearer $accessToken")
+            }
+        }  catch (e: ClientRequestException) {
+            logger.warn("Bad request for referrals, '$endpoint', ${e.localizedMessage}")
+            throw ContentRequestException("Failed to fetch content, ${e.localizedMessage}}")
+        } catch (e: ServerResponseException) {
+            logger.warn("CMS failed to process referrals request, '$endpoint', ${e.localizedMessage}")
+            throw ContentException("Failed while fetching content from server", e)
+        } catch (e: Exception) {
+            logger.error("Unexpected failure for, '$endpoint', ${e.printStackTrace()}")
+            throw ContentException("Unexpected failure while fetching referrals content from server", e)
+        }
     }
 
     suspend fun getAsset(endpoint: String): ByteArray {
@@ -117,6 +137,7 @@ class ContentClient {
             throw ContentException("Unexpected failure while fetching asset content from server", e)
         }
     }
+
 }
 
 

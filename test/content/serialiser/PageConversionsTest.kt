@@ -1,6 +1,7 @@
 package com.rti.charisma.api.content.serialiser
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.rti.charisma.api.content.*
 import com.rti.charisma.api.fixtures.PageContentFixture
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -14,6 +15,26 @@ class PageConversionsTest {
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
         assertEquals(PageContentFixture.pageWithVideoSectionResponseJson(), json)
+    }
+
+    @Test
+    fun `it should ignore page content with  empty image fields `() {
+
+        val pageContent = givenPageWithEmptyUrls()
+
+        val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
+
+        assertEquals(expectedJsonWithNullAssets(), json)
+    }
+
+    @Test
+    fun `it should ignore page content with no image fields `() {
+
+        val pageContent = givenPageWithNoUrls()
+
+        val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
+
+        assertEquals(expectedJsonWithNullAssets(), json)
     }
 
     @Test
@@ -45,11 +66,97 @@ class PageConversionsTest {
     }
 
     @Test
-    fun `it should not serialised minimal content - no video and counselling modules`() {
+    fun `it should serialise minimal content - no video and counselling modules`() {
         val pageContent = PageContentFixture.withNoVideoSectionAndSteps("published")
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(PageContentFixture.pageWithoutVideoSectionJson(), json)
+        assertEquals(PageContentFixture.pageWithoutVideoAndStepsJson(), json)
     }
+
+    private fun givenPageWithEmptyUrls(): Page {
+        val heroImage = HeroImage("title", "intro", "summary", "")
+        val image = PageImage(ImageFile("", "title"))
+        val videoSection = VideoSection(
+            videos = listOf(
+                PageVideo(
+                    videoUrl = "",
+                    videoImage = "",
+                    actionText = "",
+                    actionLink = "",
+                    isPrivate = false
+                )
+            )
+        )
+        return Page(
+            "id", null, null, null,
+            null, "Published",
+            heroImage,
+            listOf(image),
+            videoSection,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+    }
+
+    private fun givenPageWithNoUrls(): Page {
+        val heroImage = HeroImage("title", "intro", "summary", "")
+        val image = PageImage(ImageFile("", "title"))
+        val videoSection = VideoSection(
+            videos = listOf(
+                PageVideo(
+                    videoUrl = null,
+                    videoImage = null,
+                    actionText = "",
+                    actionLink = "",
+                    isPrivate = false
+                )
+            )
+        )
+        return Page(
+            "id", null, null, null,
+            null, "Published",
+            heroImage,
+            listOf(image),
+            videoSection,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+    }
+
+    private fun expectedJsonWithNullAssets() = """{
+  "title" : null,
+  "introduction" : null,
+  "description" : null,
+  "summary" : null,
+  "heroImage" : {
+    "title" : "title",
+    "introduction" : "intro",
+    "summary" : "summary",
+    "imageUrl" : null
+  },
+  "images" : [ {
+    "title" : "title",
+    "imageUrl" : null
+  } ],
+  "videoSection" : {
+    "introduction" : "",
+    "summary" : "",
+    "videos" : [ {
+      "title" : "",
+      "description" : "",
+      "videoUrl" : null,
+      "videoImage" : null,
+      "actionText" : "",
+      "actionLink" : "",
+      "isPrivate" : false
+    } ]
+  }
+}"""
 
 }

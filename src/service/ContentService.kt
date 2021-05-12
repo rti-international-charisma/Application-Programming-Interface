@@ -5,6 +5,7 @@ import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.content.Page
 import com.rti.charisma.api.content.PageContent
+import com.rti.charisma.api.content.Referrals
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.exception.ContentServerException
 import com.rti.charisma.api.route.CONSENT
@@ -38,13 +39,17 @@ class ContentService(private val contentClient: ContentClient) {
         return pageRequest(endpoint)
     }
 
-    suspend fun getModule(partnerScore: Int, consent: CONSENT): Page {
+    fun getModules(): List<Page> {
+        TODO("To Implement")
+    }
+
+    suspend fun getModules(partnerScore: Int, consent: CONSENT): Page {
         val moduleId: String = selectModuleId(partnerScore, consent)
         val endpoint = "/items/counselling_module/${moduleId}?fields=*.*,*.accordion_content.*"
         return pageRequest(endpoint)
     }
 
-    suspend fun getAssessment(): Assessment {
+    suspend fun getAssessments(): Assessment {
         val endpoint =
             "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
         try {
@@ -56,6 +61,21 @@ class ContentService(private val contentClient: ContentClient) {
             throw ContentRequestException(e.localizedMessage)
         } catch (e: ContentServerException) {
             logger.warn("Request failed for assessment, ${e.localizedMessage}")
+            throw ContentServerException(e.localizedMessage, e)
+        }
+    }
+
+    suspend fun getReferrals(): Referrals {
+        val endpoint = "/items/referrals"
+        try {
+            val referrals = contentClient.getReferrals(endpoint)
+            logger.info("Referrals received successfully")
+            return referrals
+        } catch (e: ContentRequestException) {
+            logger.warn("Request failed for referrals, ${e.localizedMessage}")
+            throw ContentRequestException(e.localizedMessage)
+        } catch (e: ContentServerException) {
+            logger.warn("Request failed for referrals, ${e.localizedMessage}")
             throw ContentServerException(e.localizedMessage, e)
         }
     }
@@ -73,16 +93,17 @@ class ContentService(private val contentClient: ContentClient) {
     }
 
     private fun selectModuleId(partnerScore: Int, consent: CONSENT): String {
-        when {
+        return when {
             (partnerScore in 13..42) -> return PrePModules.getModuleId(PrePModules.PREP_ABUSE)
-            (partnerScore in 1..12 && CONSENT.AGREE == (consent)) -> return PrePModules.getModuleId(PrePModules.PREP_AGREE)
-            (partnerScore in 1..12 && CONSENT.NEUTRAL == (consent)) -> return PrePModules.getModuleId(PrePModules.PREP_NEUTRAL)
-            (partnerScore in 1..12 && CONSENT.OPPOSE == (consent)) -> return PrePModules.getModuleId(PrePModules.PREP_OPPOSE)
-            (partnerScore in 1..12 && CONSENT.UNAWARE == (consent)) -> return PrePModules.getModuleId(PrePModules.PREP_UNAWARE)
-
+            (partnerScore in 1..12 && CONSENT.AGREE == (consent)) -> PrePModules.getModuleId(PrePModules.PREP_AGREE)
+            (partnerScore in 1..12 && CONSENT.NEUTRAL == (consent)) -> PrePModules.getModuleId(PrePModules.PREP_NEUTRAL)
+            (partnerScore in 1..12 && CONSENT.OPPOSE == (consent)) -> PrePModules.getModuleId(PrePModules.PREP_OPPOSE)
+            (partnerScore in 1..12 && CONSENT.UNAWARE == (consent)) -> PrePModules.getModuleId(PrePModules.PREP_UNAWARE)
+            else -> {
+                logger.warn("Failed to recommend module for score, $partnerScore and consent, $consent")
+                throw ContentRequestException("Failed to recommend module for score, $partnerScore and consent, $consent")
+            }
         }
-        logger.warn("Failed to recommend module for score, $partnerScore and consent, $consent")
-        throw ContentRequestException("Failed to recommend module for score, $partnerScore and consent, $consent")
     }
 
     private suspend fun pageRequest(endpoint: String): Page {
@@ -99,5 +120,7 @@ class ContentService(private val contentClient: ContentClient) {
             throw ContentServerException(e.localizedMessage, e)
         }
     }
+
+
 }
 

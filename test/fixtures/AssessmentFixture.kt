@@ -365,6 +365,84 @@ object AssessmentFixture {
         return jacksonObjectMapper().readValue(content, Assessment::class.java)
     }
 
+    fun onlyArchived(): Assessment {
+        val content = """{
+    "data": [
+        {
+            "id": 1,
+            "title": "Section 1",
+            "introduction" : "Introduction for section 1",
+            "status" : "archived",
+            "questions": [
+                {
+                    "questions_id": {
+                        "id": "qid1",
+                        "text": "question 1",
+                        "description": "description 1",
+                        "options": [
+                            {
+                                "options_id": {
+                                    "id": 3,
+                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                    "date_created": "2021-04-16T00:36:59+05:30",
+                                    "text": "disagree",
+                                    "weightage": 2
+                                }
+                            },
+                            {
+                                "options_id": {
+                                    "id": 5,
+                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                    "date_created": "2021-04-16T00:37:17+05:30",
+                                    "text": "agree",
+                                    "weightage": 4
+                                }
+                            },
+                            {
+                                "options_id": {
+                                    "id": 4,
+                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                    "date_created": "2021-04-16T00:37:10+05:30",
+                                    "text": "neutral",
+                                    "weightage": 3
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "questions_id": {
+                        "id": "qid3",
+                        "text": "question 3",
+                        "description": "description 3",
+                        "options": [
+                            {
+                                "options_id": {
+                                    "id": 5,
+                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                    "date_created": "2021-04-16T00:37:17+05:30",
+                                    "text": "agree",
+                                    "weightage": 4
+                                }
+                            },
+                            {
+                                "options_id": {
+                                    "id": 3,
+                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                    "date_created": "2021-04-16T00:36:59+05:30",
+                                    "text": "disagree",
+                                    "weightage": 2
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}"""
+        return jacksonObjectMapper().readValue(content, Assessment::class.java)
+    }
 
     fun assessmentResponseJson(): String {
         return """{
@@ -471,19 +549,24 @@ object AssessmentFixture {
 
     fun assessmentResult(): AssessmentScoreResponse {
 
-        val section1 = AssessmentResult("sectionid-1", "sectiontype-1", mutableListOf(
-            AssessmentResultQuestion("question1", 11),
-            AssessmentResultQuestion("question2", 12)
-        ))
-        val section2 = AssessmentResult("sectionid-2", "sectiontype-2", mutableListOf(
-            AssessmentResultQuestion("question3", 21),
-            AssessmentResultQuestion("question4", 22)
-        ))
+        val section1 = AssessmentResult(
+            "sectionid-1", "sectiontype-1", mutableListOf(
+                AssessmentResultQuestion("question1", 11),
+                AssessmentResultQuestion("question2", 12)
+            )
+        )
+        val section2 = AssessmentResult(
+            "sectionid-2", "sectiontype-2", mutableListOf(
+                AssessmentResultQuestion("question3", 21),
+                AssessmentResultQuestion("question4", 22)
+            )
+        )
         return AssessmentScoreResponse(mutableListOf(section1, section2))
     }
 
+    //DO not remove
     fun assessmentResultResponse(): Any? {
-       return """{
+        return """{
   "sections" : [ {
     "sectionId" : "sectionid-1",
     "sectionType" : "sectiontype-1",
@@ -505,6 +588,12 @@ object AssessmentFixture {
       "score" : 22
     } ]
   } ]
+}"""
+    }
+
+    fun emptyResponse(): String {
+        return """{
+  "assessment" : [ ]
 }"""
     }
 

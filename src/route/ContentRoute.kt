@@ -6,7 +6,6 @@ import io.ktor.http.*
 import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import io.ktor.util.pipeline.*
 
 
 @KtorExperimentalLocationsAPI
@@ -16,22 +15,31 @@ fun Routing.contentRoute(contentService: ContentService) {
         val homePage = contentService.getHomePage()
         call.respond(homePage)
     }
-    get("/assessment") {
-        val assessment = contentService.getAssessment()
+
+    get("/assessments") {
+        val assessment = contentService.getAssessments()
         call.respond(assessment)
     }
 
-    get("assessment/module") {
-        //score=<score>&prep=<disagree|opposed|neutral|agree>
+    get("/referrals") {
+        val referrals = contentService.getReferrals()
+        call.respond(referrals)
+    }
+
+    get("/modules") {
         val partnerScore = call.parameters["partner_score"]
         val prepConsent = call.parameters["prep_consent"]
         if (partnerScore.isNullOrEmpty() || prepConsent.isNullOrEmpty()) {
             call.respond(HttpStatusCode.BadRequest, "Missing required query parameters")
         } else {
-            val assessmentScores = contentService.getModule(partnerScore.toInt(), CONSENT.valueOf(prepConsent.toUpperCase()))
-            call.respond(assessmentScores)
+            val modules = contentService.getModules(partnerScore.toInt(), CONSENT.valueOf(prepConsent.toUpperCase()))
+            call.respond(modules)
         }
+    }
 
+    get("/content/{pageId}") {
+        val pageId = call.parameters["pageId"]
+        pageId?.let { call.respond(contentService.getPage(pageId)) }
     }
 
     get("/assets/{assetID}") {
@@ -39,19 +47,6 @@ fun Routing.contentRoute(contentService: ContentService) {
         call.respondBytes(asset)
     }
 
-    get("/assessment/intro") {
-       getPage("assessment-intro", contentService)
-
-    }
-
-    get("/aboutus") {
-        getPage("aboutus", contentService)
-    }
-
-}
-
-private suspend fun PipelineContext<Unit, ApplicationCall>.getPage(pageId: String, contentService: ContentService) {
-    pageId.let { call.respond(contentService.getPage(pageId)) }
 }
 
 enum class CONSENT(val value: String) {

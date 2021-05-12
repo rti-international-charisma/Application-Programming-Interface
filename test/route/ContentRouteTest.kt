@@ -1,19 +1,20 @@
 package com.rti.charisma.api.route
 
 import com.rti.charisma.api.commonModule
+import com.rti.charisma.api.content.Assessment
 import com.rti.charisma.api.contentModule
 import com.rti.charisma.api.exception.ContentException
 import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.exception.ContentServerException
 import com.rti.charisma.api.fixtures.AssessmentFixture
 import com.rti.charisma.api.fixtures.PageContentFixture
+import com.rti.charisma.api.fixtures.ReferralsFixture
 import com.rti.charisma.api.service.ContentService
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -25,6 +26,8 @@ import java.util.stream.Stream
 class ContentRouteTest {
 
     private val contentService = mockk<ContentService>(relaxed = true)
+
+    //-------------------GET /home------------------------------------//
 
     @Test
     fun `GET home should return 200 OK with json response`() = testApp {
@@ -49,101 +52,6 @@ class ContentRouteTest {
             assertEquals("""{ }""", response.content)
         }
     }
-
-    @ParameterizedTest
-    @MethodSource("arguments")
-    fun `GET page should return 200 OK with json response`(endPoint: String, pageId: String) = testApp {
-        coEvery { contentService.getPage(pageId) } returns PageContentFixture.withNoVideoSectionAndSteps("Published")
-
-        handleRequest(HttpMethod.Get, endPoint) {
-        }.apply {
-            assertEquals(200, response.status()?.value)
-            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(PageContentFixture.pageWithoutVideoSectionJson(), response.content)
-        }
-    }
-
-    @Test
-    fun `GET page should return 200 OK with counselling modules json response`() = testApp {
-        coEvery {
-            contentService.getModule(
-                13,
-                CONSENT.OPPOSE
-            )
-        } returns PageContentFixture.pageWithCounsellingModules("Published")
-
-        handleRequest(HttpMethod.Get, "assessment/module?partner_score=13&prep_consent=oppose") {
-        }.apply {
-            assertEquals(200, response.status()?.value)
-            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content)
-        }
-    }
-
-
-    @Test
-    fun `GET page should return 400 Bad request if score and consent missing`() = testApp {
-        handleRequest(HttpMethod.Get, "assessment/module") {
-        }.apply {
-            assertEquals(400, response.status()?.value)
-        }
-
-        coVerify(verifyBlock = { contentService.getModule(any(), any()) }, exactly = 0)
-    }
-
-    @Test
-    fun `GET page should return 400 Bad request if consent missing`() = testApp {
-        handleRequest(HttpMethod.Get, "assessment/module?partner_score=13") {
-        }.apply {
-            assertEquals(400, response.status()?.value)
-        }
-
-        coVerify(verifyBlock = { contentService.getModule(any(), any()) }, exactly = 0)
-    }
-
-    @Test
-    fun `GET page should return 400 Bad request if score  missing`() = testApp {
-        handleRequest(HttpMethod.Get, "assessment/module?prep_consent=oppose") {
-        }.apply {
-            assertEquals(400, response.status()?.value)
-        }
-
-        coVerify(verifyBlock = { contentService.getModule(any(), any()) }, exactly = 0)
-    }
-
-    @Test
-    fun `GET page should return 500 Error if score invalid`() = testApp {
-        handleRequest(HttpMethod.Get, "assessment/module?partner_score=number&prep_consent=oppose") {
-        }.apply {
-            assertEquals(500, response.status()?.value)
-        }
-
-        coVerify(verifyBlock = { contentService.getModule(any(), any()) }, exactly = 0)
-    }
-
-    @Test
-    fun `GET page should return 500 Error if consent invalid`() = testApp {
-        handleRequest(HttpMethod.Get, "assessment/module?partner_score=21&prep_consent=yes") {
-        }.apply {
-            assertEquals(500, response.status()?.value)
-        }
-
-        coVerify(verifyBlock = { contentService.getModule(any(), any()) }, exactly = 0)
-    }
-
-    @ParameterizedTest
-    @MethodSource("arguments")
-    fun `GET page should return 200 OK with empty json response`(endPoint: String, pageId: String) = testApp {
-        coEvery { contentService.getPage(pageId) } returns PageContentFixture.withNoVideoSectionAndSteps("Archived")
-
-        handleRequest(HttpMethod.Get, endPoint) {
-        }.apply {
-            assertEquals(200, response.status()?.value)
-            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals("""{ }""", response.content)
-        }
-    }
-
     @Test
     fun `GET home should throw 400 bad request error if error while fetching content`() = testApp {
         coEvery { contentService.getHomePage() } throws ContentRequestException("some error")
@@ -165,11 +73,26 @@ class ContentRouteTest {
     }
 
     @Test
-    fun `GET home should return 404 not found error for incorrect request`() = testApp {
+    fun `GET request should return 404 not found error for incorrect path`() = testApp {
         handleRequest(HttpMethod.Get, "/hmpage") {
         }.apply {
             assertEquals(404, response.status()?.value)
 
+        }
+    }
+
+    //-------------------GET /page/{pageId}------------------------------------//
+
+    @ParameterizedTest
+    @MethodSource("arguments")
+    fun `GET page should return 200 OK with json response`(endPoint: String, pageId: String) = testApp {
+        coEvery { contentService.getPage(pageId) } returns PageContentFixture.withNoVideoSectionAndSteps("Published")
+
+        handleRequest(HttpMethod.Get, endPoint) {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(PageContentFixture.pageWithoutVideoAndStepsJson(), response.content)
         }
     }
 
@@ -189,7 +112,7 @@ class ContentRouteTest {
 
     @ParameterizedTest
     @MethodSource("arguments")
-    fun `GET assessment intro should throw 502 bad gateway error if error while fetching content`(
+    fun `GET page should throw 502 bad gateway error if error while fetching content`(
         endPoint: String,
         pageId: String
     ) = testApp {
@@ -201,19 +124,110 @@ class ContentRouteTest {
         }
     }
 
-    @Test
-    fun `GET asessment intro should return 404 not found error for incorrect request`() = testApp {
-        handleRequest(HttpMethod.Get, "/assessment/i") {
+    @ParameterizedTest
+    @MethodSource("arguments")
+    fun `GET page should return 200 OK with empty json response`(endPoint: String, pageId: String) = testApp {
+        coEvery { contentService.getPage(pageId) } returns PageContentFixture.withNoVideoSectionAndSteps("Archived")
+
+        handleRequest(HttpMethod.Get, endPoint) {
         }.apply {
-            assertEquals(404, response.status()?.value)
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals("""{ }""", response.content)
+        }
+    }
+
+
+    //-------------------GET /modules?partner_score&prep_consent------------------------------------//
+
+
+    @Test
+    fun `GET modules should return 200 OK with counselling modules json response`() = testApp {
+        coEvery {
+            contentService.getModules(any(), any())
+        } returns PageContentFixture.pageWithCounsellingModules("Published")
+
+        handleRequest(HttpMethod.Get, "/modules?partner_score=13&prep_consent=oppose") {
+
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content)
         }
     }
 
     @Test
-    fun `GET assessment should return 200 OK with json response`() = testApp {
-        coEvery { contentService.getAssessment() } returns AssessmentFixture.assessment()
+    fun `GET modules with score parameter should return 200 OK with a counselling module json response`() = testApp {
+        coEvery {
+            contentService.getModules(any(), any())
+        } returns PageContentFixture.pageWithCounsellingModules("Published")
 
-        handleRequest(HttpMethod.Get, "/assessment") {
+        handleRequest(HttpMethod.Get, "/modules?partner_score=13&prep_consent=oppose") {
+
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content)
+        }
+    }
+
+    @Test
+    fun `GET modules with score parameter should Bad Request Response if score and consent missing`() = testApp {
+        handleRequest(HttpMethod.Get, "/modules") {
+        }.apply {
+            assertEquals(400, response.status()?.value)
+        }
+
+        coVerify(verifyBlock = { contentService.getModules(any(), any()) }, exactly = 0)
+    }
+
+    @Test
+    fun `GET modules with score parameter should Bad Request Response if consent missing`() = testApp {
+        handleRequest(HttpMethod.Get, "/modules?partner_score=13") {
+        }.apply {
+            assertEquals(400, response.status()?.value)
+        }
+
+        coVerify(verifyBlock = { contentService.getModules(any(), any()) }, exactly = 0)
+    }
+
+    @Test
+    fun `GET modules with score parameter should Bad Request Response  if score missing`() = testApp {
+        handleRequest(HttpMethod.Get, "/modules?prep_consent=oppose") {
+        }.apply {
+            assertEquals(400, response.status()?.value)
+        }
+
+        coVerify(verifyBlock = { contentService.getModules(any(), any()) }, exactly = 0)
+    }
+
+    @Test
+    fun `GET modules with score parameter should return 500 Error if score invalid`() = testApp {
+        handleRequest(HttpMethod.Get, "/modules?partner_score=number&prep_consent=oppose") {
+        }.apply {
+            assertEquals(500, response.status()?.value)
+        }
+
+        coVerify(verifyBlock = { contentService.getModules(any(), any()) }, exactly = 0)
+    }
+
+    @Test
+    fun `GET modules with score parameter should return 500 Error if consent invalid`() = testApp {
+        handleRequest(HttpMethod.Get, "modules?partner_score=21&prep_consent=yes") {
+        }.apply {
+            assertEquals(500, response.status()?.value)
+        }
+
+        coVerify(verifyBlock = { contentService.getModules(any(), any()) }, exactly = 0)
+    }
+
+    //-------------------GET /assessments------------------------------------//
+
+    @Test
+    fun `GET assessments should return 200 OK with json response`() = testApp {
+        coEvery { contentService.getAssessments() } returns AssessmentFixture.assessment()
+
+        handleRequest(HttpMethod.Get, "/assessments") {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
@@ -222,10 +236,19 @@ class ContentRouteTest {
     }
 
     @Test
-    fun `GET assessment should return 200 OK with only published sections`() = testApp {
-        coEvery { contentService.getAssessment() } returns AssessmentFixture.archivedAssessmentCmsContent()
+    fun `GET assessments should return 404 not found error for incorrect request`() = testApp {
+        handleRequest(HttpMethod.Get, "/assessments/i") {
+        }.apply {
+            assertEquals(404, response.status()?.value)
+        }
+    }
 
-        handleRequest(HttpMethod.Get, "/assessment") {
+
+    @Test
+    fun `GET assessments should return 200 OK with only published sections`() = testApp {
+        coEvery { contentService.getAssessments() } returns AssessmentFixture.archivedAssessmentCmsContent()
+
+        handleRequest(HttpMethod.Get, "/assessments") {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
@@ -234,30 +257,119 @@ class ContentRouteTest {
     }
 
     @Test
-    fun `GET assessment should throw 400 bad request error if error while fetching content`() = testApp {
-        coEvery { contentService.getAssessment() } throws ContentRequestException("some error")
+    fun `GET assessments should return 200 OK with empty response sections`() = testApp {
+        coEvery { contentService.getAssessments() } returns Assessment(mutableListOf())
 
-        handleRequest(HttpMethod.Get, "/assessment") {
+        handleRequest(HttpMethod.Get, "/assessments") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(AssessmentFixture.emptyResponse(), response.content)
+        }
+    }
+
+    @Test
+    fun `GET assessments should return 200 OK with empty response given no published sections`() = testApp {
+        coEvery { contentService.getAssessments() } returns AssessmentFixture.onlyArchived()
+
+        handleRequest(HttpMethod.Get, "/assessments") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(AssessmentFixture.emptyResponse(), response.content)
+        }
+    }
+
+    @Test
+    fun `GET assessments should throw 400 bad request error if error while fetching content`() = testApp {
+        coEvery { contentService.getAssessments() } throws ContentRequestException("some error")
+
+        handleRequest(HttpMethod.Get, "/assessments") {
         }.apply {
             assertEquals(400, response.status()?.value)
         }
     }
 
     @Test
-    fun `GET assessment should throw 500 bad request error if error while fetching content`() = testApp {
-        coEvery { contentService.getAssessment() } throws ContentException("some error", RuntimeException())
+    fun `GET assessments should throw 500 bad request error if error while fetching content`() = testApp {
+        coEvery { contentService.getAssessments() } throws ContentException("some error", RuntimeException())
 
-        handleRequest(HttpMethod.Get, "/assessment") {
+        handleRequest(HttpMethod.Get, "/assessments") {
         }.apply {
             assertEquals(500, response.status()?.value)
         }
     }
 
     @Test
-    fun `GET assessment should throw 502 bad gateway error if error while fetching content`() = testApp {
-        coEvery { contentService.getAssessment() } throws ContentServerException("some error", RuntimeException())
+    fun `GET assessments should throw 502 bad gateway error if error while fetching content`() = testApp {
+        coEvery { contentService.getAssessments() } throws ContentServerException("some error", RuntimeException())
 
-        handleRequest(HttpMethod.Get, "/assessment") {
+        handleRequest(HttpMethod.Get, "/assessments") {
+        }.apply {
+            assertEquals(502, response.status()?.value)
+        }
+    }
+
+
+    //-------------------GET /referrals------------------------------------//
+
+    @Test
+    fun `GET referrals should return 200 OK with list of referrals as json response`() = testApp {
+        coEvery { contentService.getReferrals() } returns ReferralsFixture.givenReferrals()
+
+        handleRequest(HttpMethod.Get, "/referrals") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(ReferralsFixture.responseJson(), response.content)
+        }
+    }
+
+    @Test
+    fun `GET referrals should return 200 OK with empty json response if no referrals`() = testApp {
+        coEvery { contentService.getReferrals() } returns ReferralsFixture.noReferrals()
+
+        handleRequest(HttpMethod.Get, "/referrals") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals("""[ ]""", response.content)
+        }
+    }
+
+    @Test
+    fun `GET referrals should return 404 not found error for incorrect request`() = testApp {
+        handleRequest(HttpMethod.Get, "/referrals/any") {
+        }.apply {
+            assertEquals(404, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `GET referrals should throw 400 bad request error if error while fetching content`() = testApp {
+        coEvery { contentService.getReferrals() } throws ContentRequestException("some error")
+
+        handleRequest(HttpMethod.Get, "/referrals") {
+        }.apply {
+            assertEquals(400, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `GET referrals should throw 500 bad request error if error while fetching content`() = testApp {
+        coEvery { contentService.getReferrals() } throws ContentException("some error", RuntimeException())
+
+        handleRequest(HttpMethod.Get, "/referrals") {
+        }.apply {
+            assertEquals(500, response.status()?.value)
+        }
+    }
+
+    @Test
+    fun `GET referrals should throw 502 bad gateway error if error while fetching content`() = testApp {
+        coEvery { contentService.getReferrals() } throws ContentServerException("some error", RuntimeException())
+
+        handleRequest(HttpMethod.Get, "/referrals") {
         }.apply {
             assertEquals(502, response.status()?.value)
         }
@@ -274,8 +386,8 @@ class ContentRouteTest {
         @JvmStatic
         fun arguments() =
             Stream.of(
-                Arguments.of("assessment/intro", "assessment-intro"),
-                Arguments.of("aboutus", "aboutus")
+                Arguments.of("content/assessment-intro", "assessment-intro"),
+                Arguments.of("content/aboutus", "aboutus")
             )
     }
 }

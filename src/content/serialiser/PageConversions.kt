@@ -18,24 +18,24 @@ object PageConversions {
                     writeStringField("description", value.description)
                     writeStringField("summary", value.summary)
 
-                    value.heroImage?.let {
+                    value.heroImage?.let { image ->
                         writeObjectFieldStart("heroImage")
-                        writeStringField("title", it.title)
-                        writeStringField("introduction", it.introduction)
-                        writeStringField("summary", it.summary)
-                        writeStringField("imageUrl", "/assets/${it.imageUrl}")
+                        writeStringField("title", image.title)
+                        writeStringField("introduction", image.introduction)
+                        writeStringField("summary", image.summary)
+                        writeStringField("imageUrl", ifPresent(image.imageUrl)?.let { "/assets/${image.imageUrl}" })
                         writeEndObject()
                     }
 
                     value.videoUrl?.let {
                         writeObjectFieldStart("moduleVideo")
-                        writeStringField("videoUrl", "/assets/${it.videoUrl}")
+                        writeStringField("videoUrl", ifPresent(it.videoUrl)?.let { value -> "/assets/${value}" })
                         writeEndObject()
                     }
 
                     value.moduleImage?.let {
                         writeObjectFieldStart("moduleImage")
-                        writeStringField("imageUrl", "/assets/${it.moduleImage}")
+                        writeStringField("imageUrl", ifPresent(it.moduleImage)?.let { value -> "/assets/${value}" })
                         writeEndObject()
                     }
 
@@ -44,7 +44,7 @@ object PageConversions {
                         value.images.forEach { image ->
                             writeStartObject()
                             writeStringField("title", image.imageFile.title)
-                            writeStringField("imageUrl", "/assets/${image.imageFile.imageUrl}")
+                            writeStringField("imageUrl", ifPresent(image.imageFile.imageUrl)?.let{"/assets/${image.imageFile.imageUrl}"})
                             writeEndObject()
                         }
                         writeEndArray()
@@ -58,14 +58,8 @@ object PageConversions {
                             writeStartObject()
                             writeStringField("title", video.title)
                             writeStringField("description", video.description)
-                            writeStringField(
-                                "videoUrl",
-                                if (video.videoUrl == null) "" else "/assets/${video.videoUrl}"
-                            )
-                            writeStringField(
-                                "videoImage",
-                                if (video.videoImage == null) "" else "/assets/${video.videoImage}"
-                            )
+                            writeStringField("videoUrl", ifPresent(video.videoUrl)?.let { "/assets/${video.videoUrl}" })
+                            writeStringField("videoImage", ifPresent(video.videoImage)?.let { "/assets/${video.videoImage}" })
                             writeStringField("actionText", video.actionText)
                             writeStringField("actionLink", video.actionLink)
                             writeBooleanField("isPrivate", video.isPrivate)
@@ -81,8 +75,8 @@ object PageConversions {
                             writeStartObject()
                             writeStringField("title", step.title)
                             writeStringField("subTitle", step.subTitle)
-                            writeStringField("backgroundImageUrl", "/assets/${step.backgroundImageUrl}")
-                            writeStringField("imageUrl", "/assets/${step.imageUrl}")
+                            writeStringField("backgroundImageUrl", ifPresent(step.backgroundImageUrl)?.let { "/assets/${step.backgroundImageUrl}" })
+                            writeStringField("imageUrl", ifPresent(step.imageUrl)?.let { "/assets/${step.imageUrl}" })
                             writeEndObject()
                         }
                         writeEndArray()
@@ -128,6 +122,13 @@ object PageConversions {
                 }
             }
         }
+    }
+
+    private fun ifPresent(value: String?): String? {
+        if (value?.isNotEmpty() == true) {
+            return value
+        }
+        return null
     }
 
     private fun canAccess(status: String): Boolean {
