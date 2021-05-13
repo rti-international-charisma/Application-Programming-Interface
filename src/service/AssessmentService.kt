@@ -14,7 +14,6 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
 
     fun addAssessmentScore(userId: Int, assessmentResults: List<AssessmentResult>) {
         try {
-
             if (assessmentRepository.userScoreExists(userId)) {
                 logger.info("Updating assessment scores for, $userId")
                 assessmentRepository.replaceScore(toSectionScore(userId, assessmentResults))

@@ -59,7 +59,6 @@ class UserRepositoryImpl: UserRepository {
         }
     }
 
-
     private fun ResultRow.toUser(): User = User(
                 id =this[Users.id],
                 username = this[Users.username],
