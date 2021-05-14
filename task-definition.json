@@ -27,11 +27,23 @@
       "environment": [
         {
           "name": "environment",
-          "value": "development"
+          "value": "staging"
         },
         {
           "name": "health_check_endpoint",
           "value": "/server/health"
+        },
+        {
+          "name": "port",
+          "value": "5000"
+        },
+        {
+          "name": "reset_password_attempts",
+          "value": "5"
+        },
+        {
+          "name": "rootPath",
+          "value": "/api"
         }
       ],
       "ulimits": null,
@@ -42,10 +54,6 @@
         {
           "valueFrom": "API_ACCESS_TOKEN",
           "name": "access_token"
-        },
-        {
-          "valueFrom": "API_ACCESSIBLE_STATE",
-          "name": "accessible_state"
         },
         {
           "valueFrom": "API_ASSETS_URL",
@@ -78,14 +86,6 @@
         {
           "valueFrom": "API_LOGIN_ATTEMPTS",
           "name": "login_attempts"
-        },
-        {
-          "valueFrom": "API_PORT",
-          "name": "port"
-        },
-        {
-          "valueFrom": "API_ROOT_PATH",
-          "name": "rootPath"
         }
       ],
       "dockerSecurityOptions": null,
@@ -120,7 +120,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/charisma-api-td:14",
+  "taskDefinitionArn": "arn:aws:ecs:af-south-1:402711366397:task-definition/charisma-api-td:31",
   "family": "charisma-api-td",
   "requiresAttributes": [
     {
@@ -184,7 +184,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 14,
+  "revision": 31,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
