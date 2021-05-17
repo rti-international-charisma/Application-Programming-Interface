@@ -18,8 +18,6 @@ data class Question(val questionId: String, val score: Int)
 
 @KtorExperimentalLocationsAPI
 fun Routing.assessmentRoute(assessmentService: AssessmentService) {
-
-
     authenticate("jwt") {
         post("assessment/scores") {
             val user = call.principal<User>()

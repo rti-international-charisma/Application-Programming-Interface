@@ -565,7 +565,7 @@ object AssessmentFixture {
     }
 
     //DO not remove
-    fun assessmentResultResponse(): Any? {
+    fun assessmentScoreJson(): String {
         return """{
   "sections" : [ {
     "sectionId" : "sectionid-1",
