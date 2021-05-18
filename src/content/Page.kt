@@ -75,7 +75,9 @@ data class CounsellingModuleSection(
 data class AccordionContent(
     val id: String,
     val title: String,
-    val description: String
+    val description: String,
+    @JsonProperty("image_url")
+    var imageUrl: String? = ""
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

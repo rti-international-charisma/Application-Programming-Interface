@@ -95,8 +95,9 @@ object PageConversions {
                                 accordions.forEach { accordion ->
                                     writeStartObject()
                                     writeStringField("id", accordion.id)
-                                    writeStringField("description", accordion.description)
                                     writeStringField("title", accordion.title)
+                                    writeStringField("description", accordion.description)
+                                    writeStringField("imageUrl", ifPresent(accordion.imageUrl)?.let { "/assets/${accordion.imageUrl}" })
                                     writeEndObject()
                                 }
                                 writeEndArray()

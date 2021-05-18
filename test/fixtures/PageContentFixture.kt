@@ -342,7 +342,8 @@ object PageContentFixture {
     "accordion_content": [{
       "id": "section_4_accordion_1",
       "title": "Here are some tips that other young women have used:",
-      "description": "<p>● Store pills in places your partner</p>"
+      "description": "<p>● Store pills in places your partner</p>",
+      "image_url": "image-id"
     }]
   },
     {
@@ -360,7 +361,8 @@ object PageContentFixture {
       "accordion_content": [{
         "id": "section_1_accordion_1",
         "title": "Some common reasons for sharing are:",
-        "description": "<p>● You feel like you need your partner&rsquo;s, </p>"
+        "description": "<p>● You feel like you need your partner&rsquo;s, </p>",
+        "image_url": "image-id"
       },
         {
           "id": "section_1_accordion_2",
@@ -431,7 +433,8 @@ object PageContentFixture {
                 AccordionContent(
                     "section_4_accordion_1",
                     "Here are some tips that other young women have used:",
-                    "<p>● Store pills in places your partner</p>"
+                    "<p>● Store pills in places your partner</p>",
+                    "image-id"
                 )
             )
         )
@@ -453,7 +456,8 @@ object PageContentFixture {
                 AccordionContent(
                     "section_1_accordion_1",
                     "Some common reasons for sharing are:",
-                    "<p>● You feel like you need your partner&rsquo;s, </p>"
+                    "<p>● You feel like you need your partner&rsquo;s, </p>",
+                    "image-id"
                 ),
                 AccordionContent(
                     "section_1_accordion_2",
@@ -478,7 +482,6 @@ object PageContentFixture {
             moduleImage,
             counsellingSections,
             counsellingActionPoints
-
         )
     }
 
@@ -507,8 +510,9 @@ object PageContentFixture {
     "summary" : null,
     "accordionContent" : [ {
       "id" : "section_4_accordion_1",
+      "title" : "Here are some tips that other young women have used:",
       "description" : "<p>● Store pills in places your partner</p>",
-      "title" : "Here are some tips that other young women have used:"
+      "imageUrl" : "/assets/image-id"
     } ]
   }, {
     "id" : "section_5",
@@ -522,12 +526,14 @@ object PageContentFixture {
     "summary" : "<p>Remember, whether you share or not is optional. </p>",
     "accordionContent" : [ {
       "id" : "section_1_accordion_1",
+      "title" : "Some common reasons for sharing are:",
       "description" : "<p>● You feel like you need your partner&rsquo;s, </p>",
-      "title" : "Some common reasons for sharing are:"
+      "imageUrl" : "/assets/image-id"
     }, {
       "id" : "section_1_accordion_2",
+      "title" : "On the other hand, some reasons for NOT sharing include:",
       "description" : "<p>● You worry your partner, or someone else you tell, may not allow you to use PrEP or force you to stop using it<br />● </p>",
-      "title" : "On the other hand, some reasons for NOT sharing include:"
+      "imageUrl" : null
     } ]
   } ],
   "counsellingModuleActionPoints" : [ {
