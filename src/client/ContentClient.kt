@@ -46,7 +46,7 @@ class ContentClient {
                 customizeClient {
                     setMaxConnTotal(1000)
                     setMaxConnPerRoute(100)
-                    //
+
                 }
                 customizeRequest {
                 }

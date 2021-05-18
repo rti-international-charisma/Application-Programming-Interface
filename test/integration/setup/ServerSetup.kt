@@ -2,8 +2,7 @@ package integration.setup
 
 
 import com.github.tomakehurst.wiremock.WireMockServer
-import com.github.tomakehurst.wiremock.client.WireMock.*
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
+import com.github.tomakehurst.wiremock.client.WireMock
 import com.rti.charisma.api.main
 import io.ktor.application.*
 import io.ktor.server.engine.*
@@ -13,9 +12,7 @@ import io.restassured.RestAssured
 import io.restassured.response.ResponseBodyExtractionOptions
 import io.restassured.specification.RequestSpecification
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
 import java.util.concurrent.TimeUnit
 
 
@@ -52,6 +49,9 @@ open class ServerTest {
             }
         }
     }
+
+
+
 
 }
 
