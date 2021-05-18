@@ -95,7 +95,6 @@ class ContentClient {
             logger.error("Unexpected failure for, '$endpoint', ${e.printStackTrace()}")
             throw ContentException("Unexpected failure while fetching assessment content from server", e)
         }
-
     }
 
     suspend fun getReferrals(endpoint: String): Referrals {

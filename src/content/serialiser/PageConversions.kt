@@ -3,7 +3,7 @@ package com.rti.charisma.api.content.serialiser
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
-import com.rti.charisma.api.config.ACCESSIBILITY_STATUS
+import com.rti.charisma.api.config.IS_DRAFT_MODE
 import com.rti.charisma.api.config.ConfigProvider
 import com.rti.charisma.api.content.Page
 
@@ -132,7 +132,10 @@ object PageConversions {
     }
 
     private fun canAccess(status: String): Boolean {
-        val states: List<String> = ConfigProvider.getList(ACCESSIBILITY_STATUS)
-        return states.contains(status.toLowerCase())
+        val isDraftMode: Boolean = ConfigProvider.get(IS_DRAFT_MODE).toBoolean()
+        if (status.equals("PUBLISHED", true)) return true
+        if (status.equals("DRAFT", true) && isDraftMode) return true
+        return false;
     }
+
 }
