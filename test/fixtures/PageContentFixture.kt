@@ -9,7 +9,7 @@ object PageContentFixture {
         val heroImage = HeroImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",
-            "summary",
+            "personalised message",
             "hero-image-id"
         )
         val image1 = PageImage(ImageFile("image-1", "image-1 title"))
@@ -115,7 +115,7 @@ object PageContentFixture {
 			"name": "hero image",
 			"status": "published",
 			"title": "Hero Image",
-			"summary": "summary",
+			"personalised_message": "personalised message",
 			"introduction": "<div><span>some styled introduction</span></div>",
 			"image_url": "hero-image-id"
 		}
@@ -134,7 +134,7 @@ object PageContentFixture {
   "heroImage" : {
     "title" : "Hero Image",
     "introduction" : "<div><span>some styled introduction</span></div>",
-    "summary" : "summary",
+    "personalisedMessage" : "personalised message",
     "imageUrl" : "/assets/hero-image-id"
   },
   "images" : [ {
@@ -183,7 +183,7 @@ object PageContentFixture {
         val heroImage = HeroImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",
-            "summary",
+            "personalised message",
             "hero-image-id"
         )
         val image1 = PageImage(ImageFile(title = "image1-title", imageUrl = "image1-id"))
@@ -491,7 +491,7 @@ object PageContentFixture {
   "heroImage" : {
     "title" : "PrEp Hero Image",
     "introduction" : "",
-    "summary" : "",
+    "personalisedMessage" : "",
     "imageUrl" : "/assets/1c2eea87-f593-41c2-b6ba-da69a3133c9a"
   },
   "moduleVideo" : {

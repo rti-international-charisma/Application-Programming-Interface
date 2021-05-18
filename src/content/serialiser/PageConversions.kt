@@ -22,7 +22,7 @@ object PageConversions {
                         writeObjectFieldStart("heroImage")
                         writeStringField("title", image.title)
                         writeStringField("introduction", image.introduction)
-                        writeStringField("summary", image.summary)
+                        writeStringField("personalisedMessage", image.personalisedMessage)
                         writeStringField("imageUrl", ifPresent(image.imageUrl)?.let { "/assets/${image.imageUrl}" })
                         writeEndObject()
                     }

@@ -109,7 +109,8 @@ data class ImageFile(
 data class HeroImage(
     var title: String = "",
     var introduction: String? = "",
-    var summary: String? = "",
+    @JsonProperty("personalised_message")
+    var personalisedMessage: String? = "",
     @JsonProperty("image_url")
     var imageUrl: String = ""
 )

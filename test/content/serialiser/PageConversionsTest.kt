@@ -74,7 +74,7 @@ class PageConversionsTest {
     }
 
     private fun givenPageWithEmptyUrls(): Page {
-        val heroImage = HeroImage("title", "intro", "summary", "")
+        val heroImage = HeroImage("title", "intro", "personalised message", "")
         val image = PageImage(ImageFile("", "title"))
         val videoSection = VideoSection(
             videos = listOf(
@@ -102,7 +102,7 @@ class PageConversionsTest {
     }
 
     private fun givenPageWithNoUrls(): Page {
-        val heroImage = HeroImage("title", "intro", "summary", "")
+        val heroImage = HeroImage("title", "intro", "personalised message", "")
         val image = PageImage(ImageFile("", "title"))
         val videoSection = VideoSection(
             videos = listOf(
@@ -137,7 +137,7 @@ class PageConversionsTest {
   "heroImage" : {
     "title" : "title",
     "introduction" : "intro",
-    "summary" : "summary",
+    "personalisedMessage" : "personalised message",
     "imageUrl" : null
   },
   "images" : [ {
