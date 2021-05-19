@@ -16,7 +16,7 @@ object ReferralsConversions {
                     writeStringField("name", referral.name)
                     writeStringField("address", referral.address)
                     writeStringField("contact", referral.contact)
-                    writeStringField("imageUrl", ifPresent(referral.imageUrl)?.let {  "/assets/${referral.imageUrl}"})
+                    writeStringField("imageUrl", ifPresent(referral.imageUrl)?.let { "/assets/${referral.imageUrl}" })
                     writeEndObject()
                 }
                 writeEndArray()
@@ -25,11 +25,10 @@ object ReferralsConversions {
     }
 
     private fun ifPresent(value: String?): String? {
-        if(value?.isNotEmpty() == true) {
+        if (value?.isNotEmpty() == true) {
             return value
         }
         return null
     }
-
 
 }

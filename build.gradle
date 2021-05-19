@@ -57,6 +57,8 @@ dependencies {
     compile "org.postgresql:postgresql:42.2.18"
     implementation "com.viartemev:ktor-flyway-feature:1.2.2"
 
+
+
     testImplementation "org.junit.jupiter:junit-jupiter:5.7.0"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
     testImplementation "io.mockk:mockk:1.10.0"
@@ -66,6 +68,8 @@ dependencies {
     testCompile "org.testcontainers:testcontainers:1.15.2"
     testCompile "org.testcontainers:junit-jupiter:1.15.2"
     testCompile "com.h2database:h2:1.4.200"
+    testCompile "io.rest-assured:rest-assured:3.3.0"
+    testCompile "com.github.tomakehurst:wiremock-jre8-standalone:2.28.0"
 }
 
 repositories {
@@ -110,7 +114,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.73
+                minimum = 0.79
             }
         }
 

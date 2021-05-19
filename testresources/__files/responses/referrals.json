@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "sort": null,
+      "type": "health",
+      "address": "50 Saxon Road, Hurlingham,\n011 535 3000",
+      "name": "Tara hospital",
+      "contact_number": "",
+      "image": "5a28b210-1697-4cc0-8c42-4d17ad0d8198"
+    },
+    {
+      "id": 2,
+      "sort": null,
+      "type": "hotline",
+      "address": null,
+      "name": "Hotline",
+      "contact_number": "9747347534",
+      "image": null
+    },
+    {
+      "id": 3,
+      "sort": null,
+      "type": "shelter",
+      "address": "Some address\nCode 32432432",
+      "name": "Shelter Children",
+      "contact_number": "23423423423",
+      "image": null
+    }
+  ]
+}
