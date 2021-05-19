@@ -286,7 +286,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentFixture.emptyResponse(), response.content)
+            assertEquals(AssessmentFixture.emptyAssessment(), response.content)
         }
     }
 
@@ -298,7 +298,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentFixture.emptyResponse(), response.content)
+            assertEquals(AssessmentFixture.emptyAssessment(), response.content)
         }
     }
 
@@ -449,7 +449,7 @@ class ContentRouteTest {
         }) { callback() }
     }
 
-    private companion object {
+    companion object {
         @JvmStatic
         fun arguments() =
             Stream.of(

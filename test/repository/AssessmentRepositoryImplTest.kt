@@ -59,6 +59,7 @@ class AssessmentRepositoryImplTest {
                 it[userId] = testUserId
                 it[sectionId] = "test-assessment-section-id"
                 it[sectionType] = "TEST SECTION"
+                it[totalSections] = 6
             } get SectionScores.id
 
             Answers.insert {
@@ -79,6 +80,7 @@ class AssessmentRepositoryImplTest {
                 it[userId] = testUserId
                 it[sectionId] = "test-assessment-section-id"
                 it[sectionType] = "TEST SECTION"
+                it[totalSections] = 6
             } get SectionScores.id
 
             Answers.insert {
@@ -95,8 +97,8 @@ class AssessmentRepositoryImplTest {
     @Test
     fun `it should insert user score with all sections and answers`() {
         //given
-        val sectionScore1 = createSectionEntry(testUserId, "section-id-1", "section-type-1", 11, 12)
-        val sectionScore2 = createSectionEntry(testUserId, "section-id-2", "section-type-2", 21, 22)
+        val sectionScore1 = createSectionEntry(testUserId, "section-id-1", "section-type-1", 11, 12, 6)
+        val sectionScore2 = createSectionEntry(testUserId, "section-id-2", "section-type-2", 21, 22, 6)
 
         //when
         repository.insertScore(mutableListOf(sectionScore1, sectionScore2))
@@ -111,8 +113,10 @@ class AssessmentRepositoryImplTest {
                     .firstOrNull()
             assertNotNull(sectionScore1FromDB)
             assertEquals("section-type-1", sectionScore1FromDB[SectionScores.sectionType])
+            assertEquals(6, sectionScore1FromDB[SectionScores.totalSections])
             assertNotNull(sectionScore2FromDB)
             assertEquals("section-type-2", sectionScore2FromDB[SectionScores.sectionType])
+            assertEquals(6, sectionScore2FromDB[SectionScores.totalSections])
 
             val answersForSection1FromDB =
                 Answers.select { Answers.assessmentSectionId eq sectionScore1FromDB[SectionScores.id] }
@@ -132,14 +136,14 @@ class AssessmentRepositoryImplTest {
     @Test
     fun `it should update user score with all sections and answers`() {
         //given
-        val sectionScore1 = createSectionEntry(testUserId, "section-id-1", "section-type-1", 11, 12)
-        val sectionScore2 = createSectionEntry(testUserId, "section-id-2", "section-type-2", 21, 22)
+        val sectionScore1 = createSectionEntry(testUserId, "section-id-1", "section-type-1", 11, 12, 5)
+        val sectionScore2 = createSectionEntry(testUserId, "section-id-2", "section-type-2", 21, 22, 5)
         repository.insertScore(mutableListOf(sectionScore1, sectionScore2))
 
         //when
-        val sectionScoreNew1 = createSectionEntry(testUserId, "section-id-1", "section-type-11", 111, 112)
-        val sectionScoreNew2 = createSectionEntry(testUserId, "section-id-new-2", "section-type-new-12", 221, 222)
-        val sectionScoreNew3 = createSectionEntry(testUserId, "section-id-3", "section-type-13", 331, 332)
+        val sectionScoreNew1 = createSectionEntry(testUserId, "section-id-1", "section-type-11", 111, 112, 6)
+        val sectionScoreNew2 = createSectionEntry(testUserId, "section-id-new-2", "section-type-new-12", 221, 222, 6)
+        val sectionScoreNew3 = createSectionEntry(testUserId, "section-id-3", "section-type-13", 331, 332, 6)
         repository.replaceScore(mutableListOf(sectionScoreNew1, sectionScoreNew2, sectionScoreNew3))
 
         //then
@@ -183,8 +187,8 @@ class AssessmentRepositoryImplTest {
     @Test
     fun `it should return all sections and relevant answers for a user`() {
         //given
-        val sectionScore1 = createSectionEntry(testUserId, "section-id-1", "section-type-1", 11, 12)
-        val sectionScore2 = createSectionEntry(testUserId, "section-id-2", "section-type-2", 21, 22)
+        val sectionScore1 = createSectionEntry(testUserId, "section-id-1", "section-type-1", 11, 12, 8)
+        val sectionScore2 = createSectionEntry(testUserId, "section-id-2", "section-type-2", 21, 22, 9)
         repository.insertScore(mutableListOf(sectionScore1, sectionScore2))
 
         //when
@@ -194,9 +198,12 @@ class AssessmentRepositoryImplTest {
         assertEquals(2, userSections.size)
         assertEquals("section-id-1", userSections[0].sectionId)
         assertEquals("section-type-1", userSections[0].sectionType)
+        assertEquals(8, userSections[0].totalSections)
         assertEquals(2, userSections[0].answers.size)
+
         assertEquals("section-id-2", userSections[1].sectionId)
         assertEquals("section-type-2", userSections[1].sectionType)
+        assertEquals(9, userSections[1].totalSections)
         assertEquals(2, userSections[1].answers.size)
     }
 
@@ -217,6 +224,7 @@ class AssessmentRepositoryImplTest {
             SectionScores.insert {
                 it[sectionId] = "section1"
                 it[sectionType] = "sectionType1"
+                it[totalSections] = 4
                 it[userId] = testUserId
             }
         }
@@ -228,6 +236,7 @@ class AssessmentRepositoryImplTest {
         assertEquals(1, userSections.size)
         assertEquals("section1", userSections[0].sectionId)
         assertEquals("sectionType1", userSections[0].sectionType)
+        assertEquals(4, userSections[0].totalSections)
         assertTrue(userSections[0].answers.isEmpty())
     }
 
@@ -237,12 +246,14 @@ class AssessmentRepositoryImplTest {
         sectionId: String,
         sectionType: String,
         score1: Int,
-        score2: Int
+        score2: Int,
+        totalSections: Int
     ): SectionScore {
         return SectionScore(
             user = userId,
             sectionId = sectionId,
             sectionType = sectionType,
+            totalSections = totalSections,
             answers = mutableListOf(
                 Answer(questionId = "question-$score1", score = score1),
                 Answer(questionId = "question-$score2", score = score2)

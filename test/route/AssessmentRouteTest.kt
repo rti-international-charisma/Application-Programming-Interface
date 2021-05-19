@@ -71,7 +71,7 @@ class AssessmentRouteTest {
         }.apply {
             assertEquals(401, response.status()?.value)
         }
-        verify(verifyBlock = { assessmentService.addAssessmentScore(any(), any()) }, exactly = 0)
+        verify(verifyBlock = { assessmentService.addAssessmentScore(any(), any(), any()) }, exactly = 0)
     }
 
     @Test
@@ -89,19 +89,18 @@ class AssessmentRouteTest {
     }
 
     @Test
-    fun `it should return 200 with empty result`() = testApp {
+    fun `it should return 200 with empty result if no score found`() = testApp {
         every { userService.findUserById(1) } returns testUser
-        every { assessmentService.getAssessmentScore(any()) } returns AssessmentScoreResponse(emptyList())
+        every { assessmentService.getAssessmentScore(any()) } returns AssessmentScoreResponse(emptyList(), 0)
         handleRequest(HttpMethod.Get, "assessment/scores") {
             addHeader("Authorization", "Bearer ${getToken()}")
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
 
-            assertEquals(emptyResponse(), response.content)
+            assertEquals(AssessmentFixture.emptySections(), response.content)
         }
     }
-
 
     @Test
     fun `it should return 500 when finding scores throws exception`() = testApp {
@@ -162,9 +161,4 @@ class AssessmentRouteTest {
     }
 
 
-    private fun emptyResponse(): String {
-        return """{
-  "sections" : [ ]
-}"""
-    }
 }

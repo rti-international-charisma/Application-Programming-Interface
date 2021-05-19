@@ -12,14 +12,14 @@ import org.slf4j.LoggerFactory
 class AssessmentService(private val assessmentRepository: AssessmentRepository) {
     private val logger = LoggerFactory.getLogger(AssessmentService::class.java)
 
-    fun addAssessmentScore(userId: Int, assessmentResults: List<AssessmentResult>) {
+    fun addAssessmentScore(userId: Int, assessmentResults: List<AssessmentResult>, totalSections: Int) {
         try {
             if (assessmentRepository.userScoreExists(userId)) {
                 logger.info("Updating assessment scores for, $userId")
-                assessmentRepository.replaceScore(toSectionScore(userId, assessmentResults))
+                assessmentRepository.replaceScore(toSectionScore(userId, assessmentResults, totalSections))
             } else {
                 logger.info("Inserting assessment scores for, $userId")
-                assessmentRepository.insertScore(toSectionScore(userId, assessmentResults))
+                assessmentRepository.insertScore(toSectionScore(userId, assessmentResults, totalSections))
             }
         } catch (e: Exception) {
             logger.error("Failed to update scores for, $userId, ${e.printStackTrace()}")
@@ -48,15 +48,16 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
                 sectionScore.answers.map { answer -> Question(answer.questionId, answer.score) }
             )
         }
-        return AssessmentScoreResponse(sectionScores)
+        return AssessmentScoreResponse(sectionScores, sections.firstOrNull()?.let { it -> it.totalSections } ?: 0)
     }
 
-    private fun toSectionScore(userId: Int, assessmentResults: List<AssessmentResult>): List<SectionScore> {
+    private fun toSectionScore(userId: Int, assessmentResults: List<AssessmentResult>, totalSections: Int): List<SectionScore> {
         return assessmentResults.map { section ->
             SectionScore(
                 user = userId,
                 sectionId = section.sectionId,
                 sectionType = section.sectionType,
+                totalSections = totalSections,
                 answers = section.answers
                     .map { question -> Answer(questionId = question.questionId, score = question.score) }
             )

@@ -9,6 +9,7 @@ object SectionScores : Table() {
     val userId = integer("user_id").references(Users.id, onDelete = ReferenceOption.CASCADE)
     val sectionId = varchar("section_id", 255)
     val sectionType = varchar("section_type", 255)
+    val totalSections = integer("total_sections")
 
     override val primaryKey = PrimaryKey(id, name = "PK_SECTION_SCORE_ID")
 }
@@ -19,5 +20,6 @@ data class SectionScore(
     val user: Int,
     val sectionId: String,
     val sectionType: String,
+    val totalSections: Int,
     var answers: List<Answer> = emptyList()
 )
