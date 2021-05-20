@@ -12,7 +12,7 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-data class AssessmentScoreRequest(val sections: List<AssessmentResult>)
+data class AssessmentScoreRequest(val sections: List<AssessmentResult>, val totalSections: Int)
 data class AssessmentResult(val sectionId: String, val sectionType: String, val answers: List<Question>)
 data class Question(val questionId: String, val score: Int)
 
@@ -25,7 +25,7 @@ fun Routing.assessmentRoute(assessmentService: AssessmentService) {
                 call.respond(HttpStatusCode.Unauthorized)
             } else {
                 val assessmentScore = jacksonObjectMapper().readValue<AssessmentScoreRequest>(call.receiveText())
-                assessmentService.addAssessmentScore(user.id, assessmentScore.sections)
+                assessmentService.addAssessmentScore(user.id, assessmentScore.sections, assessmentScore.totalSections)
                 call.respond(HttpStatusCode.Created)
             }
         }

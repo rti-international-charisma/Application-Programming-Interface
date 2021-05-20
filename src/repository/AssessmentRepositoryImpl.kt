@@ -13,9 +13,9 @@ class AssessmentRepositoryImpl : AssessmentRepository {
 
     override fun insertScore(sections: List<SectionScore>) {
         transaction {
-            sections.forEach { score ->
-                val userSectionId = insertSectionScore(score)
-                score.answers.forEach { answer ->
+            sections.forEach { section ->
+                val userSectionId = insertSectionScore(section)
+                section.answers.forEach { answer ->
                     insertAnswer(answer, userSectionId)
                 }
             }
@@ -49,6 +49,7 @@ class AssessmentRepositoryImpl : AssessmentRepository {
                         user = it[SectionScores.userId],
                         sectionId = it[SectionScores.sectionId],
                         sectionType = it[SectionScores.sectionType],
+                        totalSections = it[SectionScores.totalSections],
                         answers = findAnswersByAssessmentSectionId(it[SectionScores.id])
                     )
                 }
@@ -84,6 +85,7 @@ class AssessmentRepositoryImpl : AssessmentRepository {
             it[userId] = section.user
             it[sectionId] = section.sectionId
             it[sectionType] = section.sectionType
+            it[totalSections] = section.totalSections
         } get SectionScores.id
     }
 

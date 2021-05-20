@@ -2,7 +2,6 @@ package service
 
 import com.rti.charisma.api.db.tables.Answer
 import com.rti.charisma.api.db.tables.SectionScore
-import com.rti.charisma.api.exception.ContentRequestException
 import com.rti.charisma.api.exception.DataBaseException
 import com.rti.charisma.api.repository.AssessmentRepository
 import com.rti.charisma.api.route.AssessmentResult
@@ -33,7 +32,7 @@ class AssessmentServiceTest {
         val assessmentResults = mutableListOf(section1)
 
         //when
-        service.addAssessmentScore(userId, assessmentResults)
+        service.addAssessmentScore(userId, assessmentResults, 6)
 
         //then
         verify { repository.insertScore(eq(expectedSections)) }
@@ -49,7 +48,7 @@ class AssessmentServiceTest {
 
         assertFailsWith(
             exceptionClass = DataBaseException::class,
-            block = { service.addAssessmentScore(userId, assessmentResults) }
+            block = { service.addAssessmentScore(userId, assessmentResults, 1) }
         )
 
     }
@@ -64,7 +63,7 @@ class AssessmentServiceTest {
         every { repository.userScoreExists(userId) } returns true
 
         //when
-        service.addAssessmentScore(userId, assessmentResults)
+        service.addAssessmentScore(userId, assessmentResults,6)
 
         //then
         verify { repository.replaceScore(eq(expectedSections)) }
@@ -80,7 +79,7 @@ class AssessmentServiceTest {
 
        assertFailsWith(
            exceptionClass = DataBaseException::class,
-           block = { service.addAssessmentScore(userId, assessmentResults) }
+           block = { service.addAssessmentScore(userId, assessmentResults,4) }
        )
     }
 
@@ -92,12 +91,14 @@ class AssessmentServiceTest {
             user = userId,
             sectionId = "section-1",
             sectionType = "section-type1",
+            totalSections = 5,
             answers = mutableListOf(Answer(questionId = "question1", score = 11))
         )
         val sectionScore2 = SectionScore(
             user = userId,
             sectionId = "section-2",
             sectionType = "section-type2",
+            totalSections = 5,
             answers = mutableListOf(
                 Answer(questionId = "question2", score = 22),
                 Answer(questionId = "question3", score = 33)
@@ -110,6 +111,7 @@ class AssessmentServiceTest {
 
         //then
         assertEquals(2, assessmentScore.sections.size)
+        assertEquals(5, assessmentScore.totalSections)
 
         assertEquals("section-1", assessmentScore.sections[0].sectionId)
         assertEquals("section-type1", assessmentScore.sections[0].sectionType)
@@ -154,6 +156,7 @@ class AssessmentServiceTest {
                 user = userId,
                 sectionId = "section-1",
                 sectionType = "section-type",
+                totalSections = 6,
                 answers = mutableListOf(Answer(questionId = "question1", score = 44))
             )
         )

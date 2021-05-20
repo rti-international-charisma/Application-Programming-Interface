@@ -561,7 +561,7 @@ object AssessmentFixture {
                 AssessmentResultQuestion("question4", 22)
             )
         )
-        return AssessmentScoreResponse(mutableListOf(section1, section2))
+        return AssessmentScoreResponse(mutableListOf(section1, section2), 6)
     }
 
     //DO not remove
@@ -587,14 +587,23 @@ object AssessmentFixture {
       "questionId" : "question4",
       "score" : 22
     } ]
-  } ]
+  } ],
+  "totalSections" : 6
 }"""
     }
 
-    fun emptyResponse(): String {
+    fun emptyAssessment(): String {
         return """{
   "assessment" : [ ]
 }"""
+    }
+
+    fun emptySections(): String {
+        return """{
+  "sections" : [ ],
+  "totalSections" : 0
+}"""
+
     }
 
 }
