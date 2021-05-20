@@ -12,6 +12,9 @@
 # Log file
 *.log
 
+# Log folder
+logs
+
 # BlueJ files
 *.ctxt
 
