@@ -265,8 +265,8 @@ class ContentServiceTest {
 
         assertEquals(Referrals(listOf(Referral("health",
             "Tara hospital",
-            "323423324234",
-            "50 Saxon Road, Hurlingham,\n011 535 3000",
+            "50 Saxon Road, Hurlingham,\n" +
+                    "011 535 3000, 323423324234",
             "5a28b210-1697-4cc0-8c42-4d17ad0d8198"))), assessment)
     }
 

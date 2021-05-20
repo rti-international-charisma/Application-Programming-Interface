@@ -9,20 +9,17 @@ object ReferralsFixture {
         return """[ {
   "type" : "health",
   "name" : "Tara hospital",
-  "address" : "50 Saxon Road, Hurlingham,\n011 535 3000",
-  "contact" : "",
+  "addressAndContactInfo" : "50 Saxon Road, Hurlingham,\n011 535 3000",
   "imageUrl" : "/assets/5a28b210-1697-4cc0-8c42-4d17ad0d8198"
 }, {
   "type" : "hotline",
   "name" : "Hotline",
-  "address" : null,
-  "contact" : "9747347534",
+  "addressAndContactInfo" : "Some address",
   "imageUrl" : null
 }, {
   "type" : "shelter",
   "name" : "Shelter Children",
-  "address" : "Some adrress\nCode 32432432",
-  "contact" : "23423423423",
+  "addressAndContactInfo" : "Some address\nCode 32432432, 23423423423",
   "imageUrl" : null
 } ]"""
 
@@ -32,7 +29,6 @@ object ReferralsFixture {
         val referral1 = Referral(
             "health",
             "Tara hospital",
-            "",
             "50 Saxon Road, Hurlingham,\n011 535 3000",
             "5a28b210-1697-4cc0-8c42-4d17ad0d8198"
         )
@@ -40,15 +36,13 @@ object ReferralsFixture {
         val referral2 = Referral(
             "hotline",
             "Hotline",
-            "9747347534",
-            null,
+            "Some address",
             null
         )
         val referral3 = Referral(
             "shelter",
             "Shelter Children",
-            "23423423423",
-            "Some adrress\nCode 32432432",
+            "Some address\nCode 32432432, 23423423423",
             null
         )
 
@@ -60,20 +54,17 @@ object ReferralsFixture {
         val content = """{ "data": [ {
   "type" : "health",
   "name" : "Tara hospital",
-  "address" : "50 Saxon Road, Hurlingham,\n011 535 3000",
-  "contact_number" : "",
+  "address_and_contact_info" : "50 Saxon Road, Hurlingham,\n011 535 3000",
   "image" : "5a28b210-1697-4cc0-8c42-4d17ad0d8198"
 }, {
   "type" : "hotline",
   "name" : "Hotline",
-  "address" : null,
-  "contact_number" : "9747347534",
+  "address_and_contact_info" : "Some address",
   "image" : null
 }, {
   "type" : "shelter",
   "name" : "Shelter Children",
-  "address" : "Some adrress\nCode 32432432",
-  "contact_number" : "23423423423",
+  "address_and_contact_info" : "Some address\nCode 32432432, 23423423423",
   "image" : null
 } ]}"""
         return jacksonObjectMapper().readValue(content, Referrals::class.java)
@@ -87,8 +78,7 @@ object ReferralsFixture {
         val content = """{ "data": [ {
   "type" : "health",
   "name" : "Tara hospital",
-  "address" : "50 Saxon Road, Hurlingham,\n011 535 3000",
-  "contact_number" : "323423324234",
+  "address_and_contact_info" : "50 Saxon Road, Hurlingham,\n011 535 3000, 323423324234",
   "image" : "5a28b210-1697-4cc0-8c42-4d17ad0d8198"
 }]}"""
         return jacksonObjectMapper().readValue(content, Referrals::class.java)

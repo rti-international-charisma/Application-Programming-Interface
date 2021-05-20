@@ -20,9 +20,8 @@ data class Referrals(
 data class Referral(
     val type: String,
     val name: String,
-    @JsonAlias("contact_number")
-    val contact: String?,
-    val address: String?,
+    @JsonAlias("address_and_contact_info")
+    val addressAndContactInfo: String?,
     @JsonAlias("image")
     val imageUrl: String?
 )

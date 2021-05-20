@@ -24,8 +24,7 @@ class ReferralsConversionsTest {
         val referral = Referral(
             "type",
             "name",
-            "324234234",
-            "address 1, address 2, code - 32423",
+            "address 1, address 2, code - 32423, 324234234",
             "image-id"
         )
         val json = jacksonObjectMapper()
@@ -35,8 +34,7 @@ class ReferralsConversionsTest {
         val singleReferral = """[ {
   "type" : "type",
   "name" : "name",
-  "address" : "address 1, address 2, code - 32423",
-  "contact" : "324234234",
+  "addressAndContactInfo" : "address 1, address 2, code - 32423, 324234234",
   "imageUrl" : "/assets/image-id"
 } ]"""
         assertEquals(singleReferral, json)
@@ -49,7 +47,6 @@ class ReferralsConversionsTest {
             "type",
             "name",
             "",
-            "",
             ""
         )
         val json = jacksonObjectMapper()
@@ -59,8 +56,7 @@ class ReferralsConversionsTest {
         val singleReferral = """[ {
   "type" : "type",
   "name" : "name",
-  "address" : "",
-  "contact" : "",
+  "addressAndContactInfo" : "",
   "imageUrl" : null
 } ]"""
         assertEquals(singleReferral, json)
@@ -74,7 +70,6 @@ class ReferralsConversionsTest {
             "type",
             "name",
             null,
-            null,
             null
         )
         val json = jacksonObjectMapper()
@@ -84,8 +79,7 @@ class ReferralsConversionsTest {
         val singleReferral = """[ {
   "type" : "type",
   "name" : "name",
-  "address" : null,
-  "contact" : null,
+  "addressAndContactInfo" : null,
   "imageUrl" : null
 } ]"""
         assertEquals(singleReferral, json)

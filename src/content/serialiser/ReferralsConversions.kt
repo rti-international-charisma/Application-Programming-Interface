@@ -14,9 +14,8 @@ object ReferralsConversions {
                     writeStartObject()
                     writeStringField("type", referral.type)
                     writeStringField("name", referral.name)
-                    writeStringField("address", referral.address)
-                    writeStringField("contact", referral.contact)
-                    writeStringField("imageUrl", ifPresent(referral.imageUrl)?.let { "/assets/${referral.imageUrl}" })
+                    writeStringField("addressAndContactInfo", referral.addressAndContactInfo)
+                    writeStringField("imageUrl", ifPresent(referral.imageUrl)?.let {  "/assets/${referral.imageUrl}"})
                     writeEndObject()
                 }
                 writeEndArray()
