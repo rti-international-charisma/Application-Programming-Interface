@@ -4,7 +4,8 @@ on:
     branches:
       - integration_postgres_docker
   workflow_dispatch:
-  
+
+
 jobs:
   setup-build-package-publish:
     name: Setup, Clean , Test, Publish Test Coverage
@@ -28,7 +29,7 @@ jobs:
           - 5432:5432
 
     env:
-        db_url: postgresql://postgres:postgres@localhost:5432/charisma
+      db_url: postgresql://postgres:postgres@localhost:5432/charisma
 
     steps:
       - name: Checkout
