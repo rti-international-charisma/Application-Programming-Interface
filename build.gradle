@@ -27,7 +27,7 @@ sourceSets {
     main.kotlin.srcDirs = ['src']
     test.kotlin.srcDirs = ['test']
     main.resources.srcDirs = ['resources']
-    test.resources.srcDirs = ['testresources']
+    test.resources.srcDirs = ['test-resources']
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
