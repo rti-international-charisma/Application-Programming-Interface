@@ -40,7 +40,7 @@ class ContentTest : ServerTest() {
     fun `it should fetch a counselling module for given module id`() {
         wireMockServer.stubFor(
             addMapping(
-                "/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)",
+                "/items/counselling_module/prep_use?([a-z]*)",
                 "module-prep-use.json",
                 2
             )
@@ -58,13 +58,31 @@ class ContentTest : ServerTest() {
     fun `it should fetch a counselling module for given module id - partner - comm`() {
         wireMockServer.stubFor(
             addMapping(
-                "/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)",
+                "/items/counselling_module/partner_comm?([a-z]*)",
                 "module-partner-comms.json",
                 2
             )
         )
 
         val modules = get("/modules/partner_comm")
+            .then()
+            .statusCode(200)
+            .extract().asString()
+
+        assertEquals(ServiceResponse.partner_comms, modules)
+    }
+
+    @Test
+    fun `it should fetch counselling module for given score and consent`() {
+        wireMockServer.stubFor(
+            addMapping(
+                "/items/counselling_module/partner_comm?([a-z]*)",
+                "module-partner-comms.json",
+                1
+            )
+        )
+
+        val modules = get("/modules?partner_score=12&prep_consent=agree")
             .then()
             .statusCode(200)
             .extract().asString()
@@ -113,20 +131,6 @@ class ContentTest : ServerTest() {
         assertEquals(ServiceResponse.referrals, referrals)
     }
 
-//    @Test
-//    fun `it should fetch counselling module for given score and consent`() {
-//        wireMockServer.stubFor(
-//            addMapping("/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)",
-//                "module-partner-comms.json", 1)
-//        )
-//
-//        val modules = get("/modules?partner_score=12&prep_consent=agree")
-//            .then()
-//            .statusCode(200)
-//            .extract().asString()
-//
-//        assertEquals(ServiceResponse.partner_comms, modules)
-//    }
 
     @Test
     fun `it should fetch page content for given page`() {
