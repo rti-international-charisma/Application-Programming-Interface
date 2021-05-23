@@ -28,14 +28,14 @@ class ContentService(private val contentClient: ContentClient) {
     private val logger = LoggerFactory.getLogger(ContentService::class.java)
 
     suspend fun getHomePage(): Page {
-        //supports 3 levels of information
+        // supports 3 levels of information
         val endpoint = "/items/homepage?fields=*.*.*"
         return pageRequest(endpoint)
     }
 
     suspend fun getPage(pageId: String): Page {
-        //supports 3 levels of information
-        val endpoint = "/items/pages/${pageId}?fields=*.*.*"
+        // supports 3 levels of information
+        val endpoint = "/items/pages/$pageId?fields=*.*.*"
         return pageRequest(endpoint)
     }
 
@@ -45,7 +45,7 @@ class ContentService(private val contentClient: ContentClient) {
     }
 
     suspend fun getModule(moduleId: String): Page {
-        val endpoint = "/items/counselling_module/${moduleId}?fields=*.*,*.accordion_content.*"
+        val endpoint = "/items/counselling_module/$moduleId?fields=*.*,*.accordion_content.*"
         return pageRequest(endpoint)
     }
 
@@ -83,7 +83,7 @@ class ContentService(private val contentClient: ContentClient) {
     @Deprecated("To be removed")
     suspend fun getAsset(assetId: String): ByteArray {
         try {
-            return contentClient.getAsset("/assets/${assetId}")
+            return contentClient.getAsset("/assets/$assetId")
         } catch (e: ContentRequestException) {
             logger.warn("Request failed for asset, $assetId, ${e.localizedMessage}")
             throw ContentRequestException(e.localizedMessage)
@@ -120,7 +120,4 @@ class ContentService(private val contentClient: ContentClient) {
             throw ContentServerException(e.localizedMessage, e)
         }
     }
-
-
 }
-

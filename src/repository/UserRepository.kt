@@ -4,7 +4,6 @@ import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.route.Signup
 
-
 interface UserRepository {
 
     fun getSecurityQuestions(secQId: Int?): List<SecurityQuestion>

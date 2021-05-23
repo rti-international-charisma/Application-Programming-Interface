@@ -14,7 +14,6 @@ object SectionScores : Table() {
     override val primaryKey = PrimaryKey(id, name = "PK_SECTION_SCORE_ID")
 }
 
-
 data class SectionScore(
     var id: Int = 0,
     val user: Int,

@@ -39,7 +39,6 @@ import io.ktor.util.date.*
 import org.slf4j.event.Level
 import javax.sql.DataSource
 
-
 fun main() {
     embeddedServer(Netty, port = 8080) {
         main()
@@ -80,7 +79,7 @@ fun Application.commonModule() {
         jackson {
             configure(com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT, true)
             setDefaultPrettyPrinter(DefaultPrettyPrinter())
-            registerModule(JavaTimeModule())  // support java.time.* types
+            registerModule(JavaTimeModule()) // support java.time.* types
         }
     }
 
@@ -182,7 +181,6 @@ fun Application.contentModule(contentService: ContentService) {
     routing {
         contentRoute(contentService)
     }
-
 }
 
 fun Application.healthCheckModule() {
@@ -190,5 +188,3 @@ fun Application.healthCheckModule() {
         healthRoute()
     }
 }
-
-

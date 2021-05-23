@@ -20,7 +20,7 @@ import io.ktor.routing.*
 import java.util.*
 
 data class Signup(val username: String, val password: String, val secQuestionId: Int, val secQuestionAnswer: String)
-data class Login (val username: String, val password: String)
+data class Login(val username: String, val password: String)
 data class VerifySecQuestion(val username: String, val secQuestionId: Int, val secQuestionAnswer: String)
 data class ResetPassword(val newPassword: String)
 
@@ -35,8 +35,8 @@ fun Routing.userRoute(userService: UserService) {
 
     get("/securityquestions/{id}") {
         val id = if (call.parameters["id"].isNullOrEmpty()) {
-           null
-         } else {
+            null
+        } else {
             call.parameters["id"]?.toInt()
         }
         call.respond(HttpStatusCode.OK, userService.getSecurityQuestions(id))
@@ -92,7 +92,6 @@ fun Routing.userRoute(userService: UserService) {
         } ?: run {
             call.respond(HttpStatusCode.Unauthorized)
         }
-
     }
 
     authenticate("jwt") {

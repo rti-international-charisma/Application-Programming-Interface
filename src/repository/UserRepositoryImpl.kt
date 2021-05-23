@@ -9,7 +9,7 @@ import com.rti.charisma.api.util.hash
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class UserRepositoryImpl: UserRepository {
+class UserRepositoryImpl : UserRepository {
 
     override fun getSecurityQuestions(secQId: Int?): List<SecurityQuestion> {
         secQId?.let {
@@ -60,17 +60,17 @@ class UserRepositoryImpl: UserRepository {
     }
 
     private fun ResultRow.toUser(): User = User(
-                id =this[Users.id],
-                username = this[Users.username],
-                sec_q_id = this[Users.sec_q_id],
-                password = this[Users.password],
-                sec_answer = this[Users.sec_answer],
-                loginAttemptsLeft = this[Users.loginAttempts],
-                resetPasswordAttemptsLeft = this[Users.resetPasswordAttempts]
-        )
+        id = this[Users.id],
+        username = this[Users.username],
+        sec_q_id = this[Users.sec_q_id],
+        password = this[Users.password],
+        sec_answer = this[Users.sec_answer],
+        loginAttemptsLeft = this[Users.loginAttempts],
+        resetPasswordAttemptsLeft = this[Users.resetPasswordAttempts]
+    )
 
     private fun ResultRow.toSecurityQuestion(): SecurityQuestion = SecurityQuestion(
-            id = this[SecurityQuestions.sec_q_id],
-            question = this[SecurityQuestions.question]
+        id = this[SecurityQuestions.sec_q_id],
+        question = this[SecurityQuestions.question]
     )
 }

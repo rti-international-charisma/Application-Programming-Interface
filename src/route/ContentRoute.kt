@@ -7,7 +7,6 @@ import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-
 @KtorExperimentalLocationsAPI
 fun Routing.contentRoute(contentService: ContentService) {
 
@@ -56,7 +55,6 @@ fun Routing.contentRoute(contentService: ContentService) {
         val asset = contentService.getAsset("${call.parameters["assetID"]}")
         call.respondBytes(asset)
     }
-
 }
 
 enum class CONSENT(val value: String) {
@@ -65,4 +63,3 @@ enum class CONSENT(val value: String) {
     OPPOSE("oppose"),
     UNAWARE("unaware")
 }
-

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import io.ktor.auth.*
 import org.jetbrains.exposed.sql.Table
 
-object Users: Table() {
+object Users : Table() {
     val id = integer("id").autoIncrement()
     val username = varchar("username", 25)
     val password = varchar("password", 50)
@@ -13,7 +13,6 @@ object Users: Table() {
     val loginAttempts = integer("login_attempts_left")
     val resetPasswordAttempts = integer("reset_password_attempts_left")
     override val primaryKey: PrimaryKey = PrimaryKey(id)
-
 }
 
 data class User(

@@ -38,7 +38,16 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Build with Gradle
-        run: ./gradlew clean test --info
+
       - name: JaCoCo coverage report
-        run: ./gradlew jacocoTestCoverageVerification --info
+        run: ./gradlew clean test jacocoTestCoverageVerification --info
+
+      - name: Build with Gradle
+        run: ./gradlew build --info
+
+      - name: Publish Test Report
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'test-report'
+          path: build/reports/jacoco/test/*

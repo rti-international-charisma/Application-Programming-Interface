@@ -3,8 +3,8 @@ package com.rti.charisma.api.content.serialiser
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
-import com.rti.charisma.api.config.IS_DRAFT_MODE
 import com.rti.charisma.api.config.ConfigProvider
+import com.rti.charisma.api.config.IS_DRAFT_MODE
 import com.rti.charisma.api.content.Page
 
 object PageConversions {
@@ -29,13 +29,13 @@ object PageConversions {
 
                     value.videoUrl?.let {
                         writeObjectFieldStart("moduleVideo")
-                        writeStringField("videoUrl", ifPresent(it.videoUrl)?.let { value -> "/assets/${value}" })
+                        writeStringField("videoUrl", ifPresent(it.videoUrl)?.let { value -> "/assets/$value" })
                         writeEndObject()
                     }
 
                     value.moduleImage?.let {
                         writeObjectFieldStart("moduleImage")
-                        writeStringField("imageUrl", ifPresent(it.moduleImage)?.let { value -> "/assets/${value}" })
+                        writeStringField("imageUrl", ifPresent(it.moduleImage)?.let { value -> "/assets/$value" })
                         writeEndObject()
                     }
 
@@ -44,7 +44,10 @@ object PageConversions {
                         value.images.forEach { image ->
                             writeStartObject()
                             writeStringField("title", image.imageFile.title)
-                            writeStringField("imageUrl", ifPresent(image.imageFile.imageUrl)?.let{"/assets/${image.imageFile.imageUrl}"})
+                            writeStringField(
+                                "imageUrl",
+                                ifPresent(image.imageFile.imageUrl)?.let { "/assets/${image.imageFile.imageUrl}" }
+                            )
                             writeEndObject()
                         }
                         writeEndArray()
@@ -59,7 +62,10 @@ object PageConversions {
                             writeStringField("title", video.title)
                             writeStringField("description", video.description)
                             writeStringField("videoUrl", ifPresent(video.videoUrl)?.let { "/assets/${video.videoUrl}" })
-                            writeStringField("videoImage", ifPresent(video.videoImage)?.let { "/assets/${video.videoImage}" })
+                            writeStringField(
+                                "videoImage",
+                                ifPresent(video.videoImage)?.let { "/assets/${video.videoImage}" }
+                            )
                             writeStringField("actionText", video.actionText)
                             writeStringField("actionLink", video.actionLink)
                             writeBooleanField("isPrivate", video.isPrivate)
@@ -75,7 +81,10 @@ object PageConversions {
                             writeStartObject()
                             writeStringField("title", step.title)
                             writeStringField("subTitle", step.subTitle)
-                            writeStringField("backgroundImageUrl", ifPresent(step.backgroundImageUrl)?.let { "/assets/${step.backgroundImageUrl}" })
+                            writeStringField(
+                                "backgroundImageUrl",
+                                ifPresent(step.backgroundImageUrl)?.let { "/assets/${step.backgroundImageUrl}" }
+                            )
                             writeStringField("imageUrl", ifPresent(step.imageUrl)?.let { "/assets/${step.imageUrl}" })
                             writeEndObject()
                         }
@@ -97,7 +106,10 @@ object PageConversions {
                                     writeStringField("id", accordion.id)
                                     writeStringField("title", accordion.title)
                                     writeStringField("description", accordion.description)
-                                    writeStringField("imageUrl", ifPresent(accordion.imageUrl)?.let { "/assets/${accordion.imageUrl}" })
+                                    writeStringField(
+                                        "imageUrl",
+                                        ifPresent(accordion.imageUrl)?.let { "/assets/${accordion.imageUrl}" }
+                                    )
                                     writeEndObject()
                                 }
                                 writeEndArray()
@@ -136,7 +148,6 @@ object PageConversions {
         val isDraftMode: Boolean = ConfigProvider.get(IS_DRAFT_MODE).toBoolean()
         if (status.equals("PUBLISHED", true)) return true
         if (status.equals("DRAFT", true) && isDraftMode) return true
-        return false;
+        return false
     }
-
 }
