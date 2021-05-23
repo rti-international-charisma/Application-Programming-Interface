@@ -2,7 +2,7 @@ name: Build and Verify Charisma API
 on:
   push:
     branches:
-      - integration_postgres_docker
+      - master
   workflow_dispatch:
 
 
