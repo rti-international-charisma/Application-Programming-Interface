@@ -1,4 +1,4 @@
-package integration.routes
+package integration.api
 
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
@@ -6,7 +6,6 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import integration.setup.ServerTest
 import integration.setup.responses.ServiceResponse
 import io.restassured.RestAssured.get
-import org.junit.Ignore
 import org.junit.jupiter.api.*
 import kotlin.test.assertEquals
 
@@ -82,12 +81,12 @@ class ContentTest : ServerTest() {
     @Test
     fun `it should fetch a counselling module for given module id`() {
 
-        val modules = get("/modules/partner_comm")
+        val modules = get("/modules/prep_use")
             .then()
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.modules, modules)
+        assertEquals(ServiceResponse.moduleForId, modules)
     }
 
     @Test
@@ -104,32 +103,37 @@ class ContentTest : ServerTest() {
 
     private fun createStub(){
         wireMockServer.stubFor(
-            addMapping("/items/pages/assessment-intro?([a-z]*)", "responses/page.json")
-        )
-
-        wireMockServer.stubFor(
-            addMapping("/items/counselling_module/partner_comm?([a-z]*)", "responses/counselling-modules.json")
+            addMapping("/items/pages/assessment-intro?([a-z]*)", "page.json", 2)
         )
         wireMockServer.stubFor(
-            addMapping("/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)", "responses/counselling-modules.json")
+            addMapping("/items/counselling_module/partner_comm?([a-z]*)",
+                "counselling-modules.json", 1)
         )
         wireMockServer.stubFor(
-            addMapping("/items/referrals", "responses/referrals.json")
+            addMapping(
+                "/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)",
+                "counselling-module-prep.json",
+                2
+            )
         )
         wireMockServer.stubFor(
-            addMapping("/items/sections?([a-z]*)", "responses/assessments.json")
+            addMapping("/items/referrals", "referrals.json", 2)
         )
         wireMockServer.stubFor(
-            addMapping("/items/homepage?([a-z]*)", "responses/homepage.json")
+            addMapping("/items/sections?([a-z]*)", "assessments.json", 2)
+        )
+        wireMockServer.stubFor(
+            addMapping("/items/homepage?([a-z]*)", "homepage.json", 2)
         )
     }
 
-    private fun addMapping(urlPattern: String, responsePath: String) =
+    private fun addMapping(urlPattern: String, stubFile: String, priority: Int) =
         WireMock.get(WireMock.urlPathMatching(urlPattern))
+            .atPriority(priority)
             .willReturn(
                 WireMock.aResponse()
                     .withHeader("Content-Type", "application/json")
                     .withStatus(200)
-                    .withBodyFile(responsePath)
+                    .withBodyFile("responses/$stubFile")
             )
 }
