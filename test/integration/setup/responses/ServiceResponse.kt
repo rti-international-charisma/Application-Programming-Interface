@@ -105,7 +105,7 @@ object ServiceResponse {
   "heroImage" : {
     "title" : "Partner Communication",
     "introduction" : null,
-    "personalisedMessage" : "",
+    "personalisedMessage" : null,
     "imageUrl" : "/assets/8ff62364-4536-4a47-ae5e-fd30c15f59c5"
   },
   "moduleVideo" : {
@@ -141,7 +141,7 @@ object ServiceResponse {
       "id" : "section_9_accordion_3",
       "title" : "So Whats a good example of an “I” Statement",
       "description" : "<p class=\"p1\">More &ldquo;I&rdquo; Statement examples</p>\n<ul class=\"ul1\">\n<li class=\"li1\">&ldquo;I felt very embarrassed last night because you were so drunk and you were letting that woman kiss you and dance with you in a very sexy way. If you are unhappy about our relationship and your mind is straying to thoughts of other women, I would like us to talk about it in private.&rdquo;<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">&ldquo;When you come home at night after the bar, I feel disappointed, because I would like to see more of you, and I would like some money for food for the children. I would like us to discuss how we can make things better together.&rdquo;<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li3\">These statements carry no blame and are phrased not to annoy the person we&rsquo;re talking to. The expectations within them are presented in a nonjudgmental manner (there is no &ldquo;you must...&rdquo;) and are not accusing the listener. They state your expectations or hopes, but they do not demand that they be met.</li>\n</ul>",
-      "imageUrl" : null
+      "imageUrl" : "/assets/9c4289ef-0371-490d-9c50-a1ee89fd5d57"
     } ]
   }, {
     "id" : "section_8",
@@ -173,7 +173,7 @@ object ServiceResponse {
       "id" : "section_11_accordion_2",
       "title" : "Clean up your fighting",
       "description" : "<p class=\"p1\"><strong>How to do it:</strong></p>\n<ul class=\"ul1\">\n<li class=\"li1\">Review the types of dirty conflict and tips for decreasing conflict</li>\n<li class=\"li1\">Think about an argument you have with your partner. Consider if you used any types of dirty fighting. What were they? What was their impact? How did they make the conversation harder?</li>\n<li class=\"li1\">What&rsquo;s an alternative approach you could use in the future?</li>\n<li class=\"li1\">The next time you find yourself in a conflict with your partner, make an active effort to avoid the &ldquo;dirty fighting&rdquo; and engage in more constructive behaviors instead. Don&rsquo;t be too hard on yourself if you slip up&mdash;it can be challenging to stay focused during the heat of an argument, and these habits can take time to change.</li>\n<li class=\"li1\">After the conflict, make a note of how things went. Did you or your partner engage in any of the &ldquo;dirty fighting&rdquo; behaviors, and if so, did you catch yourself and try to take a different approach during the conflict? What went well, and what could you improve for next time?</li>\n<li class=\"li1\">If you feel comfortable, you can share the information about dirty fighting and decreasing conflict with your partner so they can also help improve how you handle conflict.</li>\n</ul>\n<p class=\"p3\">&nbsp;</p>\n<p class=\"p1\"><strong>Why do it: </strong></p>\n<p class=\"p1\">Most couples have conflict in their relationship from time to time, and while that&rsquo;s not a bad thing, it can sometimes elicit destructive behaviors that contribute to you feeling bad in your relationship. If you can identify the destructive behaviors you can reduce them and replace them with more helpful behaviors, which can in turn improve communication and increase satisfaction. This process takes time and practice, and in some cases couples may benefit from seeking the support of a relationship counselor. See our list of resources for places where you can get that extra help.</p>",
-      "imageUrl" : null
+      "imageUrl" : "/assets/109ba440-9ede-4738-a1ba-f625a1aeebde"
     }, {
       "id" : "section_11_accordion_1",
       "title" : "The five types of dirty fighting",
