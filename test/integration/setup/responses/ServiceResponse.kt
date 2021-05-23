@@ -208,20 +208,17 @@ object ServiceResponse {
     const val referrals = """[ {
   "type" : "health",
   "name" : "Tara hospital",
-  "address" : "50 Saxon Road, Hurlingham,\n011 535 3000",
-  "contact" : "",
+  "addressAndContactInfo" : null,
   "imageUrl" : "/assets/5a28b210-1697-4cc0-8c42-4d17ad0d8198"
 }, {
   "type" : "hotline",
   "name" : "Hotline",
-  "address" : null,
-  "contact" : "9747347534",
+  "addressAndContactInfo" : null,
   "imageUrl" : null
 }, {
   "type" : "shelter",
   "name" : "Shelter Children",
-  "address" : "Some address\nCode 32432432",
-  "contact" : "23423423423",
+  "addressAndContactInfo" : null,
   "imageUrl" : null
 } ]"""
 
