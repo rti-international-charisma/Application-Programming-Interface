@@ -1,4 +1,4 @@
-name: Deploy API to Amazon ECS Production
+name: Deploy API to Amazon ECS staging
 
 on:
   workflow_dispatch:
@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
     
     - name: Checkout source code
       uses: actions/checkout@v1
@@ -41,7 +40,7 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_PRODUCTION }}
+        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
         IMAGE_TAG: latest
       run: |
           # Build a docker container and
@@ -55,14 +54,15 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: production/task-definition.json
-        container-name: ${{ secrets.AWS_CONTAINER_NAME_PRODUCTION }}
+        task-definition: .aws/service/staging/task-definition.json
+        container-name: ${{ secrets.AWS_CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
     
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ${{ secrets.SERVICE_NAME_PRODUCTION }}
-        cluster: ${{ secrets.AWS_CLUSTER_PRODUCTION }}
+        service: ${{ secrets.SERVICE_NAME }}
+        cluster: ${{ secrets.AWS_CLUSTER }}
         wait-for-service-stability: true
+        

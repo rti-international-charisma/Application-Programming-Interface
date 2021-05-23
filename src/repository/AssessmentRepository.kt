@@ -9,5 +9,4 @@ interface AssessmentRepository {
     fun replaceScore(sections: List<SectionScore>)
     fun findSectionsByUser(userId: Int): List<SectionScore>
     fun findAnswersByAssessmentSectionId(userSectionId: Int): List<Answer>
-
 }

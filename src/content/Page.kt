@@ -69,7 +69,6 @@ data class CounsellingModuleSection(
     val accordionContent: List<AccordionContent>?
 )
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 data class AccordionContent(
@@ -89,7 +88,6 @@ data class CounsellingModuleActionPoint(
     val moduleName: String
 )
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 data class PageImage(
@@ -104,7 +102,6 @@ data class ImageFile(
     val imageUrl: String = "",
     val title: String = ""
 )
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
@@ -133,7 +130,6 @@ data class PageVideo(
     @JsonProperty("is_private")
     var isPrivate: Boolean
 )
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Step(

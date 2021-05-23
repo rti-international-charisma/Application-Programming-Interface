@@ -53,10 +53,8 @@ class AssessmentRepositoryImpl : AssessmentRepository {
                         answers = findAnswersByAssessmentSectionId(it[SectionScores.id])
                     )
                 }
-
         }
     }
-
 
     override fun findAnswersByAssessmentSectionId(userSectionId: Int): List<Answer> {
         return transaction {

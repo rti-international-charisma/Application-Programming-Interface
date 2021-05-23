@@ -44,6 +44,6 @@ object AssessmentSectionConversions {
         val isDraftMode: Boolean = ConfigProvider.get(IS_DRAFT_MODE).toBoolean()
         if (status.equals("PUBLISHED", true)) return true
         if (status.equals("DRAFT", true) && isDraftMode) return true
-        return false;
+        return false
     }
 }

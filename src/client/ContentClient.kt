@@ -46,7 +46,6 @@ class ContentClient {
                 customizeClient {
                     setMaxConnTotal(1000)
                     setMaxConnPerRoute(100)
-
                 }
                 customizeRequest {
                 }
@@ -61,7 +60,7 @@ class ContentClient {
         logger.info("Sending request to cms, '$endpoint'")
         try {
             return client.request {
-                url("$baseUrl${endpoint}")
+                url("$baseUrl$endpoint")
                 method = HttpMethod.Get
                 header("Authorization", "Bearer $accessToken")
             }
@@ -81,11 +80,11 @@ class ContentClient {
         logger.info("Sending request to cms, '$endpoint'")
         try {
             return client.request {
-                url("$baseUrl${endpoint}")
+                url("$baseUrl$endpoint")
                 method = HttpMethod.Get
                 header("Authorization", "Bearer $accessToken")
             }
-        }  catch (e: ClientRequestException) {
+        } catch (e: ClientRequestException) {
             logger.warn("Bad request for assessment, '$endpoint', ${e.localizedMessage}")
             throw ContentRequestException("Failed to fetch content, ${e.localizedMessage}}")
         } catch (e: ServerResponseException) {
@@ -101,11 +100,11 @@ class ContentClient {
         logger.info("Sending request to cms, '$endpoint'")
         try {
             return client.request {
-                url("$baseUrl${endpoint}")
+                url("$baseUrl$endpoint")
                 method = HttpMethod.Get
                 header("Authorization", "Bearer $accessToken")
             }
-        }  catch (e: ClientRequestException) {
+        } catch (e: ClientRequestException) {
             logger.warn("Bad request for referrals, '$endpoint', ${e.localizedMessage}")
             throw ContentRequestException("Failed to fetch content, ${e.localizedMessage}}")
         } catch (e: ServerResponseException) {
@@ -119,9 +118,9 @@ class ContentClient {
 
     suspend fun getAsset(endpoint: String): ByteArray {
         logger.info("Sending request to cms, '$endpoint'")
-        try{
+        try {
             return client.request {
-                url("$baseUrl${endpoint}")
+                url("$baseUrl$endpoint")
                 method = HttpMethod.Get
                 header("Authorization", "Bearer $accessToken")
             }
@@ -136,9 +135,4 @@ class ContentClient {
             throw ContentException("Unexpected failure while fetching asset content from server", e)
         }
     }
-
 }
-
-
-
-

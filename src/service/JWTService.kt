@@ -21,9 +21,9 @@ object JWTService {
         .build()
 
     val resetPassVerifier: JWTVerifier = JWT
-            .require(algorithm)
-            .withIssuer(resetPassIssuer)
-            .build()
+        .require(algorithm)
+        .withIssuer(resetPassIssuer)
+        .build()
 
     fun generateToken(user: User): String = JWT.create()
         .withSubject("Authentication")
@@ -34,11 +34,11 @@ object JWTService {
 
 
     fun generateResetPasswordToken(user: User): String = JWT.create()
-            .withSubject("ResetPassword")
-            .withIssuer(resetPassIssuer)
-            .withClaim("id", user.id)
-            .withExpiresAt(expiresAt())
-            .sign(algorithm)
+        .withSubject("ResetPassword")
+        .withIssuer(resetPassIssuer)
+        .withClaim("id", user.id)
+        .withExpiresAt(expiresAt())
+        .sign(algorithm)
 
     private fun expiresAt() = Date(System.currentTimeMillis() + validityInMs)
 }

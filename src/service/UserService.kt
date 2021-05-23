@@ -6,15 +6,15 @@ import com.rti.charisma.api.config.RESET_ATTEMPTS
 import com.rti.charisma.api.db.tables.SecurityQuestion
 import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.exception.*
-import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.repository.UserRepository
 import com.rti.charisma.api.route.Login
 import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.route.VerifySecQuestion
+import com.rti.charisma.api.route.response.UserResponse
 import com.rti.charisma.api.util.hash
 import org.slf4j.LoggerFactory
 
-class UserService(private val userRepository: UserRepository, private val jwtService : JWTService) {
+class UserService(private val userRepository: UserRepository, private val jwtService: JWTService) {
     private val logger = LoggerFactory.getLogger(UserService::class.java)
 
     fun registerUser(signupModel: Signup): Int {
@@ -23,7 +23,11 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
             throw UserAlreadyExistException()
         } else {
             userRepository.getSecurityQuestions(signupModel.secQuestionId).firstOrNull()?.let {
-                return userRepository.registerUser(signupModel, ConfigProvider.get(LOGIN_ATTEMPTS).toInt(), ConfigProvider.get(RESET_ATTEMPTS).toInt())
+                return userRepository.registerUser(
+                    signupModel,
+                    ConfigProvider.get(LOGIN_ATTEMPTS).toInt(),
+                    ConfigProvider.get(RESET_ATTEMPTS).toInt()
+                )
             } ?: run {
                 logger.warn("Security question does not exist, ${signupModel.secQuestionId}")
                 throw SecurityQuestionException("Security question with Id: ${signupModel.secQuestionId} is not present")
@@ -88,14 +92,16 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
                         user.resetPasswordAttemptsLeft--
                         userRepository.updateUser(user)
                         logger.warn("Deactivating account. Reset password attempts exhausted userId: ${user.id}")
-                        throw ResetPasswordAttemptsExhaustedException("The answer you have entered does not match what we have on file and this account will be deactivated." +
-                                " Please create a new account")
+                        throw ResetPasswordAttemptsExhaustedException(
+                            "The answer you have entered does not match what we have on file and this account will be deactivated. Please create a new account"
+                        )
                     } else if (user.resetPasswordAttemptsLeft > 0) {
                         user.resetPasswordAttemptsLeft--
                         userRepository.updateUser(user)
                         logger.warn("Incorrect secret question answer . Decrementing reset password attempts for userId: ${user.id}")
-                        throw LoginException("The answer you have entered does not match what we have on file. " +
-                                "Please try again, you have ${user.resetPasswordAttemptsLeft} number of attempts left.")
+                        throw LoginException(
+                            "The answer you have entered does not match what we have on file. Please try again, you have ${user.resetPasswordAttemptsLeft} number of attempts left."
+                        )
                     }
                 }
             } else {

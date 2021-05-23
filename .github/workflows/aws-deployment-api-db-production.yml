@@ -13,7 +13,6 @@ jobs:
 
     steps:
     
-    
     - name: Checkout source code
       uses: actions/checkout@v1
       
@@ -48,7 +47,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: production/postgres/task-definition.json
+        task-definition: .aws/tasks/postgres/task-definition.json
         container-name: ${{ secrets.AWS_CONTAINER_NAME_POSTGRES_PRODUCTION }}
         image: ${{ steps.pull-image-postgres.outputs.image }}
     

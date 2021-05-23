@@ -31,9 +31,7 @@ class AssessmentService(private val assessmentRepository: AssessmentRepository) 
         try {
             val sections: List<SectionScore> = assessmentRepository.findSectionsByUser(userId)
             logger.info("Successfully fetched assessment scores for, $userId")
-
             return fromSectionScore(sections)
-
         } catch (e: Exception) {
             logger.error("Failed to get scores for, $userId, ${e.printStackTrace()}")
             throw DataBaseException("Failed to get scores", e)

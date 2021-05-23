@@ -6,7 +6,6 @@ import io.ktor.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-
 object Hash {
     fun stringHash(str: String): String {
         val hashKey = ConfigProvider.get(HASH_SECRET_KEY).toByteArray()

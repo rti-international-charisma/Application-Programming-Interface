@@ -12,7 +12,7 @@ data class Assessment(
     val assessment: MutableList<AssessmentSection>
 )
 
-@JsonIgnoreProperties(value = ["status"], allowSetters = true, ignoreUnknown=true)
+@JsonIgnoreProperties(value = ["status"], allowSetters = true, ignoreUnknown = true)
 @JsonSerialize(using = AssessmentSectionConversions.Serializer::class)
 data class AssessmentSection(
     val id: String,
@@ -45,4 +45,3 @@ data class Option(
     val text: String,
     val weightage: Int
 )
-
