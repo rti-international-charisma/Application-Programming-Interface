@@ -2,111 +2,87 @@ package integration.setup.responses
 
 
 object ServiceResponse {
-    const val moduleForId = """{
-  "title" : "Prep Use",
-  "introduction" : "",
+    const val module_prep_use = """{
+  "title" : "Discussing PrEP Use With Partners",
+  "introduction" : "<p>Bring about positive changes in your relationship through better communication</p>",
   "description" : null,
   "summary" : null,
   "heroImage" : {
-    "title" : "Partner Communication",
+    "title" : "PrEP Disclosure",
     "introduction" : null,
-    "personalisedMessage" : "",
-    "imageUrl" : "/assets/8ff62364-4536-4a47-ae5e-fd30c15f59c5"
+    "personalisedMessage" : null,
+    "imageUrl" : "/assets/89390db4-434f-4d7d-92a0-152cd1368ecd"
   },
   "moduleVideo" : {
-    "videoUrl" : "/assets/9fd45ac0-e7e3-4d26-b75f-62c0125bf6ec"
+    "videoUrl" : "/assets/f5930b41-f299-4728-b035-919156a06675"
   },
   "counsellingModuleSections" : [ {
-    "id" : "section_7",
-    "title" : "Elements of Communication",
-    "introduction" : "<p><span style=\"font-size: 14pt;\">The way we and our partners communicate and behave in our relationship can make or break the relationship. To make sure we&rsquo;re stronger together, we should look at our communication.</span></p>",
+    "id" : "section_2",
+    "title" : "How to tell your partner, or someone else you trust, about PrEP…",
+    "introduction" : "<p>It can sometimes be difficult to bring up the issue of HIV prevention with a partner, but there are ways it can become easier.</p>",
     "summary" : null,
     "accordionContent" : [ {
-      "id" : "section_7_accordion_1",
-      "title" : "Ways of communicating",
-      "description" : "<p class=\"p1\">It&rsquo;s about more than the words we use. It&rsquo;s also about voice, tone, and body language. These are also known as the 3 &ldquo;V&rdquo;&rsquo;s: Verbal, Vocal and Visual<span class=\"Apple-converted-space\">&nbsp;</span></p>\n<p class=\"p1\"><strong>Verbal</strong></p>\n<ul class=\"ul1\">\n<li class=\"li1\">&nbsp;Words</li>\n</ul>\n<p class=\"p1\"><strong>Vocal</strong></p>\n<ul class=\"ul1\">\n<li class=\"li1\">&nbsp;Words</li>\n</ul>\n<p class=\"p1\"><strong>Visual&nbsp;</strong></p>\n<ul class=\"ul1\">\n<li class=\"li1\">&nbsp;Gestures</li>\n<li class=\"li1\">Facial expressions</li>\n<li class=\"li1\">Eye contact / movements</li>\n</ul>",
+      "id" : "section_2_accordion_2",
+      "title" : "Where to tell someone",
+      "description" : "<ul>\n<li>Do it in a comfortable and private place where no one will overhear you and where you will not be interrupted.</li>\n<li>If you are worried that he may be violent or you are not sure how he will react, don&rsquo;t be too far away from others so that you can get help if you need it.</li>\n<li>When to tell someone</li>\n<li>When you will have enough time to say everything you need to say</li>\n<li>When you will have enough time for that person to respond and ask questions</li>\n<li>When both of you are in a good mood and with a settled mind</li>\n<li>If you are worried that he may become violent, it may help to disclose during the daytime so you can get help more easily, if you need it.</li>\n</ul>",
+      "imageUrl" : null
+    }, {
+      "id" : "section_2_accordion_1",
+      "title" : "Here are some tips you can use to make it easier:",
+      "description" : "<ul>\n<li>How to tell someone</li>\n<li>Use clear and simple language.</li>\n<li>Maintain eye contact, remain confident and calm.</li>\n<li>Have prepared answers for anticipated questions</li>\n<li>Start disclosure indirectly by creating a story talking about PrEP in general without telling him you&rsquo;re using it and see what he says. If he says negative things, you may not want to tell him you are using it. Gauge his reaction; if you feel he may harm you, do not disclose.</li>\n<li>Be prepared to answer his questions.</li>\n<li>Listen openly to your partner&rsquo;s concerns do not assume you already know what he is going to say.</li>\n<li>Avoid blaming others when disclosing, especially him. In other words, don&rsquo;t say that it is his fault that you are using PrEP, because of his behaviours. Instead, say it is your decision to protect yourself.</li>\n<li>Observe or Look at your partner&rsquo;s the body language of your partner as you are disclosing or talking to him about PrEP to see his reaction.</li>\n<li>Be sensitive to emotions and feelings of your partner as you are disclosing or talking to him.</li>\n</ul>",
       "imageUrl" : null
     } ]
   }, {
-    "id" : "section_9",
-    "title" : "USING “I” STATEMENTS",
-    "introduction" : "<p>Now that we&rsquo;ve talked about how positive or negative communication and behaviours like body language can influence the health of your relationship, let&rsquo;s learn about and practice using what we call &ldquo;assertive&rdquo; communication. This is a way of communicating your needs in a healthy way. We&rsquo;re going to practice using &ldquo;I&rdquo; statements, which is a way of saying how you feel so that you and your partner can open, rather than close, conversation on a difficult topic.</p>",
-    "summary" : null,
-    "accordionContent" : [ {
-      "id" : "section_9_accordion_1",
-      "title" : "What is an “I” Statement",
-      "description" : "<ul class=\"ul1\">\n<li class=\"li1\">An &ldquo;I&rdquo; statement is a way of clearly expressing your point of view about a situation. It includes an expression of how a situation is affecting you and how you would like to see it change.<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">The best &ldquo;I&rdquo; statement is free of specific demands and blame. It opens up the discussion and leaves the next move up to the other person.<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">We should aim for &ldquo;I&rdquo; statements to be clear (that is, to the point) and clean (that is, free of blame and judgment). We should beware of &ldquo;you&rdquo; statements, which place blame on someone else, hold them responsible, demand change from them, or sound like a threat.</li>\n</ul>",
-      "imageUrl" : null
-    }, {
-      "id" : "section_9_accordion_2",
-      "title" : "What’s a “you” Statement",
-      "description" : "<p class=\"p1\">A &ldquo;you&rdquo; statement is not what we want because they are judgemental.</p>\n<ul class=\"ul1\">\n<li class=\"li1\">&ldquo;You are such a disgrace to me. You are always getting drunk and flirting with other women. I don&rsquo;t want to go to social events with you any more even if you are my husband. You must control yourself.&rdquo;<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">&ldquo;You are always so drunk when you come home at night, and you never give me money to buy food. I don&rsquo;t know why I ever moved in with you. You must stop going to that bar from now on!&rdquo;<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Remember &ldquo;you&rdquo; statements close a discussion because they make the person you&rsquo;re talking to feel defensive.</li>\n</ul>",
-      "imageUrl" : null
-    }, {
-      "id" : "section_9_accordion_3",
-      "title" : "So Whats a good example of an “I” Statement",
-      "description" : "<p class=\"p1\">More &ldquo;I&rdquo; Statement examples</p>\n<ul class=\"ul1\">\n<li class=\"li1\">&ldquo;I felt very embarrassed last night because you were so drunk and you were letting that woman kiss you and dance with you in a very sexy way. If you are unhappy about our relationship and your mind is straying to thoughts of other women, I would like us to talk about it in private.&rdquo;<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">&ldquo;When you come home at night after the bar, I feel disappointed, because I would like to see more of you, and I would like some money for food for the children. I would like us to discuss how we can make things better together.&rdquo;<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li3\">These statements carry no blame and are phrased not to annoy the person we&rsquo;re talking to. The expectations within them are presented in a nonjudgmental manner (there is no &ldquo;you must...&rdquo;) and are not accusing the listener. They state your expectations or hopes, but they do not demand that they be met.</li>\n</ul>",
-      "imageUrl" : null
-    } ]
-  }, {
-    "id" : "section_8",
-    "title" : "Consider how you talk to your partner or other loved ones:",
-    "introduction" : "<p><strong>How to do it:</strong> &nbsp;It&rsquo;s really great that you want to improve communication in your relationships. This is really important and can have a big impact on the health of your relationship overall. Effective communication can help build trust, intimacy, and openness.&nbsp;</p>\n<p>Think about what you learned from the video and the earlier content on the different V&rsquo;s that contribute to our communication. Think about how each of these elements can be done in either a positive or a negative way. &nbsp;</p>\n<p><strong>Reflect on the following questions:</strong></p>\n<ul>\n<li>What are positive things a partner can say? What are some negative things? By this we mean the words they use when you talk.</li>\n<li>What about the voice your partner uses &ndash; how can it be positive or negative? By voice I mean pitch or volume of the way they speak to you.</li>\n<li>What about body language? By body language I mean things like posture, facial expression, and proximity.</li>\n<li>How do these things affect the way you react to what a partner is communicating to you?</li>\n<li>Can you think of two ways your communication could improve in each of these areas?</li>\n</ul>",
+    "id" : "section_3",
+    "title" : "What if my partner, or loved one, has a bad reaction?",
+    "introduction" : "<p>Many people do have misconceptions about PrEP so it&rsquo;s important to be ready with your response.<br />Let&rsquo;s talk about some potential ways your partner, or someone else you tell, might respond if you<br />told them about PrEP. It can be helpful if you have someone in your life to support you, but not<br />everyone reacts positively. Remember, it&rsquo;s your choice whether to talk about your PrEP use, or not.<br />However, it can be helpful if you have someone in your life to support you.</p>",
     "summary" : null
   }, {
-    "id" : "section_10",
-    "title" : "Key take out points",
-    "introduction" : "<ul class=\"ul1\">\n<li class=\"li1\">This is a useful way of separating feelings and facts in order to clarify what the problem really is.<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">The formula may seem strange and unfamiliar, but it can become more natural the more you use &ldquo;I&rdquo; statements. This is a tough discipline and needs practice!<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Remember it&rsquo;s not guaranteed to work everytime. You can only control your own behavior in a conflict, not the other person&rsquo;s, but hopefully with time you&rsquo;ll both learn to respectfully handle conflict.</li>\n<li class=\"li1\">&ldquo;I&rdquo; statements can be used at work, at the market or the shops, with friends, on public transport, or at any time when you feel that your needs are<br />not being met. They are not just for use with a partner, so you can start practicing with others if practicing with your partner is too hard!<span class=\"Apple-converted-space\">&nbsp;</span></li>\n</ul>",
+    "id" : "section_4",
+    "title" : "How to use PrEP without anyone knowing",
+    "introduction" : "<p>Sometimes it makes sense not to tell your partner, or anyone else about your PrEP use, if you think<br />they&rsquo;ll be violent towards you or have another reaction that would be hard to handle. If you don&rsquo;t<br />want to tell them, that&rsquo;s your choice, but it&rsquo;s good to think about how to keep your PrEP use a<br />secret.</p>",
     "summary" : null,
     "accordionContent" : [ {
-      "id" : "section_10_accordion_1",
-      "title" : "Using “I” Statements",
-      "description" : "<p class=\"p1\">Consider what you&rsquo;ve already learned about good communication, including your voice, tone, and body language. Now let&rsquo;s use those while we also adjust our words through &ldquo;I&rdquo; statements..<span class=\"Apple-converted-space\">&nbsp;</span></p>\n<p class=\"p1\"><strong>How to do it:</strong>&nbsp; It&rsquo;s really great that you want to improve communication in your relationships. We all have conflicts with our partners and other people in our lives. It&rsquo;s important to address these conflicts so that we can improve our relationships and I-statements can help.</p>",
-      "imageUrl" : null
-    }, {
-      "id" : "section_10_accordion_2",
-      "title" : "Reflect on the following questions",
-      "description" : "<ul class=\"ul1\">\n<li class=\"li1\">Let&rsquo;s think about some things that are particularly challenging between you and your partner, or someone else, and try to come up with an &ldquo;I&rdquo; statement about them. First, think about two topics you fight about most often?<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Now, think about the most recent time you fought about one of those topics. Can you come up with one &ldquo;I&rdquo; statement that you could have used?<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">What do you think about this approach? What would be useful or not useful?<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Can you commit to using at least one &ldquo;I&rdquo; statement with your partner, or someone else in your life, the next time you have a disagreement?&nbsp;</li>\n</ul>",
+      "id" : "section_4_accordion_1",
+      "title" : "Here are some tips that other young women have used:",
+      "description" : "<ul>\n<li>Store pills in places your partner, or loved ones will not look, such as a handbag, a keychain with storage, or with pads and tampons.</li>\n<li>Ask a neighbour or a nearby friend to keep the pills, although this can make it challenging to remember to take them every day.</li>\n<li>Store a few doses in an unmarked container (ensure that this container is not clear plastic because sun can damage medication).</li>\n<li>If your partner or loved one monitors or watches you closely, think of a reason for the regular clinic visits. For e.g. you could tell them you&rsquo;re going to the clinic for a medical condition. You can also tell them you&rsquo;re taking this medication for another reason such as pregnancy prevention or menstrual cramps.</li>\n</ul>",
       "imageUrl" : null
     } ]
   }, {
-    "id" : "section_11",
-    "title" : "Decreasing Conflict",
-    "introduction" : "<p class=\"p1\"><span style=\"font-size: 14pt;\">Let&rsquo;s talk a little more about conflict in relationships. Conflict is part of every relationship, but it is important to learn how to deal with conflict in a healthy way to have a healthy relationship. Conflicts get worse when we ignore them or when one or both people start using &ldquo;dirty fighting&rdquo; and emotionally abusive and controlling behaviors.<span class=\"Apple-converted-space\">&nbsp;</span></span></p>\n<p class=\"p1\"><span style=\"font-size: 14pt;\">Let&rsquo;s learn some more about &ldquo;dirty fighting.&rdquo; When we use &ldquo;dirty fighting&rdquo; we move from the issue level (where we respectfully talk about the issue at hand and seek compromise, etc.), to the personality level (e.g., making statements such as, &ldquo;You&rsquo;re a drunk&rdquo;). From the personality level, couples often move to the relationship level, where they question the relationship (e.g., making statements such as, &ldquo;If you don&rsquo;t like it, leave me!&rdquo;). <span class=\"Apple-converted-space\">&nbsp;</span></span></p>",
-    "summary" : null,
+    "id" : "section_1",
+    "title" : "Should I tell my partner, or someone else I love, I’m taking PrEP?",
+    "introduction" : "<p><em>There are many things that other women like you think about when deciding whether to tell reasons</em><br /><em>that women do and don&rsquo;t tell their partners, or someone they love, about their use of oral PrEP. It can</em><br /><em>be helpful for some young women to have their partner&rsquo;s support, but it&rsquo;s important to think about</em><br /><em>your own reasons for telling them. What are some reasons that you might want to tell your partner,</em><br /><em>or someone you love, about PrEP?</em></p>",
+    "summary" : "<p>Remember, whether you share or not is optional. It&rsquo;s your decision whether to talk to your partner,<br />or someone else, about PrEP use.</p>\n<p><strong>Do you think it would be helpful to tell your partner, or someone else, that you&rsquo;re using PrEP?</strong><br />● How do you think they would react?<br />● Why did or would you tell him?<br />● Why didn&rsquo;t or wouldn&rsquo;t you tell him?</p>",
     "accordionContent" : [ {
-      "id" : "section_11_accordion_2",
-      "title" : "Clean up your fighting",
-      "description" : "<p class=\"p1\"><strong>How to do it:</strong></p>\n<ul class=\"ul1\">\n<li class=\"li1\">Review the types of dirty conflict and tips for decreasing conflict</li>\n<li class=\"li1\">Think about an argument you have with your partner. Consider if you used any types of dirty fighting. What were they? What was their impact? How did they make the conversation harder?</li>\n<li class=\"li1\">What&rsquo;s an alternative approach you could use in the future?</li>\n<li class=\"li1\">The next time you find yourself in a conflict with your partner, make an active effort to avoid the &ldquo;dirty fighting&rdquo; and engage in more constructive behaviors instead. Don&rsquo;t be too hard on yourself if you slip up&mdash;it can be challenging to stay focused during the heat of an argument, and these habits can take time to change.</li>\n<li class=\"li1\">After the conflict, make a note of how things went. Did you or your partner engage in any of the &ldquo;dirty fighting&rdquo; behaviors, and if so, did you catch yourself and try to take a different approach during the conflict? What went well, and what could you improve for next time?</li>\n<li class=\"li1\">If you feel comfortable, you can share the information about dirty fighting and decreasing conflict with your partner so they can also help improve how you handle conflict.</li>\n</ul>\n<p class=\"p3\">&nbsp;</p>\n<p class=\"p1\"><strong>Why do it: </strong></p>\n<p class=\"p1\">Most couples have conflict in their relationship from time to time, and while that&rsquo;s not a bad thing, it can sometimes elicit destructive behaviors that contribute to you feeling bad in your relationship. If you can identify the destructive behaviors you can reduce them and replace them with more helpful behaviors, which can in turn improve communication and increase satisfaction. This process takes time and practice, and in some cases couples may benefit from seeking the support of a relationship counselor. See our list of resources for places where you can get that extra help.</p>",
+      "id" : "section_1_accordion_1",
+      "title" : "Some common reasons for sharing are:",
+      "description" : "<ul>\n<li>You feel like you need your partner&rsquo;s, or someone&rsquo;s, permission to take PrEP</li>\n<li>You like to make decisions with your partner, because you &lsquo;share everything&rsquo;</li>\n<li>You want their support and encouragement for your decision to use PrEP</li>\n<li>You think someone can help your adherence by helping you remember to take PrEP successfully, by reminding you to take your daily pill and get refills when needed</li>\n<li>You worry your partner, or someone else, would be more upset if they found out you were using PrEP without her telling them</li>\n<li>You don&rsquo;t want your partner to have misconceptions or misunderstandings about oral PrEP (e.g. Such as think they&rsquo;re it&rsquo;s using a muti or ARVs for HIV-positive people)</li>\n</ul>",
       "imageUrl" : null
     }, {
-      "id" : "section_11_accordion_1",
-      "title" : "The five types of dirty fighting",
-      "description" : "<ol class=\"ol1\">\n<li class=\"li1\">Criticism (<span class=\"s1\">What is it</span>: when you point out your partner&rsquo;s weaknesses. This is often done in absolute terms, which means you use words like &lsquo;never&rsquo; or &lsquo;always&rsquo;, for example, &ldquo;you never think about me&rdquo;; <span class=\"s1\">What&rsquo;s an alternative</span>: it&rsquo;s okay to share with your partner what you don&rsquo;t like about their behavior, but try to focus on your feelings using &ldquo;I&rdquo; statements rather than defining them by their behavior, which suggests they can&rsquo;t change.)<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Defensiveness (<span class=\"s1\">What is it</span>: tendency to react, quick to take offense. This often happens when you feel attacked or criticized. It also involves pushing the blame onto the other person so that you don&rsquo;t take responsibility. The problem with this is it shows that you&rsquo;re not listening to your partner&rsquo;s complaint or taking them seriously. It can also make your partner feel defensive. <span class=\"s1\">What&rsquo;s an alternative</span>: Try to listen to your partner&rsquo;s complaint and take it seriously. Take responsibility and apologize when it&rsquo;s appropriate.)<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Belittling (<span class=\"s1\">What is it</span>: making your partner feel &ldquo;small,&rdquo; name calling. this and the next form of &ldquo;dirty fighting&rdquo; can start to build up to make you feel bad about the relationship and your partner feel bad about themselves. <span class=\"s1\">What&rsquo;s an alternative</span>: Take a break from the conflict and think about the positive qualities your partner has so that you can return to the conflict and not insult your partner.)<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Humiliation (<span class=\"s1\">What is it</span>: embarrassing your partner, often in front of others.)<span class=\"Apple-converted-space\">&nbsp;</span></li>\n<li class=\"li1\">Withdrawing (<span class=\"s1\">What is it:</span> refusing to talk, silent treatment. This can also take the form of leaving in the middle of an argument. Remember it&rsquo;s okay to take a break from an argument if tension is high, but it&rsquo;s good to communicate about the break. This type of behavior can make your partner feel rejected or abandoned. <span class=\"s1\">What&rsquo;s an alternative:</span><span class=\"s2\"> If </span>you need time out to take a few deep breaths and collect your thoughts, let your partner know, and then return to the conversation when you&rsquo;re ready. This way, your partner will understand that you are taking care of yourself, not trying to reject them.)</li>\n</ol>\n<p class=\"p1\"><em>Happy couples still have disagreements, but they don&rsquo;t use dirty fighting, or they apologize quickly when they do. When a simple argument looks like it&rsquo;s getting out of hand, they&rsquo;ll say things like:<span class=\"Apple-converted-space\">&nbsp;</span></em> <em>&ldquo;I can see you&rsquo;re upset and want to talk, but I&rsquo;m feeling overwhelmed and I would hear you better if we wait to talk about this until tomorrow.&rdquo;<span class=\"Apple-converted-space\">&nbsp;</span></em></p>\n<p class=\"p1\"><em>Let&rsquo;s think about the conflicts you say you usually have with your partner. When you fight, do you usually fight about an issue, your partner&rsquo;s characteristics, or about the relationship?</em></p>",
+      "id" : "section_1_accordion_2",
+      "title" : "On the other hand, some reasons for NOT sharing include:",
+      "description" : "<ul>\n<li>You worry your partner, or someone else you tell, may not allow you to use PrEP or force you to stop using it</li>\n<li>You worry they may not be supportive, and will think you don&rsquo;t trust them</li>\n<li>You worry that your partner may think you are sleeping around and that they will not trust you</li>\n<li>Your partner might think that PrEP is ARVs, and that you are actually HIV positive</li>\n<li>You worry your partner may start or continue sleeping around because he thinks you&rsquo;re protected or he&rsquo;s protected by your PrEP use</li>\n<li>You worry your partner may be violen</li>\n<li>You fear your partner may end the relationship or you&rsquo;ll be kicked out of your home</li>\n<li>You don&rsquo;t feel the need to share the decision with your partner or anyone else. It&rsquo;s your own body and your decision</li>\n</ul>",
       "imageUrl" : null
     } ]
   } ],
   "counsellingModuleActionPoints" : [ {
-    "id" : "module_partner_comm_action_point_1",
-    "title" : "Think of two ways to improve the words, tone of voice, and body language I use when talking to my partner"
+    "id" : "model_prep_use_action_point_1",
+    "title" : "Make a decision about whether to tell my partner about PrEP or not"
   }, {
-    "id" : "module_partner_comm_action_point_2",
-    "title" : "Use an ‘I’ statement with my partner or someone else"
+    "id" : "model_prep_use_action_point_2",
+    "title" : "Practice how I’ll respond to my partner’s concerns about PrEP"
   }, {
-    "id" : "module_partner_comm_action_point_3",
-    "title" : "Identify types of ‘dirty fighting’ I use"
+    "id" : "model_prep_use_action_point_3",
+    "title" : "Prepare for telling my partner (e.g. decide where and when I’ll do it)"
   }, {
-    "id" : "module_partner_comm_action_point_4",
-    "title" : "Commit to staying focused on the issue in my next conflict"
-  }, {
-    "id" : "module_partner_comm_action_point_5",
-    "title" : "Commit to avoiding ‘dirty fighting’ in my next conflict"
-  }, {
-    "id" : "module_partner_comm_action_point_6",
-    "title" : "Talk to my partner about what I learned and ways to improve our communication"
-  }, {
-    "id" : "module_partner_comm_action_point_7",
+    "id" : "model_prep_use_action_point_4",
     "title" : "Share materials from this site with my partner"
+  }, {
+    "id" : "model_prep_use_action_point_5",
+    "title" : "Call a PrEP clinic to ask about partner counselling"
+  }, {
+    "id" : "model_prep_use_action_point_6",
+    "title" : "Make a plan to keep my PrEP secret (e.g. where to store it and when to take it)"
   } ]
 }"""
 
@@ -121,7 +97,7 @@ object ServiceResponse {
   } ]
 }"""
 
-    const val modules = """{
+    const val partner_comms = """{
   "title" : "Partner Communication",
   "introduction" : "",
   "description" : null,

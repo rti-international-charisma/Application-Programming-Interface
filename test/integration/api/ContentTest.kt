@@ -23,7 +23,6 @@ class ContentTest : ServerTest() {
                 .port(8055)
         )
         wireMockServer.start()
-        createStub()
     }
 
     @AfterAll
@@ -32,8 +31,34 @@ class ContentTest : ServerTest() {
         wireMockServer.stop()
     }
 
+    @AfterEach
+    fun resetStubs() {
+        wireMockServer.resetMappings()
+    }
+
+    @Test
+    fun `it should fetch a counselling module for given module id`() {
+        wireMockServer.stubFor(
+            addMapping(
+                "/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)",
+                "module-prep-use.json",
+                2
+            )
+        )
+
+        val modules = get("/modules/prep_use")
+            .then()
+            .statusCode(200)
+            .extract().asString()
+
+        assertEquals(ServiceResponse.module_prep_use, modules)
+    }
+
     @Test
     fun `it should fetch homepage content`() {
+        wireMockServer.stubFor(
+            addMapping("/items/homepage?([a-z]*)", "homepage.json", 2)
+        )
 
         val homePage = get("/home")
             .then()
@@ -45,7 +70,9 @@ class ContentTest : ServerTest() {
 
     @Test
     fun `it should fetch assessments`() {
-
+        wireMockServer.stubFor(
+            addMapping("/items/sections?([a-z]*)", "assessments.json", 2)
+        )
 
         val assessments = get("/assessments")
             .then()
@@ -57,8 +84,9 @@ class ContentTest : ServerTest() {
 
     @Test
     fun `it should fetch referrals`() {
-
-
+        wireMockServer.stubFor(
+            addMapping("/items/referrals", "referrals.json", 2)
+        )
         val referrals = get("/referrals")
             .then()
             .statusCode(200)
@@ -69,28 +97,24 @@ class ContentTest : ServerTest() {
 
     @Test
     fun `it should fetch counselling modules`() {
+        wireMockServer.stubFor(
+            addMapping("/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)",
+                "module-partner-comms.json", 1)
+        )
 
         val modules = get("/modules?partner_score=12&prep_consent=agree")
             .then()
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.modules, modules)
-    }
-
-    @Test
-    fun `it should fetch a counselling module for given module id`() {
-
-        val modules = get("/modules/prep_use")
-            .then()
-            .statusCode(200)
-            .extract().asString()
-
-        assertEquals(ServiceResponse.moduleForId, modules)
+        assertEquals(ServiceResponse.partner_comms, modules)
     }
 
     @Test
     fun `it should fetch page content for given page`() {
+        wireMockServer.stubFor(
+            addMapping("/items/pages/assessment-intro?([a-z]*)", "page.json", 2)
+        )
 
         val assessmentIntro = get("/content/assessment-intro")
             .then()
@@ -100,32 +124,6 @@ class ContentTest : ServerTest() {
         assertEquals(ServiceResponse.introPage, assessmentIntro)
     }
 
-
-    private fun createStub(){
-        wireMockServer.stubFor(
-            addMapping("/items/pages/assessment-intro?([a-z]*)", "page.json", 2)
-        )
-        wireMockServer.stubFor(
-            addMapping("/items/counselling_module/partner_comm?([a-z]*)",
-                "counselling-modules.json", 1)
-        )
-        wireMockServer.stubFor(
-            addMapping(
-                "/items/counselling_module/(([a-z])*_([a-z])*)?([a-z]*)",
-                "counselling-module-prep.json",
-                2
-            )
-        )
-        wireMockServer.stubFor(
-            addMapping("/items/referrals", "referrals.json", 2)
-        )
-        wireMockServer.stubFor(
-            addMapping("/items/sections?([a-z]*)", "assessments.json", 2)
-        )
-        wireMockServer.stubFor(
-            addMapping("/items/homepage?([a-z]*)", "homepage.json", 2)
-        )
-    }
 
     private fun addMapping(urlPattern: String, stubFile: String, priority: Int) =
         WireMock.get(WireMock.urlPathMatching(urlPattern))
