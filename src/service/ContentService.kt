@@ -80,6 +80,21 @@ class ContentService(private val contentClient: ContentClient) {
         }
     }
 
+    suspend fun getReferrals(referralType: String?): Referrals {
+        val endpoint = "/items/referrals?filter[type][_in]=$referralType"
+        try {
+            val referrals = contentClient.getReferrals(endpoint)
+            logger.info("Referrals received successfully")
+            return referrals
+        } catch (e: ContentRequestException) {
+            logger.warn("Request failed for referrals, ${e.localizedMessage}")
+            throw ContentRequestException(e.localizedMessage)
+        } catch (e: ContentServerException) {
+            logger.warn("Request failed for referrals, ${e.localizedMessage}")
+            throw ContentServerException(e.localizedMessage, e)
+        }
+    }
+
     @Deprecated("To be removed")
     suspend fun getAsset(assetId: String): ByteArray {
         try {

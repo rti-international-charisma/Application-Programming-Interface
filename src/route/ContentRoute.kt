@@ -21,8 +21,19 @@ fun Routing.contentRoute(contentService: ContentService) {
     }
 
     get("/referrals") {
-        val referrals = contentService.getReferrals()
-        call.respond(referrals)
+        // Pass in the referral TYPE field as a filter parameter
+        // to get only those type of referrals in results
+        // Example: ?filter=Counselling
+        // OR
+        // Example: ?filter=Counselling,Shelters (Youth),Hotlines
+        val referralTypes = call.request.queryParameters["filter"]
+        if (referralTypes.isNullOrEmpty()) {
+            val referrals = contentService.getReferrals()
+            call.respond(referrals)
+        } else {
+            val referrals = contentService.getReferrals(referralTypes)
+            call.respond(referrals)
+        }
     }
 
     get("/modules") {

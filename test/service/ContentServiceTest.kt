@@ -24,6 +24,7 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 import java.util.stream.Stream
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotEquals
 
 @ExperimentalCoroutinesApi
 class ContentServiceTest {
@@ -258,12 +259,19 @@ class ContentServiceTest {
     @Test
     fun `it should parse referral response`() = runBlockingTest {
         coEvery {
-            contentClient.getReferrals("/items/referrals")
-        } returns ReferralsFixture.cmsResponseWithOneReferral()
+            contentClient.getReferrals("/items/referrals?filter[type][_in]=Counselling")
+        } returns ReferralsFixture.cmsResponseWithOneReferralType()
 
-        val assessment = contentService.getReferrals()
+        val assessment = contentService.getReferrals("Counselling")
 
-        assertEquals(Referrals(listOf(Referral("health",
+        assertEquals(Referrals(listOf(Referral(
+            "Counselling",
+            "Sophiatown Counseling",
+            "Some address Code 32432432, 23423423423",
+            "5a28b210-1697-4cc0-8c42-4d17ad0d8198"))), assessment)
+
+        assertNotEquals(Referrals(listOf(Referral(
+            "health",
             "Tara hospital",
             "50 Saxon Road, Hurlingham,\n" +
                     "011 535 3000, 323423324234",
@@ -282,6 +290,17 @@ class ContentServiceTest {
     }
 
     @Test
+    fun `it should throw exception on error processing referrals when the TYPE filter parameter is present`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals?filter[type][_in]=ABC")
+        } throws (ContentException("Content error", RuntimeException()))
+        assertFailsWith(
+            exceptionClass = ContentException::class,
+            block = { contentService.getReferrals("ABC") }
+        )
+    }
+
+    @Test
     fun `it should throw exception on error fetching referrals`() = runBlockingTest {
         coEvery {
             contentClient.getReferrals("/items/referrals")
@@ -293,6 +312,17 @@ class ContentServiceTest {
     }
 
     @Test
+    fun `it should throw exception on error fetching referrals when the TYPE filter parameter is present`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals?filter[type][_in]=ABC")
+        } throws (ContentRequestException("Content Request Error"))
+        assertFailsWith(
+            exceptionClass = ContentRequestException::class,
+            block = { contentService.getReferrals("ABC") }
+        )
+    }
+
+    @Test
     fun `it should throw Content Server exception on error fetching referrals`() = runBlockingTest {
         coEvery {
             contentClient.getReferrals("/items/referrals")
@@ -300,6 +330,17 @@ class ContentServiceTest {
         assertFailsWith(
             exceptionClass = ContentServerException::class,
             block = { contentService.getReferrals() }
+        )
+    }
+
+    @Test
+    fun `it should throw Content Server exception on error fetching referrals when the TYPE filter parameter is present`() = runBlockingTest {
+        coEvery {
+            contentClient.getReferrals("/items/referrals?filter[type][_in]=ABC")
+        } throws (ContentServerException("Content Request Error", RuntimeException()))
+        assertFailsWith(
+            exceptionClass = ContentServerException::class,
+            block = { contentService.getReferrals("ABC") }
         )
     }
 
