@@ -21,8 +21,15 @@ fun Routing.contentRoute(contentService: ContentService) {
     }
 
     get("/referrals") {
-        val referrals = contentService.getReferrals()
-        call.respond(referrals)
+        val referralTypes = call.request.queryParameters["filter"]
+        if (referralTypes.isNullOrEmpty()) {
+            val referrals = contentService.getReferrals()
+            call.respond(referrals)
+        } else {
+            val referrals = contentService.getReferrals(referralTypes)
+            call.respond(referrals)
+        }
+
     }
 
     get("/modules") {

@@ -348,6 +348,18 @@ class ContentRouteTest {
     }
 
     @Test
+    fun `GET referrals should return 200 OK with list of referrals as json response as per the TYPE mentioned in filter parameter`() = testApp {
+        coEvery { contentService.getReferrals("Counselling") } returns ReferralsFixture.givenReferralsForReferralFilter()
+
+        handleRequest(HttpMethod.Get, "/referrals?filter=Counselling") {
+        }.apply {
+            assertEquals(200, response.status()?.value)
+            assertEquals("application/json; charset=UTF-8", response.contentType().toString())
+            assertEquals(ReferralsFixture.responseJsonForReferralFilter(), response.content)
+        }
+    }
+
+    @Test
     fun `GET referrals should return 200 OK with empty json response if no referrals`() = testApp {
         coEvery { contentService.getReferrals() } returns ReferralsFixture.noReferrals()
 
