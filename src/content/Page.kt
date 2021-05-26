@@ -28,6 +28,8 @@ data class Page(
     val heroImage: HeroImage?,
     @JsonProperty("images", required = false)
     val images: List<PageImage>?,
+    @JsonProperty("documents", required = false)
+    val documents: List<PageDocuments>?,
     @JsonProperty("video_section", required = false)
     val videoSection: VideoSection?,
     @JsonProperty(required = false)
@@ -97,10 +99,25 @@ data class PageImage(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
+data class PageDocuments(
+    @JsonProperty("directus_files_id")
+    val document: Document
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class ImageFile(
     @JsonProperty("id")
     val imageUrl: String = "",
     val title: String = ""
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+data class Document(
+    @JsonProperty("id")
+    val documentUrl: String = "",
+    val title: String = "",
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
