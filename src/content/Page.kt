@@ -26,6 +26,10 @@ data class Page(
     val status: String,
     @JsonProperty("hero_image", required = false)
     val heroImage: HeroImage?,
+    @JsonAlias("hero_image_caption_test_complete")
+    val heroImageCaptionTestComplete: String?,
+    @JsonAlias("hero_image_caption_test_incomplete")
+    val heroImageCaptionTestIncomplete: String?,
     @JsonProperty("images", required = false)
     val images: List<PageImage>?,
     @JsonProperty("documents", required = false)
@@ -125,8 +129,6 @@ data class Document(
 data class HeroImage(
     var title: String = "",
     var introduction: String? = "",
-    @JsonProperty("personalised_message")
-    var personalisedMessage: String? = "",
     @JsonProperty("image_url")
     var imageUrl: String = ""
 )

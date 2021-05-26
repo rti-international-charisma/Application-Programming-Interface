@@ -17,12 +17,13 @@ object PageConversions {
                     writeStringField("introduction", value.introduction)
                     writeStringField("description", value.description)
                     writeStringField("summary", value.summary)
+                    writeStringField("heroImageCaptionTestComplete", value.heroImageCaptionTestComplete)
+                    writeStringField("heroImageCaptionTestIncomplete", value.heroImageCaptionTestIncomplete)
 
                     value.heroImage?.let { image ->
                         writeObjectFieldStart("heroImage")
                         writeStringField("title", image.title)
                         writeStringField("introduction", image.introduction)
-                        writeStringField("personalisedMessage", image.personalisedMessage)
                         writeStringField("imageUrl", ifPresent(image.imageUrl)?.let { "/assets/${image.imageUrl}" })
                         writeEndObject()
                     }
