@@ -7,10 +7,11 @@ object ServiceResponse {
   "introduction" : "<p>Bring about positive changes in your relationship through better communication</p>",
   "description" : null,
   "summary" : null,
+  "heroImageCaptionTestComplete" : null,
+  "heroImageCaptionTestIncomplete" : null,
   "heroImage" : {
     "title" : "PrEP Disclosure",
     "introduction" : null,
-    "personalisedMessage" : null,
     "imageUrl" : "/assets/89390db4-434f-4d7d-92a0-152cd1368ecd"
   },
   "moduleVideo" : {
@@ -91,6 +92,8 @@ object ServiceResponse {
   "introduction" : "<p><strong>Hi there, you&rsquo;re about to take the HEAlthy Relationship Test (HEART assessment).&nbsp;</strong><br /><strong>Go to you for taking this step!&nbsp;</strong></p>\n<p>We think it&rsquo;s useful to find out what limits or risks you might face in your relationship that could stop you from using PrEP. It may also help you see what&rsquo;s healthy or not in your relationship. We&rsquo;ll use your score to advise you on the content and skills we think could work for you in your relationship and PrEP use journey.&nbsp;</p>\n<p>When you&rsquo;re taking the HEART assessment, remember to keep your main partner in mind. If you don&rsquo;t have a main partner, it&rsquo;s helpful to think about which partner or partners might affect your PrEP use the most.&nbsp;</p>\n<p>A quick note about responding to the questions. For each question, you have 5 options based on how much you agree or disagree with the statement you&rsquo;re reading:</p>",
   "description" : null,
   "summary" : "<p>&bull; &nbsp; &nbsp;Disagree or Agree, and then &nbsp;<br />&bull; &nbsp; &nbsp;How much you disagree or agree: A Lot, Somewhat or A Little</p>\n<p>And finally, try to answer the questions about yourself and about your relationship with your partner(s) as honestly and openly as you can. These questions will help determine what kind of counselling and support related to the use of PrEP you might need.&nbsp;</p>\n<p>Remember, all your answers will be kept confidential.</p>",
+  "heroImageCaptionTestComplete" : null,
+  "heroImageCaptionTestIncomplete" : null,
   "images" : [ {
     "title" : "Image 18",
     "imageUrl" : "/assets/76438d8d-bd12-453d-9793-8adf363c820e"
@@ -102,10 +105,11 @@ object ServiceResponse {
   "introduction" : "",
   "description" : null,
   "summary" : null,
+  "heroImageCaptionTestComplete" : null,
+  "heroImageCaptionTestIncomplete" : null,
   "heroImage" : {
     "title" : "Partner Communication",
     "introduction" : null,
-    "personalisedMessage" : null,
     "imageUrl" : "/assets/8ff62364-4536-4a47-ae5e-fd30c15f59c5"
   },
   "moduleVideo" : {
@@ -1080,10 +1084,11 @@ object ServiceResponse {
   "introduction" : null,
   "description" : null,
   "summary" : null,
+  "heroImageCaptionTestComplete" : null,
+  "heroImageCaptionTestIncomplete" : null,
   "heroImage" : {
     "title" : "Hero Image",
     "introduction" : "<div><span style=\"font-size: 18pt;\"><strong>Want to check the status of your relationship and protect yourself?</strong></span></div>\n<div>\n<p><span style=\"font-size: 14pt;\">CHARISMA&rsquo;s here to support you!&nbsp;</span></p>\n<p><span style=\"font-size: 14pt;\">Take a quiz about your relationship and get tailored support, or browse content on Healthy relationships, using PrEP in your relationships,&nbsp;</span><br /><span style=\"font-size: 14pt;\">good communication with your partner and others, and relationship safety. You can always come back more for later and share what you like!</span></p>\n</div>",
-    "personalisedMessage" : "",
     "imageUrl" : "/assets/82c667f6-c82e-4c89-a8f0-e715563f87dc"
   },
   "videoSection" : {

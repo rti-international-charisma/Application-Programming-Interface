@@ -9,7 +9,6 @@ object PageContentFixture {
         val heroImage = HeroImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",
-            "personalised message",
             "hero-image-id"
         )
         val image1 = PageImage(ImageFile("image-1", "image-1 title"))
@@ -33,6 +32,8 @@ object PageContentFixture {
             "This is summary",
             "published",
             heroImage,
+            "This is caption for completed test",
+            "This is caption for partially completed test",
             mutableListOf(image1, image2),
             mutableListOf(doc1, doc2),
             videoSection,
@@ -53,6 +54,8 @@ object PageContentFixture {
 		"introduction": "This is introduction",
 		"description": "This is description",
 		"summary": "This is summary",
+        "hero_image_caption_test_complete": "This is caption for completed test",
+        "hero_image_caption_test_incomplete": "This is caption for partially completed test",
 		"status": "published",
 		"video_section": {
 			"id": "video_section",
@@ -133,7 +136,6 @@ object PageContentFixture {
 			"name": "hero image",
 			"status": "published",
 			"title": "Hero Image",
-			"personalised_message": "personalised message",
 			"introduction": "<div><span>some styled introduction</span></div>",
 			"image_url": "hero-image-id"
 		}
@@ -149,10 +151,11 @@ object PageContentFixture {
   "introduction" : "This is introduction",
   "description" : "This is description",
   "summary" : "This is summary",
+  "heroImageCaptionTestComplete" : "This is caption for completed test",
+  "heroImageCaptionTestIncomplete" : "This is caption for partially completed test",
   "heroImage" : {
     "title" : "Hero Image",
     "introduction" : "<div><span>some styled introduction</span></div>",
-    "personalisedMessage" : "personalised message",
     "imageUrl" : "/assets/hero-image-id"
   },
   "images" : [ {
@@ -208,7 +211,6 @@ object PageContentFixture {
         val heroImage = HeroImage(
             "Hero Image",
             "<div><span>some styled introduction</span></div>",
-            "personalised message",
             "hero-image-id"
         )
         val image1 = PageImage(ImageFile(title = "image1-title", imageUrl = "image1-id"))
@@ -232,6 +234,8 @@ object PageContentFixture {
             "This is summary",
             status,
             heroImage,
+            "This is caption for completed test",
+            "This is caption for partially completed test",
             mutableListOf(image1, image2),
             mutableListOf(doc1, doc2),
             videoSection,
@@ -251,6 +255,8 @@ object PageContentFixture {
             "This is description",
             "This is summary",
             status,
+            null,
+            null,
             null,
             images = mutableListOf(
                 PageImage(ImageFile("image-1", "image-1 title")),
@@ -323,6 +329,8 @@ object PageContentFixture {
   "introduction" : "This is introduction",
   "description" : "This is description",
   "summary" : "This is summary",
+  "heroImageCaptionTestComplete" : null,
+  "heroImageCaptionTestIncomplete" : null,
   "images" : [ {
     "title" : "image-1 title",
     "imageUrl" : "/assets/image-1"
@@ -347,6 +355,8 @@ object PageContentFixture {
   "title": "Discussing PrEP Use With Partners",
   "introduction": "<p>Bring about positive changes in your relationship through better communication</p>",
   "status": "Published",
+  "hero_image_caption_test_complete": "This is caption for completed test",
+  "hero_image_caption_test_incomplete": "This is caption for partially completed test",
   "hero_image": {
     "title": "PrEp Hero Image",
     "image_url": "1c2eea87-f593-41c2-b6ba-da69a3133c9a"
@@ -435,7 +445,6 @@ object PageContentFixture {
     fun pageWithCounsellingModules(status: String): Page {
         val heroImage = HeroImage(
             "PrEp Hero Image",
-            "",
             "",
             "1c2eea87-f593-41c2-b6ba-da69a3133c9a"
         )
@@ -529,6 +538,8 @@ object PageContentFixture {
             null,
             status,
             heroImage,
+            "This is caption for completed test",
+            "This is caption for partially completed test",
             null,
             null,
             null,
@@ -546,10 +557,11 @@ object PageContentFixture {
   "introduction" : "<p>Bring about positive changes in your relationship through better communication</p>",
   "description" : null,
   "summary" : null,
+  "heroImageCaptionTestComplete" : "This is caption for completed test",
+  "heroImageCaptionTestIncomplete" : "This is caption for partially completed test",
   "heroImage" : {
     "title" : "PrEp Hero Image",
     "introduction" : "",
-    "personalisedMessage" : "",
     "imageUrl" : "/assets/1c2eea87-f593-41c2-b6ba-da69a3133c9a"
   },
   "moduleVideo" : {
