@@ -14,6 +14,8 @@ object PageContentFixture {
         )
         val image1 = PageImage(ImageFile("image-1", "image-1 title"))
         val image2 = PageImage(ImageFile("image-2", "image-2 title"))
+        val doc1 = PageDocuments(Document("doc-1", "Document 1"))
+        val doc2 = PageDocuments(Document("doc-2", "Document 2"))
         val video1 = PageVideo("video-title1", "description1", "file1", "video_image1", "action1", "/assessment/intro", false)
         val video2 = PageVideo("video-title2", "description2", "file2", "video_image2", "action2", "/assessment/intro", false)
         val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
@@ -32,6 +34,7 @@ object PageContentFixture {
             "published",
             heroImage,
             mutableListOf(image1, image2),
+            mutableListOf(doc1, doc2),
             videoSection,
             mutableListOf(step1, step2),
             null,
@@ -111,6 +114,21 @@ object PageContentFixture {
                     "title": "image-2 title"
                 }
          }],
+         "documents": [{
+                        "id": 1,
+                        "directus_files_id": {
+                            "id": "doc-1",
+                            "title": "Document 1"
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "directus_files_id": {
+                            "id": "doc-2",
+                            "title": "Document 2"
+                        }
+                    }
+                ],
 		"hero_image": {
 			"name": "hero image",
 			"status": "published",
@@ -143,6 +161,13 @@ object PageContentFixture {
   }, {
     "title" : "image2-title",
     "imageUrl" : "/assets/image2-id"
+  } ],
+  "documents" : [ {
+    "title" : "Document 1",
+    "documentUrl" : "/assets/doc-1"
+  }, {
+    "title" : "Document 2",
+    "documentUrl" : "/assets/doc-2"
   } ],
   "videoSection" : {
     "introduction" : "Build a healthy relationship with your partner",
@@ -188,6 +213,8 @@ object PageContentFixture {
         )
         val image1 = PageImage(ImageFile(title = "image1-title", imageUrl = "image1-id"))
         val image2 = PageImage(ImageFile(title = "image2-title", imageUrl = "image2-id"))
+        val doc1 = PageDocuments(Document("doc-1", "Document 1"))
+        val doc2 = PageDocuments(Document("doc-2", "Document 2"))
         val video1 = PageVideo("video-title1", "description1", "file1", "video-image-1", "action1", "/assessment/intro", false)
         val video2 = PageVideo("video-title2", "description2", "file2", "video-image-2", "action2", "/assessment/intro", false)
         val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
@@ -206,6 +233,7 @@ object PageContentFixture {
             status,
             heroImage,
             mutableListOf(image1, image2),
+            mutableListOf(doc1, doc2),
             videoSection,
             mutableListOf(step1, step2),
             null,
@@ -227,6 +255,10 @@ object PageContentFixture {
             images = mutableListOf(
                 PageImage(ImageFile("image-1", "image-1 title")),
                 PageImage(ImageFile("image-2", "image-2 title"))
+            ),
+            documents = mutableListOf(
+                PageDocuments(Document("doc-1", "Document 1")),
+                PageDocuments(Document("doc-2", "Document 2"))
             ),
             null,
             null,
@@ -263,7 +295,22 @@ object PageContentFixture {
                     "id": "image-2",
                     "title": "image-2 title"
                 }
-            }]
+            }],
+            "documents": [{
+                        "id": 1,
+                        "directus_files_id": {
+                            "id": "doc-1",
+                            "title": "Document 1"
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "directus_files_id": {
+                            "id": "doc-2",
+                            "title": "Document 2"
+                        }
+                    }
+                ]
 }
 }"""
         return jacksonObjectMapper().readValue(content, PageContent::class.java)
@@ -282,6 +329,13 @@ object PageContentFixture {
   }, {
     "title" : "image-2 title",
     "imageUrl" : "/assets/image-2"
+  } ],
+  "documents" : [ {
+    "title" : "Document 1",
+    "documentUrl" : "/assets/doc-1"
+  }, {
+    "title" : "Document 2",
+    "documentUrl" : "/assets/doc-2"
   } ]
 }"""
     }
@@ -475,6 +529,7 @@ object PageContentFixture {
             null,
             status,
             heroImage,
+            null,
             null,
             null,
             null,

@@ -52,6 +52,18 @@ object PageConversions {
                         }
                         writeEndArray()
                     }
+
+                    value.documents?.let {
+                        writeArrayFieldStart("documents")
+                        value.documents.forEach { document ->
+                            writeStartObject()
+                            writeStringField("title", document.document.title)
+                            writeStringField("documentUrl", ifPresent(document.document.documentUrl)?.let { "/assets/${document.document.documentUrl}" })
+                            writeEndObject()
+                        }
+                        writeEndArray()
+                    }
+
                     value.videoSection?.let {
                         writeObjectFieldStart("videoSection")
                         writeStringField("introduction", it.introduction)
