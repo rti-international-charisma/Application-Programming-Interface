@@ -12,6 +12,25 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        # Docker Hub PostgreSQL image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: charisma
+          POSTGRES_PASSWORD: pass123
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+    env:
+      db_url: jdbc:postgresql://localhost:5432/charisma
+
     steps:
     
     - name: Checkout source code
