@@ -149,7 +149,7 @@ fun getDataSource(): HikariDataSource {
     config.jdbcUrl = ConfigProvider.get(DB_URL)
     config.username = ConfigProvider.get(DB_USER)
     config.password = ConfigProvider.get(DB_PASSWORD)
-    config.maximumPoolSize = 3
+    config.maximumPoolSize = 10
     config.isAutoCommit = false
     config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
     config.validate()
