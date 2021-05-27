@@ -1,4 +1,4 @@
-package service
+package com.rti.charisma.api.service
 
 import com.rti.charisma.api.db.tables.Answer
 import com.rti.charisma.api.db.tables.SectionScore
@@ -6,14 +6,12 @@ import com.rti.charisma.api.exception.DataBaseException
 import com.rti.charisma.api.repository.AssessmentRepository
 import com.rti.charisma.api.route.AssessmentResult
 import com.rti.charisma.api.route.Question
-import com.rti.charisma.api.service.AssessmentService
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import java.lang.RuntimeException
 import kotlin.test.assertFailsWith
 
 class AssessmentServiceTest {

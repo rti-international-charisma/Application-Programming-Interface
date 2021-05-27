@@ -135,4 +135,8 @@ class ContentClient {
             throw ContentException("Unexpected failure while fetching asset content from server", e)
         }
     }
+
+    fun close() {
+        client.close()
+    }
 }

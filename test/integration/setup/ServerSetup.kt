@@ -20,7 +20,6 @@ open class ServerTest {
         return this.`when`()
     }
 
-    // allows response.to<Widget>() -> Widget instance
     protected inline fun <reified T> ResponseBodyExtractionOptions.to(): T {
         return this.`as`(T::class.java)
     }

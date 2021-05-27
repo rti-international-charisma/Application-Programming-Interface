@@ -1,7 +1,6 @@
-package util
+package com.rti.charisma.api.util
 
-import com.rti.charisma.api.util.hash
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class HashTest {

@@ -1,10 +1,7 @@
-package repository
+package com.rti.charisma.api.repository
 
 import com.rti.charisma.api.db.CharismaDB
 import com.rti.charisma.api.db.tables.*
-import com.rti.charisma.api.repository.AssessmentRepository
-import com.rti.charisma.api.repository.AssessmentRepositoryImpl
-import com.rti.charisma.api.repository.InMemoryDB
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.*

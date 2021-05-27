@@ -3,10 +3,7 @@ package com.rti.charisma.api
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.rti.charisma.api.client.ContentClient
-import com.rti.charisma.api.config.ConfigProvider
-import com.rti.charisma.api.config.DB_PASSWORD
-import com.rti.charisma.api.config.DB_URL
-import com.rti.charisma.api.config.DB_USER
+import com.rti.charisma.api.config.*
 import com.rti.charisma.api.db.CharismaDB
 import com.rti.charisma.api.exception.*
 import com.rti.charisma.api.repository.AssessmentRepositoryImpl
@@ -16,10 +13,7 @@ import com.rti.charisma.api.route.contentRoute
 import com.rti.charisma.api.route.healthRoute
 import com.rti.charisma.api.route.response.ErrorResponse
 import com.rti.charisma.api.route.userRoute
-import com.rti.charisma.api.service.AssessmentService
-import com.rti.charisma.api.service.ContentService
-import com.rti.charisma.api.service.JWTService
-import com.rti.charisma.api.service.UserService
+import com.rti.charisma.api.service.*
 import com.viartemev.ktor.flyway.FlywayFeature
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -36,7 +30,9 @@ import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.util.date.*
+import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
+import java.util.concurrent.TimeUnit
 import javax.sql.DataSource
 
 fun main() {
@@ -47,14 +43,30 @@ fun main() {
 
 @kotlin.jvm.JvmOverloads
 fun Application.main() {
-    val contentService = ContentService(ContentClient())
+    val logger = LoggerFactory.getLogger("Application_Charisma")
+
+    val contentClient = ContentClient()
+    val contentService = ContentService(contentClient)
     val userService = UserService(UserRepositoryImpl(), JWTService)
     val assessmentService = AssessmentService(AssessmentRepositoryImpl())
+    val cleanupTask = CleanupTask(userService)
+    val schedulerService = SchedulerService(cleanupTask)
 
     commonModule()
     loginModule(getDataSource(), userService, assessmentService)
     contentModule(contentService)
     healthCheckModule()
+
+    environment.monitor.subscribe(ApplicationStarted) {
+        logger.info("Invoking scheduler...")
+        schedulerService.scheduleExecution(Every(ConfigProvider.get(SCHEDULER_FREQUENCY).toLong(), TimeUnit.DAYS))
+    }
+
+    environment.monitor.subscribe(ApplicationStopping) {
+        logger.info("Stopping all processes...")
+        schedulerService.stop()
+        contentClient.close()
+    }
 }
 
 fun Application.commonModule() {
@@ -66,8 +78,8 @@ fun Application.commonModule() {
     install(CachingHeaders) {
         options { outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
-                ContentType.Text.CSS -> CachingOptions(
-                    CacheControl.MaxAge(maxAgeSeconds = 60 * 60),
+                ContentType.Application.Json -> CachingOptions(
+                    CacheControl.MaxAge(maxAgeSeconds = ConfigProvider.get(CACHE_MAX_AGE_SECONDS).toInt()),
                     expires = null as? GMTDate?
                 )
                 else -> null
