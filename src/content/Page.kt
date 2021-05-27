@@ -26,8 +26,14 @@ data class Page(
     val status: String,
     @JsonProperty("hero_image", required = false)
     val heroImage: HeroImage?,
+    @JsonAlias("hero_image_caption_test_complete")
+    val heroImageCaptionTestComplete: String?,
+    @JsonAlias("hero_image_caption_test_incomplete")
+    val heroImageCaptionTestIncomplete: String?,
     @JsonProperty("images", required = false)
     val images: List<PageImage>?,
+    @JsonProperty("documents", required = false)
+    val documents: List<PageDocuments>?,
     @JsonProperty("video_section", required = false)
     val videoSection: VideoSection?,
     @JsonProperty(required = false)
@@ -97,6 +103,13 @@ data class PageImage(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
+data class PageDocuments(
+    @JsonProperty("directus_files_id")
+    val document: Document
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class ImageFile(
     @JsonProperty("id")
     val imageUrl: String = "",
@@ -105,11 +118,17 @@ data class ImageFile(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
+data class Document(
+    @JsonProperty("id")
+    val documentUrl: String = "",
+    val title: String = "",
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 data class HeroImage(
     var title: String = "",
     var introduction: String? = "",
-    @JsonProperty("personalised_message")
-    var personalisedMessage: String? = "",
     @JsonProperty("image_url")
     var imageUrl: String = ""
 )

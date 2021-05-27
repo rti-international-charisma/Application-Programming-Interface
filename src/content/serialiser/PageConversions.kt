@@ -17,12 +17,13 @@ object PageConversions {
                     writeStringField("introduction", value.introduction)
                     writeStringField("description", value.description)
                     writeStringField("summary", value.summary)
+                    writeStringField("heroImageCaptionTestComplete", value.heroImageCaptionTestComplete)
+                    writeStringField("heroImageCaptionTestIncomplete", value.heroImageCaptionTestIncomplete)
 
                     value.heroImage?.let { image ->
                         writeObjectFieldStart("heroImage")
                         writeStringField("title", image.title)
                         writeStringField("introduction", image.introduction)
-                        writeStringField("personalisedMessage", image.personalisedMessage)
                         writeStringField("imageUrl", ifPresent(image.imageUrl)?.let { "/assets/${image.imageUrl}" })
                         writeEndObject()
                     }
@@ -52,6 +53,18 @@ object PageConversions {
                         }
                         writeEndArray()
                     }
+
+                    value.documents?.let {
+                        writeArrayFieldStart("documents")
+                        value.documents.forEach { document ->
+                            writeStartObject()
+                            writeStringField("title", document.document.title)
+                            writeStringField("documentUrl", ifPresent(document.document.documentUrl)?.let { "/assets/${document.document.documentUrl}" })
+                            writeEndObject()
+                        }
+                        writeEndArray()
+                    }
+
                     value.videoSection?.let {
                         writeObjectFieldStart("videoSection")
                         writeStringField("introduction", it.introduction)

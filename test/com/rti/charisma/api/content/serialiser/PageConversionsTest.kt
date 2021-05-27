@@ -74,8 +74,9 @@ class PageConversionsTest {
     }
 
     private fun givenPageWithEmptyUrls(): Page {
-        val heroImage = HeroImage("title", "intro", "personalised message", "")
+        val heroImage = HeroImage("title", "intro", "")
         val image = PageImage(ImageFile("", "title"))
+        val document = PageDocuments(Document("", "title"))
         val videoSection = VideoSection(
             videos = listOf(
                 PageVideo(
@@ -91,7 +92,10 @@ class PageConversionsTest {
             "id", null, null, null,
             null, "Published",
             heroImage,
+            "This is caption for completed test",
+            "This is caption for partially completed test",
             listOf(image),
+            listOf(document),
             videoSection,
             null,
             null,
@@ -102,8 +106,9 @@ class PageConversionsTest {
     }
 
     private fun givenPageWithNoUrls(): Page {
-        val heroImage = HeroImage("title", "intro", "personalised message", "")
+        val heroImage = HeroImage("title", "intro",  "")
         val image = PageImage(ImageFile("", "title"))
+        val document = PageDocuments(Document("", "title"))
         val videoSection = VideoSection(
             videos = listOf(
                 PageVideo(
@@ -119,7 +124,10 @@ class PageConversionsTest {
             "id", null, null, null,
             null, "Published",
             heroImage,
+            "This is caption for completed test",
+            "This is caption for partially completed test",
             listOf(image),
+            listOf(document),
             videoSection,
             null,
             null,
@@ -134,15 +142,20 @@ class PageConversionsTest {
   "introduction" : null,
   "description" : null,
   "summary" : null,
+  "heroImageCaptionTestComplete" : "This is caption for completed test",
+  "heroImageCaptionTestIncomplete" : "This is caption for partially completed test",
   "heroImage" : {
     "title" : "title",
     "introduction" : "intro",
-    "personalisedMessage" : "personalised message",
     "imageUrl" : null
   },
   "images" : [ {
     "title" : "title",
     "imageUrl" : null
+  } ],
+  "documents" : [ {
+    "title" : "title",
+    "documentUrl" : null
   } ],
   "videoSection" : {
     "introduction" : "",
