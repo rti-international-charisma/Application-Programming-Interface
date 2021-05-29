@@ -3,6 +3,8 @@ package com.rti.charisma.api.db.tables
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.ktor.auth.*
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.`java-time`.CurrentDateTime
+import org.jetbrains.exposed.sql.`java-time`.datetime
 
 object Users : Table() {
     val id = integer("id").autoIncrement()
@@ -12,6 +14,8 @@ object Users : Table() {
     val sec_answer = varchar("sec_answer", 50)
     val loginAttempts = integer("login_attempts_left")
     val resetPasswordAttempts = integer("reset_password_attempts_left")
+    val lastLogin = datetime("last_login").defaultExpression(CurrentDateTime())
+
     override val primaryKey: PrimaryKey = PrimaryKey(id)
 }
 

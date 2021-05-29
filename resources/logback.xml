@@ -13,7 +13,7 @@
             <fileNamePattern>
                 logs/app.%d{yyyy-MM-dd-mm}.%i.log.zip
             </fileNamePattern>
-            <maxFileSize>5KB</maxFileSize>
+            <maxFileSize>100KB</maxFileSize>
             <maxHistory>10</maxHistory>
             <totalSizeCap>1MB</totalSizeCap>
         </rollingPolicy>
@@ -26,7 +26,7 @@
     <logger name="com.zaxxer.hikari" level="WARN" />
     <logger name="io.netty" level="WARN"/>
     <logger name="com.viartemev" level="WARN"/>
-
+    <logger name="com.rti.charisma" level="INFO"/>
     <root level="info">
         <appender-ref ref="ROLLING_FILE"/>
     </root>

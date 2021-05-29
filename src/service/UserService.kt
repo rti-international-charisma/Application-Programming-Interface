@@ -125,4 +125,13 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
             throw LoginException("Something went wrong")
         }
     }
+
+    fun deleteInactiveUsers(durationInDays: Long): Int {
+        try {
+           return userRepository.deleteInactiveUsers(durationInDays)
+        } catch (e: Exception) {
+            logger.error("Failed to delete inactive users", e.localizedMessage )
+            throw DataBaseException("Failed to delete inactive users", e)
+        }
+    }
 }

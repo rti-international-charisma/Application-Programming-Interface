@@ -12,4 +12,5 @@ interface UserRepository {
     fun findUserByUsername(username: String): User?
     fun findUserById(userId: Int): User?
     fun updateUser(user: User)
+    fun deleteInactiveUsers(inactivityInDays: Long) : Int
 }

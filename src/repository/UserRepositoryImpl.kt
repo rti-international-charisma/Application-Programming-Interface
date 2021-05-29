@@ -7,7 +7,9 @@ import com.rti.charisma.api.db.tables.Users
 import com.rti.charisma.api.route.Signup
 import com.rti.charisma.api.util.hash
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.`java-time`.CurrentDateTime
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.time.LocalDateTime
 
 class UserRepositoryImpl : UserRepository {
 
@@ -55,7 +57,16 @@ class UserRepositoryImpl : UserRepository {
                 it[loginAttempts] = user.loginAttemptsLeft
                 it[resetPasswordAttempts] = user.resetPasswordAttemptsLeft
                 it[password] = user.password
+                it[lastLogin] = CurrentDateTime()
             }
+        }
+    }
+
+    override fun deleteInactiveUsers(inactivityInDays: Long): Int {
+        val allowedInactivity = LocalDateTime.now().minusDays(inactivityInDays)
+
+        return transaction {
+            Users.deleteWhere { Users.lastLogin less allowedInactivity }
         }
     }
 

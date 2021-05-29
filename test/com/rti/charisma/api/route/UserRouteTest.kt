@@ -1,27 +1,25 @@
-package route
+package com.rti.charisma.api.route
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.rti.charisma.api.route.response.ErrorResponse
-import com.rti.charisma.api.loginModule
 import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.db.tables.User
 import com.rti.charisma.api.exception.LoginAttemptsExhaustedException
 import com.rti.charisma.api.exception.LoginException
+import com.rti.charisma.api.loginModule
+import com.rti.charisma.api.route.response.ErrorResponse
 import com.rti.charisma.api.route.response.UserResponse
-import com.rti.charisma.api.route.Login
-import com.rti.charisma.api.route.Signup
-import com.rti.charisma.api.route.VerifySecQuestion
 import com.rti.charisma.api.service.AssessmentService
 import com.rti.charisma.api.service.JWTService
 import com.rti.charisma.api.service.UserService
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.http.HttpMethod
+import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import javax.sql.DataSource
 

@@ -1,4 +1,4 @@
-package route
+package com.rti.charisma.api.route
 
 import com.rti.charisma.api.commonModule
 import com.rti.charisma.api.db.tables.User

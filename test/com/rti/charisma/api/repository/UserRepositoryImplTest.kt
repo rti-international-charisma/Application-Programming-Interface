@@ -1,18 +1,16 @@
-package repository
+package com.rti.charisma.api.repository
 
 import com.rti.charisma.api.db.CharismaDB
 import com.rti.charisma.api.db.tables.SecurityQuestions
 import com.rti.charisma.api.db.tables.Users
-import com.rti.charisma.api.repository.InMemoryDB
-import com.rti.charisma.api.repository.UserRepositoryImpl
 import com.rti.charisma.api.route.Signup
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
+import java.time.LocalDateTime
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserRepositoryImplTest {
@@ -23,6 +21,7 @@ class UserRepositoryImplTest {
     fun setup() {
         db = CharismaDB.init(InMemoryDB.inMemoryDataSource())
     }
+
     @BeforeEach
     fun setupData() {
         transaction {
@@ -44,6 +43,7 @@ class UserRepositoryImplTest {
                 it[sec_answer] = "hashed-answer"
                 it[loginAttempts] = 5
                 it[resetPasswordAttempts] = 5
+                it[lastLogin] = LocalDateTime.now().minusDays(3)
             }
         }
     }
@@ -106,5 +106,54 @@ class UserRepositoryImplTest {
         val userId = userRepository.registerUser(signupModel, 5, 5)
         val user = userRepository.findUserById(userId)
         assertNotEquals("password", user?.password)
+    }
+
+
+    @Test
+    fun `it should delete user with last login before allowed date `() {
+        assertNotNull(userRepository.findUserByUsername("username"))
+
+        val result = userRepository.deleteInactiveUsers(2)
+
+        assertEquals(1, result)
+        assertNull(userRepository.findUserByUsername("username"))
+
+    }
+
+    @Test
+    fun `it should delete users with last login before allowed date and returns number of users deleted `() {
+        transaction {
+            Users.insert {
+                it[username] = "username1"
+                it[password] = "hashed-password"
+                it[sec_q_id] = 1
+                it[sec_answer] = "hashed-answer"
+                it[loginAttempts] = 5
+                it[resetPasswordAttempts] = 5
+                it[lastLogin] = LocalDateTime.now().minusDays(1)
+            }
+
+            Users.insert {
+                it[username] = "username2"
+                it[password] = "hashed-password"
+                it[sec_q_id] = 1
+                it[sec_answer] = "hashed-answer"
+                it[loginAttempts] = 5
+                it[resetPasswordAttempts] = 5
+                it[lastLogin] = LocalDateTime.now().minusDays(4)
+            }
+        }
+
+
+        assertNotNull(userRepository.findUserByUsername("username"))
+        assertNotNull(userRepository.findUserByUsername("username1"))
+        assertNotNull(userRepository.findUserByUsername("username2"))
+
+        val result = userRepository.deleteInactiveUsers(2)
+
+        assertEquals(2, result)
+        assertNull(userRepository.findUserByUsername("username"))
+        assertNull(userRepository.findUserByUsername("username2"))
+        assertNotNull(userRepository.findUserByUsername("username1"))
     }
 }

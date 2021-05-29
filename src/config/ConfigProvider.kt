@@ -13,6 +13,9 @@ const val ACCESS_TOKEN = "ktor.cms.access_token"
 const val LOGIN_ATTEMPTS = "ktor.login_attempts"
 const val RESET_ATTEMPTS = "ktor.reset_password_attempts"
 const val IS_DRAFT_MODE = "ktor.cms.draft_mode"
+const val INACTIVE_THRESHOLD_IN_DAYS = "ktor.inactive_days_threshold"
+const val CACHE_MAX_AGE_SECONDS = "ktor.cache_max_age_seconds"
+const val SCHEDULER_FREQUENCY = "ktor.scheduler_frequency"
 
 object ConfigProvider {
     private val config = HoconApplicationConfig(ConfigFactory.load())
