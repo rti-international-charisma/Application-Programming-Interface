@@ -40,7 +40,7 @@ class ContentTest : ServerTest() {
     fun `it should fetch a counselling module for given module id`() {
         wireMockServer.stubFor(
             addMapping(
-                "/items/counselling_module/prep_use?([a-z]*)",
+                "/items/counselling_modules/prep_use?([a-z]*)",
                 "module-prep-use.json",
                 2
             )
@@ -58,7 +58,7 @@ class ContentTest : ServerTest() {
     fun `it should fetch a counselling module for given module id - partner - comm`() {
         wireMockServer.stubFor(
             addMapping(
-                "/items/counselling_module/partner_comm?([a-z]*)",
+                "/items/counselling_modules/partner_comm?([a-z]*)",
                 "module-partner-comms.json",
                 2
             )
@@ -76,7 +76,7 @@ class ContentTest : ServerTest() {
 //    fun `it should fetch counselling module for given score and consent`() {
 //        wireMockServer.stubFor(
 //            addMapping(
-//                "/items/counselling_module/partner_comm?([a-z]*)",
+//                "/items/counselling_modules/partner_comm?([a-z]*)",
 //                "module-partner-comms.json",
 //                1
 //            )
@@ -107,7 +107,7 @@ class ContentTest : ServerTest() {
     @Test
     fun `it should fetch assessments`() {
         wireMockServer.stubFor(
-            addMapping("/items/sections?([a-z]*)", "assessments.json", 2)
+            addMapping("/items/assessment_sections?([a-z]*)", "assessments.json", 2)
         )
 
         val assessments = get("/assessments")

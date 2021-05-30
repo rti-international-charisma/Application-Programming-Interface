@@ -86,7 +86,7 @@ object PageContentFixture {
 				}
 			]
 		},
-		"steps": [{
+		"actions": [{
 				"id": 1,
 				"title": "title-1",
 				"sub_title": "sub-title-1",
@@ -448,32 +448,32 @@ object PageContentFixture {
             "",
             "1c2eea87-f593-41c2-b6ba-da69a3133c9a"
         )
-        val actionPoint1 = CounsellingModuleActionPoint(
+        val actionPoint1 = CounsellingActionPoint(
             "model_prep_use_action_point_1",
             "Make a decision about whether to tell my partner about PrEP or not",
             "prep_use"
         )
-        val actionPoint2 = CounsellingModuleActionPoint(
+        val actionPoint2 = CounsellingActionPoint(
             "model_prep_use_action_point_2",
             "Practice how I'll respond to my partner's concerns about PrEP",
             "prep_use"
         )
-        val actionPoint3 = CounsellingModuleActionPoint(
+        val actionPoint3 = CounsellingActionPoint(
             "model_prep_use_action_point_3",
             "Prepare for telling my partner (e.g. decide where and when I'll do it)",
             "prep_use"
         )
-        val actionPoint4 = CounsellingModuleActionPoint(
+        val actionPoint4 = CounsellingActionPoint(
             "model_prep_use_action_point_4",
             "Share materials from this site with my partner",
             "prep_use"
         )
-        val actionPoint5 = CounsellingModuleActionPoint(
+        val actionPoint5 = CounsellingActionPoint(
             "model_prep_use_action_point_5",
             "Call a PrEP clinic to ask about partner counselling",
             "prep_use"
         )
-        val actionPoint6 = CounsellingModuleActionPoint(
+        val actionPoint6 = CounsellingActionPoint(
             "model_prep_use_action_point_6",
             "Make a plan to keep my PrEP secret (e.g. where to store it and when to take it)",
             "prep_use"
@@ -486,7 +486,7 @@ object PageContentFixture {
         val moduleImage = CounsellingModuleImage(
             "moduleimage"
         )
-        val section1 = CounsellingModuleSection(
+        val section1 = CounsellingSection(
             "section_4",
             "How to use PrEP without anyone knowing",
             "<p>Sometimes it makes sense not to tell your partner, or anyone else about your PrEP use</p>",
@@ -501,7 +501,7 @@ object PageContentFixture {
                 )
             )
         )
-        val section2 = CounsellingModuleSection(
+        val section2 = CounsellingSection(
             "section_5",
             "Why you decided to use oral PrEP",
             "<p>If talking to a partner, the benefits for the relationship</p>",
@@ -509,7 +509,7 @@ object PageContentFixture {
             null,
             null
         )
-        val section3 = CounsellingModuleSection(
+        val section3 = CounsellingSection(
             "section_1",
             "Should I tell my partner, or someone else I love, I'm taking PrEP?",
             "<p><em>There are many things that other women like you think about when deciding whether to tell reasons</p>",

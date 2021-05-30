@@ -89,7 +89,6 @@ object AssessmentFixture {
             "status" : "published",
             "questions": [
                 {
-                    "questions_id": {
                         "id": "qid1",
                         "text": "question 1",
                         "description": "description 1",
@@ -123,10 +122,8 @@ object AssessmentFixture {
                                 }
                             }
                         ]
-                    }
-                },
-                {
-                    "questions_id": {
+                    },
+               {
                         "id": "qid3",
                         "text": "question 3",
                         "description": "description 3",
@@ -152,7 +149,6 @@ object AssessmentFixture {
                             }
                         ]
                     }
-                }
             ]
         },
         {
@@ -162,7 +158,6 @@ object AssessmentFixture {
             "status" : "published",
             "questions": [
                 {
-                    "questions_id": {
                         "id": "qid2",
                         "text": "question 2",
                         "description": "description 2",
@@ -215,7 +210,6 @@ object AssessmentFixture {
                             }
                         ]
                     }
-                }
             ]
         }
     ]
@@ -234,67 +228,63 @@ object AssessmentFixture {
             "status" : "published",
             "questions": [
                 {
-                    "questions_id": {
-                        "id": "qid1",
-                        "text": "question 1",
-                        "description": "description 1",
-                        "options": [
-                            {
-                                "options_id": {
-                                    "id": 3,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:36:59+05:30",
-                                    "text": "disagree",
-                                    "weightage": 2
-                                }
-                            },
-                            {
-                                "options_id": {
-                                    "id": 5,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:37:17+05:30",
-                                    "text": "agree",
-                                    "weightage": 4
-                                }
-                            },
-                            {
-                                "options_id": {
-                                    "id": 4,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:37:10+05:30",
-                                    "text": "neutral",
-                                    "weightage": 3
-                                }
+                    "id": "qid1",
+                    "text": "question 1",
+                    "description": "description 1",
+                    "options": [
+                        {
+                            "options_id": {
+                                "id": 3,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:36:59+05:30",
+                                "text": "disagree",
+                                "weightage": 2
                             }
-                        ]
-                    }
+                        },
+                        {
+                            "options_id": {
+                                "id": 5,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:37:17+05:30",
+                                "text": "agree",
+                                "weightage": 4
+                            }
+                        },
+                        {
+                            "options_id": {
+                                "id": 4,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:37:10+05:30",
+                                "text": "neutral",
+                                "weightage": 3
+                            }
+                        }
+                    ]
                 },
-                {
-                    "questions_id": {
-                        "id": "qid3",
-                        "text": "question 3",
-                        "description": "description 3",
-                        "options": [
-                            {
-                                "options_id": {
-                                    "id": 5,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:37:17+05:30",
-                                    "text": "agree",
-                                    "weightage": 4
-                                }
-                            },
-                            {
-                                "options_id": {
-                                    "id": 3,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:36:59+05:30",
-                                    "text": "disagree",
-                                    "weightage": 2
-                                }
+            {
+                    "id": "qid3",
+                    "text": "question 3",
+                    "description": "description 3",
+                    "options": [
+                        {
+                            "options_id": {
+                                "id": 5,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:37:17+05:30",
+                                "text": "agree",
+                                "weightage": 4
                             }
-                        ]
-                    }
+                        },
+                        {
+                            "options_id": {
+                                "id": 3,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:36:59+05:30",
+                                "text": "disagree",
+                                "weightage": 2
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -305,58 +295,56 @@ object AssessmentFixture {
             "status" : "archived",
             "questions": [
                 {
-                    "questions_id": {
-                        "id": "qid3",
-                        "text": "question 2",
-                        "description": "description 2",
-                        "options": [
-                            {
-                                "options_id": {
-                                    "id": 3,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:36:59+05:30",
-                                    "text": "disagree",
-                                    "weightage": 2
-                                }
-                            },
-                            {
-                                "options_id": {
-                                    "id": 1,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:36:43+05:30",
-                                    "text": "strongly disagree",
-                                    "weightage": 1
-                                }
-                            },
-                            {
-                                "options_id": {
-                                    "id": 4,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:37:10+05:30",
-                                    "text": "neutral",
-                                    "weightage": 3
-                                }
-                            },
-                            {
-                                "options_id": {
-                                    "id": 5,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:37:17+05:30",
-                                    "text": "agree",
-                                    "weightage": 4
-                                }
-                            },
-                            {
-                                "options_id": {
-                                    "id": 6,
-                                    "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
-                                    "date_created": "2021-04-16T00:37:25+05:30",
-                                    "text": "strongly agree",
-                                    "weightage": 5
-                                }
+                    "id": "qid3",
+                    "text": "question 2",
+                    "description": "description 2",
+                    "options": [
+                        {
+                            "options_id": {
+                                "id": 3,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:36:59+05:30",
+                                "text": "disagree",
+                                "weightage": 2
                             }
-                        ]
-                    }
+                        },
+                        {
+                            "options_id": {
+                                "id": 1,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:36:43+05:30",
+                                "text": "strongly disagree",
+                                "weightage": 1
+                            }
+                        },
+                        {
+                            "options_id": {
+                                "id": 4,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:37:10+05:30",
+                                "text": "neutral",
+                                "weightage": 3
+                            }
+                        },
+                        {
+                            "options_id": {
+                                "id": 5,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:37:17+05:30",
+                                "text": "agree",
+                                "weightage": 4
+                            }
+                        },
+                        {
+                            "options_id": {
+                                "id": 6,
+                                "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
+                                "date_created": "2021-04-16T00:37:25+05:30",
+                                "text": "strongly agree",
+                                "weightage": 5
+                            }
+                        }
+                    ]
                 }
             ]
         }
@@ -375,7 +363,6 @@ object AssessmentFixture {
             "status" : "archived",
             "questions": [
                 {
-                    "questions_id": {
                         "id": "qid1",
                         "text": "question 1",
                         "description": "description 1",
@@ -408,10 +395,8 @@ object AssessmentFixture {
                                 }
                             }
                         ]
-                    }
-                },
+                    },
                 {
-                    "questions_id": {
                         "id": "qid3",
                         "text": "question 3",
                         "description": "description 3",
@@ -436,7 +421,6 @@ object AssessmentFixture {
                             }
                         ]
                     }
-                }
             ]
         }
     ]
