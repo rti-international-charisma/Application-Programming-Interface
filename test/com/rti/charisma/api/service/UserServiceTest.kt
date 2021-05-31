@@ -380,4 +380,16 @@ class UserServiceTest {
             userService.deleteInactiveUsers(180)
         }
     }
+
+    @Test
+    fun `it should throw error if user, deactivated for resetAttempts, attempts login`() {
+        val user = User(1, "username", 1, 5, 0,"oldHashedAnswer", "hashedPassword")
+
+        every { userRepository.findUserById(1) } returns user
+        val loginModel = Login("username", "password")
+
+        assertFailsWith(LoginException::class) {
+            userService.login(loginModel)
+        }
+    }
 }
