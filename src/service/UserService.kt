@@ -48,6 +48,10 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
     fun login(loginModel: Login): UserResponse {
         val user = userRepository.findUserByUsername(loginModel.username)
         user?.let {
+            if (user.resetPasswordAttemptsLeft <= 0) {
+                logger.warn("Deactivated user tried login, ${user.id}")
+                throw LoginException("This account is deactivated. Please create a new account")
+            }
             if (loginModel.password.hash() == it.password) {
                 user.loginAttemptsLeft = ConfigProvider.get(LOGIN_ATTEMPTS).toInt()
                 userRepository.updateUser(user)
@@ -90,6 +94,7 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
                 } else {
                     if (user.resetPasswordAttemptsLeft == 1) {
                         user.resetPasswordAttemptsLeft--
+                        user.loginAttemptsLeft = 0
                         userRepository.updateUser(user)
                         logger.warn("Deactivating account. Reset password attempts exhausted userId: ${user.id}")
                         throw ResetPasswordAttemptsExhaustedException(
