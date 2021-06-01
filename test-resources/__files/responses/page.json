@@ -2,56 +2,25 @@
   "data": {
     "id": "assessment-intro",
     "status": "published",
-    "date_created": "2021-04-15T10:48:49Z",
-    "date_updated": "2021-04-27T09:35:27Z",
-    "introduction": "<p><strong>Hi there, you&rsquo;re about to take the HEAlthy Relationship Test (HEART assessment).&nbsp;</strong><br /><strong>Go to you for taking this step!&nbsp;</strong></p>\n<p>We think it&rsquo;s useful to find out what limits or risks you might face in your relationship that could stop you from using PrEP. It may also help you see what&rsquo;s healthy or not in your relationship. We&rsquo;ll use your score to advise you on the content and skills we think could work for you in your relationship and PrEP use journey.&nbsp;</p>\n<p>When you&rsquo;re taking the HEART assessment, remember to keep your main partner in mind. If you don&rsquo;t have a main partner, it&rsquo;s helpful to think about which partner or partners might affect your PrEP use the most.&nbsp;</p>\n<p>A quick note about responding to the questions. For each question, you have 5 options based on how much you agree or disagree with the statement you&rsquo;re reading:</p>",
-    "summary": "<p>&bull; &nbsp; &nbsp;Disagree or Agree, and then &nbsp;<br />&bull; &nbsp; &nbsp;How much you disagree or agree: A Lot, Somewhat or A Little</p>\n<p>And finally, try to answer the questions about yourself and about your relationship with your partner(s) as honestly and openly as you can. These questions will help determine what kind of counselling and support related to the use of PrEP you might need.&nbsp;</p>\n<p>Remember, all your answers will be kept confidential.</p>",
-    "description": null,
+    "sort": null,
+    "date_created": "2021-05-25T19:05:57Z",
+    "date_updated": "2021-05-28T10:11:22Z",
     "title": "HEART Assessment Introduction",
-    "hero_image": null,
+    "introduction": "<p><strong>Hi there, you&rsquo;re about to take the HEAlthy Relationship Test (HEART assessment).&nbsp;</strong><br /><strong>Go to you for taking this step!&nbsp;</strong></p>\n<p>We think it&rsquo;s useful to find out what limits or risks you might face in your relationship that could stop you from using PrEP. It may also help you see what&rsquo;s healthy or not in your relationship. We&rsquo;ll use your score to advise you on the content and skills we think could work for you in your relationship and PrEP use journey.&nbsp;</p>\n<p>When you&rsquo;re taking the HEART assessment, remember to keep your main partner in mind. If you don&rsquo;t have a main partner, it&rsquo;s helpful to think about which partner or partners might affect your PrEP use the most.&nbsp;</p>\n<p>A quick note about responding to the questions. For each question, you have 5 options based on how much you agree or disagree with the statement you&rsquo;re reading:</p>",
+    "description": null,
+    "summary": "<p>&bull; &nbsp; &nbsp;Disagree or Agree, and then &nbsp;<br />&bull; &nbsp; &nbsp;How much you disagree or agree: A Lot, Somewhat or A Little</p>\n<p>And finally, try to answer the questions about yourself and about your relationship with your partner(s) as honestly and openly as you can. These questions will help determine what kind of counselling and support related to the use of PrEP you might need.&nbsp;</p>\n<p>Remember, all your answers will be kept confidential.</p>",
     "images": [
       {
-        "id": 4,
-        "pages_id": {
-          "id": "assessment-intro",
-          "status": "published",
-          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_created": "2021-04-15T10:48:49Z",
-          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_updated": "2021-04-27T09:35:27Z",
-          "introduction": "<p><strong>Hi there, you&rsquo;re about to take the HEAlthy Relationship Test (HEART assessment).&nbsp;</strong><br /><strong>Go to you for taking this step!&nbsp;</strong></p>\n<p>We think it&rsquo;s useful to find out what limits or risks you might face in your relationship that could stop you from using PrEP. It may also help you see what&rsquo;s healthy or not in your relationship. We&rsquo;ll use your score to advise you on the content and skills we think could work for you in your relationship and PrEP use journey.&nbsp;</p>\n<p>When you&rsquo;re taking the HEART assessment, remember to keep your main partner in mind. If you don&rsquo;t have a main partner, it&rsquo;s helpful to think about which partner or partners might affect your PrEP use the most.&nbsp;</p>\n<p>A quick note about responding to the questions. For each question, you have 5 options based on how much you agree or disagree with the statement you&rsquo;re reading:</p>",
-          "summary": "<p>&bull; &nbsp; &nbsp;Disagree or Agree, and then &nbsp;<br />&bull; &nbsp; &nbsp;How much you disagree or agree: A Lot, Somewhat or A Little</p>\n<p>And finally, try to answer the questions about yourself and about your relationship with your partner(s) as honestly and openly as you can. These questions will help determine what kind of counselling and support related to the use of PrEP you might need.&nbsp;</p>\n<p>Remember, all your answers will be kept confidential.</p>",
-          "description": null,
-          "title": "HEART Assessment Introduction",
-          "hero_image": null,
-          "images": [
-            4
-          ]
-        },
+        "id": 3,
         "directus_files_id": {
-          "id": "76438d8d-bd12-453d-9793-8adf363c820e",
-          "storage": "local",
-          "filename_disk": "76438d8d-bd12-453d-9793-8adf363c820e.png",
-          "filename_download": "image 18.png",
-          "title": "Image 18",
-          "type": "image/png",
-          "folder": null,
-          "uploaded_by": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "uploaded_on": "2021-04-15T11:11:40Z",
-          "modified_by": null,
-          "modified_on": "2021-04-15T11:11:40Z",
-          "charset": null,
-          "filesize": 21534,
-          "width": 280,
-          "height": 88,
-          "duration": null,
-          "embed": null,
-          "description": null,
-          "location": null,
+          "id": "89d1a545-ee4b-48ee-a3a6-aada7ff0529f",
+          "title": "Assessment Image",
           "tags": null,
-          "metadata": {}
+          "type": "image/png",
+          "filesize": 52425
         }
       }
-    ]
+    ],
+    "documents": []
   }
 }

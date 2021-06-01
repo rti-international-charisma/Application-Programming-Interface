@@ -25,8 +25,9 @@ data class AssessmentSection(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeName("questions_id")
-@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonTypeName("questions_id")
+//@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 data class Question(
     val id: String,
     val text: String,
