@@ -14,8 +14,18 @@ object ServiceResponse {
     "introduction" : null,
     "imageUrl" : "/assets/89390db4-434f-4d7d-92a0-152cd1368ecd"
   },
-  "moduleVideo" : {
-    "videoUrl" : "/assets/f5930b41-f299-4728-b035-919156a06675"
+  "videoSection" : {
+    "introduction" : null,
+    "summary" : null,
+    "videos" : [ {
+      "title" : "Prep use video",
+      "description" : null,
+      "videoUrl" : "/assets/2b22ad56-c682-4167-817b-e8c55aff51e0",
+      "videoImage" : null,
+      "actionText" : "Learn more",
+      "actionLink" : null,
+      "isPrivate" : false
+    } ]
   },
   "counsellingModuleSections" : [ {
     "id" : "section_2",
@@ -112,8 +122,18 @@ object ServiceResponse {
     "introduction" : null,
     "imageUrl" : "/assets/8ff62364-4536-4a47-ae5e-fd30c15f59c5"
   },
-  "moduleVideo" : {
-    "videoUrl" : "/assets/9fd45ac0-e7e3-4d26-b75f-62c0125bf6ec"
+  "videoSection" : {
+    "introduction" : null,
+    "summary" : null,
+    "videos" : [ {
+      "title" : "Partner Communication Video",
+      "description" : null,
+      "videoUrl" : "/assets/9fd45ac0-e7e3-4d26-b75f-62c0125bf6ec",
+      "videoImage" : null,
+      "actionText" : "Learn more",
+      "actionLink" : null,
+      "isPrivate" : false
+    } ]
   },
   "counsellingModuleSections" : [ {
     "id" : "section_7",

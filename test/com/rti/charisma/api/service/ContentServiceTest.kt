@@ -77,7 +77,7 @@ class ContentServiceTest {
         contentService.getModule(score, consent)
 
         coVerify {
-            contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,*.accordion_content.*")
+            contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,video_section.*.*,*.accordion_content.*")
         }
 
         verify { PrePModules.getModuleId(eq(moduleName)) }
@@ -93,7 +93,7 @@ class ContentServiceTest {
             val expectedPageContent = PageContentFixture.pageWithCounsellingModules("Published")
 
             coEvery {
-                contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,*.accordion_content.*")
+                contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,video_section.*.*,*.accordion_content.*")
             } returns PageContentFixture.contentWithCounsellingModules()
 
             val pageContent = contentService.getModule(score, consent)

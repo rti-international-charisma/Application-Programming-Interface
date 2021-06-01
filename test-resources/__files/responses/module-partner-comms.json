@@ -16,28 +16,30 @@
       "image_url": "8ff62364-4536-4a47-ae5e-fd30c15f59c5",
       "personalised_message": null
     },
-    "video_url": {
-      "id": "9fd45ac0-e7e3-4d26-b75f-62c0125bf6ec",
-      "storage": "local",
-      "filename_disk": "9fd45ac0-e7e3-4d26-b75f-62c0125bf6ec.mp4",
-      "filename_download": "module2video_compressed.mp4",
-      "title": "Module2video Compressed",
-      "type": "video/mp4",
-      "folder": null,
-      "uploaded_by": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-      "uploaded_on": "2021-04-06T06:04:48Z",
-      "modified_by": null,
-      "modified_on": "2021-04-06T06:05:02Z",
-      "charset": null,
-      "filesize": 60586481,
-      "width": null,
-      "height": null,
-      "duration": null,
-      "embed": null,
-      "description": null,
-      "location": null,
-      "tags": null,
-      "metadata": null
+    "video_section": {
+      "id": "module_partner_comm_videos",
+      "status": "published",
+      "date_created": "2021-05-31T18:02:37Z",
+      "date_updated": null,
+      "introduction": null,
+      "summary": null,
+      "videos": [
+        {
+          "id": "partner_comm_video",
+          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
+          "date_created": "2021-05-31T17:56:11Z",
+          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
+          "date_updated": "2021-05-31T18:02:37Z",
+          "title": "Partner Communication Video",
+          "description": null,
+          "action_text": "Learn more",
+          "video_url": "9fd45ac0-e7e3-4d26-b75f-62c0125bf6ec",
+          "video_image": null,
+          "is_private": false,
+          "action_link": null,
+          "video_section": "module_partner_comm_videos"
+        }
+      ]
     },
     "module_image": null,
     "counselling_module_sections": [

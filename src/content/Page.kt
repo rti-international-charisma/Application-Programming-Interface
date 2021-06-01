@@ -38,8 +38,6 @@ data class Page(
     val videoSection: VideoSection?,
     @JsonProperty(required = false)
     val steps: List<Step>?,
-    @JsonAlias("video_url")
-    val videoUrl: CounsellingModuleVideo?,
     @JsonAlias("module_image")
     val moduleImage: CounsellingModuleImage?,
     @JsonAlias("counselling_module_sections")
@@ -136,8 +134,8 @@ data class HeroImage(
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 data class PageVideo(
-    var title: String = "",
-    var description: String = "",
+    var title: String? = "",
+    var description: String? = "",
     @JsonProperty("video_url")
     var videoUrl: String?,
     @JsonProperty("video_image", required = false)
@@ -163,7 +161,7 @@ data class Step(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class VideoSection(
-    var introduction: String = "",
-    var summary: String = "",
+    var introduction: String? = "",
+    var summary: String? = "",
     var videos: List<PageVideo> = emptyList()
 )
