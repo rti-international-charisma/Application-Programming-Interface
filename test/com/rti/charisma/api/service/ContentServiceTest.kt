@@ -41,7 +41,7 @@ class ContentServiceTest {
     fun `it should parse page response with video sections and steps`() = runBlockingTest {
         val expectedHomePage = PageContentFixture.withVideoSectionAndSteps()
 
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } returns PageContentFixture.fromCmsWithVideos()
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*,video_section.*.*") } returns PageContentFixture.fromCmsWithVideos()
 
         val homePage: Page = contentService.getHomePage()
 
@@ -77,7 +77,7 @@ class ContentServiceTest {
         contentService.getModule(score, consent)
 
         coVerify {
-            contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,video_section.*.*,*.accordion_content.*")
+            contentClient.getPage("/items/counselling_modules/moduleId?fields=*.*,video_section.*.*,*.accordions.*")
         }
 
         verify { PrePModules.getModuleId(eq(moduleName)) }
@@ -93,7 +93,7 @@ class ContentServiceTest {
             val expectedPageContent = PageContentFixture.pageWithCounsellingModules("Published")
 
             coEvery {
-                contentClient.getPage("/items/counselling_module/moduleId?fields=*.*,video_section.*.*,*.accordion_content.*")
+                contentClient.getPage("/items/counselling_modules/moduleId?fields=*.*,video_section.*.*,*.accordions.*")
             } returns PageContentFixture.contentWithCounsellingModules()
 
             val pageContent = contentService.getModule(score, consent)
@@ -134,7 +134,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error processing response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentServerException(
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*,video_section.*.*") } throws (ContentServerException(
             "Content error",
             Exception()
         ))
@@ -146,7 +146,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw unexpected exception on error processing response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentException(
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*,video_section.*.*") } throws (ContentException(
             "Content error",
             RuntimeException()
         ))
@@ -158,7 +158,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error fetching response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/homepage?fields=*.*.*") } throws (ContentRequestException(
+        coEvery { contentClient.getPage("/items/homepage?fields=*.*,video_section.*.*") } throws (ContentRequestException(
             "Content error"
         ))
         assertFailsWith(
@@ -196,7 +196,7 @@ class ContentServiceTest {
     fun `it should parse assessment response`() = runBlockingTest {
         coEvery {
             contentClient.getAssessment(
-                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
+                "/items/assessment_sections?sort=sort&fields=*,questions.*,questions.options.options_id.*"
             )
         } returns AssessmentFixture.assessmentCmsContent()
 
@@ -209,7 +209,7 @@ class ContentServiceTest {
     fun `it should throw exception on error processing assessment response`() = runBlockingTest {
         coEvery {
             contentClient.getAssessment(
-                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
+                "/items/assessment_sections?sort=sort&fields=*,questions.*,questions.options.options_id.*"
             )
         } throws (ContentException("Content error", RuntimeException()))
         assertFailsWith(
@@ -222,7 +222,7 @@ class ContentServiceTest {
     fun `it should throw exception on error fetching assessment response`() = runBlockingTest {
         coEvery {
             contentClient.getAssessment(
-                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
+                "/items/assessment_sections?sort=sort&fields=*,questions.*,questions.options.options_id.*"
             )
         } throws (ContentRequestException("Content Request Error"))
         assertFailsWith(
@@ -235,7 +235,7 @@ class ContentServiceTest {
     fun `it should throw Content Server exception on error fetching assessment response`() = runBlockingTest {
         coEvery {
             contentClient.getAssessment(
-                "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
+                "/items/assessment_sections?sort=sort&fields=*,questions.*,questions.options.options_id.*"
             )
         } throws (ContentServerException("Content Request Error", RuntimeException()))
         assertFailsWith(

@@ -37,59 +37,14 @@ data class Page(
     @JsonProperty("video_section", required = false)
     val videoSection: VideoSection?,
     @JsonProperty(required = false)
+    @JsonAlias("actions")
     val steps: List<Step>?,
     @JsonAlias("module_image")
     val moduleImage: CounsellingModuleImage?,
-    @JsonAlias("counselling_module_sections")
-    val counsellingModuleSections: List<CounsellingModuleSection>?,
-    @JsonAlias("counselling_module_action_points")
-    val counsellingModuleActionPoints: List<CounsellingModuleActionPoint>?
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
-data class CounsellingModuleVideo(
-    @JsonProperty("id")
-    val videoUrl: String? = ""
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
-data class CounsellingModuleImage(
-    @JsonProperty("id")
-    val moduleImage: String? = ""
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
-data class CounsellingModuleSection(
-    val id: String,
-    val title: String?,
-    val introduction: String?,
-    val summary: String?,
-    @JsonAlias("module_name")
-    val moduleName: String?,
-    @JsonAlias("accordion_content")
-    val accordionContent: List<AccordionContent>?
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
-data class AccordionContent(
-    val id: String,
-    val title: String,
-    val description: String,
-    @JsonProperty("image_url")
-    var imageUrl: String? = ""
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
-data class CounsellingModuleActionPoint(
-    val id: String,
-    val title: String,
-    @JsonAlias("module_name")
-    val moduleName: String
+    @JsonAlias("counselling_module_sections", "sections")
+    val counsellingSections: List<CounsellingSection>?,
+    @JsonAlias("counselling_module_action_points", "action_points")
+    val counsellingActionPoints: List<CounsellingActionPoint>?
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

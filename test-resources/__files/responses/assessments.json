@@ -1,2071 +1,831 @@
 {
   "data": [
     {
-      "id": "c8aca8b8-d22e-4291-b60e-08a878dac42a",
+      "id": "29a4c749-d14c-4ed9-b39d-3a174ed1b6b9",
       "status": "published",
-      "sort": 1,
+      "sort": null,
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T18:51:58Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-26T03:47:01Z",
       "title": "PARTNER CONTEXT",
       "introduction": "Think about the partner or partners you have been involved with sexually during the last year.",
       "type": "PARTNER CONTEXT",
       "questions": [
         {
-          "questions_id": {
-            "id": "53e79da3-d07a-4f13-81af-b09170a52360",
-            "status": "published",
-            "text": "Do you have a primary sex partner – a man you have sex with on a regular basis, or who you consider as your main partner?",
-            "description": "If yes, please think about that person when you respond.\nIf you do not currently have a primary sex partner, but have had a primary sex partner in the past year, please think about that person when you respond.\nIf you have not had a primary sex partner in the last year, is there another recent partner who has had more “say” or more influence over your ability to use HIV prevention products? If yes, think about that person when you respond.\nIf you have not had a primary sex partner and there is no other partner who influences your use of HIV prevention methods, please think about the sexual partner you have had sex with most recently when you respond.",
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "bf3f9c6e-41a8-4472-864a-5a4ba8df7e52",
-                  "text": "Current sex partner",
-                  "weightage": 1,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "870ef46e-bbc6-4515-ab59-4191f0c84169",
-                  "text": "Non-current sex partner, from past year",
-                  "weightage": 2,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "f138d09c-a49e-4ddf-870d-cd95591664d4",
-                  "text": "Most influential of other partners",
-                  "weightage": 3,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "3e918de6-7d27-4653-8498-80d551c0230c",
-                  "text": "Most recent sexual partner",
-                  "weightage": 4,
-                  "sort": null
-                }
+          "id": "38016349-41cd-4ae2-b376-b9f27f22bfc0",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T04:09:17Z",
+          "text": "Do you have a primary sex partner – a man you have sex with on a regular basis, or who you consider as your main partner?",
+          "description": "<p>If yes, please think about that person when you respond. If you do not currently have a primary sex partner, but have had a primary sex partner in the past year, please think about that person when you&nbsp;respond. If you have not had a primary sex partner in the last year, is there another recent partner who has had more &ldquo;say&rdquo; or more influence over your ability to use HIV prevention products?&nbsp;If yes,&nbsp;think about that person when you&nbsp;respond. If&nbsp;you have not had a primary sex partner and&nbsp;there is no other partner who influences your use of HIV prevention methods,&nbsp;please think about the sexual partner you have had sex with most recently when&nbsp;you&nbsp;respond.</p>",
+          "positive_narrative": true,
+          "sections_id": "29a4c749-d14c-4ed9-b39d-3a174ed1b6b9",
+          "options": [
+            {
+              "options_id": {
+                "id": "b78e192f-bc25-4a53-9a13-2e5dbb4a3c93",
+                "text": "Current sex partner",
+                "weightage": 1,
+                "sort": null
               }
-            ]
-          }
+            },
+            {
+              "options_id": {
+                "id": "acf3a9da-07eb-4ff3-8571-54ee5a014140",
+                "text": "Most influential of other partners",
+                "weightage": 3,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "6da5e7f9-0c64-433e-81f4-ce3dcd19c70d",
+                "text": "Most recent sexual partner",
+                "weightage": 4,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "b872cb6a-8dfe-41b3-b28b-4fb7eed38c11",
+                "text": "Non-current sex partner, from past year",
+                "weightage": 2,
+                "sort": null
+              }
+            }
+          ]
         },
         {
-          "questions_id": {
-            "id": "1d369bb8-8373-4010-968b-313c11fa1af6",
-            "status": "published",
-            "text": "Does your primary partner know that you are taking oral PrEP?",
-            "description": "Does your primary partner know that you are taking oral PrEP?",
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "289ad1aa-dc0b-4436-a715-2f8ebc2f6906",
-                  "text": "No",
-                  "weightage": 2,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "31c96ce1-a71d-4233-ad8d-a9da314322b8",
-                  "text": "Yes",
-                  "weightage": 1,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "ff403224-d2ce-4b35-b5b2-35b142c74374",
-                  "text": "N/A (No primary partner)",
-                  "weightage": 3,
-                  "sort": null
-                }
+          "id": "431b2aac-8dcc-4e53-8173-88abdce45576",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T04:09:53Z",
+          "text": "Does your primary partner know that you are taking oral PrEP?",
+          "description": "<p>Does your primary partner know that you are taking oral PrEP?</p>",
+          "positive_narrative": true,
+          "sections_id": "29a4c749-d14c-4ed9-b39d-3a174ed1b6b9",
+          "options": [
+            {
+              "options_id": {
+                "id": "1e70025f-0fe3-498c-89b3-19753a0625ff",
+                "text": "N/A (No primary partner)",
+                "weightage": 3,
+                "sort": null
               }
-            ]
-          }
+            },
+            {
+              "options_id": {
+                "id": "c95cf6d3-f21d-4fba-b928-bd1efaa32eb0",
+                "text": "No",
+                "weightage": 2,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "5c2723cc-235c-4ef7-8681-cf71bf5022c6",
+                "text": "Yes",
+                "weightage": 1,
+                "sort": null
+              }
+            }
+          ]
         },
         {
-          "questions_id": {
-            "id": "d33111eb-96fb-4a74-8162-dea5850ed4ee",
-            "status": "draft",
-            "text": "What was your partner’s reaction when he found out about your PrEP use?",
-            "description": "What was your partner’s reaction when he found out about your PrEP use?",
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "ff154107-0af9-4859-a5b2-c6d5840d8ad7",
-                  "text": "Supportive",
-                  "weightage": 1,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "89b1bd99-e09f-42ac-a337-59d09805d3b8",
-                  "text": "Neutral",
-                  "weightage": 2,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "37ccbb1e-9a63-4d78-bcb6-049e2f26d0be",
-                  "text": "Opposed",
-                  "weightage": 3,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1341f568-5f27-4d18-a650-c3c6690090c2",
-                  "text": "Don’t know",
-                  "weightage": 4,
-                  "sort": null
-                }
-              }
-            ]
-          }
+          "id": "f31cdbec-87ed-45ae-8162-9bb37b7876d1",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:47:01Z",
+          "text": "What was your partner’s reaction when he found out about your PrEP use?",
+          "description": "What was your partner’s reaction when he found out about your PrEP use?",
+          "positive_narrative": true,
+          "sections_id": "29a4c749-d14c-4ed9-b39d-3a174ed1b6b9",
+          "options": []
         }
       ]
     },
     {
-      "id": "3a9be2a0-ea29-40ee-973c-d183af87996f",
+      "id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
       "status": "published",
-      "sort": 2,
+      "sort": null,
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T18:51:58Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-26T03:52:32Z",
       "title": "TRADITIONAL VALUES",
       "introduction": "This first section is about how do you feel about the kind of roles that men and women should have in their everyday lives.",
       "type": "TRADITIONAL VALUES",
       "questions": [
         {
-          "questions_id": {
-            "id": "0368f445-7cd9-430b-9ba3-2ca581020921",
-            "status": "published",
-            "text": "Changing diapers, giving the children a bath, and feeding the kids is a mother's responsibility.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "533dc3a4-5de7-4e73-8f55-ea0b23c4e6d3",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "A man should have the final say in all family matters.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "eaf1eeee-f329-46bf-94ce-03b93d67a75f",
-            "status": "published",
-            "text": "A woman cannot refuse to have sex with her husband or boyfriend.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "790f2b31-3da1-4eda-a82d-1c631d53bfba",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "A man should have the final word about decisions in the home.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "4ce7146b-5251-4f5b-9c89-c1763fa24810",
-            "status": "published",
-            "text": "If a man has paid bride wealth for his wife, he owns her.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "7abba958-2a4e-4eb8-9232-ae0ab5fc82bf",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "A woman cannot refuse to have sex with her husband or boyfriend.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "979e7d38-df19-4f72-87d2-845a00859ac0",
-            "status": "published",
-            "text": "A woman should always listen and abide by the word of her husband or boyfriend without questions.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "838bbc1b-5d4a-4803-a5cb-7d3c6015dd93",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "Changing diapers, giving the children a bath, and feeding the kids is a mother's responsibility.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "8f1dd1e3-0925-476a-881c-f3357a852f08",
-            "status": "published",
-            "text": "A man should have the final word about decisions in the home.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "a7501be3-6eda-4cb0-afbe-654e0c8f8d10",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "If a man has paid bride wealth for his wife, he owns her.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "eea8764d-4e2a-463a-8d47-25700236b4b8",
-            "status": "published",
-            "text": "A real man produces a male child.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "d575c116-4c32-4571-8056-f0628ca51aac",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "I only think I am attractive if other people think I am.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "336b9951-80ce-4d83-87dd-ab3bbe2d19c7",
-            "status": "published",
-            "text": "If a man has paid bride wealth for his wife, she must have sex when he wants it.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "de4ee697-45f7-4c3b-af04-0fdd7413d37b",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "If a man has paid bride wealth for his wife, she must have sex when he wants it.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "81a3955e-fd1d-4793-890c-f971393b27b4",
-            "status": "published",
-            "text": "A man should have the final say in all family matters.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "debeec2f-79b4-4982-ad1f-63f4219f9ccc",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "A real man produces a male child.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "61241d26-3afb-47b7-97ce-46df9c1c42bd",
-            "status": "published",
-            "text": "A woman should accept her partner's wishes – even when she disagrees - to keep the family together.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
-        },
-        {
-          "questions_id": {
-            "id": "0008ea62-937a-4dcb-9b01-5e145d82abbd",
-            "status": "published",
-            "text": "I only think I am attractive if other people think I am.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "eb79e777-7e94-4909-8b03-e4070095b196",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:52:32Z",
+          "text": "A woman should accept her partner's wishes – even when she disagrees - to keep the family together.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "2e4a199c-6df8-4346-904b-fd5faf7e5208",
+          "options": []
         }
       ]
     },
     {
-      "id": "d4dc8750-6364-4278-9c2d-2d594347cc7a",
+      "id": "51697b78-83e2-4ff7-8fde-ef3c29d1c1ca",
       "status": "published",
-      "sort": 3,
-      "title": "PARTNER ABUSE AND CONTROL",
-      "introduction": "How does your partner treat you? Some of these questions might be difficult for you to answer. Please take your time and please respond as honestly and openly as you can.",
-      "type": "PARTNER ABUSE AND CONTROL",
-      "questions": [
-        {
-          "questions_id": {
-            "id": "96e645b4-8c8c-4e60-90c5-b8c02a2d6f66",
-            "status": "published",
-            "text": "My partner slaps, hits, kicks, or pushes me.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
-        },
-        {
-          "questions_id": {
-            "id": "457d204b-05d9-4626-b3bf-7b571ecf9ede",
-            "status": "published",
-            "text": "My partner does things to scare or intimidate me on purpose.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
-        },
-        {
-          "questions_id": {
-            "id": "f2fb033d-efaa-4de7-8c37-bdb95add50a8",
-            "status": "published",
-            "text": "My partner makes fun of me or humiliates me.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
-        },
-        {
-          "questions_id": {
-            "id": "f86de0aa-3043-484d-a09f-2c4ed4c6fa88",
-            "status": "published",
-            "text": "I feel frightened by what my partner says or does.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
-        },
-        {
-          "questions_id": {
-            "id": "e2a0f3be-c756-481e-8ac4-9be8fa515708",
-            "status": "published",
-            "text": "I can't seem to make good decisions about my life.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
-        },
-        {
-          "questions_id": {
-            "id": "ac4a70e8-aa40-4ffa-8769-984842d67e95",
-            "status": "published",
-            "text": "I do not trust myself to make good decisions about my life.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "fafcdc7a-4be6-4cf3-82e5-9ddde66479bf",
-      "status": "published",
-      "sort": 4,
+      "sort": null,
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T18:51:58Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-26T03:54:21Z",
       "title": "PARTNER SUPPORT",
       "introduction": "Consider how much or how little support you might receive or have received from the partner you were thinking of in section 1",
       "type": "PARTNER SUPPORT",
       "questions": [
         {
-          "questions_id": {
-            "id": "dda3380d-fee4-46a5-b00b-e60e405b21ea",
-            "status": "published",
-            "text": "My partner is as committed as I am to our relationship.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
+          "id": "2f2229a1-3d19-4fea-9fb0-4b35b9e08a0c",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T04:05:36Z",
+          "text": "Arguments with my partner result in me feeling down or bad about myself.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "51697b78-83e2-4ff7-8fde-ef3c29d1c1ca",
+          "options": [
+            {
+              "options_id": {
+                "id": "b26476be-cc65-4c42-84cc-6f21e63cf6c1",
+                "text": "Agree Strongly",
+                "weightage": 6,
+                "sort": 1
               }
-            ]
-          }
+            },
+            {
+              "options_id": {
+                "id": "b88dfcb3-b20d-4b11-9513-4839278a1843",
+                "text": "Agree",
+                "weightage": 5,
+                "sort": 6
+              }
+            },
+            {
+              "options_id": {
+                "id": "fb6599ba-71bd-4541-a256-9cb449bf6c6c",
+                "text": "Disagree",
+                "weightage": 2,
+                "sort": 5
+              }
+            },
+            {
+              "options_id": {
+                "id": "13c28435-45ed-4597-84f2-6fb82f312c55",
+                "text": "Little",
+                "weightage": 4,
+                "sort": 3
+              }
+            },
+            {
+              "options_id": {
+                "id": "83784777-c50f-4637-975c-d132201ca8a1",
+                "text": "Neutral",
+                "weightage": 3,
+                "sort": 4
+              }
+            },
+            {
+              "options_id": {
+                "id": "961abe1d-0395-4cbe-97c5-a601ce4b5c7d",
+                "text": "Strongly disagree",
+                "weightage": 1,
+                "sort": 2
+              }
+            }
+          ]
         },
         {
-          "questions_id": {
-            "id": "ce37bc1f-7f54-40e3-9673-35c1573adc1b",
-            "status": "published",
-            "text": "In general, my relationship has a lot of tension.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "9d83ebb5-c600-4d1c-928c-f168312f76f9",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:54:21Z",
+          "text": "I feel safe in my current relationship.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "51697b78-83e2-4ff7-8fde-ef3c29d1c1ca",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "5b39c5ff-609d-4688-b439-e7b1c258c763",
-            "status": "published",
-            "text": "I feel trapped or stuck in our relationship.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "a25886df-6e91-407b-977b-0cadff9df0fb",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:54:21Z",
+          "text": "I feel trapped or stuck in our relationship.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "51697b78-83e2-4ff7-8fde-ef3c29d1c1ca",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "8ef41629-0f7d-4fe2-9b5c-5fbd116a299d",
-            "status": "published",
-            "text": "Arguments with my partner result in me feeling down or bad about myself.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "a880e839-3f02-4b90-a633-c0bac26353ab",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:54:21Z",
+          "text": "My partner is as committed as I am to our relationship.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "51697b78-83e2-4ff7-8fde-ef3c29d1c1ca",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "15aa0bd9-2022-406f-a6b6-8bc1d70044e7",
-            "status": "published",
-            "text": "My partner does what he wants, even if I do not want him to.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "b83ea82a-ad9c-4d3f-95ea-a5c6648b7498",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:54:21Z",
+          "text": "In general, my relationship has a lot of tension.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "51697b78-83e2-4ff7-8fde-ef3c29d1c1ca",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "cabf12cb-4eea-484d-b6c7-f117f0550287",
-            "status": "published",
-            "text": "I feel safe in my current relationship.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "eb5cd6aa-e539-4f49-80ce-f15adc63a14f",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:54:21Z",
+          "text": "My partner does what he wants, even if I do not want him to.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "51697b78-83e2-4ff7-8fde-ef3c29d1c1ca",
+          "options": []
         }
       ]
     },
     {
-      "id": "b4399697-2e38-434b-9e07-94242bb91295",
+      "id": "581c4fc0-2c59-442c-a56c-61ac6f810760",
       "status": "published",
-      "sort": 5,
+      "sort": null,
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T18:51:58Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-26T03:55:56Z",
+      "title": "PARTNER ABUSE AND CONTROL",
+      "introduction": "How does your partner treat you? Some of these questions might be difficult for you to answer. Please take your time and please respond as honestly and openly as you can.",
+      "type": "PARTNER ABUSE AND CONTROL",
+      "questions": [
+        {
+          "id": "0bb05822-3e3e-40d3-8c82-7b3e75b116fc",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T04:01:44Z",
+          "text": "My partner slaps, hits, kicks, or pushes me.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "581c4fc0-2c59-442c-a56c-61ac6f810760",
+          "options": [
+            {
+              "options_id": {
+                "id": "fb6599ba-71bd-4541-a256-9cb449bf6c6c",
+                "text": "Disagree",
+                "weightage": 2,
+                "sort": 5
+              }
+            },
+            {
+              "options_id": {
+                "id": "b26476be-cc65-4c42-84cc-6f21e63cf6c1",
+                "text": "Agree Strongly",
+                "weightage": 6,
+                "sort": 1
+              }
+            },
+            {
+              "options_id": {
+                "id": "b88dfcb3-b20d-4b11-9513-4839278a1843",
+                "text": "Agree",
+                "weightage": 5,
+                "sort": 6
+              }
+            },
+            {
+              "options_id": {
+                "id": "13c28435-45ed-4597-84f2-6fb82f312c55",
+                "text": "Little",
+                "weightage": 4,
+                "sort": 3
+              }
+            },
+            {
+              "options_id": {
+                "id": "d20364f6-e66a-47ae-98d1-0dc3add5cbd4",
+                "text": "Neutral",
+                "weightage": 3,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "961abe1d-0395-4cbe-97c5-a601ce4b5c7d",
+                "text": "Strongly disagree",
+                "weightage": 1,
+                "sort": 2
+              }
+            }
+          ]
+        },
+        {
+          "id": "147b4a1e-e66f-4366-b844-2a83af28f46c",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T04:03:36Z",
+          "text": "I feel frightened by what my partner says or does.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "581c4fc0-2c59-442c-a56c-61ac6f810760",
+          "options": [
+            {
+              "options_id": {
+                "id": "b26476be-cc65-4c42-84cc-6f21e63cf6c1",
+                "text": "Agree Strongly",
+                "weightage": 6,
+                "sort": 1
+              }
+            },
+            {
+              "options_id": {
+                "id": "b88dfcb3-b20d-4b11-9513-4839278a1843",
+                "text": "Agree",
+                "weightage": 5,
+                "sort": 6
+              }
+            },
+            {
+              "options_id": {
+                "id": "13c28435-45ed-4597-84f2-6fb82f312c55",
+                "text": "Little",
+                "weightage": 4,
+                "sort": 3
+              }
+            },
+            {
+              "options_id": {
+                "id": "83784777-c50f-4637-975c-d132201ca8a1",
+                "text": "Neutral",
+                "weightage": 3,
+                "sort": 4
+              }
+            },
+            {
+              "options_id": {
+                "id": "961abe1d-0395-4cbe-97c5-a601ce4b5c7d",
+                "text": "Strongly disagree",
+                "weightage": 1,
+                "sort": 2
+              }
+            },
+            {
+              "options_id": {
+                "id": "fb6599ba-71bd-4541-a256-9cb449bf6c6c",
+                "text": "Disagree",
+                "weightage": 2,
+                "sort": 5
+              }
+            }
+          ]
+        },
+        {
+          "id": "7dd7fd96-9e68-44d3-abdf-57f59e44522a",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:55:56Z",
+          "text": "I can't seem to make good decisions about my life.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "581c4fc0-2c59-442c-a56c-61ac6f810760",
+          "options": []
+        },
+        {
+          "id": "d3192740-999d-4edb-8bff-f6f2e2edec99",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:55:56Z",
+          "text": "My partner makes fun of me or humiliates me.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "581c4fc0-2c59-442c-a56c-61ac6f810760",
+          "options": []
+        },
+        {
+          "id": "feca6164-f03b-4946-a684-9e95d4f09424",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:55:56Z",
+          "text": "I do not trust myself to make good decisions about my life.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "581c4fc0-2c59-442c-a56c-61ac6f810760",
+          "options": []
+        },
+        {
+          "id": "ff061e71-ec77-4a4d-b61a-8490752c1d5d",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:25Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:55:56Z",
+          "text": "My partner does things to scare or intimidate me on purpose.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "581c4fc0-2c59-442c-a56c-61ac6f810760",
+          "options": []
+        }
+      ]
+    },
+    {
+      "id": "8c6f2602-4efb-4245-a750-4fb6be33fce4",
+      "status": "published",
+      "sort": null,
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T18:51:58Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-26T03:57:18Z",
       "title": "PARTNER ATTITUDE TO HIV PREVENTION",
       "introduction": "How do you think your partner will react to discussing HIV prevention?",
       "type": "PARTNER ATTITUDE TO HIV PREVENTION",
       "questions": [
         {
-          "questions_id": {
-            "id": "23bd7712-48d7-430a-8060-2a6c44451958",
-            "status": "published",
-            "text": "If I asked my partner to use a condom, he would get angry.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "76b09734-03cb-478c-963e-6721da7c4765",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:57:18Z",
+          "text": "I cannot tell my partner about HIV prevention product use because he will become angry.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "8c6f2602-4efb-4245-a750-4fb6be33fce4",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "44d0cc1d-caab-4bd4-85f7-1d2c8f0ab215",
-            "status": "published",
-            "text": "If I asked my partner to use an HIV prevention product, he would get violent.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "a1135445-4bda-42b0-a9ec-915f91395279",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:57:18Z",
+          "text": "If I asked my partner to use a condom, he would get violent.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "8c6f2602-4efb-4245-a750-4fb6be33fce4",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "4a9ff858-e330-45fc-9e3c-7c7e04126818",
-            "status": "published",
-            "text": "If I asked my partner to use a condom, he would get violent.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "b9a841d6-0c9a-4f1a-8755-accc7e1adc5b",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:57:18Z",
+          "text": "If I asked my partner to use a condom, he would get angry.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "8c6f2602-4efb-4245-a750-4fb6be33fce4",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "c47addcb-b62b-4186-90d1-7b524fc4abf8",
-            "status": "published",
-            "text": "If I asked my partner to use a condom, he would think I'm having sex with other people.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "cca7f772-17c3-494c-af15-f24b4e3b96cc",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:57:18Z",
+          "text": "If I asked my partner to use a condom, he would think I'm having sex with other people.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "8c6f2602-4efb-4245-a750-4fb6be33fce4",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "b3454076-f0c7-4f8e-9f4e-89e3997ec6da",
-            "status": "published",
-            "text": "I cannot tell my partner about HIV prevention product use because he will become angry.",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
-              },
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              }
-            ]
-          }
+          "id": "f5b68a4b-9b4f-4e2d-9d2a-e42346611a97",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:57:18Z",
+          "text": "If I asked my partner to use an HIV prevention product, he would get violent.",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "8c6f2602-4efb-4245-a750-4fb6be33fce4",
+          "options": []
         }
       ]
     },
     {
-      "id": "746ad99f-0ded-4fc9-95a3-162ebe94d616",
+      "id": "9ad88ea6-1122-455f-ac9a-7e9ffec0c412",
       "status": "published",
-      "sort": 6,
+      "sort": null,
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T18:51:58Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-26T03:58:58Z",
       "title": "HIV PREVENTION READINESS",
       "introduction": "How do you feel about using an HIV prevention product – in this case, oral PrEP?",
       "type": "HIV PREVENTION READINESS",
       "questions": [
         {
-          "questions_id": {
-            "id": "8fcfca82-3722-4c2b-97e2-57c7c659bc79",
-            "status": "published",
-            "text": "Using an HIV prevention product with my partner will help us communicate better.  ",
-            "description": null,
-            "positive_narrative": true,
-            "options": [
-              {
-                "options_id": {
-                  "id": "77757c2f-3c5a-418c-99a1-57962aec0a12",
-                  "text": "Strongly disagree",
-                  "weightage": 1,
-                  "sort": 2
-                }
-              },
-              {
-                "options_id": {
-                  "id": "525509b4-5869-47d9-bf39-2485a47b3ad7",
-                  "text": "Disagree",
-                  "weightage": 2,
-                  "sort": 5
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1ff0d223-1915-4ea5-923d-b76a2e77151f",
-                  "text": "Neutral",
-                  "weightage": 3,
-                  "sort": 4
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1d034581-2f1c-4987-9347-910e1fd2d429",
-                  "text": "Little",
-                  "weightage": 4,
-                  "sort": 3
-                }
-              },
-              {
-                "options_id": {
-                  "id": "d72adb67-6939-4bfc-80b2-ff32a08f5ef3",
-                  "text": "Agree",
-                  "weightage": 5,
-                  "sort": 6
-                }
-              },
-              {
-                "options_id": {
-                  "id": "cb283117-38d9-4d93-9bc3-d1ad11267fa1",
-                  "text": "Agree Strongly",
-                  "weightage": 6,
-                  "sort": 1
-                }
+          "id": "33aaf805-7219-4e45-93cf-a6ce3e1eaedd",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T04:08:07Z",
+          "text": "I am nervous to learn what my HIV status is.",
+          "description": null,
+          "positive_narrative": false,
+          "sections_id": "9ad88ea6-1122-455f-ac9a-7e9ffec0c412",
+          "options": [
+            {
+              "options_id": {
+                "id": "6e7e0e98-01cb-49db-8011-06bedbfdf97d",
+                "text": "Agree strongly",
+                "weightage": 1,
+                "sort": null
               }
-            ]
-          }
+            },
+            {
+              "options_id": {
+                "id": "e9b02274-019a-4fb7-9803-9930f5ab93cc",
+                "text": "Agree",
+                "weightage": 2,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "051e2f17-242b-4e7d-a47a-3e54afe9ff06",
+                "text": "Disagree",
+                "weightage": 5,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "a7af2637-cf39-4577-81a2-a31e51e9957f",
+                "text": "Little",
+                "weightage": 3,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "c363f964-8819-4e16-8f36-1f30d112f1c3",
+                "text": "Neutral",
+                "weightage": 4,
+                "sort": null
+              }
+            },
+            {
+              "options_id": {
+                "id": "875cb4b2-eb5e-4d40-9b5d-a331abbd31f7",
+                "text": "Strongly disagree",
+                "weightage": 6,
+                "sort": 0
+              }
+            }
+          ]
         },
         {
-          "questions_id": {
-            "id": "be3765d5-b45a-4311-af0c-066911dab2dd",
-            "status": "published",
-            "text": "I worry that others will think I am cheating with many partners if they know I am using the product.",
-            "description": null,
-            "positive_narrative": false,
-            "options": [
-              {
-                "options_id": {
-                  "id": "c5e9dc2e-442f-4363-8f4c-ea23d7e0a58c",
-                  "text": "Strongly disagree",
-                  "weightage": 6,
-                  "sort": 0
-                }
-              },
-              {
-                "options_id": {
-                  "id": "42e18bf5-2bf2-435b-8e9a-ea68e41c8aa0",
-                  "text": "Disagree",
-                  "weightage": 5,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1e5e4635-7727-4426-bea2-643d93a91cf0",
-                  "text": "Neutral",
-                  "weightage": 4,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "37cf9a2b-9c1d-455f-9106-8b78936d93ae",
-                  "text": "Little",
-                  "weightage": 3,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "bdd04d88-6dcf-4498-b3ac-65013b817956",
-                  "text": "Agree",
-                  "weightage": 2,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "03c5846d-8e66-40d4-9589-9e4b287f5d23",
-                  "text": "Agree strongly",
-                  "weightage": 1,
-                  "sort": null
-                }
+          "id": "50e8c293-1cde-47c1-b7a6-a0d2198d2f60",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T04:10:48Z",
+          "text": "Using an HIV prevention product with my partner will help us communicate better.  ",
+          "description": null,
+          "positive_narrative": true,
+          "sections_id": "9ad88ea6-1122-455f-ac9a-7e9ffec0c412",
+          "options": [
+            {
+              "options_id": {
+                "id": "b88dfcb3-b20d-4b11-9513-4839278a1843",
+                "text": "Agree",
+                "weightage": 5,
+                "sort": 6
               }
-            ]
-          }
+            },
+            {
+              "options_id": {
+                "id": "b26476be-cc65-4c42-84cc-6f21e63cf6c1",
+                "text": "Agree Strongly",
+                "weightage": 6,
+                "sort": 1
+              }
+            },
+            {
+              "options_id": {
+                "id": "fb6599ba-71bd-4541-a256-9cb449bf6c6c",
+                "text": "Disagree",
+                "weightage": 2,
+                "sort": 5
+              }
+            },
+            {
+              "options_id": {
+                "id": "83784777-c50f-4637-975c-d132201ca8a1",
+                "text": "Neutral",
+                "weightage": 3,
+                "sort": 4
+              }
+            },
+            {
+              "options_id": {
+                "id": "13c28435-45ed-4597-84f2-6fb82f312c55",
+                "text": "Little",
+                "weightage": 4,
+                "sort": 3
+              }
+            },
+            {
+              "options_id": {
+                "id": "961abe1d-0395-4cbe-97c5-a601ce4b5c7d",
+                "text": "Strongly disagree",
+                "weightage": 1,
+                "sort": 2
+              }
+            }
+          ]
         },
         {
-          "questions_id": {
-            "id": "bedd6c69-459d-4d4e-b017-46fab6b7c7e4",
-            "status": "published",
-            "text": "I worry that my partner will think I do not trust him because I am using the product.",
-            "description": null,
-            "positive_narrative": false,
-            "options": [
-              {
-                "options_id": {
-                  "id": "c5e9dc2e-442f-4363-8f4c-ea23d7e0a58c",
-                  "text": "Strongly disagree",
-                  "weightage": 6,
-                  "sort": 0
-                }
-              },
-              {
-                "options_id": {
-                  "id": "42e18bf5-2bf2-435b-8e9a-ea68e41c8aa0",
-                  "text": "Disagree",
-                  "weightage": 5,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1e5e4635-7727-4426-bea2-643d93a91cf0",
-                  "text": "Neutral",
-                  "weightage": 4,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "37cf9a2b-9c1d-455f-9106-8b78936d93ae",
-                  "text": "Little",
-                  "weightage": 3,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "bdd04d88-6dcf-4498-b3ac-65013b817956",
-                  "text": "Agree",
-                  "weightage": 2,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "03c5846d-8e66-40d4-9589-9e4b287f5d23",
-                  "text": "Agree strongly",
-                  "weightage": 1,
-                  "sort": null
-                }
-              }
-            ]
-          }
+          "id": "8b811a80-ca80-40ea-8944-c29088755a28",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:58:58Z",
+          "text": "I worry that my partner will think I do not trust him because I am using the product.",
+          "description": null,
+          "positive_narrative": false,
+          "sections_id": "9ad88ea6-1122-455f-ac9a-7e9ffec0c412",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "916eaa5a-9431-442a-9119-1efb5375b835",
-            "status": "published",
-            "text": "I am nervous to learn what my HIV status is.",
-            "description": null,
-            "positive_narrative": false,
-            "options": [
-              {
-                "options_id": {
-                  "id": "c5e9dc2e-442f-4363-8f4c-ea23d7e0a58c",
-                  "text": "Strongly disagree",
-                  "weightage": 6,
-                  "sort": 0
-                }
-              },
-              {
-                "options_id": {
-                  "id": "42e18bf5-2bf2-435b-8e9a-ea68e41c8aa0",
-                  "text": "Disagree",
-                  "weightage": 5,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1e5e4635-7727-4426-bea2-643d93a91cf0",
-                  "text": "Neutral",
-                  "weightage": 4,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "37cf9a2b-9c1d-455f-9106-8b78936d93ae",
-                  "text": "Little",
-                  "weightage": 3,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "bdd04d88-6dcf-4498-b3ac-65013b817956",
-                  "text": "Agree",
-                  "weightage": 2,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "03c5846d-8e66-40d4-9589-9e4b287f5d23",
-                  "text": "Agree strongly",
-                  "weightage": 1,
-                  "sort": null
-                }
-              }
-            ]
-          }
+          "id": "aa0c0375-6623-4e95-b5a5-28644ba5b3d1",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:58:58Z",
+          "text": "I worry that others will think I am cheating with many partners if they know I am using the product.",
+          "description": null,
+          "positive_narrative": false,
+          "sections_id": "9ad88ea6-1122-455f-ac9a-7e9ffec0c412",
+          "options": []
         },
         {
-          "questions_id": {
-            "id": "f8af8cb5-7707-4be3-af2a-316ac1143096",
-            "status": "published",
-            "text": "I worry that the product will affect my sex life.",
-            "description": null,
-            "positive_narrative": false,
-            "options": [
-              {
-                "options_id": {
-                  "id": "c5e9dc2e-442f-4363-8f4c-ea23d7e0a58c",
-                  "text": "Strongly disagree",
-                  "weightage": 6,
-                  "sort": 0
-                }
-              },
-              {
-                "options_id": {
-                  "id": "42e18bf5-2bf2-435b-8e9a-ea68e41c8aa0",
-                  "text": "Disagree",
-                  "weightage": 5,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "1e5e4635-7727-4426-bea2-643d93a91cf0",
-                  "text": "Neutral",
-                  "weightage": 4,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "37cf9a2b-9c1d-455f-9106-8b78936d93ae",
-                  "text": "Little",
-                  "weightage": 3,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "bdd04d88-6dcf-4498-b3ac-65013b817956",
-                  "text": "Agree",
-                  "weightage": 2,
-                  "sort": null
-                }
-              },
-              {
-                "options_id": {
-                  "id": "03c5846d-8e66-40d4-9589-9e4b287f5d23",
-                  "text": "Agree strongly",
-                  "weightage": 1,
-                  "sort": null
-                }
-              }
-            ]
-          }
+          "id": "ebc097c1-ca23-4463-b3a2-97cf5c251859",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T18:40:26Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-26T03:58:58Z",
+          "text": "I worry that the product will affect my sex life.",
+          "description": null,
+          "positive_narrative": false,
+          "sections_id": "9ad88ea6-1122-455f-ac9a-7e9ffec0c412",
+          "options": []
         }
       ]
     }

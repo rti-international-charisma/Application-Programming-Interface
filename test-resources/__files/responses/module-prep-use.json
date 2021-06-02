@@ -1,20 +1,21 @@
 {
   "data": {
     "id": "prep_use",
-    "title": "Discussing PrEP Use With Partners",
-    "introduction": "<p>Bring about positive changes in your relationship through better communication</p>",
     "status": "published",
+    "sort": null,
+    "date_created": "2021-05-25T17:45:23Z",
+    "date_updated": "2021-05-28T03:49:55Z",
+    "introduction": "<p>Bring about positive changes in your relationship through better communication</p>",
+    "title": "Discussing PrEP Use With Partners",
     "hero_image": {
-      "name": "counselling_module_prep_use_hero_image",
-      "status": "published",
-      "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-      "date_created": "2021-05-03T09:09:16Z",
-      "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-      "date_updated": "2021-05-10T07:37:27Z",
+      "name": "counselling_prep_use",
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-28T03:49:55Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-28T09:55:31Z",
       "title": "PrEP Disclosure",
       "introduction": null,
-      "image_url": "89390db4-434f-4d7d-92a0-152cd1368ecd",
-      "personalised_message": null
+      "image_url": "22edef46-a445-4af4-ac3d-0847b0976598"
     },
     "video_section": {
       "id": "module_prep_use_videos",
@@ -42,27 +43,82 @@
       ]
     },
     "module_image": null,
-    "counselling_module_sections": [
+    "action_points": [
+      {
+        "id": "model_prep_use_action_point_1",
+        "title": "Make a decision about whether to tell my partner about PrEP or not",
+        "module_id": "prep_use"
+      },
+      {
+        "id": "model_prep_use_action_point_2",
+        "title": "Practice how I’ll respond to my partner’s concerns about PrEP",
+        "module_id": "prep_use"
+      },
+      {
+        "id": "model_prep_use_action_point_3",
+        "title": "Prepare for telling my partner (e.g. decide where and when I’ll do it)",
+        "module_id": "prep_use"
+      },
+      {
+        "id": "model_prep_use_action_point_4",
+        "title": "Share materials from this site with my partner",
+        "module_id": "prep_use"
+      },
+      {
+        "id": "model_prep_use_action_point_5",
+        "title": "Call a PrEP clinic to ask about partner counselling",
+        "module_id": "prep_use"
+      },
+      {
+        "id": "model_prep_use_action_point_6",
+        "title": "Make a plan to keep my PrEP secret (e.g. where to store it and when to take it)",
+        "module_id": "prep_use"
+      }
+    ],
+    "sections": [
+      {
+        "id": "section_1",
+        "title": "Should I tell my partner, or someone else I love, I’m taking PrEP?",
+        "introduction": "<p><em>There are many things that other women like you think about when deciding whether to tell reasons</em><br /><em>that women do and don&rsquo;t tell their partners, or someone they love, about their use of oral PrEP. It can</em><br /><em>be helpful for some young women to have their partner&rsquo;s support, but it&rsquo;s important to think about</em><br /><em>your own reasons for telling them. What are some reasons that you might want to tell your partner,</em><br /><em>or someone you love, about PrEP?</em></p>",
+        "summary": "<p>Remember, whether you share or not is optional. It&rsquo;s your decision whether to talk to your partner,<br />or someone else, about PrEP use.</p>\n<p><strong>Do you think it would be helpful to tell your partner, or someone else, that you&rsquo;re using PrEP?</strong><br />● How do you think they would react?<br />● Why did or would you tell him?<br />● Why didn&rsquo;t or wouldn&rsquo;t you tell him?</p>",
+        "module_id": "prep_use",
+        "accordions": [
+          {
+            "id": "section_1_accordion_1",
+            "title": "Some common reasons for sharing are:",
+            "description": "<ul>\n<li>You feel like you need your partner&rsquo;s, or someone&rsquo;s, permission to take PrEP</li>\n<li>You like to make decisions with your partner, because you &lsquo;share everything&rsquo;</li>\n<li>You want their support and encouragement for your decision to use PrEP</li>\n<li>You think someone can help your adherence by helping you remember to take PrEP successfully, by reminding you to take your daily pill and get refills when needed</li>\n<li>You worry your partner, or someone else, would be more upset if they found out you were using PrEP without her telling them</li>\n<li>You don&rsquo;t want your partner to have misconceptions or misunderstandings about oral PrEP (e.g. Such as think they&rsquo;re it&rsquo;s using a muti or ARVs for HIV-positive people)</li>\n</ul>",
+            "image_url": null,
+            "counselling_section_id": "section_1"
+          },
+          {
+            "id": "section_1_accordion_2",
+            "title": "On the other hand, some reasons for NOT sharing include:",
+            "description": "<ul>\n<li>You worry your partner, or someone else you tell, may not allow you to use PrEP or force you to stop using it</li>\n<li>You worry they may not be supportive, and will think you don&rsquo;t trust them</li>\n<li>You worry that your partner may think you are sleeping around and that they will not trust you</li>\n<li>Your partner might think that PrEP is ARVs, and that you are actually HIV positive</li>\n<li>You worry your partner may start or continue sleeping around because he thinks you&rsquo;re protected or he&rsquo;s protected by your PrEP use</li>\n<li>You worry your partner may be violen</li>\n<li>You fear your partner may end the relationship or you&rsquo;ll be kicked out of your home</li>\n<li>You don&rsquo;t feel the need to share the decision with your partner or anyone else. It&rsquo;s your own body and your decision</li>\n</ul>",
+            "image_url": null,
+            "counselling_section_id": "section_1"
+          }
+        ]
+      },
       {
         "id": "section_2",
         "title": "How to tell your partner, or someone else you trust, about PrEP…",
         "introduction": "<p>It can sometimes be difficult to bring up the issue of HIV prevention with a partner, but there are ways it can become easier.</p>",
         "summary": null,
-        "module_name": "prep_use",
-        "accordion_content": [
-          {
-            "id": "section_2_accordion_2",
-            "title": "Where to tell someone",
-            "description": "<ul>\n<li>Do it in a comfortable and private place where no one will overhear you and where you will not be interrupted.</li>\n<li>If you are worried that he may be violent or you are not sure how he will react, don&rsquo;t be too far away from others so that you can get help if you need it.</li>\n<li>When to tell someone</li>\n<li>When you will have enough time to say everything you need to say</li>\n<li>When you will have enough time for that person to respond and ask questions</li>\n<li>When both of you are in a good mood and with a settled mind</li>\n<li>If you are worried that he may become violent, it may help to disclose during the daytime so you can get help more easily, if you need it.</li>\n</ul>",
-            "module_section": "section_2",
-            "image_url": null
-          },
+        "module_id": "prep_use",
+        "accordions": [
           {
             "id": "section_2_accordion_1",
             "title": "Here are some tips you can use to make it easier:",
             "description": "<ul>\n<li>How to tell someone</li>\n<li>Use clear and simple language.</li>\n<li>Maintain eye contact, remain confident and calm.</li>\n<li>Have prepared answers for anticipated questions</li>\n<li>Start disclosure indirectly by creating a story talking about PrEP in general without telling him you&rsquo;re using it and see what he says. If he says negative things, you may not want to tell him you are using it. Gauge his reaction; if you feel he may harm you, do not disclose.</li>\n<li>Be prepared to answer his questions.</li>\n<li>Listen openly to your partner&rsquo;s concerns do not assume you already know what he is going to say.</li>\n<li>Avoid blaming others when disclosing, especially him. In other words, don&rsquo;t say that it is his fault that you are using PrEP, because of his behaviours. Instead, say it is your decision to protect yourself.</li>\n<li>Observe or Look at your partner&rsquo;s the body language of your partner as you are disclosing or talking to him about PrEP to see his reaction.</li>\n<li>Be sensitive to emotions and feelings of your partner as you are disclosing or talking to him.</li>\n</ul>",
-            "module_section": "section_2",
-            "image_url": null
+            "image_url": null,
+            "counselling_section_id": "section_2"
+          },
+          {
+            "id": "section_2_accordion_2",
+            "title": "Where to tell someone",
+            "description": "<ul>\n<li>Do it in a comfortable and private place where no one will overhear you and where you will not be interrupted.</li>\n<li>If you are worried that he may be violent or you are not sure how he will react, don&rsquo;t be too far away from others so that you can get help if you need it.</li>\n<li>When to tell someone</li>\n<li>When you will have enough time to say everything you need to say</li>\n<li>When you will have enough time for that person to respond and ask questions</li>\n<li>When both of you are in a good mood and with a settled mind</li>\n<li>If you are worried that he may become violent, it may help to disclose during the daytime so you can get help more easily, if you need it.</li>\n</ul>",
+            "image_url": null,
+            "counselling_section_id": "section_2"
           }
         ]
       },
@@ -71,79 +127,24 @@
         "title": "What if my partner, or loved one, has a bad reaction?",
         "introduction": "<p>Many people do have misconceptions about PrEP so it&rsquo;s important to be ready with your response.<br />Let&rsquo;s talk about some potential ways your partner, or someone else you tell, might respond if you<br />told them about PrEP. It can be helpful if you have someone in your life to support you, but not<br />everyone reacts positively. Remember, it&rsquo;s your choice whether to talk about your PrEP use, or not.<br />However, it can be helpful if you have someone in your life to support you.</p>",
         "summary": null,
-        "module_name": "prep_use",
-        "accordion_content": null
+        "module_id": "prep_use",
+        "accordions": []
       },
       {
         "id": "section_4",
         "title": "How to use PrEP without anyone knowing",
         "introduction": "<p>Sometimes it makes sense not to tell your partner, or anyone else about your PrEP use, if you think<br />they&rsquo;ll be violent towards you or have another reaction that would be hard to handle. If you don&rsquo;t<br />want to tell them, that&rsquo;s your choice, but it&rsquo;s good to think about how to keep your PrEP use a<br />secret.</p>",
         "summary": null,
-        "module_name": "prep_use",
-        "accordion_content": [
+        "module_id": "prep_use",
+        "accordions": [
           {
             "id": "section_4_accordion_1",
             "title": "Here are some tips that other young women have used:",
             "description": "<ul>\n<li>Store pills in places your partner, or loved ones will not look, such as a handbag, a keychain with storage, or with pads and tampons.</li>\n<li>Ask a neighbour or a nearby friend to keep the pills, although this can make it challenging to remember to take them every day.</li>\n<li>Store a few doses in an unmarked container (ensure that this container is not clear plastic because sun can damage medication).</li>\n<li>If your partner or loved one monitors or watches you closely, think of a reason for the regular clinic visits. For e.g. you could tell them you&rsquo;re going to the clinic for a medical condition. You can also tell them you&rsquo;re taking this medication for another reason such as pregnancy prevention or menstrual cramps.</li>\n</ul>",
-            "module_section": "section_4",
-            "image_url": null
+            "image_url": null,
+            "counselling_section_id": "section_4"
           }
         ]
-      },
-      {
-        "id": "section_1",
-        "title": "Should I tell my partner, or someone else I love, I’m taking PrEP?",
-        "introduction": "<p><em>There are many things that other women like you think about when deciding whether to tell reasons</em><br /><em>that women do and don&rsquo;t tell their partners, or someone they love, about their use of oral PrEP. It can</em><br /><em>be helpful for some young women to have their partner&rsquo;s support, but it&rsquo;s important to think about</em><br /><em>your own reasons for telling them. What are some reasons that you might want to tell your partner,</em><br /><em>or someone you love, about PrEP?</em></p>",
-        "summary": "<p>Remember, whether you share or not is optional. It&rsquo;s your decision whether to talk to your partner,<br />or someone else, about PrEP use.</p>\n<p><strong>Do you think it would be helpful to tell your partner, or someone else, that you&rsquo;re using PrEP?</strong><br />● How do you think they would react?<br />● Why did or would you tell him?<br />● Why didn&rsquo;t or wouldn&rsquo;t you tell him?</p>",
-        "module_name": "prep_use",
-        "accordion_content": [
-          {
-            "id": "section_1_accordion_1",
-            "title": "Some common reasons for sharing are:",
-            "description": "<ul>\n<li>You feel like you need your partner&rsquo;s, or someone&rsquo;s, permission to take PrEP</li>\n<li>You like to make decisions with your partner, because you &lsquo;share everything&rsquo;</li>\n<li>You want their support and encouragement for your decision to use PrEP</li>\n<li>You think someone can help your adherence by helping you remember to take PrEP successfully, by reminding you to take your daily pill and get refills when needed</li>\n<li>You worry your partner, or someone else, would be more upset if they found out you were using PrEP without her telling them</li>\n<li>You don&rsquo;t want your partner to have misconceptions or misunderstandings about oral PrEP (e.g. Such as think they&rsquo;re it&rsquo;s using a muti or ARVs for HIV-positive people)</li>\n</ul>",
-            "module_section": "section_1",
-            "image_url": null
-          },
-          {
-            "id": "section_1_accordion_2",
-            "title": "On the other hand, some reasons for NOT sharing include:",
-            "description": "<ul>\n<li>You worry your partner, or someone else you tell, may not allow you to use PrEP or force you to stop using it</li>\n<li>You worry they may not be supportive, and will think you don&rsquo;t trust them</li>\n<li>You worry that your partner may think you are sleeping around and that they will not trust you</li>\n<li>Your partner might think that PrEP is ARVs, and that you are actually HIV positive</li>\n<li>You worry your partner may start or continue sleeping around because he thinks you&rsquo;re protected or he&rsquo;s protected by your PrEP use</li>\n<li>You worry your partner may be violen</li>\n<li>You fear your partner may end the relationship or you&rsquo;ll be kicked out of your home</li>\n<li>You don&rsquo;t feel the need to share the decision with your partner or anyone else. It&rsquo;s your own body and your decision</li>\n</ul>",
-            "module_section": "section_1",
-            "image_url": null
-          }
-        ]
-      }
-    ],
-    "counselling_module_action_points": [
-      {
-        "id": "model_prep_use_action_point_1",
-        "title": "Make a decision about whether to tell my partner about PrEP or not",
-        "module_name": "prep_use"
-      },
-      {
-        "id": "model_prep_use_action_point_2",
-        "title": "Practice how I’ll respond to my partner’s concerns about PrEP",
-        "module_name": "prep_use"
-      },
-      {
-        "id": "model_prep_use_action_point_3",
-        "title": "Prepare for telling my partner (e.g. decide where and when I’ll do it)",
-        "module_name": "prep_use"
-      },
-      {
-        "id": "model_prep_use_action_point_4",
-        "title": "Share materials from this site with my partner",
-        "module_name": "prep_use"
-      },
-      {
-        "id": "model_prep_use_action_point_5",
-        "title": "Call a PrEP clinic to ask about partner counselling",
-        "module_name": "prep_use"
-      },
-      {
-        "id": "model_prep_use_action_point_6",
-        "title": "Make a plan to keep my PrEP secret (e.g. where to store it and when to take it)",
-        "module_name": "prep_use"
       }
     ]
   }

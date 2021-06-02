@@ -98,7 +98,7 @@ object PageConversions {
                         writeEndArray()
                     }
 
-                    value.counsellingModuleSections?.let {
+                    value.counsellingSections?.let {
                         writeArrayFieldStart("counsellingModuleSections")
                         it.forEach { section ->
                             writeStartObject()
@@ -125,7 +125,7 @@ object PageConversions {
                         }
                         writeEndArray()
                     }
-                    value.counsellingModuleActionPoints?.let {
+                    value.counsellingActionPoints?.let {
                         writeArrayFieldStart("counsellingModuleActionPoints")
                         it.forEach { actionPoint ->
                             writeStartObject()

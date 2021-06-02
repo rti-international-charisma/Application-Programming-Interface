@@ -2,218 +2,144 @@
   "data": {
     "id": "homepage",
     "status": "published",
+    "date_created": "2021-05-25T20:01:41Z",
+    "date_updated": "2021-05-29T18:54:33Z",
+    "hero_image_caption_test_complete": "<p><span style=\"font-size: 14pt;\">Well done on completing assessment! You can check your scores again below and continue reading the counselling content suggested for you.</span></p>",
+    "hero_image_caption_test_incomplete": "<p><span style=\"font-size: 14pt;\">You&rsquo;ve been doing so well and we want to help you to keep up the progress.</span></p>",
+    "hero_image": {
+      "name": "homepag_hero_image",
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T19:19:17Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-28T03:52:06Z",
+      "title": "Home Page Hero Image",
+      "introduction": "<div><span style=\"font-size: 18pt;\"><strong>Want to check the status of your relationship and protect yourself?</strong></span></div>\n<div>\n<p><span style=\"font-size: 14pt;\">CHARISMA&rsquo;s here to support you!&nbsp;</span></p>\n<p><span style=\"font-size: 14pt;\">Take a quiz about your relationship and get tailored support, or browse content on Healthy relationships, using PrEP in your relationships,&nbsp;</span><br /><span style=\"font-size: 14pt;\">good communication with your partner and others, and relationship safety. You can always come back more for later and share what you like!</span></p>\n</div>",
+      "image_url": "7c071343-9292-4021-9d05-30c88479afee"
+    },
     "video_section": {
-      "id": "video_section",
-      "status": "published",
-      "date_created": "2021-04-06T12:36:37Z",
-      "date_updated": "2021-04-21T11:30:39Z",
+      "id": "homepage_videos",
+      "sort": null,
+      "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_created": "2021-05-25T20:20:58Z",
+      "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+      "date_updated": "2021-05-29T18:54:33Z",
       "introduction": "Build a healthy relationship with your partner",
       "summary": "Here are some videos, activities and reading material for you",
       "videos": [
         {
-          "id": "video_module3",
-          "status": "published",
-          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_created": "2021-04-06T03:34:50Z",
-          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_updated": "2021-05-14T04:15:11Z",
-          "title": "Discussing PrEP Use with Partners",
-          "description": "Are you on PrEP or would like to be on PrEP but don’t know how to tell your partner about it? We’ve got you. Read more to learn about ways other women tell their male partners. And if you’re not ready you can also learn how to use PrEP without telling your partner.",
-          "video_section": "video_section",
-          "action_text": "Learn more",
-          "video_url": "2b22ad56-c682-4167-817b-e8c55aff51e0",
-          "video_image": null,
-          "is_private": false,
-          "action_link": "/module/prep_use"
-        },
-        {
-          "id": "video_module2",
-          "status": "published",
-          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_created": "2021-04-06T03:33:51Z",
-          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_updated": "2021-05-14T04:15:26Z",
-          "title": "Do you know the different ways of communicating?",
-          "description": "Communication is more than just the words you speak. Often we are not “heard” because we struggle to separate our feelings from facts when we’re upset. This section will give you skills to communicate better with your partner and use conflict to actually get what you both want and need in your relationship.",
-          "video_section": "video_section",
-          "action_text": "Learn more",
-          "video_url": "9fd45ac0-e7e3-4d26-b75f-62c0125bf6ec",
-          "video_image": null,
-          "is_private": false,
-          "action_link": "/module/partner_comm"
+          "id": "video_module0",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T20:10:47Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-29T18:54:33Z",
+          "title": "Start Here:",
+          "action_text": "Take the Test",
+          "video_url": null,
+          "video_image": "c7f72d63-6733-45d8-a836-505aaa29a731",
+          "action_link": "/assessment/intro",
+          "is_private": true,
+          "description": "Take the HEART assessment test, and understand your relationship better",
+          "video_section_id": "homepage_videos"
         },
         {
           "id": "video_module1",
-          "status": "published",
-          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_created": "2021-04-19T07:41:27Z",
-          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_updated": "2021-05-14T04:15:51Z",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T20:12:55Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-29T18:54:33Z",
           "title": "How's the health of your relationship?",
-          "description": "All relationships have challenges, but it’s important to know what’s healthy or not. Read more to learn about healthy and unhealthy relationship qualities. It requires you to reflect on your own relationships using what you have learned.",
-          "video_section": "video_section",
           "action_text": "Learn more",
-          "video_url": "f5930b41-f299-4728-b035-919156a06675",
+          "video_url": "ec99eb6f-6979-459a-8b59-7740b175285f",
           "video_image": null,
+          "action_link": "/module/prep_use",
           "is_private": false,
-          "action_link": "/module/prep_use"
+          "description": "All relationships have challenges, but it’s important to know what’s healthy or not. Read more to learn about healthy and unhealthy relationship qualities. It requires you to reflect on your own relationships using what you have learned.",
+          "video_section_id": "homepage_videos"
         },
         {
-          "id": "video_module0",
-          "status": "published",
-          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_created": "2021-04-19T07:42:49Z",
-          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_updated": "2021-04-21T11:30:40Z",
-          "title": "Start Here:",
-          "description": "Take the HEART assessment test, and understand your relationship better",
-          "video_section": "video_section",
-          "action_text": "Take the Test",
-          "video_url": null,
-          "video_image": "ea231c41-e9fc-4ea3-acba-975c659dc3df",
-          "is_private": true,
-          "action_link": "/assessment/intro"
+          "id": "video_module2",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T20:14:33Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-29T18:54:33Z",
+          "title": "Do you know the different ways of communicating?",
+          "action_text": "Learn more",
+          "video_url": "ad64c889-ef0d-474b-bd6f-0e2f130fad13",
+          "video_image": null,
+          "action_link": "/module/partner_comm",
+          "is_private": false,
+          "description": "Communication is more than just the words you speak. Often we are not “heard” because we struggle to separate our feelings from facts when we’re upset. This section will give you skills to communicate better with your partner and use conflict to actually get what you both want and need in your relationship.",
+          "video_section_id": "homepage_videos"
+        },
+        {
+          "id": "video_module3",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T20:17:31Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-29T18:54:33Z",
+          "title": "Discussing PrEP Use with Partners",
+          "action_text": "Learn more",
+          "video_url": "25d369ee-47d1-48b3-b9d9-c5dc7df44d2d",
+          "video_image": null,
+          "action_link": "/module/prep_use",
+          "is_private": false,
+          "description": "Are you on PrEP or would like to be on PrEP but don’t know how to tell your partner about it? We’ve got you. Read more to learn about ways other women tell their male partners. And if you’re not ready you can also learn how to use PrEP without telling your partner.",
+          "video_section_id": "homepage_videos"
         },
         {
           "id": "video_module4",
-          "status": "published",
-          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_created": "2021-04-06T03:35:47Z",
-          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-          "date_updated": "2021-05-14T04:14:53Z",
+          "sort": null,
+          "user_created": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_created": "2021-05-25T20:18:32Z",
+          "user_updated": "43f6df62-53b1-4729-9f4c-3f77d44f1573",
+          "date_updated": "2021-05-29T18:54:33Z",
           "title": "Staying safe in a violent relationship",
-          "description": "Tension and conflict is common in relationships, but it should not lead to physical abuse. Are you aware that abuse is not only physical? Read more to find out what you can do if you suspect you are in an abusive relationship. It’s good to have a back-up plan to make sure you stay safe even if you’re not ready to seek help.",
-          "video_section": "video_section",
           "action_text": "Learn more",
           "video_url": null,
-          "video_image": "31d8138d-1f0c-4abe-a2c8-6c3682033c17",
+          "video_image": "cd2a0921-a66a-4e5e-8bc1-82b5df8befd3",
+          "action_link": "/module/ipv",
           "is_private": false,
-          "action_link": "/module/ipv"
+          "description": "Tension and conflict is common in relationships, but it should not lead to physical abuse. Are you aware that abuse is not only physical? Read more to find out what you can do if you suspect you are in an abusive relationship. It’s good to have a back-up plan to make sure you stay safe even if you’re not ready to seek help.",
+          "video_section_id": "homepage_videos"
         }
       ]
     },
-    "hero_image": {
-      "name": "score image",
-      "status": "published",
-      "date_created": "2021-04-07T12:36:40Z",
-      "date_updated": "2021-04-19T05:19:46Z",
-      "title": "Hero Image",
-      "summary": "",
-      "introduction": "<div><span style=\"font-size: 18pt;\"><strong>Want to check the status of your relationship and protect yourself?</strong></span></div>\n<div>\n<p><span style=\"font-size: 14pt;\">CHARISMA&rsquo;s here to support you!&nbsp;</span></p>\n<p><span style=\"font-size: 14pt;\">Take a quiz about your relationship and get tailored support, or browse content on Healthy relationships, using PrEP in your relationships,&nbsp;</span><br /><span style=\"font-size: 14pt;\">good communication with your partner and others, and relationship safety. You can always come back more for later and share what you like!</span></p>\n</div>",
-      "image_url": "82c667f6-c82e-4c89-a8f0-e715563f87dc",
-      "user_created": {
-        "id": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-        "first_name": null,
-        "last_name": null,
-        "email": "admin@charisma.com",
-        "password": "**********",
-        "location": null,
-        "title": null,
-        "description": null,
-        "tags": null,
-        "avatar": null,
-        "language": "en-US",
-        "theme": "auto",
-        "tfa_secret": null,
-        "status": "active",
-        "role": "10606a22-4089-469e-8406-313741213b91",
-        "token": "accesstokenforthecharismaapi",
-        "last_access": "2021-05-17T05:19:26Z",
-        "last_page": "/collections/pageimages"
-      },
-      "user_updated": {
-        "id": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
-        "first_name": null,
-        "last_name": null,
-        "email": "admin@charisma.com",
-        "password": "**********",
-        "location": null,
-        "title": null,
-        "description": null,
-        "tags": null,
-        "avatar": null,
-        "language": "en-US",
-        "theme": "auto",
-        "tfa_secret": null,
-        "status": "active",
-        "role": "10606a22-4089-469e-8406-313741213b91",
-        "token": "accesstokenforthecharismaapi",
-        "last_access": "2021-05-17T05:19:26Z",
-        "last_page": "/collections/pageimages"
-      }
-    },
-    "steps": [
+    "actions": [
       {
-        "id": 1,
-        "background_image": "6caced82-67c6-4434-8225-d12ad7fd1643",
-        "image": "bd5c8897-fba1-4110-a3ec-cfb126526f3e",
-        "title": "Take Relationship Quiz",
-        "page": {
-          "id": "homepage",
-          "status": "published",
-          "video_section": "video_section",
-          "hero_image": "score image",
-          "steps": [
-            1,
-            2,
-            3,
-            4
-          ]
-        }
-      },
-      {
-        "id": 2,
-        "background_image": "38f6117e-c345-49ee-8c25-e7273cde4b9a",
-        "image": "fa8de294-9d7c-46b6-b933-cbe66605d31f",
+        "id": "step 2",
         "title": "Access Counselling Content Selected Just For You",
-        "page": {
-          "id": "homepage",
-          "status": "published",
-          "video_section": "video_section",
-          "hero_image": "score image",
-          "steps": [
-            1,
-            2,
-            3,
-            4
-          ]
-        }
+        "page_id": "homepage",
+        "image": "964a11ff-6d58-4a89-829a-525bfcd6f0d7",
+        "background_image": "75b448ce-e862-4aa0-b62b-b53f83bd26d4",
+        "step_number": 2
       },
       {
-        "id": 3,
-        "background_image": "a9dd6f32-e04d-47f7-8865-8bc64ff65319",
-        "image": "4bfe21df-9f30-48bc-ab96-50cf6bfc653c",
-        "title": "Share Educational Material with Partner",
-        "page": {
-          "id": "homepage",
-          "status": "published",
-          "video_section": "video_section",
-          "hero_image": "score image",
-          "steps": [
-            1,
-            2,
-            3,
-            4
-          ]
-        }
-      },
-      {
-        "id": 4,
-        "background_image": "c13524f4-1b4b-4631-8779-f16026e2a4f1",
-        "image": "39626393-68ef-47bc-a1b4-5c06c52fb1fa",
+        "id": "step 4",
         "title": "Get Access To Available Support In Your Community",
-        "page": {
-          "id": "homepage",
-          "status": "published",
-          "video_section": "video_section",
-          "hero_image": "score image",
-          "steps": [
-            1,
-            2,
-            3,
-            4
-          ]
-        }
+        "page_id": "homepage",
+        "image": "76191be7-b39c-43da-9294-467db74908d5",
+        "background_image": "dff6546a-debf-4c14-bb03-edbe6cd1a22d",
+        "step_number": 4
+      },
+      {
+        "id": "step1",
+        "title": "Take Relationship Quiz",
+        "page_id": "homepage",
+        "image": "94d51d3d-ed88-42cc-a9fd-384a8e98e01c",
+        "background_image": "5cebe56a-ca0c-488f-95e1-3688f729cb20",
+        "step_number": 1
+      },
+      {
+        "id": "step3",
+        "title": "Share Educational Material with Partner",
+        "page_id": "homepage",
+        "image": "d5d362a0-ab20-4d61-9c58-2903547eb026",
+        "background_image": "5750f28d-444c-49e0-ad96-62ff72493a90",
+        "step_number": 3
       }
     ]
   }

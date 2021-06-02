@@ -29,7 +29,7 @@ class ContentService(private val contentClient: ContentClient) {
 
     suspend fun getHomePage(): Page {
         // supports 3 levels of information
-        val endpoint = "/items/homepage?fields=*.*.*"
+        val endpoint = "/items/homepage?fields=*.*,video_section.*.*"
         return pageRequest(endpoint)
     }
 
@@ -45,13 +45,13 @@ class ContentService(private val contentClient: ContentClient) {
     }
 
     suspend fun getModule(moduleId: String): Page {
-        val endpoint = "/items/counselling_module/$moduleId?fields=*.*,video_section.*.*,*.accordion_content.*"
+        val endpoint = "/items/counselling_modules/$moduleId?fields=*.*,video_section.*.*,*.accordions.*"
         return pageRequest(endpoint)
     }
 
     suspend fun getAssessments(): Assessment {
         val endpoint =
-            "/items/sections?sort=sort&fields=*,questions.questions_id.*,questions.questions_id.options.options_id.*"
+            "/items/assessment_sections?sort=sort&fields=*,questions.*,questions.options.options_id.*"
         try {
             val assessment = contentClient.getAssessment(endpoint)
             logger.info("Assessment content received successfully")
