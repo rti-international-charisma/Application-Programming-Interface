@@ -45,7 +45,7 @@ class ContentService(private val contentClient: ContentClient) {
     }
 
     suspend fun getModule(moduleId: String): Page {
-        val endpoint = "/items/counselling_modules/$moduleId?fields=*.*,*.accordions.*"
+        val endpoint = "/items/counselling_modules/$moduleId?fields=*.*,video_section.*.*,*.accordions.*"
         return pageRequest(endpoint)
     }
 

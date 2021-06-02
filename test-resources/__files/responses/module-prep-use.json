@@ -17,12 +17,30 @@
       "introduction": null,
       "image_url": "22edef46-a445-4af4-ac3d-0847b0976598"
     },
-    "video_url": {
-      "id": "ec99eb6f-6979-459a-8b59-7740b175285f",
-      "title": "Module1video Compressed",
-      "tags": null,
-      "type": "video/mp4",
-      "filesize": 54768091
+    "video_section": {
+      "id": "module_prep_use_videos",
+      "status": "published",
+      "date_created": "2021-05-31T18:02:55Z",
+      "date_updated": null,
+      "introduction": null,
+      "summary": null,
+      "videos": [
+        {
+          "id": "prep_use_video",
+          "user_created": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
+          "date_created": "2021-05-31T17:55:43Z",
+          "user_updated": "2e2e2552-bac2-42c2-84b6-18f8eeb22aae",
+          "date_updated": "2021-05-31T18:02:55Z",
+          "title": "Prep use video",
+          "description": null,
+          "action_text": "Learn more",
+          "video_url": "2b22ad56-c682-4167-817b-e8c55aff51e0",
+          "video_image": null,
+          "is_private": false,
+          "action_link": null,
+          "video_section": "module_prep_use_videos"
+        }
+      ]
     },
     "module_image": null,
     "action_points": [

@@ -28,12 +28,6 @@ object PageConversions {
                         writeEndObject()
                     }
 
-                    value.videoUrl?.let {
-                        writeObjectFieldStart("moduleVideo")
-                        writeStringField("videoUrl", ifPresent(it.videoUrl)?.let { value -> "/assets/$value" })
-                        writeEndObject()
-                    }
-
                     value.moduleImage?.let {
                         writeObjectFieldStart("moduleImage")
                         writeStringField("imageUrl", ifPresent(it.moduleImage)?.let { value -> "/assets/$value" })

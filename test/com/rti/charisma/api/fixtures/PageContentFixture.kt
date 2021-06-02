@@ -41,7 +41,6 @@ object PageContentFixture {
             null,
             null,
             null,
-            null
         )
 
     }
@@ -243,7 +242,6 @@ object PageContentFixture {
             null,
             null,
             null,
-            null
         )
     }
 
@@ -266,7 +264,6 @@ object PageContentFixture {
                 PageDocuments(Document("doc-1", "Document 1")),
                 PageDocuments(Document("doc-2", "Document 2"))
             ),
-            null,
             null,
             null,
             null,
@@ -361,8 +358,13 @@ object PageContentFixture {
     "title": "PrEp Hero Image",
     "image_url": "1c2eea87-f593-41c2-b6ba-da69a3133c9a"
   },
-  "video_url": {
-    "id": "videourl"
+  "video_section": {
+    "videos": [
+        {
+            "id": "videourl",
+            "video_url": "48e9b5e8-aff0-489e-a5cc-088b34941c3el"
+        }
+    ]
   },
   "module_image": {
     "id": "moduleimage"
@@ -480,8 +482,8 @@ object PageContentFixture {
         )
         val counsellingActionPoints =
             listOf(actionPoint1, actionPoint2, actionPoint3, actionPoint4, actionPoint5, actionPoint6)
-        val moduleVideo = CounsellingModuleVideo(
-            "videourl"
+        val moduleVideo = VideoSection(
+            videos = listOf(PageVideo("","","48e9b5e8-aff0-489e-a5cc-088b34941c3el",null,null,null,false))
         )
         val moduleImage = CounsellingModuleImage(
             "moduleimage"
@@ -542,9 +544,8 @@ object PageContentFixture {
             "This is caption for partially completed test",
             null,
             null,
-            null,
-            null,
             moduleVideo,
+            null,
             moduleImage,
             counsellingSections,
             counsellingActionPoints
@@ -564,11 +565,21 @@ object PageContentFixture {
     "introduction" : "",
     "imageUrl" : "/assets/1c2eea87-f593-41c2-b6ba-da69a3133c9a"
   },
-  "moduleVideo" : {
-    "videoUrl" : "/assets/videourl"
-  },
   "moduleImage" : {
     "imageUrl" : "/assets/moduleimage"
+  },
+  "videoSection" : {
+    "introduction" : "",
+    "summary" : "",
+    "videos" : [ {
+      "title" : "",
+      "description" : "",
+      "videoUrl" : "/assets/48e9b5e8-aff0-489e-a5cc-088b34941c3el",
+      "videoImage" : null,
+      "actionText" : null,
+      "actionLink" : null,
+      "isPrivate" : false
+    } ]
   },
   "counsellingModuleSections" : [ {
     "id" : "section_4",
