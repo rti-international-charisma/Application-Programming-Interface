@@ -1,4 +1,4 @@
-name: Deploy APIDB to Amazon ECS production
+name: Deploy APIDB to Amazon ECS staging
 
 on:
   workflow_dispatch:
