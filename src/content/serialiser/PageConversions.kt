@@ -87,7 +87,7 @@ object PageConversions {
                         it.forEach { step ->
                             writeStartObject()
                             writeStringField("title", step.title)
-                            writeStringField("subTitle", step.subTitle)
+                            writeNumberField("stepNumber", step.stepNumber)
                             writeStringField(
                                 "backgroundImageUrl",
                                 ifPresent(step.backgroundImageUrl)?.let { "/assets/${step.backgroundImageUrl}" }

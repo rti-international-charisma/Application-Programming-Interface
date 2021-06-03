@@ -17,8 +17,8 @@ object PageContentFixture {
         val doc2 = PageDocuments(Document("doc-2", "Document 2"))
         val video1 = PageVideo("video-title1", "description1", "file1", "video_image1", "action1", "/assessment/intro", false)
         val video2 = PageVideo("video-title2", "description2", "file2", "video_image2", "action2", "/assessment/intro", false)
-        val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
-        val step2 = Step("title-2", "sub-title-2", "bg_image2", "image2")
+        val step1 = Step("title-1", 1, "bg_image1", "image1")
+        val step2 = Step("title-2", 2, "bg_image2", "image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
@@ -86,16 +86,16 @@ object PageContentFixture {
 			]
 		},
 		"actions": [{
-				"id": 1,
+				"id": "step 1",
 				"title": "title-1",
-				"sub_title": "sub-title-1",
+				"step_number": 1,
 				"background_image": "bg_image1",
 				"image": "image1"
 			},
 			{
-				"id": 2,
+				"id": "step 2",
 				"title": "title-2",
-				"sub_title": "sub-title-2",
+				"step_number": 2,
 				"background_image": "bg_image2",
 				"image": "image2"
 			}
@@ -194,12 +194,12 @@ object PageContentFixture {
   },
   "steps" : [ {
     "title" : "title-1",
-    "subTitle" : "sub-title-1",
+    "stepNumber" : 1,
     "backgroundImageUrl" : "/assets/bg_image1",
     "imageUrl" : "/assets/image1"
   }, {
     "title" : "title-2",
-    "subTitle" : "sub-title-2",
+    "stepNumber" : 2,
     "backgroundImageUrl" : "/assets/bg_image2",
     "imageUrl" : "/assets/image2"
   } ]
@@ -218,8 +218,8 @@ object PageContentFixture {
         val doc2 = PageDocuments(Document("doc-2", "Document 2"))
         val video1 = PageVideo("video-title1", "description1", "file1", "video-image-1", "action1", "/assessment/intro", false)
         val video2 = PageVideo("video-title2", "description2", "file2", "video-image-2", "action2", "/assessment/intro", false)
-        val step1 = Step("title-1", "sub-title-1", "bg_image1", "image1")
-        val step2 = Step("title-2", "sub-title-2", "bg_image2", "image2")
+        val step1 = Step("title-1", 1, "bg_image1", "image1")
+        val step2 = Step("title-2", 2, "bg_image2", "image2")
         val videoSection = VideoSection(
             "Build a healthy relationship with your partner",
             "Here are some videos, activities and reading material for you",
