@@ -54,7 +54,7 @@ class ContentServiceTest {
         val pageId = "test-page"
 
         coEvery {
-            contentClient.getPage("/items/pages/${pageId}?fields=*.*.*")
+            contentClient.getPage("/items/pages/${pageId}?fields=*.*,images.*.*,documents.*.*")
         } returns PageContentFixture.pageFromCmsWithImages()
 
         val pageContent = contentService.getPage(pageId)
@@ -77,7 +77,7 @@ class ContentServiceTest {
         contentService.getModule(score, consent)
 
         coVerify {
-            contentClient.getPage("/items/counselling_modules/moduleId?fields=*.*,video_section.*.*,*.accordions.*")
+            contentClient.getPage("/items/counselling_modules/moduleId?fields=*.*,video_section.*.*,sections.accordions.*")
         }
 
         verify { PrePModules.getModuleId(eq(moduleName)) }
@@ -93,7 +93,7 @@ class ContentServiceTest {
             val expectedPageContent = PageContentFixture.pageWithCounsellingModules("Published")
 
             coEvery {
-                contentClient.getPage("/items/counselling_modules/moduleId?fields=*.*,video_section.*.*,*.accordions.*")
+                contentClient.getPage("/items/counselling_modules/moduleId?fields=*.*,video_section.*.*,sections.accordions.*")
             } returns PageContentFixture.contentWithCounsellingModules()
 
             val pageContent = contentService.getModule(score, consent)
@@ -169,7 +169,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error processing page response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentServerException(
+        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*,images.*.*,documents.*.*") } throws (ContentServerException(
             "Content error",
             Exception()
         ))
@@ -181,7 +181,7 @@ class ContentServiceTest {
 
     @Test
     fun `it should throw exception on error fetching page response`() = runBlockingTest {
-        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*.*") } throws (ContentRequestException(
+        coEvery { contentClient.getPage("/items/pages/test-page?fields=*.*,images.*.*,documents.*.*") } throws (ContentRequestException(
             "Content Request Error"
         ))
         assertFailsWith(

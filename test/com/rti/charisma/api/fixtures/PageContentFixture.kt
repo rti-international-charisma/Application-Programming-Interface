@@ -369,7 +369,7 @@ object PageContentFixture {
   "module_image": {
     "id": "moduleimage"
   },
-  "counselling_module_action_points": [{
+  "action_points": [{
     "id": "model_prep_use_action_point_1",
     "module_name": "prep_use",
     "title": "Make a decision about whether to tell my partner about PrEP or not"
@@ -400,12 +400,12 @@ object PageContentFixture {
       "title": "Make a plan to keep my PrEP secret (e.g. where to store it and when to take it)"
     }
   ],
-  "counselling_module_sections": [{
+  "sections": [{
     "id": "section_4",
     "title": "How to use PrEP without anyone knowing",
     "introduction": "<p>Sometimes it makes sense not to tell your partner, or anyone else about your PrEP use</p>",
     "summary": null,
-    "accordion_content": [{
+    "accordions": [{
       "id": "section_4_accordion_1",
       "title": "Here are some tips that other young women have used:",
       "description": "<p>● Store pills in places your partner</p>",
@@ -417,14 +417,14 @@ object PageContentFixture {
       "title": "Why you decided to use oral PrEP",
       "introduction": "<p>If talking to a partner, the benefits for the relationship</p>",
       "summary": null,
-      "accordion_content": null
+      "accordions": null
     },
     {
       "id": "section_1",
       "title": "Should I tell my partner, or someone else I love, I'm taking PrEP?",
       "introduction": "<p><em>There are many things that other women like you think about when deciding whether to tell reasons</p>",
       "summary": "<p>Remember, whether you share or not is optional. </p>",
-      "accordion_content": [{
+      "accordions": [{
         "id": "section_1_accordion_1",
         "title": "Some common reasons for sharing are:",
         "description": "<p>● You feel like you need your partner&rsquo;s, </p>",

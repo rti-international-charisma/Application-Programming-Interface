@@ -8,13 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-data class CounsellingModuleVideo(
-    @JsonProperty("id")
-    val videoUrl: String? = ""
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 data class CounsellingModuleImage(
     @JsonProperty("id")
     val moduleImage: String? = ""

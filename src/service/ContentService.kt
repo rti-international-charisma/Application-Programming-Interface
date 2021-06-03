@@ -35,7 +35,7 @@ class ContentService(private val contentClient: ContentClient) {
 
     suspend fun getPage(pageId: String): Page {
         // supports 3 levels of information
-        val endpoint = "/items/pages/$pageId?fields=*.*.*"
+        val endpoint = "/items/pages/$pageId?fields=*.*,images.*.*,documents.*.*"
         return pageRequest(endpoint)
     }
 
@@ -45,7 +45,7 @@ class ContentService(private val contentClient: ContentClient) {
     }
 
     suspend fun getModule(moduleId: String): Page {
-        val endpoint = "/items/counselling_modules/$moduleId?fields=*.*,video_section.*.*,*.accordions.*"
+        val endpoint = "/items/counselling_modules/$moduleId?fields=*.*,video_section.*.*,sections.accordions.*"
         return pageRequest(endpoint)
     }
 
