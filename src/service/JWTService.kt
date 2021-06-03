@@ -13,7 +13,7 @@ object JWTService {
     private const val issuer = "charismaApi"
     private const val resetPassIssuer = "CharismaApiResetPassword"
     private val algorithm = Algorithm.HMAC512(ConfigProvider.get(JWT_SECRET))
-    private const val validityInMs = 60000 * 15 // 15 minutes (milli seconds in minute * X)
+    private const val validityInMs = 60000 * 5 // 5 minutes (milli seconds in minute * X)
 
     val verifier: JWTVerifier = JWT
         .require(algorithm)
