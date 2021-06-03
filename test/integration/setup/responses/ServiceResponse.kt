@@ -822,22 +822,22 @@ object ServiceResponse {
   },
   "steps" : [ {
     "title" : "Access Counselling Content Selected Just For You",
-    "subTitle" : null,
+    "stepNumber" : 2,
     "backgroundImageUrl" : "/assets/75b448ce-e862-4aa0-b62b-b53f83bd26d4",
     "imageUrl" : "/assets/964a11ff-6d58-4a89-829a-525bfcd6f0d7"
   }, {
     "title" : "Get Access To Available Support In Your Community",
-    "subTitle" : null,
+    "stepNumber" : 4,
     "backgroundImageUrl" : "/assets/dff6546a-debf-4c14-bb03-edbe6cd1a22d",
     "imageUrl" : "/assets/76191be7-b39c-43da-9294-467db74908d5"
   }, {
     "title" : "Take Relationship Quiz",
-    "subTitle" : null,
+    "stepNumber" : 1,
     "backgroundImageUrl" : "/assets/5cebe56a-ca0c-488f-95e1-3688f729cb20",
     "imageUrl" : "/assets/94d51d3d-ed88-42cc-a9fd-384a8e98e01c"
   }, {
     "title" : "Share Educational Material with Partner",
-    "subTitle" : null,
+    "stepNumber" : 3,
     "backgroundImageUrl" : "/assets/5750f28d-444c-49e0-ad96-62ff72493a90",
     "imageUrl" : "/assets/d5d362a0-ab20-4d61-9c58-2903547eb026"
   } ]

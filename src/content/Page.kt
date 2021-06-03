@@ -106,8 +106,8 @@ data class PageVideo(
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Step(
     val title: String,
-    @JsonProperty("sub_title")
-    val subTitle: String?,
+    @JsonProperty("step_number")
+    val stepNumber: Int,
     @JsonProperty("background_image")
     val backgroundImageUrl: String,
     @JsonProperty("image")
