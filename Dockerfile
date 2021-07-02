@@ -1,4 +1,4 @@
-FROM openjdk:11.0.8-jre-slim
+FROM openjdk:8-jre-alpine
 
 ENV APPLICATION_USER ktor
 
