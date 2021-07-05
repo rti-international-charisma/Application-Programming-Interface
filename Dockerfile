@@ -1,8 +1,8 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk:11.0.8-jre-slim
 
 ENV APPLICATION_USER ktor
 
-RUN adduser -D -g '' $APPLICATION_USER
+RUN adduser --disabled-password --gecos '' $APPLICATION_USER
 
 RUN mkdir /app
 RUN chown -R $APPLICATION_USER /app
