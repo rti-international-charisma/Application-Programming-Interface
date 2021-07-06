@@ -6,6 +6,9 @@ import io.ktor.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
+/**
+ * Used to generate Hash from Strings
+ */
 object Hash {
     fun stringHash(str: String): String {
         val hashKey = ConfigProvider.get(HASH_SECRET_KEY).toByteArray()

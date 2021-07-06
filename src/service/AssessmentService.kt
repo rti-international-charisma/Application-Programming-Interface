@@ -12,6 +12,13 @@ import org.slf4j.LoggerFactory
 class AssessmentService(private val assessmentRepository: AssessmentRepository) {
     private val logger = LoggerFactory.getLogger(AssessmentService::class.java)
 
+    /***
+     * Adds Assessment score to the DB
+     * If assessment score for the user already exists then replace the existing score. At a point in time there will be only one score against a user.
+     * Create assessment score record if the scores for this user does not exist.
+     *
+     * AssessmentScore need not be a complete assessment score. User can store partial assessment at the section level.
+     */
     fun addAssessmentScore(userId: Int, assessmentResults: List<AssessmentResult>, totalSections: Int) {
         try {
             if (assessmentRepository.userScoreExists(userId)) {

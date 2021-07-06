@@ -21,7 +21,14 @@ import org.slf4j.LoggerFactory
 import java.text.DateFormat
 
 class ContentClient {
+    /**
+     *  AccessToken required to call CMS APIs
+     */
     private val accessToken = ConfigProvider.get(ACCESS_TOKEN)
+
+    /**
+     * CMS base url
+     */
     private val baseUrl = ConfigProvider.get(CMS_BASE_URL)
     private val logger = LoggerFactory.getLogger(ContentClient::class.java)
 

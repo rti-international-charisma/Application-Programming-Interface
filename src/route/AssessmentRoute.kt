@@ -16,6 +16,14 @@ data class AssessmentScoreRequest(val sections: List<AssessmentResult>, val tota
 data class AssessmentResult(val sectionId: String, val sectionType: String, val answers: List<Question>)
 data class Question(val questionId: String, val score: Int)
 
+/**
+ *  post("assessment/scores") :
+ *  This is an authenticated API. Stores the AssessmentScore against the user.
+ *
+ *  get("assessment/scores") :
+ *  This is an authenticate API. Returns the Assessment Score stored against the user.
+ *
+ */
 @KtorExperimentalLocationsAPI
 fun Routing.assessmentRoute(assessmentService: AssessmentService) {
     authenticate("jwt") {

@@ -39,11 +39,18 @@ class ContentService(private val contentClient: ContentClient) {
         return pageRequest(endpoint)
     }
 
+    /**
+     * Determines the Counselling module based User's score and consent.
+     * Please check the separate Heart Assessment score calculation and storing documentation.
+     */
     suspend fun getModule(partnerScore: Int, consent: CONSENT): Page {
         val moduleId: String = selectModuleId(partnerScore, consent)
         return getModule(moduleId)
     }
 
+    /**
+     * Returns Counselling module based on the moduleId
+     */
     suspend fun getModule(moduleId: String): Page {
         val endpoint = "/items/counselling_modules/$moduleId?fields=*.*,video_section.*.*,sections.accordions.*"
         return pageRequest(endpoint)
@@ -95,6 +102,9 @@ class ContentService(private val contentClient: ContentClient) {
         }
     }
 
+    /**
+     * This is not used. The assets are directly requested from CMS.
+     */
     @Deprecated("To be removed")
     suspend fun getAsset(assetId: String): ByteArray {
         try {
@@ -107,6 +117,10 @@ class ContentService(private val contentClient: ContentClient) {
         }
     }
 
+    /**
+     * This method holds the core counselling module determination logic.
+     * @return moduleId which represents the counselling module.
+     */
     private fun selectModuleId(partnerScore: Int, consent: CONSENT): String {
         return when {
             (partnerScore in 13..42) -> return PrePModules.getModuleId(PrePModules.PREP_ABUSE)
