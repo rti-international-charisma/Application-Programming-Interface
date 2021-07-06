@@ -53,11 +53,11 @@ jobs:
           path: build/reports/tests/*
 
       - name: Build documentatation
-          run: ./gradlew clean dokkaHtml
+        run: ./gradlew clean dokkaHtml
 
       - name: Publish Documentation
-          if: always()
-          uses: actions/upload-artifact@v2
-          with:
-            name: 'api-docs'
-            path: build/dokka/html/*
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'api-docs'
+          path: build/dokka/html/*
