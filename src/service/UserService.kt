@@ -17,6 +17,10 @@ import org.slf4j.LoggerFactory
 class UserService(private val userRepository: UserRepository, private val jwtService: JWTService) {
     private val logger = LoggerFactory.getLogger(UserService::class.java)
 
+    /**
+     * Register User
+     * Verifies if user with similar username is not present and the security question with that id is present
+     */
     fun registerUser(signupModel: Signup): Int {
         if (userRepository.doesUserExist(signupModel.username)) {
             logger.warn("User already exists")
@@ -35,6 +39,11 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
         }
     }
 
+    /**
+     * Returns a list of Security Questions
+     * If secQId is provided then returns that particular security question.
+     * Else returns all security question.
+     */
     fun getSecurityQuestions(secQId: Int?): List<SecurityQuestion> {
         val securityQuestions = userRepository.getSecurityQuestions(secQId)
         if (securityQuestions.isNotEmpty()) {
@@ -45,6 +54,16 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
         }
     }
 
+    /**
+     * Logs in a user.
+     * Returns [UserResponse]
+     *
+     * If the user tries login with incorrect password, decrements the loginAttemptsLeft for that user by 1 and @throws [LoginException]
+     * If the user tries login with incorrect password for more than [LOGIN_ATTEMPTS] times @throws [LoginAttemptsExhaustedException]
+     * If the user has exhausted resetPassword attempts @throws [LoginException]
+     * @see [ConfigProvider]
+     * Returns UserResponse with [User] and JWT valid for [JWTService.validityInMs] duration.
+     */
     fun login(loginModel: Login): UserResponse {
         val user = userRepository.findUserByUsername(loginModel.username)
         user?.let {
@@ -78,6 +97,16 @@ class UserService(private val userRepository: UserRepository, private val jwtSer
         return true
     }
 
+    /**
+     * Used for resetting the Password.
+     * If the user tries to verify security question with incorrect answer, decrement the resetPasswordAttemptsLeft by 1 and @throws [ResetPasswordAttemptsExhaustedException]
+     * If the user tries to verify security question with incorrect answer for more than [RESET_ATTEMPTS] times then blocks the account forever and @throws [ResetPasswordAttemptsExhaustedException]
+     *
+     * ResetPasswordAttemptsLeft is reset to [RESET_ATTEMPTS] when user enters correct secret answer.
+     * Submitting correct secret question - answer combination, returns [UserResponse] with [UserResponse.resetPasswordToken] set. Which is a JWT valid for set time.
+     * [UserResponse.resetPasswordToken] is verified at the time of actually resetting the password.
+     * @see [JWTService]
+     */
     fun verifySecurityQuestion(verifySecQuestion: VerifySecQuestion): UserResponse {
         val user = userRepository.findUserByUsername(verifySecQuestion.username)
         user?.let {

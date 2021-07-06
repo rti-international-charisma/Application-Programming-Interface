@@ -24,6 +24,30 @@ data class Login(val username: String, val password: String)
 data class VerifySecQuestion(val username: String, val secQuestionId: Int, val secQuestionAnswer: String)
 data class ResetPassword(val newPassword: String)
 
+/**
+ * post("/signup") :
+ * Register User
+ *
+ * get("/securityquestions/{id}") :
+ * Returns List of securityQuestions. If id is passed then returns List with single security question.
+ *
+ * get("/user/availability/{username}") :
+ * Return [UsernameAvailability] with true or false
+ *
+ * post("/login") :
+ * Login user with credentials. Returns [UserResponse] with JWT valid for [JWTService.validityInMs]
+ *
+ * post("/verify-securityquestion") :
+ * Used for authentication user to reset password.
+ * Verifies Security question - Users answer combination. If correct returns JWT for reset password with [JWTService.validityInMs] validity.
+ *
+ * post("/reset-password") :
+ * Authenticated through Reset password JWT generated in post("/verify-securityquestion")
+ * If JWT is valid then updates password.
+ *
+ * @see [JWTService]
+ *
+ */
 @KtorExperimentalLocationsAPI
 fun Routing.userRoute(userService: UserService) {
 
@@ -61,6 +85,10 @@ fun Routing.userRoute(userService: UserService) {
         call.respond(HttpStatusCode.OK, userService.verifySecurityQuestion(verifySecQuestion))
     }
 
+    /**
+     * Used specifically for Reset Password JWT verification.
+     * Verification done manually as Ktor does not allow more than one [Authentication] plugins.
+     */
     fun verifyToken(token: String?): Principal? {
         val decodedJWT = try {
             token?.substringAfter(" ")?.let { JWTService.resetPassVerifier.verify(it) }

@@ -14,6 +14,9 @@ data class PageContent(
     val page: Page
 )
 
+/**
+ * Generic model representing a Page from CMS.
+ */
 @JsonIgnoreProperties(value = ["status"], allowSetters = true, ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 @JsonSerialize(using = PageConversions.Serializer::class)
@@ -74,7 +77,7 @@ data class ImageFile(
 data class Document(
     @JsonProperty("id")
     val documentUrl: String = "",
-    val title: String = "",
+    val title: String = ""
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -7,6 +7,39 @@ import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
+/**
+ * All the endpoints are wrapper for CMS.
+ *
+ * get("/home") :
+ * Return Home Page data from CMS
+ *
+ * get("/assessments") :
+ * Returns Assessment data from CMS.
+ *
+ * get("/referrals") :
+ * Returns referrals data from CMS
+ *
+ * get("/modules") :
+ * Calculates and returns the recommended counselling module based on score calculations.
+ *
+ * get("/modules/{moduleId}") :
+ * Returns the Counselling module by its Id.
+ *  Possible values [ContentService.PrePModules]
+ *
+ * get("/content/{pageId}") :
+ * Returns other contents from CMS fetched based on their Ids.
+ *    Possible values used at the moment for pageId.
+ *
+ * hiv_prevention_prep
+ *
+ * aboutus
+ *
+ * assessment-intro
+ *
+ * male_partner_info_pack
+ *
+ * referral_intro
+ */
 @KtorExperimentalLocationsAPI
 fun Routing.contentRoute(contentService: ContentService) {
 
