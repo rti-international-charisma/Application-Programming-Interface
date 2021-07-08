@@ -5,6 +5,7 @@ ENV APPLICATION_USER ktor
 RUN adduser --disabled-password --gecos '' $APPLICATION_USER
 
 RUN mkdir /app
+RUN mkdir /app/logs
 RUN chown -R $APPLICATION_USER /app
 
 USER $APPLICATION_USER
