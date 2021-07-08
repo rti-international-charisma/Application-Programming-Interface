@@ -13,9 +13,9 @@
             <fileNamePattern>
                 logs/app.%d{yyyy-MM-dd-mm}.%i.log.zip
             </fileNamePattern>
-            <maxFileSize>100KB</maxFileSize>
+            <maxFileSize>1MB</maxFileSize>
             <maxHistory>10</maxHistory>
-            <totalSizeCap>1MB</totalSizeCap>
+            <totalSizeCap>10MB</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
