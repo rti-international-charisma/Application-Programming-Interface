@@ -1,6 +1,5 @@
 <configuration>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/charisma.log</file>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
@@ -21,13 +20,10 @@
             <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="io.ktor.auth.jwt" level="WARN"/>
-    <logger name="org.eclipse.jetty" level="WARN"/>
-    <logger name="com.zaxxer.hikari" level="WARN" />
-    <logger name="io.netty" level="WARN"/>
-    <logger name="com.viartemev" level="WARN"/>
-    <logger name="com.rti.charisma" level="INFO"/>
-    <root level="info">
-        <appender-ref ref="ROLLING_FILE"/>
+    <logger name="com.rti.charisma" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <root level="WARN">
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
