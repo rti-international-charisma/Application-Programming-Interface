@@ -96,6 +96,8 @@ data class PageVideo(
     var description: String? = "",
     @JsonProperty("video_url")
     var videoUrl: String?,
+    @JsonProperty("external_video_url")
+    var youtubeVideoUrl: String?,
     @JsonProperty("video_image", required = false)
     var videoImage: String?,
     @JsonProperty("action_text")

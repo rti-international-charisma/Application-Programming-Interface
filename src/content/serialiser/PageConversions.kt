@@ -69,6 +69,7 @@ object PageConversions {
                             writeStringField("title", video.title)
                             writeStringField("description", video.description)
                             writeStringField("videoUrl", ifPresent(video.videoUrl)?.let { "/assets/${video.videoUrl}" })
+                            writeStringField("youtubeVideoUrl", ifPresent(video.videoUrl)?.let { video.youtubeVideoUrl })
                             writeStringField(
                                 "videoImage",
                                 ifPresent(video.videoImage)?.let { "/assets/${video.videoImage}" }
