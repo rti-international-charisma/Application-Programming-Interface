@@ -21,6 +21,7 @@ object ServiceResponse {
       "title" : "Prep use video",
       "description" : null,
       "videoUrl" : "/assets/2b22ad56-c682-4167-817b-e8c55aff51e0",
+      "youtubeVideoUrl" : "https://www.youtube.com/watch?v=JnxzZWaJB_E",
       "videoImage" : null,
       "actionText" : "Learn more",
       "actionLink" : null,

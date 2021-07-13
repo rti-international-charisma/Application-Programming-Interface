@@ -15,8 +15,8 @@ object PageContentFixture {
         val image2 = PageImage(ImageFile("image-2", "image-2 title"))
         val doc1 = PageDocuments(Document("doc-1", "Document 1"))
         val doc2 = PageDocuments(Document("doc-2", "Document 2"))
-        val video1 = PageVideo("video-title1", "description1", "file1", "video_image1", "action1", "/assessment/intro", false)
-        val video2 = PageVideo("video-title2", "description2", "file2", "video_image2", "action2", "/assessment/intro", false)
+        val video1 = PageVideo("video-title1", "description1", "file1","yt_video_id1", "video_image1", "action1", "/assessment/intro", false)
+        val video2 = PageVideo("video-title2", "description2", "file2", "yt_video_id2","video_image2", "action2", "/assessment/intro", false)
         val step1 = Step("title-1", 1, "bg_image1", "image1")
         val step2 = Step("title-2", 2, "bg_image2", "image2")
         val videoSection = VideoSection(
@@ -40,7 +40,7 @@ object PageContentFixture {
             mutableListOf(step1, step2),
             null,
             null,
-            null,
+            null
         )
 
     }
@@ -65,6 +65,7 @@ object PageContentFixture {
 					"id": "homepage_video",
 					"status": "published",
 					"video_url": "file1",
+					"external_video_url": "yt_video_id1",
 					"action_text": "action1",
                     "action_link": "/assessment/intro",
 					"title": "video-title1",
@@ -76,6 +77,7 @@ object PageContentFixture {
 					"id": "video_module2",
 					"status": "published",
 					"video_url": "file2",
+                    "external_video_url": "yt_video_id2",
 					"action_text": "action2",
                     "action_link": "/assessment/intro",
 					"title": "video-title2",
@@ -178,6 +180,7 @@ object PageContentFixture {
       "title" : "video-title1",
       "description" : "description1",
       "videoUrl" : "/assets/file1",
+      "youtubeVideoUrl" : "yt-video-id1",
       "videoImage" : "/assets/video-image-1",
       "actionText" : "action1",
       "actionLink" : "/assessment/intro",
@@ -186,6 +189,7 @@ object PageContentFixture {
       "title" : "video-title2",
       "description" : "description2",
       "videoUrl" : "/assets/file2",
+      "youtubeVideoUrl" : "yt-video-id2",
       "videoImage" : "/assets/video-image-2",
       "actionText" : "action2",
       "actionLink" : "/assessment/intro",
@@ -216,8 +220,8 @@ object PageContentFixture {
         val image2 = PageImage(ImageFile(title = "image2-title", imageUrl = "image2-id"))
         val doc1 = PageDocuments(Document("doc-1", "Document 1"))
         val doc2 = PageDocuments(Document("doc-2", "Document 2"))
-        val video1 = PageVideo("video-title1", "description1", "file1", "video-image-1", "action1", "/assessment/intro", false)
-        val video2 = PageVideo("video-title2", "description2", "file2", "video-image-2", "action2", "/assessment/intro", false)
+        val video1 = PageVideo("video-title1", "description1", "file1", "yt-video-id1","video-image-1", "action1", "/assessment/intro", false)
+        val video2 = PageVideo("video-title2", "description2", "file2", "yt-video-id2","video-image-2", "action2", "/assessment/intro", false)
         val step1 = Step("title-1", 1, "bg_image1", "image1")
         val step2 = Step("title-2", 2, "bg_image2", "image2")
         val videoSection = VideoSection(
@@ -241,7 +245,7 @@ object PageContentFixture {
             mutableListOf(step1, step2),
             null,
             null,
-            null,
+            null
         )
     }
 
@@ -362,7 +366,9 @@ object PageContentFixture {
     "videos": [
         {
             "id": "videourl",
-            "video_url": "48e9b5e8-aff0-489e-a5cc-088b34941c3el"
+            "video_url": "48e9b5e8-aff0-489e-a5cc-088b34941c3el",
+            "external_video_url": "https://www.youtube.com/watch?v=k3IvJVc_asI"
+            
         }
     ]
   },
@@ -483,7 +489,7 @@ object PageContentFixture {
         val counsellingActionPoints =
             listOf(actionPoint1, actionPoint2, actionPoint3, actionPoint4, actionPoint5, actionPoint6)
         val moduleVideo = VideoSection(
-            videos = listOf(PageVideo("","","48e9b5e8-aff0-489e-a5cc-088b34941c3el",null,null,null,false))
+            videos = listOf(PageVideo("","","48e9b5e8-aff0-489e-a5cc-088b34941c3el","https://www.youtube.com/watch?v=k3IvJVc_asI",null,null,null,false))
         )
         val moduleImage = CounsellingModuleImage(
             "moduleimage"
@@ -575,6 +581,7 @@ object PageContentFixture {
       "title" : "",
       "description" : "",
       "videoUrl" : "/assets/48e9b5e8-aff0-489e-a5cc-088b34941c3el",
+      "youtubeVideoUrl" : "https://www.youtube.com/watch?v=k3IvJVc_asI",
       "videoImage" : null,
       "actionText" : null,
       "actionLink" : null,

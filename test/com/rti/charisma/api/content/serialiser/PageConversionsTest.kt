@@ -18,7 +18,7 @@ class PageConversionsTest {
     }
 
     @Test
-    fun `it should ignore page content with  empty image fields `() {
+    fun `it should ignore page content with empty image fields `() {
 
         val pageContent = givenPageWithEmptyUrls()
 
@@ -81,6 +81,7 @@ class PageConversionsTest {
             videos = listOf(
                 PageVideo(
                     videoUrl = "",
+                    youtubeVideoUrl = "",
                     videoImage = "",
                     actionText = "",
                     actionLink = "",
@@ -100,7 +101,7 @@ class PageConversionsTest {
             null,
             null,
             null,
-            null,
+            null
         )
     }
 
@@ -112,6 +113,7 @@ class PageConversionsTest {
             videos = listOf(
                 PageVideo(
                     videoUrl = null,
+                    youtubeVideoUrl = null,
                     videoImage = null,
                     actionText = "",
                     actionLink = "",
@@ -131,7 +133,7 @@ class PageConversionsTest {
             null,
             null,
             null,
-            null,
+            null
         )
     }
 
@@ -162,6 +164,7 @@ class PageConversionsTest {
       "title" : "",
       "description" : "",
       "videoUrl" : null,
+      "youtubeVideoUrl" : null,
       "videoImage" : null,
       "actionText" : "",
       "actionLink" : "",
