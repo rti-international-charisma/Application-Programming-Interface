@@ -533,11 +533,8 @@ object ServiceResponse {
         "text" : "Agree Strongly",
         "weightage" : 6
       }, {
-        "text" : "Agree",
-        "weightage" : 5
-      }, {
-        "text" : "Disagree",
-        "weightage" : 2
+        "text" : "Strongly disagree",
+        "weightage" : 1
       }, {
         "text" : "Little",
         "weightage" : 4
@@ -545,8 +542,11 @@ object ServiceResponse {
         "text" : "Neutral",
         "weightage" : 3
       }, {
-        "text" : "Strongly disagree",
-        "weightage" : 1
+        "text" : "Disagree",
+        "weightage" : 2
+      }, {
+        "text" : "Agree",
+        "weightage" : 5
       } ]
     }, {
       "id" : "9d83ebb5-c600-4d1c-928c-f168312f76f9",
@@ -589,23 +589,23 @@ object ServiceResponse {
       "description" : null,
       "positiveNarrative" : true,
       "options" : [ {
-        "text" : "Disagree",
-        "weightage" : 2
+        "text" : "Neutral",
+        "weightage" : 3
       }, {
         "text" : "Agree Strongly",
         "weightage" : 6
       }, {
-        "text" : "Agree",
-        "weightage" : 5
+        "text" : "Strongly disagree",
+        "weightage" : 1
       }, {
         "text" : "Little",
         "weightage" : 4
       }, {
-        "text" : "Neutral",
-        "weightage" : 3
+        "text" : "Disagree",
+        "weightage" : 2
       }, {
-        "text" : "Strongly disagree",
-        "weightage" : 1
+        "text" : "Agree",
+        "weightage" : 5
       } ]
     }, {
       "id" : "147b4a1e-e66f-4366-b844-2a83af28f46c",
@@ -616,8 +616,8 @@ object ServiceResponse {
         "text" : "Agree Strongly",
         "weightage" : 6
       }, {
-        "text" : "Agree",
-        "weightage" : 5
+        "text" : "Strongly disagree",
+        "weightage" : 1
       }, {
         "text" : "Little",
         "weightage" : 4
@@ -625,11 +625,11 @@ object ServiceResponse {
         "text" : "Neutral",
         "weightage" : 3
       }, {
-        "text" : "Strongly disagree",
-        "weightage" : 1
-      }, {
         "text" : "Disagree",
         "weightage" : 2
+      }, {
+        "text" : "Agree",
+        "weightage" : 5
       } ]
     }, {
       "id" : "7dd7fd96-9e68-44d3-abdf-57f59e44522a",
@@ -725,23 +725,23 @@ object ServiceResponse {
       "description" : null,
       "positiveNarrative" : true,
       "options" : [ {
-        "text" : "Agree",
-        "weightage" : 5
-      }, {
         "text" : "Agree Strongly",
         "weightage" : 6
       }, {
-        "text" : "Disagree",
-        "weightage" : 2
-      }, {
-        "text" : "Neutral",
-        "weightage" : 3
+        "text" : "Strongly disagree",
+        "weightage" : 1
       }, {
         "text" : "Little",
         "weightage" : 4
       }, {
-        "text" : "Strongly disagree",
-        "weightage" : 1
+        "text" : "Neutral",
+        "weightage" : 3
+      }, {
+        "text" : "Disagree",
+        "weightage" : 2
+      }, {
+        "text" : "Agree",
+        "weightage" : 5
       } ]
     }, {
       "id" : "8b811a80-ca80-40ea-8944-c29088755a28",
