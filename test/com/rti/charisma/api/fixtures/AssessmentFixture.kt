@@ -10,43 +10,14 @@ import com.rti.charisma.api.route.response.AssessmentScoreResponse
 import com.rti.charisma.api.route.Question as AssessmentResultQuestion
 
 object AssessmentFixture {
-    fun assessmentSectionsJson(): String = """{
-  "id" : "section-id",
-  "section" : "section name",
-  "introduction" : "introduction",
-  "questions" : [ {
-    "id" : "qid-1",
-    "text" : "question text1",
-    "description" : "description1",
-    "positiveNarrative" : true,
-    "options" : [ {
-      "text" : "option1",
-      "weightage" : 1
-    }, {
-      "text" : "option2",
-      "weightage" : 2
-    } ]
-  }, {
-    "id" : "qid-2",
-    "text" : "question text2",
-    "description" : "description2",
-    "positiveNarrative" : false,
-    "options" : [ {
-      "text" : "option1",
-      "weightage" : 1
-    }, {
-      "text" : "option2",
-      "weightage" : 2
-    } ]
-  } ]
-}"""
+    fun assessmentSectionsJson(): String = """{"id":"section-id","section":"section name","introduction":"introduction","questions":[{"id":"qid-1","text":"question text1","description":"description1","positiveNarrative":true,"options":[{"text":"option1","weightage":1},{"text":"option2","weightage":2}]},{"id":"qid-2","text":"question text2","description":"description2","positiveNarrative":false,"options":[{"text":"option1","weightage":1},{"text":"option2","weightage":2}]}]}"""
 
     fun assessment(): Assessment {
-        val option1 = Option("disagree", 2)
-        val option2 = Option("agree", 4)
-        val option3 = Option("neutral", 3)
-        val option4 = Option("strongly disagree", 1)
-        val option5 = Option("strongly agree", 5)
+        val option1 = Option("strongly agree", 5, 1)
+        val option2 = Option("agree", 4, 2)
+        val option3 = Option("neutral", 3, 3)
+        val option4 = Option("disagree", 2, 4)
+        val option5 = Option("strongly disagree", 1, 5)
 
         val question1 = Question("qid1", "question 1", "description 1", true, mutableListOf(option1, option2, option3))
         val question2 =
@@ -55,9 +26,9 @@ object AssessmentFixture {
                 "question 2",
                 "description 2",
                 true,
-                mutableListOf(option1, option4, option3, option2, option5)
+                mutableListOf(option1, option2, option3, option4, option5)
             )
-        val question3 = Question("qid3", "question 3", "description 3", false, mutableListOf(option2, option1))
+        val question3 = Question("qid3", "question 3", "description 3", false, mutableListOf(option1, option2))
 
 
         val assessmentSection1 =
@@ -99,8 +70,9 @@ object AssessmentFixture {
                                     "id": 3,
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:36:59+05:30",
-                                    "text": "disagree",
-                                    "weightage": 2
+                                    "text": "agree",
+                                    "weightage": 4,
+                                    "sort": 2
                                 }
                             },
                             {
@@ -108,8 +80,9 @@ object AssessmentFixture {
                                     "id": 5,
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:17+05:30",
-                                    "text": "agree",
-                                    "weightage": 4
+                                    "text": "strongly agree",
+                                    "weightage": 5,
+                                    "sort": 1
                                 }
                             },
                             {
@@ -118,7 +91,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:10+05:30",
                                     "text": "neutral",
-                                    "weightage": 3
+                                    "weightage": 3,
+                                    "sort" : 3
                                 }
                             }
                         ]
@@ -134,8 +108,9 @@ object AssessmentFixture {
                                     "id": 5,
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:17+05:30",
-                                    "text": "agree",
-                                    "weightage": 4
+                                    "text": "strongly agree",
+                                    "weightage": 5,
+                                    "sort" : 1
                                 }
                             },
                             {
@@ -143,8 +118,9 @@ object AssessmentFixture {
                                     "id": 3,
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:36:59+05:30",
-                                    "text": "disagree",
-                                    "weightage": 2
+                                    "text": "agree",
+                                    "weightage": 4,
+                                    "sort": 2
                                 }
                             }
                         ]
@@ -169,7 +145,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:36:59+05:30",
                                     "text": "disagree",
-                                    "weightage": 2
+                                    "weightage": 2,
+                                    "sort" : 4
                                 }
                             },
                             {
@@ -178,7 +155,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:36:43+05:30",
                                     "text": "strongly disagree",
-                                    "weightage": 1
+                                    "weightage": 1,
+                                    "sort" : 5
                                 }
                             },
                             {
@@ -187,7 +165,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:10+05:30",
                                     "text": "neutral",
-                                    "weightage": 3
+                                    "weightage": 3,
+                                    "sort" : 3
                                 }
                             },
                             {
@@ -196,7 +175,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:17+05:30",
                                     "text": "agree",
-                                    "weightage": 4
+                                    "weightage": 4,
+                                    "sort" : 2
                                 }
                             },
                             {
@@ -205,7 +185,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:25+05:30",
                                     "text": "strongly agree",
-                                    "weightage": 5
+                                    "weightage": 5,
+                                    "sort" : 1
                                 }
                             }
                         ]
@@ -238,7 +219,8 @@ object AssessmentFixture {
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:36:59+05:30",
                                 "text": "disagree",
-                                "weightage": 2
+                                "weightage": 2,
+                                "sort": 3
                             }
                         },
                         {
@@ -247,7 +229,8 @@ object AssessmentFixture {
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:37:17+05:30",
                                 "text": "agree",
-                                "weightage": 4
+                                "weightage": 4,
+                                "sort": 1
                             }
                         },
                         {
@@ -256,7 +239,8 @@ object AssessmentFixture {
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:37:10+05:30",
                                 "text": "neutral",
-                                "weightage": 3
+                                "weightage": 3,
+                                "sort": 2
                             }
                         }
                     ]
@@ -271,8 +255,9 @@ object AssessmentFixture {
                                 "id": 5,
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:37:17+05:30",
-                                "text": "agree",
-                                "weightage": 4
+                                "text": "strongly agree",
+                                "weightage": 5,
+                                "sort": 1
                             }
                         },
                         {
@@ -280,8 +265,9 @@ object AssessmentFixture {
                                 "id": 3,
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:36:59+05:30",
-                                "text": "disagree",
-                                "weightage": 2
+                                "text": "agree",
+                                "weightage": 4,
+                                "sort": 2
                             }
                         }
                     ]
@@ -304,8 +290,9 @@ object AssessmentFixture {
                                 "id": 3,
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:36:59+05:30",
-                                "text": "disagree",
-                                "weightage": 2
+                                "text": "strongly agree",
+                                "weightage": 5,
+                                "sort": 5
                             }
                         },
                         {
@@ -313,8 +300,9 @@ object AssessmentFixture {
                                 "id": 1,
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:36:43+05:30",
-                                "text": "strongly disagree",
-                                "weightage": 1
+                                "text": "agree",
+                                "weightage": 4,
+                                "sort": 6
                             }
                         },
                         {
@@ -323,7 +311,8 @@ object AssessmentFixture {
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:37:10+05:30",
                                 "text": "neutral",
-                                "weightage": 3
+                                "weightage": 3,
+                                "sort": 3
                             }
                         },
                         {
@@ -331,8 +320,9 @@ object AssessmentFixture {
                                 "id": 5,
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:37:17+05:30",
-                                "text": "agree",
-                                "weightage": 4
+                                "text": "disagree",
+                                "weightage": 2,
+                                "sort": 2
                             }
                         },
                         {
@@ -340,8 +330,9 @@ object AssessmentFixture {
                                 "id": 6,
                                 "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                 "date_created": "2021-04-16T00:37:25+05:30",
-                                "text": "strongly agree",
-                                "weightage": 5
+                                "text": "strongly disagree",
+                                "weightage": 1,
+                                "sort": 1
                             }
                         }
                     ]
@@ -373,7 +364,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:36:59+05:30",
                                     "text": "disagree",
-                                    "weightage": 2
+                                    "weightage": 2,
+                                    "sort": 3
                                 }
                             },
                             {
@@ -382,7 +374,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:17+05:30",
                                     "text": "agree",
-                                    "weightage": 4
+                                    "weightage": 4,
+                                    "sort": 1
                                 }
                             },
                             {
@@ -391,7 +384,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:10+05:30",
                                     "text": "neutral",
-                                    "weightage": 3
+                                    "weightage": 3,
+                                    "sort": 2
                                 }
                             }
                         ]
@@ -407,7 +401,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:37:17+05:30",
                                     "text": "agree",
-                                    "weightage": 4
+                                    "weightage": 4,
+                                    "sort": 1
                                 }
                             },
                             {
@@ -416,7 +411,8 @@ object AssessmentFixture {
                                     "user_created": "078ad2fa-44c9-4cf7-8e3e-a0199bb3049d",
                                     "date_created": "2021-04-16T00:36:59+05:30",
                                     "text": "disagree",
-                                    "weightage": 2
+                                    "weightage": 2,
+                                    "sort": 2
                                 }
                             }
                         ]
@@ -440,8 +436,8 @@ object AssessmentFixture {
       "description" : "description 1",
       "positiveNarrative" : true,
       "options" : [ {
-        "text" : "disagree",
-        "weightage" : 2
+        "text" : "strongly agree",
+        "weightage" : 5
       }, {
         "text" : "agree",
         "weightage" : 4
@@ -455,11 +451,11 @@ object AssessmentFixture {
       "description" : "description 3",
       "positiveNarrative" : false,
       "options" : [ {
+        "text" : "strongly agree",
+        "weightage" : 5
+      }, {
         "text" : "agree",
         "weightage" : 4
-      }, {
-        "text" : "disagree",
-        "weightage" : 2
       } ]
     } ]
   }, {
@@ -472,20 +468,20 @@ object AssessmentFixture {
       "description" : "description 2",
       "positiveNarrative" : true,
       "options" : [ {
+        "text" : "strongly agree",
+        "weightage" : 5
+      }, {
+        "text" : "agree",
+        "weightage" : 4
+      }, {
+        "text" : "neutral",
+        "weightage" : 3
+      }, {
         "text" : "disagree",
         "weightage" : 2
       }, {
         "text" : "strongly disagree",
         "weightage" : 1
-      }, {
-        "text" : "neutral",
-        "weightage" : 3
-      }, {
-        "text" : "agree",
-        "weightage" : 4
-      }, {
-        "text" : "strongly agree",
-        "weightage" : 5
       } ]
     } ]
   } ]
@@ -519,11 +515,11 @@ object AssessmentFixture {
       "description" : "description 3",
       "positiveNarrative" : false,
       "options" : [ {
+        "text" : "strongly agree",
+        "weightage" : 5
+      }, {
         "text" : "agree",
         "weightage" : 4
-      }, {
-        "text" : "disagree",
-        "weightage" : 2
       } ]
     } ]
   } ]

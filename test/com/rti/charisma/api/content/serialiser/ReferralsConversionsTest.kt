@@ -15,7 +15,7 @@ class ReferralsConversionsTest {
             .writerWithDefaultPrettyPrinter()
             .writeValueAsString(ReferralsFixture.givenReferrals())
 
-        assertEquals(ReferralsFixture.responseJson(), json)
+        assertEquals(ReferralsFixture.responseJson(), json.replace("\r", ""))
     }
 
     @Test
@@ -37,7 +37,7 @@ class ReferralsConversionsTest {
   "addressAndContactInfo" : "address 1, address 2, code - 32423, 324234234",
   "imageUrl" : "/assets/image-id"
 } ]"""
-        assertEquals(singleReferral, json)
+        assertEquals(singleReferral, json?.replace("\r", ""))
     }
 
     @Test
@@ -59,7 +59,7 @@ class ReferralsConversionsTest {
   "addressAndContactInfo" : "",
   "imageUrl" : null
 } ]"""
-        assertEquals(singleReferral, json)
+        assertEquals(singleReferral, json?.replace("\r", ""))
     }
 
 
@@ -82,7 +82,7 @@ class ReferralsConversionsTest {
   "addressAndContactInfo" : null,
   "imageUrl" : null
 } ]"""
-        assertEquals(singleReferral, json)
+        assertEquals(singleReferral, json?.replace("\r", ""))
     }
 
 

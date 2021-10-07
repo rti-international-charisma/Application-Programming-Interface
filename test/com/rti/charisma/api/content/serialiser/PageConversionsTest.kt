@@ -14,7 +14,7 @@ class PageConversionsTest {
 
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(PageContentFixture.pageWithVideoSectionResponseJson(), json)
+        assertEquals(PageContentFixture.pageWithVideoSectionResponseJson(), json?.replace("\r", ""))
     }
 
     @Test
@@ -24,7 +24,7 @@ class PageConversionsTest {
 
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(expectedJsonWithNullAssets(), json)
+        assertEquals(expectedJsonWithNullAssets(), json?.replace("\r", ""))
     }
 
     @Test
@@ -34,7 +34,7 @@ class PageConversionsTest {
 
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(expectedJsonWithNullAssets(), json)
+        assertEquals(expectedJsonWithNullAssets(), json?.replace("\r", ""))
     }
 
     @Test
@@ -44,7 +44,7 @@ class PageConversionsTest {
 
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), json)
+        assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), json.replace("\r", ""))
     }
 
     @Test
@@ -62,7 +62,7 @@ class PageConversionsTest {
 
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals("""{ }""", json)
+        assertEquals("""{ }""", json?.replace("\r", ""))
     }
 
     @Test
@@ -70,7 +70,7 @@ class PageConversionsTest {
         val pageContent = PageContentFixture.withNoVideoSectionAndSteps("published")
         val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(pageContent)
 
-        assertEquals(PageContentFixture.pageWithoutVideoAndStepsJson(), json)
+        assertEquals(PageContentFixture.pageWithoutVideoAndStepsJson(), json.replace("\r", ""))
     }
 
     private fun givenPageWithEmptyUrls(): Page {

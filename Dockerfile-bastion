@@ -1,0 +1,32 @@
+FROM alpine:3.13
+
+WORKDIR /home
+
+RUN echo "installing dependencys..." && \
+    apk --update \
+        add \
+            curl \
+            openssh \
+            tini \
+            postgresql-client \
+    && \
+    echo "installing aws cli" && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    unzip awscliv2.zip \
+    sudo ./aws/install \
+    /usr/local/bin/aws --version \
+  \
+    echo "creating ops user..." && \
+    adduser -D -s /bin/sh ops && \
+    echo -e "Flu1d1ty\nFlu1d1ty" | passwd ops && \
+    mkdir -p /home/ops/.ssh/ && \
+    chown -R ops /home/ops/.ssh/
+
+COPY ./bastion_pub /home/ops/authorized_keys/bastion_pub
+RUN chmod -R 644 /home/ops/authorized_keys
+RUN cat /home/ops/authorized_keys/* > /home/ops/.ssh/authorized_keys
+RUN chmod 644 /home/ops/.ssh/authorized_keys
+
+ADD entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT [ "/sbin/tini", "--" ]
+CMD [ "/bin/sh", "/usr/local/bin/entrypoint.sh" ]

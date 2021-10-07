@@ -51,7 +51,7 @@ data class Question(
     @JsonProperty("positiveNarrative")
     @JsonAlias("positive_narrative")
     val positiveNarrative: Boolean,
-    val options: List<Option>
+    var options: List<Option>
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -59,5 +59,6 @@ data class Question(
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 data class Option(
     val text: String,
-    val weightage: Int
+    val weightage: Int,
+    val sort: Int
 )

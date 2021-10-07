@@ -14,7 +14,7 @@ class AssessmentSectionConversionsTest {
     fun `it should serialise assessment sections`() {
         val assessmentSection = assessmentSection("published")
 
-        val json = jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(assessmentSection)
+        val json = jacksonObjectMapper().writer().writeValueAsString(assessmentSection)
 
         assertEquals(AssessmentFixture.assessmentSectionsJson(), json)
     }
@@ -50,8 +50,8 @@ class AssessmentSectionConversionsTest {
     }
 
     private fun assessmentSection(status: String): AssessmentSection {
-        val option1 = Option("option1", 1)
-        val option2 = Option("option2", 2)
+        val option1 = Option("option1", 1, 2)
+        val option2 = Option("option2", 2,1)
         val question1 = Question("qid-1", "question text1", "description1", true, mutableListOf(option1, option2))
         val question2 = Question("qid-2", "question text2", "description2", false, mutableListOf(option1, option2))
         return AssessmentSection(

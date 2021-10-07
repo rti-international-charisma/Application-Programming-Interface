@@ -37,7 +37,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(PageContentFixture.pageWithVideoSectionResponseJson(), response.content)
+            assertEquals(PageContentFixture.pageWithVideoSectionResponseJson(), response.content?.replace("\r", ""))
         }
     }
 
@@ -93,7 +93,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(PageContentFixture.pageWithoutVideoAndStepsJson(), response.content)
+            assertEquals(PageContentFixture.pageWithoutVideoAndStepsJson(), response.content?.replace("\r", ""))
         }
     }
 
@@ -153,7 +153,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content)
+            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content?.replace("\r", ""))
         }
     }
 
@@ -253,7 +253,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentFixture.assessmentResponseJson(), response.content)
+            assertEquals(AssessmentFixture.assessmentResponseJson(), response.content?.replace("\r", ""))
         }
     }
 
@@ -274,7 +274,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentFixture.onlyPublishedSectionsJson(), response.content)
+            assertEquals(AssessmentFixture.onlyPublishedSectionsJson(), response.content?.replace("\r", ""))
         }
     }
 
@@ -286,7 +286,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentFixture.emptyAssessment(), response.content)
+            assertEquals(AssessmentFixture.emptyAssessment(), response.content?.replace("\r", ""))
         }
     }
 
@@ -298,7 +298,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentFixture.emptyAssessment(), response.content)
+            assertEquals(AssessmentFixture.emptyAssessment(), response.content?.replace("\r", ""))
         }
     }
 
@@ -343,7 +343,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(ReferralsFixture.responseJson(), response.content)
+            assertEquals(ReferralsFixture.responseJson(), response.content?.replace("\r", ""))
         }
     }
 
@@ -355,7 +355,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(ReferralsFixture.responseJsonForReferralFilter(), response.content)
+            assertEquals(ReferralsFixture.responseJsonForReferralFilter(), response.content?.replace("\r", ""))
         }
     }
 
@@ -425,7 +425,7 @@ class ContentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content)
+            assertEquals(PageContentFixture.pageWithCounsellingResponseJson(), response.content?.replace("\r", ""))
         }
     }
 

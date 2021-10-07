@@ -84,7 +84,7 @@ class AssessmentRouteTest {
         }.apply {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
-            assertEquals(AssessmentFixture.assessmentScoreJson(), response.content)
+            assertEquals(AssessmentFixture.assessmentScoreJson(), response.content?.replace("\r", ""))
         }
     }
 
@@ -98,7 +98,7 @@ class AssessmentRouteTest {
             assertEquals(200, response.status()?.value)
             assertEquals("application/json; charset=UTF-8", response.contentType().toString())
 
-            assertEquals(AssessmentFixture.emptySections(), response.content)
+            assertEquals(AssessmentFixture.emptySections(), response.content?.replace("\r", ""))
         }
     }
 

@@ -51,7 +51,7 @@ class ContentTest : ServerTest() {
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.module_prep_use, modules)
+        assertEquals(ServiceResponse.module_prep_use, modules?.replace("\r", ""))
     }
 
     @Test
@@ -69,7 +69,7 @@ class ContentTest : ServerTest() {
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.partner_comms, modules)
+        assertEquals(ServiceResponse.partner_comms, modules?.replace("\r", ""))
     }
 
 //    @Test
@@ -101,7 +101,7 @@ class ContentTest : ServerTest() {
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.homepage, homePage)
+        assertEquals(ServiceResponse.homepage, homePage?.replace("\r", ""))
     }
 
     @Test
@@ -115,7 +115,7 @@ class ContentTest : ServerTest() {
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.assessments, assessments)
+        assertEquals(ServiceResponse.assessments, assessments?.replace("\r", ""))
     }
 
     @Test
@@ -128,7 +128,7 @@ class ContentTest : ServerTest() {
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.referrals, referrals)
+        assertEquals(ServiceResponse.referrals, referrals?.replace("\r", ""))
     }
 
 
@@ -143,7 +143,7 @@ class ContentTest : ServerTest() {
             .statusCode(200)
             .extract().asString()
 
-        assertEquals(ServiceResponse.introPage, assessmentIntro)
+        assertEquals(ServiceResponse.introPage, assessmentIntro?.replace("\r", ""))
     }
 
 

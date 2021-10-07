@@ -61,6 +61,12 @@ class ContentService(private val contentClient: ContentClient) {
             "/items/assessment_sections?sort=sort&fields=*,questions.*,questions.options.options_id.*"
         try {
             val assessment = contentClient.getAssessment(endpoint)
+                assessment.assessment.forEach {
+                                    a -> a.questions.forEach {
+                                        q -> q.options = q.options.sortedBy {   o -> o.sort }
+                                    }
+                                }
+
             logger.info("Assessment content received successfully")
             return assessment
         } catch (e: ContentRequestException) {
